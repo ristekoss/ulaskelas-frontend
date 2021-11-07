@@ -1,0 +1,62 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  # We should disable linter for generated code
+  exclude:
+    - lib/**/*.gr.dart
+    - lib/**/*.config.dart
+    - lib/**/*.g.dart
+    - lib/**/*.freezed.dart
+    - test/**/*.mocks.dart
+
+  strong-mode:
+    implicit-casts: true
+    implicit-dynamic: true
+
+  errors:
+    # Allow having TODOs in the code.
+    todo: ignore
+
+# LINTER Preferences
+#
+# Disable unwanted or conflicting lint rules.
+linter:
+  rules:
+    always_use_package_imports: false
+
+    use_late_for_private_fields_and_variables: false
+    prefer_const_declarations: false
+
+    # DO avoid print calls in production code.
+    #
+    # https://dart-lang.github.io/linter/lints/avoid_print.html
+    #
+    # My default is to have this rule enabled.
+    #
+    # Examples may want to print to the console, you might want to do so during development too. I keep the rule here
+    # to handily disable/enable as and when needed. This lint rule is a good way to find prints statements that you
+    # may have used during development in code that should not have them in production, so at least before
+    # committing the code in such projects, make sure to keep this rule enabled by commenting it out here.
+    #
+    # RELEASE:       ENABLE   : By commenting it out. (My default).
+    # DEVELOPMENT:   DISABLE  : With false value, if the warnings bother you during dev or making a console app.
+    avoid_print: false
+
+    # DO document all public members.
+    #
+    # https://dart-lang.github.io/linter/lints/public_member_api_docs.html
+    #
+    # All non-overriding public members should be documented with /// doc-style comments.
+    # Not necessary for an app or the examples in a pub.dev package. I enabled this for
+    # public packages, I keep the rule here so I can enable by commenting out this rule here.
+    #
+    # PACKAGE:       ENABLE   : By commenting it out.
+    # APPLICATION:   DISABLE  : With false value. (My default, assume we are making an app most of the time.)
+    public_member_api_docs: false
+
+    # DO sort pub dependencies in pubspec.yaml.
+    #
+    # https://dart-lang.github.io/linter/lints/sort_pub_dependencies.html
+    #
+    # Personal preference, I prefer sorting it manually based on package functionality.
+    sort_pub_dependencies: false
