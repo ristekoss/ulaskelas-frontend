@@ -1,6 +1,6 @@
 part of '_constants.dart';
 
-class CacheKeyConst {
+class CacheKey {
   static const String themeState = 'themeState';
   static const String profileState = 'profileState';
   static const String navigationState = 'navigationState';

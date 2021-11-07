@@ -13,7 +13,7 @@ class ThemeState {
   }
 
   static const String themeKey = 'theme';
-  HoumiTheme theme = HoumiThemeImpl();
+  UlaskelasTheme theme = UlaskelasThemeImpl();
   ThemeData? type;
   Color? primaryColor;
   Color? secondaryColor;
@@ -46,7 +46,7 @@ class ThemeState {
     switch (type) {
       case ThemeType.dark:
         return 'darkTheme';
-      default:
+      case ThemeType.normal:
         return 'normalTheme';
     }
   }

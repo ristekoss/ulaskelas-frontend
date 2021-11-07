@@ -3,8 +3,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:houmi/core/bases/states/_states.dart';
-import 'package:houmi/core/theme/_theme.dart';
+import 'package:ulaskelas/core/bases/states/_states.dart';
+import 'package:ulaskelas/core/theme/_theme.dart';
 
 class AppWrapper extends StatefulWidget {
   const AppWrapper({Key? key}) : super(key: key);
@@ -14,8 +14,7 @@ class AppWrapper extends StatefulWidget {
 }
 
 class _AppWrapperState extends State<AppWrapper> {
-  final auth = GlobalState.auth();
-  final profile = GlobalState.profile();
+  // TODO(pawpaw): Auth and profile state
 
   @override
   void initState() {
@@ -24,48 +23,23 @@ class _AppWrapperState extends State<AppWrapper> {
   }
 
   Future<void> splashTime() async {
+    // TODO(adit): comment this timer to start modify the splash screen content
     Timer(
       const Duration(milliseconds: 3000),
-      () async => auth.setState((s) => s.initialize(), onData: (data) async {
-        if (data.isLogin && !data.isEmailNotVerified) {
-          await profile.setState((s) => s.retrieveMyProfile());
-          if (!profile.state.isUserInfoVerified) {
-            await auth.state.instance.signOut();
-            authPageRoute();
-          } else if (!profile.state.isSubmitKtp) {
-            await auth.state.instance.signOut();
-            authPageRoute();
-          } else {
-            mainPageRoute();
-          }
-        } else {
-          authPageRoute();
-        }
-      }),
+      () async => ssoPageRoute(),
     );
   }
 
-  void mainPageRoute() {
-    nav.replaceToMainPage();
-  }
-
-  void authPageRoute() {
-    nav.replaceToAuthenticationPage();
+  void ssoPageRoute() {
+    nav.replaceToSsoPage();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HoumiColors.neutralWhite,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-          child: Image.asset(
-            'assets/images/houmi.png',
-            width: MediaQuery.of(context).size.width * .5,
-          ),
-        ),
-      ),
+      backgroundColor: BaseColors.white,
+      // TODO(adit): splash screen content
+      body: Container(),
     );
   }
 }

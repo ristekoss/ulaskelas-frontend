@@ -2,6 +2,7 @@ part of '_environment.dart';
 
 class Config {
   static Flavor? appFlavor;
+  static Entrypoint? appEntrypoint;
   static String? appName;
   static String? packageName;
 
@@ -10,8 +11,12 @@ class Config {
   static String? imagesPath;
   static String? iconsPath;
 
-  static Future<void> init(Flavor flavor) async {
+  static Future<void> init(
+    Flavor flavor, {
+    Entrypoint entrypoint = Entrypoint.splashScreen,
+  }) async {
     appFlavor = flavor;
+    appEntrypoint = entrypoint;
     appName = flavor.value;
     assetsPath = baseConfig.assetAbsolutePath;
     //todo grouping
@@ -26,18 +31,16 @@ class Config {
     }
     await Pref.init();
     await HiveDataBaseService.init();
-    // TODO fauzi: Implement notification plugin
+    // TODO(fauzi): Implement notification plugin
     // await notificationPlugin.init();
-    await HoumiPackageInfo.init();
 
     ///Initialize Future variables
-    packageName = HoumiPackageInfo.getInstance().packageName;
 
     ///Initialize SystemUI
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
-      statusBarColor: HoumiColors.transparent,
+      statusBarColor: BaseColors.transparent,
     ));
   }
 
