@@ -4,7 +4,6 @@ part 'cache_key_const.dart';
 part 'constants.dart';
 part 'notification_type_const.dart';
 part 'route_name_const.dart';
-part 'status_code_const.dart';
 part 'svg_icons_const.dart';
 
 const String kEmailRule =

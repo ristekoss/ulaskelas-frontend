@@ -3,419 +3,427 @@
 part of '_theme.dart';
 
 class FontTheme {
-  static TextStyle ubuntu10w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins10w400black() {
+    return GoogleFonts.poppins(
       fontSize: 10,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu12w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins12w400black() {
+    return GoogleFonts.poppins(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu14w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w400black() {
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu16w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins16w400black() {
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu18w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins18w400black() {
+    return GoogleFonts.poppins(
       fontSize: 18,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu20w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins20w400black() {
+    return GoogleFonts.poppins(
       fontSize: 20,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu22w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins22w400black() {
+    return GoogleFonts.poppins(
       fontSize: 22,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu24w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins24w400black() {
+    return GoogleFonts.poppins(
       fontSize: 24,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu28w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins28w400black() {
+    return GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu32w400black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins32w400black() {
+    return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu10w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins10w500black() {
+    return GoogleFonts.poppins(
       fontSize: 10,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu12w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins12w500black() {
+    return GoogleFonts.poppins(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu14w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w500black() {
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu16w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins16w500black() {
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu18w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins18w500black() {
+    return GoogleFonts.poppins(
       fontSize: 18,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu20w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins20w500black() {
+    return GoogleFonts.poppins(
       fontSize: 20,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu22w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins22w500black() {
+    return GoogleFonts.poppins(
       fontSize: 22,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu24w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins24w500black() {
+    return GoogleFonts.poppins(
       fontSize: 24,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu28w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins28w500black() {
+    return GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu32w500black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins32w500black() {
+    return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu10w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w600black() {
+    return GoogleFonts.poppins(
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      color: BaseColors.mineShaft,
+    );
+  }
+
+  static TextStyle poppins10w700black() {
+    return GoogleFonts.poppins(
       fontSize: 10,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu12w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins12w700black() {
+    return GoogleFonts.poppins(
       fontSize: 12,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu14w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w700black() {
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu16w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins16w700black() {
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu18w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins18w700black() {
+    return GoogleFonts.poppins(
       fontSize: 18,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu20w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins20w700black() {
+    return GoogleFonts.poppins(
       fontSize: 20,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu22w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins22w700black() {
+    return GoogleFonts.poppins(
       fontSize: 22,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu24w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins24w700black() {
+    return GoogleFonts.poppins(
       fontSize: 24,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu28w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins28w700black() {
+    return GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu32w700black() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins32w700black() {
+    return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.black100,
+      color: BaseColors.mineShaft,
     );
   }
 
-  static TextStyle ubuntu12w400black2() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins12w400black2() {
+    return GoogleFonts.poppins(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black80,
+      color: BaseColors.gray2,
     );
   }
 
-  static TextStyle ubuntu14w400black2() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w400black2() {
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: HoumiColors.black80,
+      color: BaseColors.gray2,
     );
   }
 
-  static TextStyle ubuntu10w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins10w500white() {
+    return GoogleFonts.poppins(
       fontSize: 10,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu12w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins12w500white() {
+    return GoogleFonts.poppins(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu14w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w500white() {
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu16w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins16w500white() {
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu18w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins18w500white() {
+    return GoogleFonts.poppins(
       fontSize: 18,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu20w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins20w500white() {
+    return GoogleFonts.poppins(
       fontSize: 20,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu22w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins22w500white() {
+    return GoogleFonts.poppins(
       fontSize: 22,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu24w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins24w500white() {
+    return GoogleFonts.poppins(
       fontSize: 24,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu28w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins28w500white() {
+    return GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu32w500white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins32w500white() {
+    return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w500,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu10w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins10w700white() {
+    return GoogleFonts.poppins(
       fontSize: 10,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu12w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins12w700white() {
+    return GoogleFonts.poppins(
       fontSize: 12,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu14w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins14w700white() {
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu16w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins16w700white() {
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu18w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins18w700white() {
+    return GoogleFonts.poppins(
       fontSize: 18,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu20w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins20w700white() {
+    return GoogleFonts.poppins(
       fontSize: 20,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu22w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins22w700white() {
+    return GoogleFonts.poppins(
       fontSize: 22,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu24w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins24w700white() {
+    return GoogleFonts.poppins(
       fontSize: 24,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu28w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins28w700white() {
+    return GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 
-  static TextStyle ubuntu32w700white() {
-    return GoogleFonts.ubuntu(
+  static TextStyle poppins32w700white() {
+    return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w700,
-      color: HoumiColors.neutralWhite,
+      color: BaseColors.alabaster,
     );
   }
 }

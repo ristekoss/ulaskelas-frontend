@@ -1,6 +1,6 @@
 part of '_theme.dart';
 
-class HoumiColors {
+class BaseColors {
   static final themeState = GlobalState.theme().state;
 
   ///primary color base on theme
@@ -23,29 +23,27 @@ class HoumiColors {
     },
   );
 
-  ///CORE NORMAL THEME
-  static const Color houmiPrimary = Color(0xFF303D83);
-  static const Color houmiSecondary = Color(0xFF808CC9);
-  static const Color houmiAccent = Color(0xFFC8D0FB);
-
-  ///DERIVE COLOR
-  static const Color transparent = Colors.transparent;
-  static const Color disableColor = black40;
-  static const Color border = black40;
-  static Color shadowColor = black40.withOpacity(.2);
-
-  ///BLACK
-  static const Color black100 = Color(0xFF131313);
-  static const Color black80 = Color(0xFF525252);
-  static const Color black60 = Color(0xFF8A8A8A);
-  static const Color black40 = Color(0xFFBBBBBB);
-
-  ///WHITE
-  static const Color neutralWhite = Color(0xFFF6F6F6);
+  /// Primary Color
   static const Color white = Color(0xFFFFFFFF);
+  static const Color alabaster = Color(0xFFF8F8F8);
+  static const Color purpleHearth = Color(0xFF5038BC);
+  static const Color malibu = Color(0xFF64E6FB);
 
-  ///STATES
-  static const Color positive = Color(0xFF37924B);
-  static const Color positive5 = Color(0xFF8EBB98);
-  static const Color negative = Color(0xFF923737);
+  /// Secondary Color
+  static const Color mineShaft = Color(0xFF333333);
+  static const Color cerise = Color(0xFFC424A3);
+  static const Color goldenrod = Color(0xFFFFD668);
+
+  /// State Color
+  static const Color success = Color(0xFF27AE60);
+  static const Color warning = Color(0xFFF7B500);
+  static const Color error = Color(0xFFEB5757);
+
+  /// Grey Color
+  static const Color gray1 = Color(0xFF4F4F4F);
+  static const Color gray2 = Color(0xFF828282);
+  static const Color gray3 = Color(0xFFBDBDBD);
+  static const Color gray4 = Color(0xFFE0E0E0);
+  static const Color gray5 = Color(0xFFF2F2F2);
+  static const Color transparent = Colors.transparent;
 }

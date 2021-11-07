@@ -1,16 +1,31 @@
-# ulaskelas
+# 👨‍💻 Ulas Kelas
+[![Generic badge](https://img.shields.io/badge/Flutter-v2.2.3-blue)](https://flutter.dev/docs)
+[![Generic badge](https://img.shields.io/badge/Dart-v2.13.4-blue)](https://dart.dev/guides)
+[![Generic badge](https://img.shields.io/badge/development-v0.0.1-brightgreen)](https://play.google.com/store/)
+[![Generic badge](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
-A new Flutter project.
+Ulas Kelas app
 
-## Getting Started
+## ⚡️ Getting Started
 
-This project is a starting point for a Flutter application.
+### 🚚 How to run, drive, and build Apk
 
-A few resources to get you started if this is your first Flutter project:
+Example how to run release development app
+```
+flutter clean
+flutter pub get
+flutter run -t lib/main_development.dart --release --no-shrink --flavor development
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Example how to build release development app
+```
+flutter clean
+flutter pub get
+flutter build apk -t lib/main_development.dart --release --no-shrink --flavor development --split-per-abi
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Example how to drive automation test on development environment
+note that automation test doesn't support release mode
+```
+flutter drive -t test_driver/app.dart --flavor development
+```

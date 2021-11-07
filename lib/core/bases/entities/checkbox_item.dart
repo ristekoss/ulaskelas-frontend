@@ -1,21 +1,17 @@
 // Created by Muhamad Fauzi Ridwan on 07/11/21.
 
-part of '_enums.dart';
+part of '_entities.dart';
 
 /// Describing dart UI Entrypoint per section
-enum Entrypoint {
-  // Radit & adit
-  splashScreen,
 
-  // Yudha & Syabib
-  home,
+class CheckboxItem {
+  CheckboxItem({
+    this.text,
+    this.value,
+  }) {
+    value ??= text;
+  }
 
-  // Bima
-  reviewMatkul,
-
-  // Paw
-  searchMatkul,
-
-  // Bintang
-  profile,
+  String? text;
+  String? value;
 }

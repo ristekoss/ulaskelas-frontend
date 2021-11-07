@@ -1,3 +1,4 @@
-// Created by Muhamad Fauzi Ridwan on 7/17/21.
+// Created by Muhamad Fauzi Ridwan on 07/11/21.
 
-part 'countdown_type.dart';
+part 'entrypoint.dart';
+part 'theme_type.dart';

@@ -3,10 +3,10 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import 'package:houmi/app_wrapper.dart';
-import 'package:houmi/core/bases/states/_states.dart';
-import 'package:houmi/core/constants/_constants.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:ulaskelas/app_wrapper.dart';
+import 'package:ulaskelas/core/bases/states/_states.dart';
+import 'package:ulaskelas/core/constants/_constants.dart';
 
 FirebaseAnalytics analytics = FirebaseAnalytics();
 
@@ -23,7 +23,7 @@ class App extends StatelessWidget {
         initState: (_, __) => __?.setState((s) => s.init()),
         builder: (context, snapshot) {
           return MaterialApp(
-            title: Constants.houmi,
+            title: Constants.ulaskelas,
             navigatorKey: nav.navigatorKey,
             debugShowCheckedModeBanner: false,
             theme: GlobalState.theme().state.type,

@@ -3,4 +3,4 @@
 part of '_constants.dart';
 
 //todo notification type
-class NotificationTypeConst {}
+class NotificationType {}

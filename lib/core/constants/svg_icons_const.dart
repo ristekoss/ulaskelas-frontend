@@ -3,8 +3,7 @@
 part of '_constants.dart';
 
 ///SVG icons
-class HoumiIcons {
-  static const houmi = 'houmi';
+class SvgIcons {
   static const offClose = 'off_close';
   static const fingerprint = 'fingerprint';
   static const faceId = 'face_id';

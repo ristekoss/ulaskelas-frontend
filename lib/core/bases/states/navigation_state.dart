@@ -3,6 +3,7 @@
 part of '_states.dart';
 
 NavigationServiceState nav = GlobalState.navigation().state;
+BuildContext? ctx = GlobalState.navigation().state.navigatorKey.currentContext;
 
 abstract class Navigation {
   Future<T?> pushRoute<T>(ModalRoute<T> route, [String? routeName]);
@@ -42,52 +43,17 @@ class NavigationServiceState implements Navigation {
     navigatorKey.currentState!.popUntil(ModalRoute.withName(routeName));
   }
 
-  Future<void> replaceToAuthenticationPage() {
-    return nav.pushReplacement<void, void>(
-      const AuthenticationPage(),
-      RouteNameConst.authPage,
-    );
-  }
-
-  Future<void> replaceToMainPage() {
+  Future<void> replaceToSsoPage() {
     return nav.pushReplacement<void, void>(
       const MainPage(),
-      RouteNameConst.mainPage,
+      RouteName.mainPage,
     );
   }
 
-  Future<void> goToForgotPassword() {
-    return push(const ForgotPasswordPage());
-  }
-
-  Future<void> goToForgotPasswordResult({required String email}) {
-    return push(ForgotPasswordResultPage(email: email));
-  }
-
-  Future<void> goToUserVerification() {
-    return push(const UserVerificationPage());
-  }
-
-  Future<void> replaceToUploadKtp() {
-    return pushReplacement<void, void>(
-      const GovernmentIdUploadPage(),
-      RouteNameConst.uploadKtp,
+  Future<void> goToFilterPage() {
+    return nav.push<void>(
+      const FilterPage(),
+      RouteName.mainPage,
     );
-  }
-
-  Future<void> goToUploadKtp() {
-    return push(
-      const GovernmentIdUploadPage(),
-      RouteNameConst.uploadKtp,
-    );
-  }
-
-  Future<void> goToNotification() {
-    return push(const NotificationPage());
-  }
-
-  // TODO: Change this
-  Future<void> goToWaitingForUserValidation() {
-    return push(const WaitingUserValidationPage());
   }
 }
