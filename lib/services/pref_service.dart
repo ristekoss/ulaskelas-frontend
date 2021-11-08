@@ -27,7 +27,7 @@ class Pref {
     return _pref!.getString(key);
   }
 
-  static Future<void> saveBool(String key, bool value) async {
+  static Future<void> saveBool(String key, {required bool value}) async {
     await _pref!.setBool(key, value);
   }
 

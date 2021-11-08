@@ -46,13 +46,20 @@ class NavigationServiceState implements Navigation {
   Future<void> replaceToSsoPage() {
     return nav.pushReplacement<void, void>(
       const MainPage(),
+      RouteName.authPage,
+    );
+  }
+
+  Future<bool?> goToFilterPage() {
+    return nav.push<bool>(
+      const FilterPage(),
       RouteName.mainPage,
     );
   }
 
-  Future<void> goToFilterPage() {
+  Future<void> goToDetailMatkulPage() {
     return nav.push<void>(
-      const FilterPage(),
+      const DetailMatkulPage(),
       RouteName.mainPage,
     );
   }
