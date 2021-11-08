@@ -23,8 +23,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  ristek_material_component:
-    path: '/Users/fauziridwan1709/Desktop/projectgit/ristek_material_component'
+  ristek_material_component: ^0.0.5
   states_rebuilder: 4.0.0+1
   logger: ^1.0.0
   firebase_analytics: ^8.2.0
@@ -47,17 +46,8 @@ dev_dependencies:
     sdk: flutter
   very_good_analysis: ^2.3.0
 
-#flutter_icons:
-#  android: "launcher_icon"
-#  ios: true
-#  image_path: "assets/images/primary_logo.png"
-#  adaptive_icon_background: #FFFFFF
-
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   assets:

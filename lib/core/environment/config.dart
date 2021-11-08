@@ -45,15 +45,13 @@ class Config {
   }
 
   static bool get isDevelopment => appFlavor == Flavor.development;
-  static BaseConfig get baseConfig => _baseConfig();
+  static BaseConfig get baseConfig => _baseConfig()!;
 
-  static BaseConfig _baseConfig() {
+  static BaseConfig? _baseConfig() {
     switch (appFlavor) {
       case Flavor.development:
         return const BaseConfig();
       case Flavor.production:
-        return const BaseConfig();
-      default:
         return const BaseConfig();
     }
   }

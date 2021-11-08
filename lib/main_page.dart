@@ -3,8 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
-
-import 'features/matkul/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

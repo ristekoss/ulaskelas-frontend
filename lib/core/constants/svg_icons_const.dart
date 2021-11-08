@@ -2,9 +2,5 @@
 
 part of '_constants.dart';
 
-///SVG icons
-class SvgIcons {
-  static const offClose = 'off_close';
-  static const fingerprint = 'fingerprint';
-  static const faceId = 'face_id';
-}
+/// SVG icons
+class SvgIcons {}
