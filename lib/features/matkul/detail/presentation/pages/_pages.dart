@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
+import 'package:ulaskelas/core/bases/states/_states.dart';
+import 'package:ulaskelas/core/theme/_theme.dart';
+import 'package:ulaskelas/features/matkul/detail/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
 part 'detail_matkul_page.dart';
