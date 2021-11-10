@@ -10,7 +10,7 @@ class GlobalState {
           ))),
       Inject(() => NavigationServiceState()),
       Inject(() => FilterState()),
-      Inject(() => SearchState()),
+      Inject(() => SearchMatkulState()),
     ];
   }
 
@@ -18,7 +18,7 @@ class GlobalState {
     Inject(() => ThemeState()),
     Inject(() => NavigationServiceState()),
     Inject(() => FilterState()),
-    Inject(() => SearchState()),
+    Inject(() => SearchMatkulState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {
@@ -33,7 +33,7 @@ class GlobalState {
     return Injector.getAsReactive<FilterState>();
   }
 
-  static ReactiveModel<SearchState> search() {
-    return Injector.getAsReactive<SearchState>();
+  static ReactiveModel<SearchMatkulState> search() {
+    return Injector.getAsReactive<SearchMatkulState>();
   }
 }

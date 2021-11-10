@@ -11,7 +11,8 @@ class MatkulPage extends StatefulWidget {
   _MatkulPageState createState() => _MatkulPageState();
 }
 
-class _MatkulPageState extends BaseStateful<MatkulPage> {
+class _MatkulPageState
+    extends BasePaginationState<MatkulPage, SearchMatkulState> {
   final controller = TextEditingController();
   final focusNode = FocusNode();
   bool hasFilter = false;
@@ -21,6 +22,11 @@ class _MatkulPageState extends BaseStateful<MatkulPage> {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       SuccessMessenger('Mata Kuliah Berhasil Disimpan').show(ctx!);
     });
+  }
+
+  @override
+  Future<void> retrieveData() async {
+    // TODO: implement retrieveData
   }
 
   @override
@@ -36,6 +42,7 @@ class _MatkulPageState extends BaseStateful<MatkulPage> {
   @override
   Widget buildNarrowLayout(
     BuildContext context,
+    ReactiveModel<SearchMatkulState> k,
     SizingInformation sizeInfo,
   ) {
     return Column(
@@ -110,13 +117,25 @@ class _MatkulPageState extends BaseStateful<MatkulPage> {
   @override
   Widget buildWideLayout(
     BuildContext context,
+    ReactiveModel<SearchMatkulState> k,
     SizingInformation sizeInfo,
   ) {
-    return buildNarrowLayout(context, sizeInfo);
+    return buildNarrowLayout(context, k, sizeInfo);
   }
 
   @override
   Future<bool> onBackPressed() async {
+    return true;
+  }
+
+  @override
+  void onScroll() {
+    // TODO: implement onScroll
+  }
+
+  @override
+  bool scrollCondition() {
+    // TODO: implement scrollCondition
     return true;
   }
 }

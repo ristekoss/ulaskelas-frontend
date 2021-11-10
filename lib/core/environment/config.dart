@@ -24,13 +24,20 @@ class Config {
     iconsPath = '${assetsPath!}/icons';
 
     await Firebase.initializeApp();
+    // try {
+    //
+    // }
+    // if (Platform.isAndroid || Platform.isIOS) {
+    //
+    // }
 
     ///Initialization of all services
-    if (kDebugMode) {
+    if (kDebugMode && !kIsWeb) {
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+      await HiveDataBaseService.init();
     }
     await Pref.init();
-    await HiveDataBaseService.init();
+
     // TODO(fauzi): Implement notification plugin
     // await notificationPlugin.init();
 

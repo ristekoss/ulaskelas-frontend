@@ -8,6 +8,7 @@ import 'package:ulaskelas/core/_core.dart';
 import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
+import 'package:ulaskelas/features/matkul/search/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
 part 'filter_page.dart';
