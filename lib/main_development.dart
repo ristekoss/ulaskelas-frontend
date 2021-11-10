@@ -9,10 +9,18 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // TODO(all): duit
   await Config.init(Flavor.development);
-  runApp(Injector(
+  final rootWidget = Injector(
     inject: GlobalState.injectData,
     builder: (context) {
       return const App();
     },
-  ));
+  );
+  // final rootWidget = kIsWeb
+  //     ? Container(
+  //         width: 500,
+  //         constraints: const BoxConstraints(maxWidth: 500),
+  //         child: Center(child: injectorWidget),
+  //       )
+  //     : injectorWidget;
+  runApp(rootWidget);
 }
