@@ -9,10 +9,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // TODO(all): duit
   await Config.init(Flavor.development);
-  runApp(Injector(
+  final rootWidget = Injector(
     inject: GlobalState.injectData,
     builder: (context) {
       return const App();
     },
-  ));
+  );
+  runApp(rootWidget);
 }
