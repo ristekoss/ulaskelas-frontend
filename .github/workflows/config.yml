@@ -24,4 +24,3 @@ jobs:
           flutter doctor
           flutter pub get
           flutter test --coverage
-          genhtml -o coverage coverage/lcov.info
