@@ -58,18 +58,20 @@ class _MatkulPageState
           ),
           child: Column(
             children: [
-              SearchField(
-                hintText: 'Cari mata kuliah',
-                focusNode: focusNode,
-                controller: search.state.controller,
-                onClear: () {
-                  focusNode.unfocus();
-                  search.state.controller.clear();
-                },
-                onFieldSubmitted: (val) {
-                  search.state.addToHistory(val);
-                },
-                onChange: onQueryChanged,
+              OnReactive(
+                () => SearchField(
+                  hintText: 'Cari mata kuliah',
+                  focusNode: focusNode,
+                  controller: search.state.controller,
+                  onClear: () {
+                    focusNode.unfocus();
+                    search.state.controller.clear();
+                  },
+                  onFieldSubmitted: (val) {
+                    search.state.addToHistory(val);
+                  },
+                  onChange: onQueryChanged,
+                ),
               ),
             ],
           ),
@@ -202,18 +204,6 @@ class _MatkulPageState
   Widget _buildSearchList(SizingInformation sizeInfo) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: InputField(
-            focusNode: FocusNode(),
-            controller: TextEditingController(),
-            label: 'gimana',
-            minLines: 2,
-            maxLines: 8,
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
