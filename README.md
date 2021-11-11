@@ -14,7 +14,7 @@ Example how to run release development app
 ```
 flutter clean
 flutter pub get
-flutter run -t lib/main_development.dart --release --no-shrink --flavor development
+flutter run -t lib/main_development.dart --release --flavor development
 ```
 
 Example how to build release development app

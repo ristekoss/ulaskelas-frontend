@@ -87,6 +87,11 @@ class FilterState {
     ),
   ];
 
+  bool get hasFilter =>
+      isFilteredType || selectedSemester.isNotEmpty || selectedSks.isNotEmpty;
+
+  bool get isFilteredType => selectedType.isNotEmpty;
+
   void pickMatkulType(String val) {
     selectedType.add(val);
   }

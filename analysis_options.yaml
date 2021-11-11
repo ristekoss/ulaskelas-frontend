@@ -22,10 +22,11 @@ analyzer:
 # Disable unwanted or conflicting lint rules.
 linter:
   rules:
+    avoid_equals_and_hash_code_on_mutable_classes: false
     always_use_package_imports: false
-
     use_late_for_private_fields_and_variables: false
     prefer_const_declarations: false
+    unnecessary_overrides: false
 
     # DO avoid print calls in production code.
     #
