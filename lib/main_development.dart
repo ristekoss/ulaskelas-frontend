@@ -15,12 +15,5 @@ Future<void> main() async {
       return const App();
     },
   );
-  // final rootWidget = kIsWeb
-  //     ? Container(
-  //         width: 500,
-  //         constraints: const BoxConstraints(maxWidth: 500),
-  //         child: Center(child: injectorWidget),
-  //       )
-  //     : injectorWidget;
   runApp(rootWidget);
 }
