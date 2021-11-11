@@ -398,10 +398,10 @@ packages:
   ristek_material_component:
     dependency: "direct main"
     description:
-      path: "/Users/fauziridwan1709/Desktop/projectgit/ristek_material_component"
-      relative: false
-    source: path
-    version: "0.0.6"
+      name: ristek_material_component
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.7"
   rxdart:
     dependency: "direct main"
     description:
