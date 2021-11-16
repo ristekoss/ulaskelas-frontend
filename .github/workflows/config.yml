@@ -6,8 +6,8 @@ on:
       - development
   push:
     branches:
-      - development
       - main
+      - development
 
 jobs:
   flutter_test:
@@ -25,3 +25,4 @@ jobs:
           flutter doctor
           flutter pub get
           flutter test --coverage
+          bash <(curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }})
