@@ -308,7 +308,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     final matkul = matkuls[i];
                     return CardMatkul(
                       model: matkul,
-                      onTap: () => nav.goToDetailMatkulPage(),
+                      onTap: () => nav.goToDetailMatkulPage(matkul.name!),
                     );
                   },
                 );
