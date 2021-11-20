@@ -1,8 +1,12 @@
 # 👨‍💻 Ulas Kelas
 [![Generic badge](https://img.shields.io/badge/Flutter-v2.2.3-blue)](https://flutter.dev/docs)
 [![Generic badge](https://img.shields.io/badge/Dart-v2.13.4-blue)](https://dart.dev/guides)
+[![test](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/config.yml/badge.svg)](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/config.yml)
+[![Deploy Web](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/firebase-hosting-merge.yml)
+[![codecov](https://codecov.io/gh/RistekCSUI/ulaskelas-frontend/branch/main/graph/badge.svg?token=SHFALBJG9U)](https://codecov.io/gh/RistekCSUI/ulaskelas-frontend)
 [![Generic badge](https://img.shields.io/badge/development-v0.0.1-brightgreen)](https://play.google.com/store/)
 [![Generic badge](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![Generic badge](https://img.shields.io/badge/component-ristek_material_component-9932CC.svg)](https://pub.dev/packages/ristek_material_component)
 
 Ulas Kelas app
 
@@ -14,7 +18,7 @@ Example how to run release development app
 ```
 flutter clean
 flutter pub get
-flutter run -t lib/main_development.dart --release --no-shrink --flavor development
+flutter run -t lib/main_development.dart --release --flavor development
 ```
 
 Example how to build release development app

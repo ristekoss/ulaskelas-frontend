@@ -8,12 +8,11 @@ import 'core/environment/_environment.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Config.init(Flavor.production);
-  runApp(Injector(
+  final rootWidget = Injector(
     inject: GlobalState.injectData,
     builder: (context) {
       return const App();
     },
-  ));
+  );
+  runApp(rootWidget);
 }
-
-//+62 812-8668-9546
