@@ -265,7 +265,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             child: AutoLayoutButton(
               text: 'Tulis Ulasan',
               onTap: () {
-                nav.goToReviewMatkulPage();
+                nav.goToReviewMatkulFormPage();
               },
             ),
           )

@@ -10,4 +10,6 @@ class RouteName {
   static const String authPage = 'auth';
   static const String profilePage = 'profile';
   static const String reviewMatkul = 'review-matkul';
+  static const String reviewMatkulFormPage = 'review-matkul-form';
+  static const String addReviewMatkulTagPage = 'tag';
 }
