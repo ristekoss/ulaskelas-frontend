@@ -67,7 +67,7 @@ class NavigationServiceState implements Navigation {
   Future<void> goToReviewMatkulPage() {
     return nav.push<void>(
       const ReviewMatkulPage(),
-      RouteName.mainPage,
+      RouteName.reviewMatkul,
     );
   }
 }
