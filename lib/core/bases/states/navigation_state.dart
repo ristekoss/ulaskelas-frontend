@@ -89,8 +89,15 @@ class NavigationServiceState implements Navigation {
 
   Future<void> goToHomeDaftarMatkul() {
     return nav.push<void>(
-      HomeDaftarMatkul(),
+      const HomeDaftarMatkul(),
       RouteName.homeDaftarMatkul,
+    );
+  }
+
+  Future<void> goToHomeDaftarUlasan() {
+    return nav.push<void>(
+      const HomeDaftarUlasan(),
+      RouteName.homeDaftarUlasan,
     );
   }
 }

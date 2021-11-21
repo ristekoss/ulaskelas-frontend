@@ -78,42 +78,40 @@ class CardMatkulReview extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              child: Column(
-                children: [
-                  const HeightSpace(4),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 10, top: 8),
-                    child: Text(
-                      model.ulasan,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: FontTheme.poppins12w400black().copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+            Column(
+              children: [
+                const HeightSpace(4),
+                Container(
+                  padding: const EdgeInsets.only(bottom: 10, top: 8),
+                  child: Text(
+                    'Anda: ${model.ulasan}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: FontTheme.poppins12w400black().copyWith(
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Diulas pada ${model.tanggal}',
-                        style: FontTheme.poppins10w400black().copyWith(
-                          color: BaseColors.gray2,
-                        ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Diulas pada ${model.tanggal}',
+                      style: FontTheme.poppins10w400black().copyWith(
+                        color: BaseColors.gray2,
                       ),
-                      Tag(
-                        label: model.status,
-                        state: model.status == 'Approved'
-                            ? TagStatus.approved
-                            : (model.status == 'Pending')
-                                ? TagStatus.pending
-                                : TagStatus.rejected,
-                      )
-                    ],
-                  )
-                ],
-              ),
+                    ),
+                    Tag(
+                      label: model.status,
+                      state: model.status == 'Approved'
+                          ? TagStatus.approved
+                          : (model.status == 'Pending')
+                              ? TagStatus.pending
+                              : TagStatus.rejected,
+                    )
+                  ],
+                )
+              ],
             )
           ],
         ),
