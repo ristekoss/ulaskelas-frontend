@@ -24,7 +24,7 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BaseAppBar(
       hasLeading: false,
-      label: 'Mata Kuliah Tersimpan',
+      label: 'Profil Pengguna',
     );
   }
 
@@ -64,29 +64,5 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
   @override
   Future<bool> onBackPressed() async {
     return true;
-  }
-
-  Widget _buildSavedList() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: SizedBox(
-            height: 40,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Daftar Matkul Tersimpan',
-                  style: FontTheme.poppins14w700black(),
-                )
-              ],
-            ),
-          ),
-        )
-      ],
-    );
   }
 }
