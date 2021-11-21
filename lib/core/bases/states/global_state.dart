@@ -1,5 +1,36 @@
 part of '_states.dart';
 
+/// Top level injection
+final search = RM.inject(
+  () => SearchMatkulState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final filter = RM.inject(
+  () => FilterState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final review = RM.inject(
+  () => ReviewState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final reviewForm = RM.inject(
+  () => ReviewMatkulFormState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final searchTag = RM.inject(
+  () => SearchTagState(),
+);
+
+final bookmark = RM.inject(
+  () => BookmarkState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+/// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
     return <Injectable>[
@@ -10,7 +41,10 @@ class GlobalState {
           ))),
       Inject(() => NavigationServiceState()),
       Inject(() => FilterState()),
-      Inject(() => SearchState()),
+      Inject(() => SearchMatkulState()),
+      Inject(() => ReviewState()),
+      Inject(() => SearchTagState()),
+      Inject(() => BookmarkState()),
     ];
   }
 
@@ -18,7 +52,10 @@ class GlobalState {
     Inject(() => ThemeState()),
     Inject(() => NavigationServiceState()),
     Inject(() => FilterState()),
-    Inject(() => SearchState()),
+    Inject(() => SearchMatkulState()),
+    Inject(() => ReviewState()),
+    Inject(() => SearchTagState()),
+    Inject(() => BookmarkState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {
@@ -27,13 +64,5 @@ class GlobalState {
 
   static ReactiveModel<NavigationServiceState> navigation() {
     return Injector.getAsReactive<NavigationServiceState>();
-  }
-
-  static ReactiveModel<FilterState> filter() {
-    return Injector.getAsReactive<FilterState>();
-  }
-
-  static ReactiveModel<SearchState> search() {
-    return Injector.getAsReactive<SearchState>();
   }
 }

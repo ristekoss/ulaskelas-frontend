@@ -200,6 +200,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_spinkit:
     dependency: transitive
     description:
@@ -224,6 +229,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fluttertoast:
+    dependency: "direct main"
+    description:
+      name: fluttertoast
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "8.0.8"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
@@ -396,7 +408,7 @@ packages:
       name: ristek_material_component
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.7"
   rxdart:
     dependency: "direct main"
     description:
@@ -478,7 +490,7 @@ packages:
       name: states_rebuilder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0+1"
+    version: "5.0.0"
   stream_channel:
     dependency: transitive
     description:
