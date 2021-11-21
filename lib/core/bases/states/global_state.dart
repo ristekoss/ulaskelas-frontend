@@ -23,6 +23,10 @@ final reviewForm = RM.inject(
 
 final searchTag = RM.inject(
   () => SearchTagState(),
+);
+
+final bookmark = RM.inject(
+  () => BookmarkState(),
   autoDisposeWhenNotUsed: false,
 );
 
@@ -40,6 +44,7 @@ class GlobalState {
       Inject(() => SearchMatkulState()),
       Inject(() => ReviewState()),
       Inject(() => SearchTagState()),
+      Inject(() => BookmarkState()),
     ];
   }
 
@@ -50,6 +55,7 @@ class GlobalState {
     Inject(() => SearchMatkulState()),
     Inject(() => ReviewState()),
     Inject(() => SearchTagState()),
+    Inject(() => BookmarkState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {

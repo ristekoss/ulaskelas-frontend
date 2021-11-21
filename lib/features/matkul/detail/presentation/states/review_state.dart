@@ -8,17 +8,17 @@ class ReviewState {
       ReviewModel(
           author: 'Astrida Nayla',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          likesCount: 0,
+          likesCount: 999,
           classTakenOn: 'Ganjil 2020/2021'),
       ReviewModel(
           author: 'Thalia Theresa',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          likesCount: 3,
+          likesCount: 9,
           classTakenOn: 'Ganjil 2020/2021'),
       ReviewModel(
           author: 'Rayhan Maulana Akbar',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          likesCount: 2,
+          likesCount: 98,
           classTakenOn: 'Ganjil 2020/2021'),
     ],
     'Basis Data': [],
