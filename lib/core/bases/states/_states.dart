@@ -4,6 +4,7 @@ import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:ulaskelas/core/_core.dart';
 import 'package:ulaskelas/core/bases/enums/_enums.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
+import 'package:ulaskelas/features/home/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/form/data/models/_models.dart';

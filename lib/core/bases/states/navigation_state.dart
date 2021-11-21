@@ -86,4 +86,11 @@ class NavigationServiceState implements Navigation {
       RouteName.addReviewMatkulTagPage,
     );
   }
+
+  Future<void> goToHomeDaftarMatkul() {
+    return nav.push<void>(
+      HomeDaftarMatkul(),
+      RouteName.homeDaftarMatkul,
+    );
+  }
 }
