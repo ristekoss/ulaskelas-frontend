@@ -70,7 +70,9 @@ class ReviewCard extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 8,),
+          const SizedBox(
+            height: 8,
+          ),
           Row(
             children: const [
               Tag(
@@ -116,6 +118,7 @@ class ReviewCard extends StatelessWidget {
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // TODO: change color &
                   GestureDetector(
@@ -126,11 +129,13 @@ class ReviewCard extends StatelessWidget {
                       color: thumbIconColor,
                     ),
                   ),
-                  const SizedBox(width: 9,),
-                  Text(
-                    likesCount.toString(),
-                    style: FontTheme.poppins14w600black().copyWith(
-                      color: likesCountColor,
+                  Container(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      likesCount.toString(),
+                      style: FontTheme.poppins14w600black().copyWith(
+                        color: likesCountColor,
+                      ),
                     ),
                   )
                 ],

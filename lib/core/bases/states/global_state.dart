@@ -16,6 +16,11 @@ final review = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final bookmark = RM.inject(
+  () => BookmarkState(),
+  autoDisposeWhenNotUsed: false,
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
@@ -29,6 +34,7 @@ class GlobalState {
       Inject(() => FilterState()),
       Inject(() => SearchMatkulState()),
       Inject(() => ReviewState()),
+      Inject(() => BookmarkState()),
     ];
   }
 
@@ -38,6 +44,7 @@ class GlobalState {
     Inject(() => FilterState()),
     Inject(() => SearchMatkulState()),
     Inject(() => ReviewState()),
+    Inject(() => BookmarkState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {
