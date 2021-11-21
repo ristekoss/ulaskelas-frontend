@@ -7,6 +7,7 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/states/_states.dart';
+import 'package:ulaskelas/features/profile/presentation/pages/_pages.dart';
 import 'package:ulaskelas/main_page.dart';
 import 'package:ulaskelas/services/_services.dart';
 
