@@ -16,6 +16,16 @@ final review = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final reviewForm = RM.inject(
+  () => ReviewMatkulFormState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final searchTag = RM.inject(
+  () => SearchTagState(),
+  autoDisposeWhenNotUsed: false,
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
@@ -29,6 +39,7 @@ class GlobalState {
       Inject(() => FilterState()),
       Inject(() => SearchMatkulState()),
       Inject(() => ReviewState()),
+      Inject(() => SearchTagState()),
     ];
   }
 
@@ -38,6 +49,7 @@ class GlobalState {
     Inject(() => FilterState()),
     Inject(() => SearchMatkulState()),
     Inject(() => ReviewState()),
+    Inject(() => SearchTagState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {

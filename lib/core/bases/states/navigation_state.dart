@@ -59,7 +59,9 @@ class NavigationServiceState implements Navigation {
 
   Future<void> goToDetailMatkulPage(String matkul) {
     return nav.push<void>(
-      DetailMatkulPage(matkul: matkul,),
+      DetailMatkulPage(
+        matkul: matkul,
+      ),
       RouteName.mainPage,
     );
   }
@@ -68,6 +70,20 @@ class NavigationServiceState implements Navigation {
     return nav.push<void>(
       const ReviewMatkulPage(),
       RouteName.mainPage,
+    );
+  }
+
+  Future<void> goToReviewMatkulFormPage() {
+    return nav.push<void>(
+      const ReviewMatkulFormPage(),
+      RouteName.reviewMatkulFormPage,
+    );
+  }
+
+  Future<List<TagModel>?> goToAddReviewMatkulTagPage() {
+    return nav.push<List<TagModel>>(
+      const AddReviewMatkulTagPage(),
+      RouteName.addReviewMatkulTagPage,
     );
   }
 }

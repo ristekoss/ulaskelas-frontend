@@ -292,6 +292,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                   );
                 }
                 return ListView.separated(
+                  controller: scrollController,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 10,
