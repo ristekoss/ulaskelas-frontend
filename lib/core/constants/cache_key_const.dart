@@ -6,4 +6,6 @@ class CacheKey {
   static const String navigationState = 'navigationState';
   static const String notificationState = 'NotificationState';
   static const String newsState = 'NewsState';
+  static const String searchState = 'SearchState';
+  static const String searchTagState = 'SearchTagState';
 }

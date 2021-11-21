@@ -33,6 +33,7 @@ class UlaskelasThemeImpl implements UlaskelasTheme {
           borderRadius: BorderRadius.circular(4),
         ),
       ),
+      dividerColor: BaseColors.gray5,
       colorScheme: const ColorScheme(
         primary: BaseColors.purpleHearth,
         primaryVariant: BaseColors.malibu,

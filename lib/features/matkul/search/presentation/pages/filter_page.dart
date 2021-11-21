@@ -12,8 +12,6 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends BaseStateful<FilterPage> {
-  final filter = GlobalState.filter();
-
   @override
   void init() {}
 
@@ -34,111 +32,113 @@ class _FilterPageState extends BaseStateful<FilterPage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    return StateBuilder(
-      observe: GlobalState.filter,
-      builder: (context, snapshot) {
+    return OnReactive(
+      () {
         return Stack(
           children: [
-            Positioned.fill(
+            Positioned.fromRelativeRect(
+                rect: const RelativeRect.fromLTRB(0, 0, 0, 40),
                 child: ListView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
-              ),
-              children: [
-                Text(
-                  'Jenis Mata Kuliah',
-                  style: FontTheme.poppins14w700black(),
-                ),
-                const HeightSpace(8),
-                GridView.count(
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  childAspectRatio: 4,
-                  children: filter.state.matkulTypes.map((item) {
-                    return CheckboxTile(
-                      value: filter.state.selectedType.contains(item.value),
-                      text: item.text,
-                      onChanged: (val) {
-                        if (val ?? true) {
-                          filter.setState(
-                            (s) => s.pickMatkulType(item.value.toString()),
-                          );
-                        } else {
-                          filter.setState(
-                            (s) => s.discardMatkulType(item.value.toString()),
-                          );
-                        }
-                        setState(() {});
-                      },
-                    );
-                  }).toList(),
-                ),
-                const HeightSpace(20),
-                Text(
-                  'Jumlah SKS',
-                  style: FontTheme.poppins14w700black(),
-                ),
-                const HeightSpace(8),
-                GridView.count(
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  childAspectRatio: 4,
-                  children: filter.state.sksTotals.map((item) {
-                    return CheckboxTile(
-                      value: filter.state.selectedSks.contains(item.value),
-                      text: item.text,
-                      onChanged: (val) {
-                        if (val ?? true) {
-                          filter.setState(
-                            (s) => s.pickSksTotal(item.value.toString()),
-                          );
-                        } else {
-                          filter.setState(
-                            (s) => s.discardSksTotal(item.value.toString()),
-                          );
-                        }
-                        setState(() {});
-                      },
-                    );
-                  }).toList(),
-                ),
-                const HeightSpace(20),
-                Text(
-                  'Semester Wajib Mengambil',
-                  style: FontTheme.poppins14w700black(),
-                ),
-                const HeightSpace(8),
-                GridView.count(
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  childAspectRatio: 4,
-                  children: filter.state.semesterPreconditions.map((item) {
-                    return CheckboxTile(
-                      value: filter.state.selectedSemester.contains(item.value),
-                      text: item.text,
-                      onChanged: (val) {
-                        if (val ?? true) {
-                          filter.setState(
-                            (s) => s.pickSemesterPrecondition(
-                                item.value.toString()),
-                          );
-                        } else {
-                          filter.setState(
-                            (s) => s.discardSemesterPrecondition(
-                                item.value.toString()),
-                          );
-                        }
-                        setState(() {});
-                      },
-                    );
-                  }).toList(),
-                ),
-              ],
-            )),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  children: [
+                    Text(
+                      'Jenis Mata Kuliah',
+                      style: FontTheme.poppins14w700black(),
+                    ),
+                    const HeightSpace(8),
+                    GridView.count(
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 4,
+                      children: filter.state.matkulTypes.map((item) {
+                        return CheckboxTile(
+                          value: filter.state.selectedType.contains(item.value),
+                          text: item.text,
+                          onChanged: (val) {
+                            if (val ?? true) {
+                              filter.setState(
+                                (s) => s.pickMatkulType(item.value.toString()),
+                              );
+                            } else {
+                              filter.setState(
+                                (s) =>
+                                    s.discardMatkulType(item.value.toString()),
+                              );
+                            }
+                            setState(() {});
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    const HeightSpace(20),
+                    Text(
+                      'Jumlah SKS',
+                      style: FontTheme.poppins14w700black(),
+                    ),
+                    const HeightSpace(8),
+                    GridView.count(
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 4,
+                      children: filter.state.sksTotals.map((item) {
+                        return CheckboxTile(
+                          value: filter.state.selectedSks.contains(item.value),
+                          text: item.text,
+                          onChanged: (val) {
+                            if (val ?? true) {
+                              filter.setState(
+                                (s) => s.pickSksTotal(item.value.toString()),
+                              );
+                            } else {
+                              filter.setState(
+                                (s) => s.discardSksTotal(item.value.toString()),
+                              );
+                            }
+                            setState(() {});
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    const HeightSpace(20),
+                    Text(
+                      'Semester Wajib Mengambil',
+                      style: FontTheme.poppins14w700black(),
+                    ),
+                    const HeightSpace(8),
+                    GridView.count(
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 4,
+                      children: filter.state.semesterPreconditions.map((item) {
+                        return CheckboxTile(
+                          value: filter.state.selectedSemester
+                              .contains(item.value),
+                          text: item.text,
+                          onChanged: (val) {
+                            if (val ?? true) {
+                              filter.setState(
+                                (s) => s.pickSemesterPrecondition(
+                                    item.value.toString()),
+                              );
+                            } else {
+                              filter.setState(
+                                (s) => s.discardSemesterPrecondition(
+                                    item.value.toString()),
+                              );
+                            }
+                            setState(() {});
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                )),
             Positioned(
               bottom: 0,
               right: 0,
