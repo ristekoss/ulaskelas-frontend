@@ -22,7 +22,10 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BaseAppBar();
+    return BaseAppBar(
+      hasLeading: false,
+      label: 'Mata Kuliah Tersimpan',
+    );
   }
 
   @override
@@ -30,7 +33,24 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    return Container();
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
+          ),
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Profile Page',
+                style: FontTheme.poppins14w700black(),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
 
   @override
@@ -44,5 +64,29 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
   @override
   Future<bool> onBackPressed() async {
     return true;
+  }
+
+  Widget _buildSavedList() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: SizedBox(
+            height: 40,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Daftar Matkul Tersimpan',
+                  style: FontTheme.poppins14w700black(),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
