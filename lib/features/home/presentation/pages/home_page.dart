@@ -56,7 +56,7 @@ class _HomePageState extends BaseStateful<HomePage> {
               padding: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 10),
               alignment: Alignment.centerLeft,
               child: Text(
-                'Hi, Raihan Fikriansyah',
+                'Hi, Raihan Fikriansyah!',
                 style: FontTheme.poppins20w700black(),
               ),
             ),
@@ -85,7 +85,7 @@ class _HomePageState extends BaseStateful<HomePage> {
                     ],
                   ),
                   Icon(
-                    Icons.arrow_forward_ios,
+                    Icons.keyboard_arrow_right,
                     color: BaseColors.primaryColor,
                   )
                 ],
