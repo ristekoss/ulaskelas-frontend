@@ -46,131 +46,134 @@ class _HomePageState extends BaseStateful<HomePage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    return Container(
-      height: sizeInfo.screenSize.height,
-      width: sizeInfo.screenSize.width,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 10),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Hi, Raihan Fikriansyah!',
-                style: FontTheme.poppins20w700black(),
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 10,
             ),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(color: BaseColors.primary, width: 2)),
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Hi, Raihan Fikriansyah!',
+              style: FontTheme.poppins20w700black(),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                border: Border.all(color: BaseColors.primary, width: 2)),
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.list_alt_outlined,
+                      color: BaseColors.primaryColor,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Lihat Semua Mata Kuliah',
+                      style: FontTheme.poppins14w400purple(),
+                    )
+                  ],
+                ),
+                Icon(
+                  Icons.keyboard_arrow_right,
+                  color: BaseColors.primaryColor,
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: SizedBox(
+              height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.list_alt_outlined,
-                        color: BaseColors.primaryColor,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Lihat Semua Mata Kuliah',
-                        style: FontTheme.poppins14w400purple(),
-                      )
-                    ],
+                children: <Widget>[
+                  Text(
+                    'Mata Kuliah Semester 5',
+                    style: FontTheme.poppins14w700black(),
                   ),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    color: BaseColors.primaryColor,
+                  InkWell(
+                    onTap: () => nav.goToHomeDaftarMatkul(),
+                    child: Text(
+                      'Lihat Semua',
+                      style: FontTheme.poppins13w400purple(),
+                    ),
                   )
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: SizedBox(
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Mata Kuliah Semester 5',
-                      style: FontTheme.poppins14w700black(),
-                    ),
-                    InkWell(
-                      onTap: () => nav.goToHomeDaftarMatkul(),
-                      child: Text(
-                        'Lihat Semua',
-                        style: FontTheme.poppins13w400purple(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+          ),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
             ),
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
-              ),
-              itemCount: 3,
-              separatorBuilder: (c, i) => const HeightSpace(16),
-              itemBuilder: (c, i) {
-                final matkul = DummyMatkul.matkul[i];
-                if (matkul.semester == 5) {
-                  return CardMatkulHome(model: matkul, onTap: () {});
-                }
-                return Container(
-                  height: 0,
-                );
-              },
+            itemCount: 3,
+            separatorBuilder: (c, i) => const HeightSpace(16),
+            itemBuilder: (c, i) {
+              final matkul = DummyMatkul.matkul[i];
+              if (matkul.semester == 5) {
+                return CardMatkulHome(model: matkul, onTap: () {});
+              }
+              return Container(
+                height: 0,
+              );
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: SizedBox(
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Riwayat Ulasanmu',
-                      style: FontTheme.poppins14w700black(),
-                    ),
-                    Text(
+            child: SizedBox(
+              height: 40,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Riwayat Ulasanmu',
+                    style: FontTheme.poppins14w700black(),
+                  ),
+                  InkWell(
+                    onTap: () => nav.goToHomeDaftarUlasan(),
+                    child: Text(
                       'Lihat Semua',
                       style: FontTheme.poppins13w400purple(),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
-              ),
-              itemCount: 3,
-              separatorBuilder: (c, i) => const HeightSpace(16),
-              itemBuilder: (c, i) {
-                final ulasan = DummyUlasan().ulasan[i];
-                return CardMatkulReview(model: ulasan, onTap: () {});
-              },
+          ),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
             ),
-          ],
-        ),
+            itemCount: 3,
+            separatorBuilder: (c, i) => const HeightSpace(16),
+            itemBuilder: (c, i) {
+              final ulasan = DummyUlasan.ulasan[i];
+              return CardMatkulReview(model: ulasan, onTap: () {});
+            },
+          ),
+        ],
       ),
     );
   }

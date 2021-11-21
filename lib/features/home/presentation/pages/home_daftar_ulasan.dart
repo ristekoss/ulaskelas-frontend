@@ -1,19 +1,19 @@
 part of '_pages.dart';
 
-class HomeDaftarMatkul extends StatefulWidget {
-  const HomeDaftarMatkul({
+class HomeDaftarUlasan extends StatefulWidget {
+  const HomeDaftarUlasan({
     Key? key,
   }) : super(key: key);
 
   @override
-  _HomeDaftarMatkulState createState() => _HomeDaftarMatkulState();
+  _HomeDaftarUlasanState createState() => _HomeDaftarUlasanState();
 }
 
-class _HomeDaftarMatkulState extends BaseStateful<HomeDaftarMatkul> {
+class _HomeDaftarUlasanState extends BaseStateful<HomeDaftarUlasan> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BaseAppBar(
-      label: 'Mata Kuliah Semester 5',
+      label: 'Riwayat Ulasanmu',
       elevation: 0,
     );
   }
@@ -34,11 +34,11 @@ class _HomeDaftarMatkulState extends BaseStateful<HomeDaftarMatkul> {
           horizontal: 20,
           vertical: 10,
         ),
-        itemCount: DummyMatkul.matkul.length,
+        itemCount: DummyUlasan.ulasan.length,
         separatorBuilder: (c, i) => const HeightSpace(16),
         itemBuilder: (c, i) {
-          final matkul = DummyMatkul.matkul[i];
-          return CardMatkulHome(model: matkul, onTap: () {});
+          final ulasan = DummyUlasan.ulasan[i];
+          return CardMatkulReview(model: ulasan, onTap: () {});
         },
       ),
     );

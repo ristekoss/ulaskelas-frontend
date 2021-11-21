@@ -13,4 +13,5 @@ class RouteName {
   static const String reviewMatkulFormPage = 'review-matkul-form';
   static const String addReviewMatkulTagPage = 'tag';
   static const String homeDaftarMatkul = 'home-daftar-matkul';
+  static const String homeDaftarUlasan = 'home-daftar-ulasan';
 }
