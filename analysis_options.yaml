@@ -27,6 +27,7 @@ linter:
     use_late_for_private_fields_and_variables: false
     prefer_const_declarations: false
     unnecessary_overrides: false
+    avoid_setters_without_getters: false
 
     # DO avoid print calls in production code.
     #
