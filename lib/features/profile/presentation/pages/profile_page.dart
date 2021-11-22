@@ -37,15 +37,24 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 24,
             vertical: 10,
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Text(
-                'Profile Page',
-                style: FontTheme.poppins14w700black(),
+              const SizedBox(height: 42),
+              CircleAvatar(
+                radius: 100,
+                backgroundColor: Colors.grey[300],
               ),
+              const SizedBox(height: 34),
+              const ProfileData('Nama',
+                  'Astrida Nayla Fauzia Nama Sangatlah Panjang Panjang sekali huaaaaa'),
+              const ProfileData('Angkatan', '2018'),
+              const ProfileData('Jurusan', 'Ilmu Komputer'),
+              SizedBox(height: 150),
+              KeluarButton(() {}),
             ],
           ),
         )
@@ -64,5 +73,28 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
   @override
   Future<bool> onBackPressed() async {
     return true;
+  }
+
+  Widget titleAndData(String title, String data) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 97,
+            child: Text(
+              title,
+              style: FontTheme.poppins12w700black(),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              data,
+              style: FontTheme.poppins12w400black(),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
