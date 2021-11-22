@@ -1,32 +1,30 @@
 part of '_pages.dart';
 
-class HomeDaftarUlasan extends StatefulWidget {
-  const HomeDaftarUlasan({
+class HomeDaftarMatkulPage extends StatefulWidget {
+  const HomeDaftarMatkulPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  _HomeDaftarUlasanState createState() => _HomeDaftarUlasanState();
+  _HomeDaftarMatkulPageState createState() => _HomeDaftarMatkulPageState();
 }
 
-class _HomeDaftarUlasanState extends BaseStateful<HomeDaftarUlasan> {
+class _HomeDaftarMatkulPageState extends BaseStateful<HomeDaftarMatkulPage> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BaseAppBar(
-      label: 'Riwayat Ulasanmu',
+      label: 'Mata Kuliah Semester 5',
       elevation: 0,
     );
   }
 
   @override
   ScaffoldAttribute buildAttribute() {
-    // TODO: implement buildAttribute
     return ScaffoldAttribute();
   }
 
   @override
   Widget buildNarrowLayout(BuildContext context, SizingInformation sizeInfo) {
-    // TODO: implement buildNarrowLayout
     return SingleChildScrollView(
       child: ListView.separated(
         shrinkWrap: true,
@@ -34,11 +32,11 @@ class _HomeDaftarUlasanState extends BaseStateful<HomeDaftarUlasan> {
           horizontal: 20,
           vertical: 10,
         ),
-        itemCount: DummyUlasan.ulasan.length,
+        itemCount: DummyMatkul.matkul.length,
         separatorBuilder: (c, i) => const HeightSpace(16),
         itemBuilder: (c, i) {
-          final ulasan = DummyUlasan.ulasan[i];
-          return CardMatkulReview(model: ulasan, onTap: () {});
+          final matkul = DummyMatkul.matkul[i];
+          return CardMatkulHome(model: matkul, onTap: () {});
         },
       ),
     );
@@ -46,7 +44,6 @@ class _HomeDaftarUlasanState extends BaseStateful<HomeDaftarUlasan> {
 
   @override
   Widget buildWideLayout(BuildContext context, SizingInformation sizeInfo) {
-    // TODO: implement buildWideLayout
     return buildNarrowLayout(context, sizeInfo);
   }
 

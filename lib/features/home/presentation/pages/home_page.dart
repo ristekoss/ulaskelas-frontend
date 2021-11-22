@@ -88,7 +88,7 @@ class _HomePageState extends BaseStateful<HomePage> {
                 Icon(
                   Icons.keyboard_arrow_right,
                   color: BaseColors.primaryColor,
-                )
+                ),
               ],
             ),
           ),
