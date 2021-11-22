@@ -6,8 +6,6 @@ import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 
 import 'core/bases/states/_states.dart';
-import 'core/constants/_constants.dart';
-import 'main_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
@@ -19,7 +17,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends BaseStateful<OnboardingPage> {
-  PageController _pageController = PageController();
+  final PageController pageController = PageController();
   int pageIndex = 0;
 
   List<String> titles = [
@@ -29,9 +27,12 @@ class _OnboardingPageState extends BaseStateful<OnboardingPage> {
   ];
 
   List<String> descriptions = [
-    'UlasKelas merupakan aplikasi ulasan untuk mata kuliah Fasilkom UI. Dengan aplikasi ini, kamu tidak perlu lagi kebingungan dalam memilih kelas!',
-    'Di UlasKelas, kamu bisa melihat ulasan untuk mata kuliah Fasilkom UI dari teman-temanmu yang sudah mengambil.',
-    'Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ulasanmu dapat dilihat oleh seluruh teman-temanmu di Fasilkom UI.',
+    '''
+UlasKelas merupakan aplikasi ulasan untuk mata kuliah Fasilkom UI. Dengan aplikasi ini, kamu tidak perlu lagi kebingungan dalam memilih kelas!''',
+    '''
+Di UlasKelas, kamu bisa melihat ulasan untuk mata kuliah Fasilkom UI dari teman-temanmu yang sudah mengambil.''',
+    '''
+Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ulasanmu dapat dilihat oleh seluruh teman-temanmu di Fasilkom UI.''',
   ];
 
   @override
@@ -52,8 +53,8 @@ class _OnboardingPageState extends BaseStateful<OnboardingPage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    double width = sizeInfo.screenSize.width;
-    double height = sizeInfo.screenSize.height;
+    final width = sizeInfo.screenSize.width;
+    final height = sizeInfo.screenSize.height;
     // TODO(Radit): Onboarding content using page view
     return SafeArea(
       child: Scaffold(
@@ -61,25 +62,24 @@ class _OnboardingPageState extends BaseStateful<OnboardingPage> {
           backgroundColor: BaseColors.gray5,
           elevation: 0,
           actions: [
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.only(right: width / 20),
-              child: (pageIndex != 2)
-                  ? InkWell(
-                      onTap: () async {
-                        return nav.pushReplacement<void, void>(
-                          const MainPage(),
-                          RouteName.authPage,
-                        );
-                      },
-                      child:
-                          Text('Lewati', style: FontTheme.poppins14w600black()))
-                  : Container(),
-            ),
+            if (pageIndex != 2)
+              Container(
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(right: width / 20),
+                child: InkWell(
+                  onTap: nav.replaceToSsoPage,
+                  child: Text(
+                    'Lewati',
+                    style: FontTheme.poppins14w600black().copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
         body: PageView.builder(
-            controller: _pageController,
+            controller: pageController,
             onPageChanged: (value) {
               setState(() {
                 pageIndex = value;
@@ -93,9 +93,7 @@ class _OnboardingPageState extends BaseStateful<OnboardingPage> {
                 width: width,
                 title: titles[index],
                 description: descriptions[index],
-                image: 'assets/images/ilust_onboard' +
-                    (index + 1).toString() +
-                    '.png',
+                image: 'assets/images/ilust_onboard${index + 1}.png',
               );
             }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -117,14 +115,11 @@ class _OnboardingPageState extends BaseStateful<OnboardingPage> {
                 backgroundColor: BaseColors.purpleHearth,
                 onTap: () async {
                   if (pageIndex < 2) {
-                    await _pageController.nextPage(
-                        duration: Duration(milliseconds: 250),
+                    await pageController.nextPage(
+                        duration: const Duration(milliseconds: 250),
                         curve: Curves.easeIn);
                   } else {
-                    return nav.pushReplacement<void, void>(
-                      const MainPage(),
-                      RouteName.authPage,
-                    );
+                    await nav.replaceToSsoPage();
                   }
                 },
               ),
@@ -150,8 +145,8 @@ class _OnboardingPageState extends BaseStateful<OnboardingPage> {
 
   AnimatedContainer buildDot({int? index}) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 200),
-      margin: EdgeInsets.only(right: 16),
+      duration: const Duration(milliseconds: 200),
+      margin: const EdgeInsets.only(right: 16),
       height: 12,
       width: pageIndex == index ? 32 : 12,
       decoration: BoxDecoration(
