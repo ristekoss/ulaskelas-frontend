@@ -6,6 +6,7 @@ import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
+import 'package:ulaskelas/features/matkul/detail/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
