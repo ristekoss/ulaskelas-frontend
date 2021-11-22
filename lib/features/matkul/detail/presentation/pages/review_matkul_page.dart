@@ -3,9 +3,7 @@
 part of '_pages.dart';
 
 class ReviewMatkulPage extends StatefulWidget {
-  const ReviewMatkulPage({
-    Key? key,
-  }) : super(key: key);
+  const ReviewMatkulPage({Key? key}) : super(key: key);
 
   @override
   _ReviewMatkulPageState createState() => _ReviewMatkulPageState();
@@ -24,7 +22,9 @@ class _ReviewMatkulPageState extends BaseStateful<ReviewMatkulPage> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BaseAppBar();
+    return BaseAppBar(
+      label: 'Tulis Ulasan',
+    );
   }
 
   @override
@@ -33,7 +33,13 @@ class _ReviewMatkulPageState extends BaseStateful<ReviewMatkulPage> {
     SizingInformation sizeInfo,
   ) {
     // TODO(bim): create form view
-    return Container();
+    return Column(
+      children: [
+        TulisUlasanButton(
+          onTap: () {},
+        )
+      ],
+    );
   }
 
   @override

@@ -33,29 +33,163 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    return Form(
-      key: reviewForm.state.formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Kecerdasan Artificial dan Sains Data Dasar',
-              style: FontTheme.poppins20w700black(),
+    return Column(
+      children: [
+        Expanded(
+          child: Form(
+            key: reviewForm.state.formKey,
+            child: ListView(
+              padding: const EdgeInsets.all(24),
+              children: [
+                Text(
+                  'Kecerdasan Artificial dan Sains Data Dasar',
+                  style: FontTheme.poppins20w700black(),
+                ),
+                const HeightSpace(8),
+                Text(
+                  'CSIE604273  •  4 SKS  •  Wajib SI',
+                  style: FontTheme.poppins14w400black(),
+                ),
+                const HeightSpace(24),
+
+                _buildSemesterDropDown(),
+                const HeightSpace(24),
+
+                _buildYearDropDown(),
+                const HeightSpace(24),
+
+                _buildAddTag(),
+                const HeightSpace(24),
+
+                _buildDescField(),
+                //TODO: set-review-as-anonymous Slider
+              ],
             ),
-            const HeightSpace(8),
-            Text(
-              'CSIE604273  •  4 SKS  •  Wajib SI',
-              style: FontTheme.poppins14w400black(),
-            ),
-            // TODO(;): Semester Drop Down
-            // TODO(;): Year Drop Down
-            _buildAddTag(),
-          ],
+          ),
         ),
-      ),
+        TulisUlasanButton(
+          onTap: () {},
+        )
+      ],
     );
+  }
+
+  TextFormField _buildDescField() {
+    return TextFormField(
+      controller: reviewForm.state.descController,
+      maxLines: null,
+      minLines: 10,
+      keyboardType: TextInputType.multiline,
+      style: FontTheme.poppins12w400black(),
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(16),
+        constraints: const BoxConstraints(maxHeight: 12.5 * 20),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        hintText: 'Tulis ulasan terhadap mata kuliah ini di sini..',
+      ),
+      textInputAction: TextInputAction.newline,
+      onChanged: (value) {
+        if (value.trim().isEmpty) {
+          reviewForm.state.descController.text = '';
+        }
+      },
+    );
+  }
+
+  Widget _buildYearDropDown() {
+    return OnReactive(() {
+      return FormField<String>(
+        builder: (field) {
+          return Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 4,
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: BaseColors.gray3)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  hint: Text(
+                    'Tahun mengambil',
+                    style: FontTheme.poppins12w400black2(),
+                  ),
+                  isExpanded: true,
+                  value: reviewForm.state.formData.year,
+                  onChanged: (value) async {
+                    await reviewForm.setState((s) => s.setYear(value!));
+                  },
+                  onTap: () {
+                    final currentFocus = FocusScope.of(context);
+
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
+                  },
+                  items: reviewForm.state.years
+                      .map((e) => DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(
+                              e,
+                              style: FontTheme.poppins12w400black(),
+                            ),
+                          ))
+                      .toList(),
+                ),
+              ));
+        },
+      );
+    });
+  }
+
+  Widget _buildSemesterDropDown() {
+    return OnReactive(() {
+      return FormField<String>(
+        initialValue: reviewForm.state.formData.semester,
+        builder: (field) {
+          return Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 4,
+            ),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: BaseColors.gray3)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                hint: Text(
+                  'Periode mengambil',
+                  style: FontTheme.poppins12w400black2(),
+                ),
+                isExpanded: true,
+                value: reviewForm.state.formData.semester,
+                onChanged: (value) async {
+                  await reviewForm.setState((s) => s.setSemester(value!));
+                },
+                onTap: () {
+                  final currentFocus = FocusScope.of(context);
+
+                  if (!currentFocus.hasPrimaryFocus) {
+                    currentFocus.unfocus();
+                  }
+                },
+                items: reviewForm.state.semesters
+                    .map((e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: Text(
+                            e,
+                            style: FontTheme.poppins12w400black(),
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
 
   @override
@@ -109,7 +243,12 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
               });
             }
           },
-          text: 'Tambah Tag',
+          child: Center(
+              child: Text(
+            'Tambah Tag',
+            style: FontTheme.poppins14w600black()
+                .copyWith(color: BaseColors.purpleHearth),
+          )),
         ),
       ],
     );
