@@ -9,6 +9,6 @@ import 'package:ulaskelas/features/home/data/datasources/_datasources.dart';
 import 'package:ulaskelas/features/home/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
-part 'home_daftar_matkul.dart';
-part 'home_daftar_ulasan.dart';
+part 'home_daftar_matkul_page.dart';
+part 'home_daftar_ulasan_page.dart';
 part 'home_page.dart';
