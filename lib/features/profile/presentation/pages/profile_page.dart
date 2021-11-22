@@ -22,7 +22,10 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BaseAppBar();
+    return BaseAppBar(
+      hasLeading: false,
+      label: 'Profil Pengguna',
+    );
   }
 
   @override
@@ -30,7 +33,32 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 10,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          const SizedBox(height: 42),
+          CircleAvatar(
+            radius: 100,
+            backgroundColor: Colors.grey[300],
+          ),
+          const SizedBox(height: 34),
+          const ProfileData('Nama', '''
+Astrida Nayla Fauzia Nama Sangatlah Panjang Panjang sekali huaaaaa'''),
+          const ProfileData('Angkatan', '2018'),
+          const ProfileData('Jurusan', 'Ilmu Komputer'),
+          const Spacer(),
+          SecondaryButton(
+            text: 'Keluar',
+            onPressed: _logout,
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -45,4 +73,6 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
   Future<bool> onBackPressed() async {
     return true;
   }
+
+  Future<void> _logout() async {}
 }

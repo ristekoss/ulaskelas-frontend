@@ -114,4 +114,11 @@ class NavigationServiceState implements Navigation {
       RouteName.homeDaftarUlasan,
     );
   }
+
+  Future<void> goToProfilePage() {
+    return nav.push<void>(
+      const ProfilePage(),
+      RouteName.profilePage,
+    );
+  }
 }

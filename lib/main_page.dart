@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/profile/presentation/pages/_pages.dart';
 
 import 'features/home/presentation/pages/_pages.dart';
 
@@ -25,7 +26,7 @@ class _MainPageState extends BaseStateful<MainPage> {
       const HomePage(),
       const MatkulPage(),
       const Scaffold(),
-      const Scaffold(),
+      const ProfilePage(),
     ];
     _selectedIndex = 0;
   }
