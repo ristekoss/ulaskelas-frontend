@@ -25,13 +25,30 @@ class _AppWrapperState extends State<AppWrapper> {
 
   Future<void> splashTime() async {
     Timer(
-      const Duration(milliseconds: 3000),
-      () async => ssoPageRoute(),
+      const Duration(milliseconds: 2500),
+      () async {
+        await auth.state.initialize();
+        if (auth.state.isLogin) {
+          mainPageRoute();
+        } else if (auth.state.isNewInstall) {
+          onboardingPageRoute();
+        } else {
+          ssoPageRoute();
+        }
+      },
     );
   }
 
   void ssoPageRoute() {
     nav.replaceToSsoPage();
+  }
+
+  void mainPageRoute() {
+    nav.replaceToMainPage();
+  }
+
+  void onboardingPageRoute() {
+    nav.replaceToOnboardingPage();
   }
 
   @override
@@ -43,8 +60,8 @@ class _AppWrapperState extends State<AppWrapper> {
           Center(
             child: Image.asset(
               '${Constants.imagePath}/logo_splash.png',
-              width: 200,
-              height: 200,
+              width: 160,
+              height: 160,
             ),
           ),
           Padding(
