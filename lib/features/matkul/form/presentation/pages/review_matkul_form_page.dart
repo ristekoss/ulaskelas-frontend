@@ -83,7 +83,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
       style: FontTheme.poppins12w400black(),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(16),
-        constraints: const BoxConstraints(maxHeight: 12.5 * 20),
+        // constraints: const BoxConstraints(maxHeight: 12.5 * 20),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
