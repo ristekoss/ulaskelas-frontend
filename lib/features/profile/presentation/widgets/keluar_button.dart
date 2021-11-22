@@ -11,8 +11,8 @@ class KeluarButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: handler,
       style: OutlinedButton.styleFrom(
-        side: BorderSide(width: 2, color: BaseColors.error),
-        fixedSize: Size(1000000, 44),
+        side: const BorderSide(width: 2, color: BaseColors.error),
+        fixedSize: const Size(1000000, 44),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
