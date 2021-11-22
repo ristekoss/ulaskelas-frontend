@@ -30,6 +30,11 @@ final bookmark = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final auth = RM.inject(
+  () => AuthState(),
+  autoDisposeWhenNotUsed: false,
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
