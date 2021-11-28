@@ -57,14 +57,30 @@ class Config {
   static BaseConfig? _baseConfig() {
     switch (appFlavor) {
       case Flavor.development:
-        return const BaseConfig();
+        return const BaseConfig(
+          endpoints: BaseEndpoints(baseUrl: Endpoints.baseUrlDev),
+        );
       case Flavor.production:
-        return const BaseConfig();
+        return const BaseConfig(
+          endpoints: BaseEndpoints(baseUrl: Endpoints.baseUrlProd),
+        );
     }
   }
 }
 
 class BaseConfig {
-  const BaseConfig({this.assetAbsolutePath = Constants.assetPath});
+  const BaseConfig({
+    this.assetAbsolutePath = Constants.assetPath,
+    required this.endpoints,
+  });
   final String assetAbsolutePath;
+  final BaseEndpoints endpoints;
+}
+
+class BaseEndpoints {
+  const BaseEndpoints({
+    required this.baseUrl,
+  });
+
+  final String baseUrl;
 }
