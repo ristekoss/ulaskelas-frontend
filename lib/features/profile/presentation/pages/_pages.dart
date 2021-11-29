@@ -7,6 +7,7 @@ import 'package:ulaskelas/authentication_page.dart';
 import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
+import 'package:ulaskelas/features/profile/presentation/widgets/keluar_button.dart';
 import 'package:ulaskelas/features/profile/presentation/widgets/profile_data.dart';
 
 part 'profile_page.dart';
