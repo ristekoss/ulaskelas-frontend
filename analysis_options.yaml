@@ -28,6 +28,7 @@ linter:
     prefer_const_declarations: false
     unnecessary_overrides: false
     avoid_setters_without_getters: false
+    use_build_context_synchronously: false
 
     # DO avoid print calls in production code.
     #

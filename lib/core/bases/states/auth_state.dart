@@ -21,7 +21,9 @@ class AuthState {
 
   Future<void> ssoLogin() async {
     // TODO(paw): sso login
-    _isLogin = true;
+    // _isLogin = true;
+    await nav.goToSsoWebView();
+    // isLoading = false;
   }
 
   Future<bool> _isNewInstall() async {

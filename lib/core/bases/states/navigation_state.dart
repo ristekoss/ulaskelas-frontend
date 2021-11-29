@@ -121,4 +121,11 @@ class NavigationServiceState implements Navigation {
       RouteName.profilePage,
     );
   }
+
+  Future<void> goToSsoWebView() {
+    return nav.push<void>(
+      const SSOWebPage(),
+      RouteName.ssoLogin,
+    );
+  }
 }
