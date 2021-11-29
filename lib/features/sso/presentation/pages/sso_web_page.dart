@@ -37,7 +37,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
     return Stack(
       children: [
         WebView(
-          initialUrl: Endpoints.sso,
+          initialUrl: Endpoints.ssoMobile,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: controller.complete,
           onProgress: _onProgress,
@@ -84,12 +84,17 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
         } else if (param.key == 'username') {
           Pref.saveString(param.key, param.value);
           auth.setState((s) {
-            s.isLogin = true;
+            s
+              ..isLogin = true
+              ..isLoading = false;
           });
-          Logger().d('flag1');
         }
       }
       nav.pop<void>();
+      if (auth.state.isLogin) {
+        unawaited(nav.replaceToMainPage());
+        SuccessMessenger('Login Successful').show(ctx!);
+      }
     }
   }
 

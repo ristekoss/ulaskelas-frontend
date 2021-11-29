@@ -52,11 +52,11 @@ class Pref {
   }
 
   static Future<void> saveToken(String value) async {
-    await _pref!.setString('ulasKelasCred', value);
+    await _pref!.setString(PreferencesKeys.ulasKelasCred, value);
   }
 
   static Map<String, String> getHeaders() {
-    final token = getString('ulasKelasCred');
+    final token = getString(PreferencesKeys.ulasKelasCred);
     return <String, String>{
       'Authorization': 'Token $token',
       'Content-Type': 'application/json'

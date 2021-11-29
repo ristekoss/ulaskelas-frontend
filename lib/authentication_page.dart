@@ -1,7 +1,7 @@
 // Created by Muhamad Fauzi Ridwan on 22/11/21.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -73,12 +73,8 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
       s.isLoading = true;
     }));
     await Future.delayed(const Duration(seconds: 1));
+
     await auth.setState((s) => s.ssoLogin());
-    Logger().d('flag2');
-    if (auth.state.isLogin) {
-      unawaited(nav.replaceToMainPage());
-      SuccessMessenger('Login Successful').show(ctx!);
-    }
   }
 }
 

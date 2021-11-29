@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 
 class ProfileData extends StatelessWidget {
-  final String title, data;
   const ProfileData(this.title, this.data, {Key? key}) : super(key: key);
+  final String title, data;
 
   @override
   Widget build(BuildContext context) {
