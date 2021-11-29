@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
+import 'package:ulaskelas/features/matkul/bookmarks/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/profile/presentation/pages/_pages.dart';
 
@@ -23,7 +24,7 @@ class _MainPageState extends BaseStateful<MainPage> {
     _children = <Widget>[
       const Scaffold(),
       const MatkulPage(),
-      const Scaffold(),
+      const BookmarksPage(),
       const ProfilePage(),
     ];
     _selectedIndex = 0;
