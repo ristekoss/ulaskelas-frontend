@@ -43,7 +43,14 @@ class NavigationServiceState implements Navigation {
     navigatorKey.currentState!.popUntil(ModalRoute.withName(routeName));
   }
 
+  bool canPop() {
+    return navigatorKey.currentState!.canPop();
+  }
+
   Future<void> replaceToSsoPage() {
+    while (canPop()) {
+      nav.pop();
+    }
     return nav.pushReplacement<void, void>(
       const AuthenticationPage(),
       RouteName.authPage,

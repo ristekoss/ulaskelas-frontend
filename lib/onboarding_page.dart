@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 import 'core/bases/states/_states.dart';
+import 'core/constants/_constants.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
@@ -102,25 +104,22 @@ Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ul
             currentIndex: pageIndex,
             length: 3,
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: List.generate(
-          //     3,
-          //     (index) => buildDot(index: index),
-          //   ),
-          // ),
           Container(
             padding: EdgeInsets.symmetric(
-                horizontal: width / 15, vertical: height / 30),
+              horizontal: width / 15,
+              vertical: height / 30,
+            ),
             child: AutoLayoutButton(
               text: (pageIndex == 2) ? 'Mulai' : 'Selanjutnya',
               backgroundColor: BaseColors.purpleHearth,
               onTap: () async {
                 if (pageIndex < 2) {
                   await pageController.nextPage(
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeIn);
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeIn,
+                  );
                 } else {
+                  await Pref.saveBool(PreferencesKeys.onBoard, value: true);
                   await nav.replaceToSsoPage();
                 }
               },
@@ -142,19 +141,6 @@ Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ul
   @override
   Future<bool> onBackPressed() async {
     return true;
-  }
-
-  AnimatedContainer buildDot({int? index}) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      margin: const EdgeInsets.only(right: 16),
-      height: 12,
-      width: pageIndex == index ? 32 : 12,
-      decoration: BoxDecoration(
-        color: pageIndex == index ? BaseColors.purpleHearth : BaseColors.gray4,
-        borderRadius: BorderRadius.circular(200),
-      ),
-    );
   }
 }
 
