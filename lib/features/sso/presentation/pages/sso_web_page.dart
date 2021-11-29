@@ -86,7 +86,6 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
           auth.setState((s) {
             s.isLogin = true;
           });
-          Logger().d('flag1');
         }
       }
       nav.pop<void>();
