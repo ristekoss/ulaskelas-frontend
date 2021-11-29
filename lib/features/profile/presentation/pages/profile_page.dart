@@ -46,14 +46,28 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
               const SizedBox(height: 42),
               CircleAvatar(
                 radius: 100,
-                backgroundColor: Colors.grey[300],
+                backgroundColor: Colors.grey[400],
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 200,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.account_circle,
+                      size: 200,
+                      color: Colors.grey[400],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 34),
               const ProfileData('Nama',
                   'Astrida Nayla Fauzia Nama Sangatlah Panjang Panjang sekali huaaaaa'),
               const ProfileData('Angkatan', '2018'),
               const ProfileData('Jurusan', 'Ilmu Komputer'),
-              SizedBox(height: 150),
+              const SizedBox(height: 150),
               KeluarButton(() {}),
             ],
           ),
