@@ -55,77 +55,78 @@ Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ul
   ) {
     final width = sizeInfo.screenSize.width;
     final height = sizeInfo.screenSize.height;
-    // TODO(Radit): Onboarding content using page view
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: BaseColors.gray5,
-          elevation: 0,
-          actions: [
-            if (pageIndex != 2)
-              Container(
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: width / 20),
-                child: InkWell(
-                  onTap: nav.replaceToSsoPage,
-                  child: Text(
-                    'Lewati',
-                    style: FontTheme.poppins14w600black().copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: BaseColors.gray5,
+        elevation: 0,
+        actions: [
+          if (pageIndex != 2)
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: width / 20),
+              child: InkWell(
+                onTap: nav.replaceToSsoPage,
+                child: Text(
+                  'Lewati',
+                  style: FontTheme.poppins14w600black().copyWith(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
-          ],
-        ),
-        body: PageView.builder(
-            controller: pageController,
-            onPageChanged: (value) {
-              setState(() {
-                pageIndex = value;
-              });
-            },
-            itemCount: titles.length,
-            itemBuilder: (context, index) {
-              return OnboardingPageBody(
-                index: index,
-                height: height,
-                width: width,
-                title: titles[index],
-                description: descriptions[index],
-                image: 'assets/images/ilust_onboard${index + 1}.png',
-              );
-            }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                3,
-                (index) => buildDot(index: index),
-              ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: width / 15, vertical: height / 30),
-              child: AutoLayoutButton(
-                text: (pageIndex == 2) ? 'Mulai' : 'Selanjutnya',
-                backgroundColor: BaseColors.purpleHearth,
-                onTap: () async {
-                  if (pageIndex < 2) {
-                    await pageController.nextPage(
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeIn);
-                  } else {
-                    await nav.replaceToSsoPage();
-                  }
-                },
-              ),
+        ],
+      ),
+      body: PageView.builder(
+          controller: pageController,
+          onPageChanged: (value) {
+            setState(() {
+              pageIndex = value;
+            });
+          },
+          itemCount: titles.length,
+          itemBuilder: (context, index) {
+            return OnboardingPageBody(
+              index: index,
+              height: height,
+              width: width,
+              title: titles[index],
+              description: descriptions[index],
+              image: 'assets/images/ilust_onboard${index + 1}.png',
+            );
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          DotIndicator(
+            currentIndex: pageIndex,
+            length: 3,
+          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: List.generate(
+          //     3,
+          //     (index) => buildDot(index: index),
+          //   ),
+          // ),
+          Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: width / 15, vertical: height / 30),
+            child: AutoLayoutButton(
+              text: (pageIndex == 2) ? 'Mulai' : 'Selanjutnya',
+              backgroundColor: BaseColors.purpleHearth,
+              onTap: () async {
+                if (pageIndex < 2) {
+                  await pageController.nextPage(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeIn);
+                } else {
+                  await nav.replaceToSsoPage();
+                }
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -196,7 +197,7 @@ class OnboardingPageBody extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 3,
             child: Container(
               padding: EdgeInsets.only(
                 left: width / 15,

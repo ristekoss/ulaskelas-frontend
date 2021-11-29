@@ -35,6 +35,10 @@ final auth = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final progressWebView = RM.inject(
+  () => ProgressWebViewState(),
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
