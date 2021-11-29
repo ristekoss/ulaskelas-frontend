@@ -45,8 +45,22 @@ class NavigationServiceState implements Navigation {
 
   Future<void> replaceToSsoPage() {
     return nav.pushReplacement<void, void>(
-      const MainPage(),
+      const AuthenticationPage(),
       RouteName.authPage,
+    );
+  }
+
+  Future<void> replaceToMainPage() {
+    return nav.pushReplacement<void, void>(
+      const MainPage(),
+      RouteName.mainPage,
+    );
+  }
+
+  Future<void> replaceToOnboardingPage() {
+    return nav.pushReplacement<void, void>(
+      const OnboardingPage(),
+      RouteName.onboardingPage,
     );
   }
 
@@ -57,10 +71,61 @@ class NavigationServiceState implements Navigation {
     );
   }
 
-  Future<void> goToDetailMatkulPage() {
+  Future<void> goToDetailMatkulPage(String matkul) {
     return nav.push<void>(
-      const DetailMatkulPage(),
+      DetailMatkulPage(
+        matkul: matkul,
+      ),
       RouteName.mainPage,
+    );
+  }
+
+  Future<void> goToReviewMatkulPage() {
+    return nav.push<void>(
+      const ReviewMatkulPage(),
+      RouteName.reviewMatkul,
+    );
+  }
+
+  Future<void> goToReviewMatkulFormPage() {
+    return nav.push<void>(
+      const ReviewMatkulFormPage(),
+      RouteName.reviewMatkulFormPage,
+    );
+  }
+
+  Future<List<TagModel>?> goToAddReviewMatkulTagPage() {
+    return nav.push<List<TagModel>>(
+      const AddReviewMatkulTagPage(),
+      RouteName.addReviewMatkulTagPage,
+    );
+  }
+
+  Future<void> goToHomeDaftarMatkul() {
+    return nav.push<void>(
+      const HomeDaftarMatkulPage(),
+      RouteName.homeDaftarMatkul,
+    );
+  }
+
+  Future<void> goToHomeDaftarUlasan() {
+    return nav.push<void>(
+      const HomeDaftarUlasanPage(),
+      RouteName.homeDaftarUlasan,
+    );
+  }
+
+  Future<void> goToProfilePage() {
+    return nav.push<void>(
+      const ProfilePage(),
+      RouteName.profilePage,
+    );
+  }
+
+  Future<void> goToSsoWebView() {
+    return nav.push<void>(
+      const SSOWebPage(),
+      RouteName.ssoLogin,
     );
   }
 }

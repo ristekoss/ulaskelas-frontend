@@ -426,4 +426,20 @@ class FontTheme {
       color: BaseColors.alabaster,
     );
   }
+
+  static TextStyle poppins13w400purple() {
+    return GoogleFonts.poppins(
+      fontSize: 13,
+      fontWeight: FontWeight.w700,
+      color: BaseColors.primaryColor,
+    );
+  }
+
+  static TextStyle poppins14w400purple() {
+    return GoogleFonts.poppins(
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+      color: BaseColors.primaryColor,
+    );
+  }
 }
