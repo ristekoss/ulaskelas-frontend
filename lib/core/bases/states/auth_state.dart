@@ -6,6 +6,7 @@ class AuthState {
   bool? _isLogin;
   bool? _isLoading;
   WindowBase? _popupWin;
+
   late bool isNewInstall;
 
   bool get isLogin => _isLogin ?? false;
@@ -21,32 +22,7 @@ class AuthState {
 
   Future<void> ssoLogin() async {
     if (kIsWeb) {
-      final currentUri = Uri.base;
-
-      final redirectUri = Uri(
-        host: currentUri.host,
-        scheme: currentUri.scheme,
-        port: currentUri.port,
-        path: '/static.html',
-      );
-
-      final url = '${Endpoints.sso}/?redirect_url=${redirectUri.toString()}';
-      Logger().w(Uri.parse(url).query);
-
-      Logger().w(redirectUri.toString());
-      _popupWin = window.open(
-        url,
-        'Sso Auth',
-        'width=800, height=900, scrollbars=yes',
-      );
-
-      window.onMessage.listen((event) {
-        /// If the event contains the token it means the user is authenticated.
-        Logger().i(event.data.toString());
-        if (event.data.toString().contains('token=')) {
-          _login(event.data);
-        }
-      });
+      _webAuth();
     } else {
       await nav.goToSsoWebView();
     }
@@ -62,7 +38,7 @@ class AuthState {
     return Pref.containsKey(key);
   }
 
-  void _login(String data) {
+  void _webLogin(String data) {
     /// Parse data into an Uri to extract the token easily.
     final receivedUri = Uri.parse(data);
 
@@ -76,7 +52,9 @@ class AuthState {
       } else if (param.key == 'username') {
         Pref.saveString(param.key, param.value);
         auth.setState((s) {
-          s.isLogin = true;
+          s
+            ..isLogin = true
+            ..isLoading = false;
         });
       }
     }
@@ -90,5 +68,34 @@ class AuthState {
         SuccessMessenger('Login Successful').show(ctx!);
       }
     }
+  }
+
+  void _webAuth() {
+    final currentUri = Uri.base;
+
+    final redirectUri = Uri(
+      host: currentUri.host,
+      scheme: currentUri.scheme,
+      port: currentUri.port,
+      path: '/static.html',
+    );
+
+    final url = '${Endpoints.sso}/?redirect_url=${redirectUri.toString()}';
+    Logger().w(Uri.parse(url).query);
+
+    Logger().w(redirectUri.toString());
+    _popupWin = window.open(
+      url,
+      'Sso Auth',
+      'width=800, height=600, scrollbars=yes',
+    );
+
+    window.onMessage.listen((event) {
+      /// If the event contains the token it means the user is authenticated.
+      Logger().i(event.data.toString());
+      if (event.data.toString().contains('token=')) {
+        _webLogin(event.data);
+      }
+    });
   }
 }

@@ -84,11 +84,17 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
         } else if (param.key == 'username') {
           Pref.saveString(param.key, param.value);
           auth.setState((s) {
-            s.isLogin = true;
+            s
+              ..isLogin = true
+              ..isLoading = false;
           });
         }
       }
       nav.pop<void>();
+      if (auth.state.isLogin) {
+        unawaited(nav.replaceToMainPage());
+        SuccessMessenger('Login Successful').show(ctx!);
+      }
     }
   }
 
