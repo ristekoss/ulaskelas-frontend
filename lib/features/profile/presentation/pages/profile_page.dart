@@ -53,7 +53,9 @@ Astrida Nayla Fauzia Nama Sangatlah Panjang Panjang sekali huaaaaa'''),
           const ProfileData('Jurusan', 'Ilmu Komputer'),
           const Spacer(),
           SecondaryButton(
+            width: double.infinity,
             text: 'Keluar',
+            backgroundColor: BaseColors.error,
             onPressed: _logout,
           ),
         ],
@@ -74,5 +76,8 @@ Astrida Nayla Fauzia Nama Sangatlah Panjang Panjang sekali huaaaaa'''),
     return true;
   }
 
-  Future<void> _logout() async {}
+  Future<void> _logout() async {
+    Cleaner().cleanWhenLogout();
+    unawaited(nav.replaceToSsoPage());
+  }
 }

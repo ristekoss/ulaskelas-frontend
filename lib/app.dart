@@ -31,6 +31,11 @@ class App extends StatelessWidget {
               FirebaseAnalyticsObserver(analytics: analytics),
             ],
             home: const AppWrapper(),
+            routes: {
+              '/callback': (context) => Scaffold(
+                    body: Container(),
+                  ),
+            },
           );
         });
   }

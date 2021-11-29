@@ -11,5 +11,9 @@ class Cleaner implements StateCleaner {
   void cleanState() {}
 
   @override
-  void cleanWhenLogout() {}
+  void cleanWhenLogout() {
+    for (final key in PreferencesKeys.removableKeys) {
+      Pref.removeKey(key);
+    }
+  }
 }

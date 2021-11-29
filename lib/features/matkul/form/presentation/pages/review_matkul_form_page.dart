@@ -62,13 +62,65 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                 const HeightSpace(24),
 
                 _buildDescField(),
-                //TODO: set-review-as-anonymous Slider
+
+                const HeightSpace(24),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Unggah ulasanmu secara anonim',
+                            style: FontTheme.poppins12w400black()
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            'Kamu bisa memilih untuk mengunggah ulasanmu '
+                            'secara anonim agar namamu tidak '
+                            'terlihat oleh orang lain.',
+                            style: FontTheme.poppins10w400black(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    OnReactive(() {
+                        return FlutterSwitch(
+                          width: 46,
+                          height: 24,
+                          toggleSize: 20,
+                          borderRadius: 32,
+                          padding: 0,
+                          value: reviewForm.state.formData.isAnonymous!,
+                          activeColor: BaseColors.purpleHearth.withOpacity(0.8),
+                          inactiveColor: BaseColors.gray5,
+                          switchBorder: Border.all(
+                            color: BaseColors.gray4,
+                            width: 1,
+                          ),
+                          toggleBorder: Border.all(
+                            color: BaseColors.gray1.withOpacity(0.20),
+                          ),
+                          onToggle: (val) {
+                            reviewForm.setState((s) => s.setAnon(val));
+                          },
+                        );
+                      }
+                    ),
+                  ],
+                )
               ],
             ),
           ),
         ),
         TulisUlasanButton(
-          onTap: () {},
+          onTap: () {
+            if (reviewForm.state.formKey.currentState!.validate()) {
+              // TODO: Navigate to PendingReviewPage
+              return;
+            }
+            WarningMessenger('Harap isi semua field').show(context);
+          },
         )
       ],
     );
@@ -95,12 +147,24 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
           reviewForm.state.descController.text = '';
         }
       },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'This field is required.';
+        }
+        return null;
+      },
     );
   }
 
   Widget _buildYearDropDown() {
     return OnReactive(() {
       return FormField<String>(
+        validator: (value) {
+          if (value == null) {
+            return 'This field is required.';
+          }
+          return null;
+        },
         builder: (field) {
           return Container(
               padding: const EdgeInsets.symmetric(
@@ -120,6 +184,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                   value: reviewForm.state.formData.year,
                   onChanged: (value) async {
                     await reviewForm.setState((s) => s.setYear(value!));
+                    field.setValue(value);
                   },
                   onTap: () {
                     final currentFocus = FocusScope.of(context);
@@ -148,6 +213,12 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
     return OnReactive(() {
       return FormField<String>(
         initialValue: reviewForm.state.formData.semester,
+        validator: (value) {
+          if (value == null) {
+            return 'This field is required.';
+          }
+          return null;
+        },
         builder: (field) {
           return Container(
             padding: const EdgeInsets.symmetric(
@@ -167,6 +238,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                 value: reviewForm.state.formData.semester,
                 onChanged: (value) async {
                   await reviewForm.setState((s) => s.setSemester(value!));
+                  field.setValue(value);
                 },
                 onTap: () {
                   final currentFocus = FocusScope.of(context);
