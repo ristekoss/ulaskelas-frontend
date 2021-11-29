@@ -9,6 +9,7 @@ class Endpoints {
   static const baseUrlProd =
       'http://ulaskelas-dev.ap-southeast-1.elasticbeanstalk.com';
   static final sso = '$baseUrl/login';
+  static final ssoMobile = '$baseUrl/login/?redirect_url=${Endpoints.token}';
   static final users = '$baseUrl/users';
   static final userId = '$baseUrl/users/{{Id}}';
   static final review = '$baseUrl/reviews';
