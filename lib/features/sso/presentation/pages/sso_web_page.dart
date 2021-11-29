@@ -37,7 +37,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
     return Stack(
       children: [
         WebView(
-          initialUrl: Endpoints.sso,
+          initialUrl: Endpoints.ssoMobile,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: controller.complete,
           onProgress: _onProgress,
