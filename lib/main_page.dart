@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/profile/presentation/pages/_pages.dart';
+
+import 'features/home/presentation/pages/_pages.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -20,10 +23,10 @@ class _MainPageState extends BaseStateful<MainPage> {
   void init() {
     // TODO(fauzi): Navigator per page
     _children = <Widget>[
-      const Scaffold(),
+      const HomePage(),
       const MatkulPage(),
       const Scaffold(),
-      const Scaffold(),
+      const ProfilePage(),
     ];
     _selectedIndex = 0;
   }

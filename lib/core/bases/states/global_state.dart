@@ -11,6 +11,34 @@ final filter = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final review = RM.inject(
+  () => ReviewState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final reviewForm = RM.inject(
+  () => ReviewMatkulFormState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final searchTag = RM.inject(
+  () => SearchTagState(),
+);
+
+final bookmark = RM.inject(
+  () => BookmarkState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final auth = RM.inject(
+  () => AuthState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final progressWebView = RM.inject(
+  () => ProgressWebViewState(),
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
@@ -23,6 +51,9 @@ class GlobalState {
       Inject(() => NavigationServiceState()),
       Inject(() => FilterState()),
       Inject(() => SearchMatkulState()),
+      Inject(() => ReviewState()),
+      Inject(() => SearchTagState()),
+      Inject(() => BookmarkState()),
     ];
   }
 
@@ -31,6 +62,9 @@ class GlobalState {
     Inject(() => NavigationServiceState()),
     Inject(() => FilterState()),
     Inject(() => SearchMatkulState()),
+    Inject(() => ReviewState()),
+    Inject(() => SearchTagState()),
+    Inject(() => BookmarkState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {

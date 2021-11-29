@@ -50,4 +50,16 @@ class Pref {
   static bool containsKey(String key) {
     return _pref!.containsKey(key);
   }
+
+  static Future<void> saveToken(String value) async {
+    await _pref!.setString('ulasKelasCred', value);
+  }
+
+  static Map<String, String> getHeaders() {
+    final token = getString('ulasKelasCred');
+    return <String, String>{
+      'Authorization': 'Token $token',
+      'Content-Type': 'application/json'
+    };
+  }
 }

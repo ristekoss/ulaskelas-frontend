@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:ulaskelas/core/_core.dart';
 import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 
@@ -23,10 +24,18 @@ class _AppWrapperState extends State<AppWrapper> {
   }
 
   Future<void> splashTime() async {
-    // TODO(adit): comment this timer to start modify the splash screen content
     Timer(
-      const Duration(milliseconds: 3000),
-      () async => ssoPageRoute(),
+      const Duration(milliseconds: 2500),
+      () async {
+        await auth.state.initialize();
+        if (auth.state.isLogin) {
+          mainPageRoute();
+        } else if (auth.state.isNewInstall) {
+          onboardingPageRoute();
+        } else {
+          ssoPageRoute();
+        }
+      },
     );
   }
 
@@ -34,12 +43,55 @@ class _AppWrapperState extends State<AppWrapper> {
     nav.replaceToSsoPage();
   }
 
+  void mainPageRoute() {
+    nav.replaceToMainPage();
+  }
+
+  void onboardingPageRoute() {
+    nav.replaceToOnboardingPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BaseColors.white,
-      // TODO(adit): splash screen content
-      body: Container(),
+      backgroundColor: BaseColors.purpleHearth,
+      body: Stack(
+        children: [
+          Center(
+            child: Image.asset(
+              '${Constants.imagePath}/logo_splash.png',
+              width: 160,
+              height: 160,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: 'Ulas',
+                        style: FontTheme.poppins20w700white(),
+                        children: const <TextSpan>[
+                          TextSpan(
+                              text: 'Kelas',
+                              style: TextStyle(
+                                color: BaseColors.malibu,
+                              )),
+                        ]),
+                  ),
+                  Text(
+                    'by RISTEK Fasilkom UI',
+                    style: FontTheme.poppins14w500white(),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
