@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -24,6 +22,7 @@ import 'package:ulaskelas/features/sso/presentation/states/progress_webview_stat
 import 'package:ulaskelas/main_page.dart';
 import 'package:ulaskelas/onboarding_page.dart';
 import 'package:ulaskelas/services/_services.dart';
+import 'package:universal_html/html.dart';
 
 part 'auth_state.dart';
 part 'cleaner.dart';

@@ -73,11 +73,8 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
       s.isLoading = true;
     }));
     await Future.delayed(const Duration(seconds: 1));
+
     await auth.setState((s) => s.ssoLogin());
-    if (auth.state.isLogin) {
-      unawaited(nav.replaceToMainPage());
-      SuccessMessenger('Login Successful').show(ctx!);
-    }
   }
 }
 
