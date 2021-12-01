@@ -79,11 +79,19 @@ class CardBookmark extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             right: 12,
-            child: Icon(
-              Icons.bookmark,
-              color: BaseColors.goldenrod,
+            child: InkWell(
+              onTap: () {
+                bookmark.setState((s) => s.deleteFromBookmark(model.name!));
+                SuccessMessenger(
+                        'Berhasil menghapus ${model.name} dari bookmark')
+                    .show(ctx!);
+              },
+              child: const Icon(
+                Icons.bookmark_sharp,
+                color: BaseColors.goldenrod,
+              ),
             ),
           ),
         ],

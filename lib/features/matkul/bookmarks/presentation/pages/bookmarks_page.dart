@@ -48,12 +48,47 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
           horizontal: 24,
           vertical: 10,
         ),
-        child: ListView.separated(
-          itemCount: 5,
-          itemBuilder: (context, index) => CardBookmark(model: model),
-          separatorBuilder: (BuildContext context, int index) =>
-              SizedBox(height: 16),
-        ),
+        child: OnReactive(() {
+          final bookmarks = bookmark.state.bookmarks;
+          if (bookmarks.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                HeightSpace(sizeInfo.screenSize.height * .1),
+                Image.asset(
+                  Ilustration.notfound,
+                  width: sizeInfo.screenSize.width * .6,
+                ),
+                const HeightSpace(20),
+                Text(
+                  'Belum Ada Mata Kuliah Tersimpan',
+                  style: FontTheme.poppins14w700black().copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const HeightSpace(10),
+                Text(
+                  '''
+Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.''',
+                  style: Theme.of(context).textTheme.caption,
+                  textAlign: TextAlign.center,
+                ),
+                const HeightSpace(40),
+              ],
+            );
+          }
+          return ListView.separated(
+            itemCount: bookmark.state.bookmarks.length,
+            itemBuilder: (context, index) {
+              final bookmark = bookmarks[index];
+              final data = search.state.matkuls
+                  .where((element) => element.name == bookmark);
+              return CardBookmark(model: data.first);
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 16),
+          );
+        }),
       ),
     );
   }

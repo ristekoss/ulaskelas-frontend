@@ -48,7 +48,7 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
           ),
           const SizedBox(height: 34),
           const ProfileData('Nama', '''
-Astrida Nayla Fauzia Nama Sangatlah Panjang Panjang sekali huaaaaa'''),
+Astrida Nayla'''),
           const ProfileData('Angkatan', '2018'),
           const ProfileData('Jurusan', 'Ilmu Komputer'),
           const Spacer(),
