@@ -42,6 +42,7 @@ dependencies:
   url_launcher: ^6.0.10
   flutter_switch: ^0.3.2
   universal_html: ^2.0.8
+  dio: ^4.0.4
 
 dev_dependencies:
   flutter_test:
