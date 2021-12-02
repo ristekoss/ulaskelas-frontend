@@ -38,27 +38,29 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
         horizontal: 24,
         vertical: 10,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          const SizedBox(height: 42),
-          CircleAvatar(
-            radius: 100,
-            backgroundColor: Colors.grey[300],
-          ),
-          const SizedBox(height: 34),
-          const ProfileData('Nama', '''
-Astrida Nayla'''),
-          const ProfileData('Angkatan', '2018'),
-          const ProfileData('Jurusan', 'Ilmu Komputer'),
-          const Spacer(),
-          SecondaryButton(
-            width: double.infinity,
-            text: 'Keluar',
-            backgroundColor: BaseColors.error,
-            onPressed: _logout,
-          ),
-        ],
+      child: FutureBuilder(
+        future: http.get(
+          Uri.parse(
+              'http://ulaskelas-dev.ap-southeast-1.elasticbeanstalk.com/api/account'),
+          headers: Pref.getHeaders(),
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text("Something went wrong"));
+          }
+
+          // if (snapshot.hasData && !snapshot.data!.exists) {
+          //   return Center(child: Text("Document does not exist"));
+          // }
+
+          if (snapshot.hasData) {
+            return loadedProfilePage((snapshot.data as Response).body);
+          }
+
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
@@ -79,5 +81,35 @@ Astrida Nayla'''),
   Future<void> _logout() async {
     Cleaner().cleanWhenLogout();
     unawaited(nav.replaceToSsoPage());
+  }
+
+  String getAngkatan(String npm) {
+    return '20${npm.substring(0, 2)}';
+  }
+
+  Widget loadedProfilePage(String jsonString) {
+    final Map<String, dynamic> userData = jsonDecode(jsonString);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        const SizedBox(height: 42),
+        const Icon(
+          Icons.account_circle,
+          size: 150,
+          color: const Color(0xFFBDBDBD),
+        ),
+        const SizedBox(height: 34),
+        ProfileData('Nama', userData['data']['name']),
+        ProfileData('Angkatan', getAngkatan(userData['data']['npm'])),
+        ProfileData('Jurusan', userData['data']['study_program']),
+        const Spacer(),
+        SecondaryButton(
+          width: double.infinity,
+          text: 'Keluar',
+          backgroundColor: BaseColors.error,
+          onPressed: _logout,
+        ),
+      ],
+    );
   }
 }

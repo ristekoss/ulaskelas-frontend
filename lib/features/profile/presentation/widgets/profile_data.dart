@@ -3,7 +3,8 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 
 class ProfileData extends StatelessWidget {
   const ProfileData(this.title, this.data, {Key? key}) : super(key: key);
-  final String title, data;
+  final String title;
+  final String? data;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ProfileData extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              data,
+              data ?? '-',
               style: FontTheme.poppins12w400black(),
             ),
           )
