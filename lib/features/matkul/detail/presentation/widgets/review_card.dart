@@ -1,20 +1,21 @@
 part of '_widgets.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({
-    Key? key,
-    required this.name,
-    required this.major,
-    required this.year,
-    required this.classTakenOn,
-    required this.description,
-    required this.likesCount,
-    required this.reviewedOn,
-    required this.thumbIconColor,
-    required this.likesCountColor,
-    this.imgUrl,
-    this.onLiked,
-  }) : super(key: key);
+  const ReviewCard(
+      {Key? key,
+      required this.name,
+      required this.major,
+      required this.year,
+      required this.classTakenOn,
+      required this.description,
+      required this.likesCount,
+      required this.reviewedOn,
+      required this.thumbIconColor,
+      required this.likesCountColor,
+      this.imgUrl,
+      this.onLiked,
+      this.status})
+      : super(key: key);
 
   final String name;
   final String major;
@@ -27,6 +28,7 @@ class ReviewCard extends StatelessWidget {
   final VoidCallback? onLiked;
   final Color thumbIconColor;
   final Color likesCountColor;
+  final String? status;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +40,10 @@ class ReviewCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: 40,
@@ -61,12 +65,39 @@ class ReviewCard extends StatelessWidget {
               const SizedBox(
                 width: 12,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name, style: FontTheme.poppins14w600black()),
-                  Text('$major $year', style: FontTheme.poppins12w400black())
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: FontTheme.poppins14w600black(),
+                          ),
+                        ),
+                        if (status == null)
+                          Container()
+                        else
+                          Tag(
+                            label: status!,
+                            state: status == 'Approved'
+                                ? TagStatus.approved
+                                : (status == 'Pending')
+                                    ? TagStatus.pending
+                                    : TagStatus.rejected,
+                          ),
+                      ],
+                    ),
+                    Text('$major $year', style: FontTheme.poppins12w400black())
+                  ],
+                ),
               )
             ],
           ),
