@@ -8,3 +8,4 @@ import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 
 part 'base_app_bar.dart';
 part 'card_matkul.dart';
+part 'empty_view.dart';

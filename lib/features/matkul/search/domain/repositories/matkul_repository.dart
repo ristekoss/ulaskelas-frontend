@@ -2,4 +2,7 @@
 
 part of '_repositories.dart';
 
-abstract class MatkulRepository {}
+abstract class MatkulRepository {
+  Future<Decide<Failure, Parsed<List<MatkulModel>>>> getAllMatkul();
+  Future<Decide<Failure, Parsed<List<MatkulModel>>>> getAllMatkulFromCache();
+}
