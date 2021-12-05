@@ -62,11 +62,11 @@ class CardBookmark extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            model.matkulType.toString(),
+                            model.code.toString(),
                             style: FontTheme.poppins12w400black(),
                           ),
                           Text(
-                            '${model.reviews} Ulasan',
+                            '${model.reviewCount} Ulasan',
                             style: FontTheme.poppins12w400black().copyWith(
                               color: BaseColors.gray2,
                             ),
@@ -79,11 +79,19 @@ class CardBookmark extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             right: 12,
-            child: Icon(
-              Icons.bookmark,
-              color: BaseColors.goldenrod,
+            child: InkWell(
+              onTap: () {
+                bookmark.setState((s) => s.deleteFromBookmark(model.name!));
+                SuccessMessenger(
+                        'Berhasil menghapus ${model.name} dari bookmark')
+                    .show(ctx!);
+              },
+              child: const Icon(
+                Icons.bookmark_sharp,
+                color: BaseColors.goldenrod,
+              ),
             ),
           ),
         ],

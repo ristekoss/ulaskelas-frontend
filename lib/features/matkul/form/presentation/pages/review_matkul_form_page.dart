@@ -51,18 +51,13 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                   style: FontTheme.poppins14w400black(),
                 ),
                 const HeightSpace(24),
-
                 _buildSemesterDropDown(),
                 const HeightSpace(24),
-
                 _buildYearDropDown(),
                 const HeightSpace(24),
-
                 _buildAddTag(),
                 const HeightSpace(24),
-
                 _buildDescField(),
-
                 const HeightSpace(24),
                 Row(
                   children: [
@@ -85,28 +80,26 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                       ),
                     ),
                     OnReactive(() {
-                        return FlutterSwitch(
-                          width: 46,
-                          height: 24,
-                          toggleSize: 20,
-                          borderRadius: 32,
-                          padding: 0,
-                          value: reviewForm.state.formData.isAnonymous!,
-                          activeColor: BaseColors.purpleHearth.withOpacity(0.8),
-                          inactiveColor: BaseColors.gray5,
-                          switchBorder: Border.all(
-                            color: BaseColors.gray4,
-                            width: 1,
-                          ),
-                          toggleBorder: Border.all(
-                            color: BaseColors.gray1.withOpacity(0.20),
-                          ),
-                          onToggle: (val) {
-                            reviewForm.setState((s) => s.setAnon(val));
-                          },
-                        );
-                      }
-                    ),
+                      return FlutterSwitch(
+                        width: 46,
+                        height: 24,
+                        toggleSize: 20,
+                        borderRadius: 32,
+                        padding: 0,
+                        value: reviewForm.state.formData.isAnonymous!,
+                        activeColor: BaseColors.purpleHearth.withOpacity(0.8),
+                        inactiveColor: BaseColors.gray5,
+                        switchBorder: Border.all(
+                          color: BaseColors.gray4,
+                        ),
+                        toggleBorder: Border.all(
+                          color: BaseColors.gray1.withOpacity(0.20),
+                        ),
+                        onToggle: (val) {
+                          reviewForm.setState((s) => s.setAnon(val));
+                        },
+                      );
+                    }),
                   ],
                 )
               ],
@@ -184,7 +177,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                   value: reviewForm.state.formData.year,
                   onChanged: (value) async {
                     await reviewForm.setState((s) => s.setYear(value!));
-                    field.setValue(value);
+                    // field.setValue(value);
                   },
                   onTap: () {
                     final currentFocus = FocusScope.of(context);
@@ -238,7 +231,6 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                 value: reviewForm.state.formData.semester,
                 onChanged: (value) async {
                   await reviewForm.setState((s) => s.setSemester(value!));
-                  field.setValue(value);
                 },
                 onTap: () {
                   final currentFocus = FocusScope.of(context);

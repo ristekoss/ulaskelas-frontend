@@ -7,7 +7,6 @@ import 'core/environment/_environment.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // TODO(all): duit
   await Config.init(Flavor.development);
   final rootWidget = Injector(
     inject: GlobalState.injectData,

@@ -21,8 +21,10 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
+          flutter-version: '2.2.3'
       - run: |
           flutter doctor
           flutter pub get
           flutter test --coverage
+          flutter analyze
           bash <(curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }})
