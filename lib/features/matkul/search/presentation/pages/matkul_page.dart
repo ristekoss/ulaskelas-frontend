@@ -121,7 +121,7 @@ class _MatkulPageState
     return !searchMatkul.state.hasReachedMax;
   }
 
-  /// Every Query changed do debouncing and rebuild
+  /// Every Query changed do debouncing and rebuild.
   Future<void> onQueryChanged(String val) async {
     if (val == searchMatkul.state.lastQuery) {
       return;
@@ -132,14 +132,14 @@ class _MatkulPageState
       if (_debounce?.isActive ?? false) {
         _debounce?.cancel();
       }
-      await searchMatkul.setState((s) {
-        s.hasReachedMax = false;
-      });
+      // await searchMatkul.setState((s) {
+      //   s.hasReachedMax = false;
+      // });
       _debounce = Timer(const Duration(milliseconds: 2000), () {
-        final query = QuerySearch(q: searchMatkul.state.controller.text);
-        searchMatkul.state
-            .searchMatkul(query)
-            .then((value) => searchMatkul.notify());
+        // final query = QuerySearch(q: searchMatkul.state.controller.text);
+        // searchMatkul.state
+        //     .searchMatkul(query)
+        //     .then((value) => searchMatkul.notify());
       });
     }
   }
@@ -246,56 +246,26 @@ class _MatkulPageState
               listenTo: searchMatkul,
               onIdle: () => WaitingView(),
               onWaiting: () => WaitingView(),
-              // onError: (dynamic error) => ErrorView(error: error),
-              onError: (dynamic error, refresh) => const Text('error'),
+              onError: (dynamic error, refresh) {
+                final failure = error as Failure;
+                return DetailView(
+                  title: failure.title ?? 'Error',
+                  description: failure.message ?? 'Something error',
+                );
+              },
               onData: (data) {
-                final query = searchMatkul.state.controller.text.toLowerCase();
-                final matkuls = data.matkuls
-                    .where((element) =>
-                        (element.name?.toLowerCase().contains(query) ??
-                            false) &&
-                        (!filter.state.isFilteredType
-                        // || filter.state.selectedType
-                        // .contains(element.matkulTypeValue),
-                        ))
-                    .toList();
+                final matkuls = data.filteredMatkuls;
                 if (data.hasReachedMax && matkuls.isEmpty) {
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 20,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          HeightSpace(sizeInfo.screenSize.height * .1),
-                          Image.asset(
-                            Ilustration.notfound,
-                            width: sizeInfo.screenSize.width * .6,
-                          ),
-                          const HeightSpace(20),
-                          Text(
-                            'Mata Kuliah Tidak Ditemukan',
-                            style: FontTheme.poppins14w700black().copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                          const HeightSpace(10),
-                          Text(
-                            '''
+                  return const DetailView(
+                    isEmptyView: true,
+                    title: 'Mata Kuliah Tidak Ditemukan',
+                    description: '''
 Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata kunci lain.''',
-                            style: Theme.of(context).textTheme.caption,
-                            textAlign: TextAlign.center,
-                          ),
-                          const HeightSpace(20),
-                        ],
-                      ),
-                    ),
                   );
                 }
                 return ListView.separated(
                   controller: scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 10,
@@ -305,9 +275,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                   separatorBuilder: (c, i) => const HeightSpace(16),
                   itemBuilder: (c, i) {
                     if (!data.hasReachedMax && i == matkuls.length) {
-                      return const CircleLoading(
-                        size: 25,
-                      );
+                      return const CircleLoading(size: 25);
                     }
                     final matkul = matkuls[i];
                     return CardMatkul(

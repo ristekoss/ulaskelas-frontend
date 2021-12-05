@@ -12,4 +12,4 @@ import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart'
 import 'package:ulaskelas/features/matkul/search/domain/repositories/_repositories.dart';
 
 part 'filter_state.dart';
-part 'search_state.dart';
+part 'search_matkul_state.dart';

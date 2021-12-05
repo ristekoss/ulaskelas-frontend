@@ -28,22 +28,19 @@ extension ResponseExtension<T> on Response {
   //ignore:avoid_shadowing_type_parameters
   Parsed<T> parse<T>(T t) {
     return Parsed.fromJson(
-      json.decode(data) as Map<String, dynamic>,
+      data as Map<String, dynamic>,
       statusCode!,
       t,
     );
   }
 
+  dynamic get responseData => (data as Map<String, dynamic>)['data'];
 
-  dynamic get responseData =>
-      (json.decode(data) as Map<String, dynamic>)['data'];
   /// Get iterable data
-  dynamic get dataBodyIterable =>
-      (json.decode(data) as Map<String, dynamic>)['data'];
-  Map<String, dynamic> get bodyAsMap =>
-      json.decode(data) as Map<String, dynamic>;
+  dynamic get dataBodyIterable => (data as Map<String, dynamic>)['data'];
+  Map<String, dynamic> get bodyAsMap => data as Map<String, dynamic>;
   Map<String, dynamic> get dataBodyAsMap => responseData ?? <String, dynamic>{};
-  Map<String, dynamic> get bodyMap => jsonDecode(data) as Map<String, dynamic>;
+  Map<String, dynamic> get bodyMap => data as Map<String, dynamic>;
 }
 
 class PaginationMeta {

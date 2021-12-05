@@ -1,6 +1,9 @@
 part of '_client.dart';
 
-Future<Response> getIt(String url, {Map<String, String>? headers}) async {
+Future<Response> getIt(
+  String url, {
+  Map<String, String>? headers,
+}) async {
   Logger().i('Url $url');
   Logger().i('Header ${Pref.getHeaders()}');
   final _getHeaders = headers ?? Pref.getHeaders();
