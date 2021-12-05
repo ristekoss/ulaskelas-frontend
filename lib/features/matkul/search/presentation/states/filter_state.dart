@@ -36,19 +36,19 @@ class FilterState {
   final sksTotals = [
     CheckboxItem(
       text: '2 SKS',
-      value: '2sks',
+      value: '2',
     ),
     CheckboxItem(
       text: '3 SKS',
-      value: '3sks',
+      value: '3',
     ),
     CheckboxItem(
       text: '4 SKS',
-      value: '4sks',
+      value: '4',
     ),
     CheckboxItem(
       text: '6 SKS',
-      value: '6sks',
+      value: '6',
     ),
   ];
 

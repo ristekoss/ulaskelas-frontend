@@ -12,8 +12,11 @@ class MatkulRemoteDataSourceImpl implements MatkulRemoteDataSource {
     final list = <MatkulModel>[];
     final url = Endpoints.courses;
     final resp = await getIt(url);
-    for (final data in resp.dataBodyIterable) {
+    for (final data in resp.dataBodyAsMap['courses']) {
       list.add(MatkulModel.fromJson(data));
+    }
+    if (resp.statusCode == 200) {
+      await FileService.saveJson('matkul.json', jsonEncode(resp.data));
     }
     return resp.parse(list);
   }

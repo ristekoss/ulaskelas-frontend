@@ -5,7 +5,11 @@ part of '_states.dart';
 class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   SearchMatkulState() {
     final _remoteDataSource = MatkulRemoteDataSourceImpl();
-    _repo = MatkulRepositoryImpl(_remoteDataSource);
+    final _localDataSource = MatkulLocalDataSourceImpl();
+    _repo = MatkulRepositoryImpl(
+      _remoteDataSource,
+      _localDataSource,
+    );
   }
 
   MatkulRepository? _repo;
@@ -29,6 +33,19 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
 
   /// Matkuls getter with dummy data at default.
   List<MatkulModel> get matkuls => _matkuls ?? [];
+  List<MatkulModel> get filteredMatkuls {
+    return (_matkuls ?? [])
+        .where((element) =>
+            (element.name
+                    ?.toLowerCase()
+                    .contains(controller.text.toLowerCase()) ??
+                false) &&
+            (!filter.state.isFilteredType ||
+                filter.state.selectedSks.contains(element.sks.toString()) ||
+                filter.state.selectedSemester
+                    .contains(element.term.toString())))
+        .toList();
+  }
 
   ListQueue<String> get history => _history ?? ListQueue();
 
@@ -57,12 +74,12 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   ///
   /// Prevent duplicates record.
   Future<void> searchMatkul(QuerySearch query) async {
-    // TODO(paw): integrate with API
     final resp = await _repo?.getAllMatkul();
     resp?.fold((failure) {
       throw failure;
     }, (result) {
       _matkuls = result.data;
+      _hasReachedMax = true;
 
       // Prevent duplicate record
       for (final matkul in matkuls) {

@@ -24,8 +24,11 @@ class MatkulModel {
     prerequisites = json['prerequisites'];
     reviewCount = json['review_count'];
     if (name?.isNotEmpty ?? false) {
-      shortName = name?.split(' ').fold<String>('',
-          (previousValue, element) => previousValue + element.substring(0, 1));
+      shortName = name?.split(' ').fold<String>(
+          '',
+          (previousValue, element) =>
+              previousValue + element.substring(0, min(element.length, 1)));
+      shortName = shortName!.substring(0, min(shortName!.length, 2));
     }
   }
 

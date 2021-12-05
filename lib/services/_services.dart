@@ -1,5 +1,7 @@
 // Created by Muhamad Fauzi Ridwan on 24/08/21.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +14,7 @@ import 'package:ulaskelas/core/_core.dart';
 part 'date_service.dart';
 part 'delay_service.dart';
 part 'duration_service.dart';
+part 'file_service.dart';
 part 'hive_db_service.dart';
 part 'pref_service.dart';
 part 'share_service.dart';
