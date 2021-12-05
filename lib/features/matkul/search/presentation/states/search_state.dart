@@ -3,6 +3,13 @@
 part of '_states.dart';
 
 class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
+  SearchMatkulState() {
+    final _remoteDataSource = MatkulRemoteDataSourceImpl();
+    _repo = MatkulRepositoryImpl(_remoteDataSource);
+  }
+
+  MatkulRepository? _repo;
+
   /// Search controller.
   final controller = TextEditingController();
 
@@ -21,66 +28,7 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   String? _lastQuery;
 
   /// Matkuls getter with dummy data at default.
-  List<MatkulModel> get matkuls =>
-      _matkuls ??
-      <MatkulModel>[
-        MatkulModel(
-          reviews: 8,
-          shortName: 'PL',
-          name: 'Pemrograman Lanjut',
-          matkulType: 'Wajib IK',
-          matkulTypeValue: 'wajibik',
-          sks: '2',
-        ),
-        MatkulModel(
-          reviews: 8,
-          shortName: 'BD',
-          name: 'Basis Data',
-          matkulType: 'Wajib SI',
-          matkulTypeValue: 'wajibsi',
-          sks: '3',
-        ),
-        MatkulModel(
-          reviews: 8,
-          shortName: 'KA',
-          name: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          matkulType: 'Wajib SI',
-          matkulTypeValue: 'wajibsi',
-          sks: '4',
-        ),
-        MatkulModel(
-          reviews: 8,
-          shortName: 'AP',
-          name: 'Arsitektur dan Pemrograman Aplikasi Perusahaan',
-          matkulType: 'Wajib SI',
-          matkulTypeValue: 'wajibsi',
-          sks: '4',
-        ),
-        MatkulModel(
-          reviews: 8,
-          shortName: 'MD',
-          name: 'Matematika Dasar 1',
-          matkulType: 'Wajib Fakultas',
-          matkulTypeValue: 'wajibfakultas',
-          sks: '3',
-        ),
-        MatkulModel(
-          reviews: 5,
-          shortName: 'MD',
-          name: 'Matematika Diskret 1',
-          matkulType: 'Wajib Fakultas',
-          matkulTypeValue: 'wajibfakultas',
-          sks: '3',
-        ),
-        MatkulModel(
-          reviews: 5,
-          shortName: 'MD',
-          name: 'Matematika Diskret 1',
-          matkulType: 'Wajib Fakultas',
-          matkulTypeValue: 'wajibfakultas',
-          sks: '3',
-        ),
-      ];
+  List<MatkulModel> get matkuls => _matkuls ?? [];
 
   ListQueue<String> get history => _history ?? ListQueue();
 
@@ -102,8 +50,7 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
 
   @override
   Future<void> retrieveData(QuerySearch query) async {
-    await Future<void>.delayed(const Duration(seconds: 1));
-    _matkuls = matkuls;
+    await searchMatkul(query);
   }
 
   /// Advanced searching combine stateful & stateless search data.
@@ -111,29 +58,19 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   /// Prevent duplicates record.
   Future<void> searchMatkul(QuerySearch query) async {
     // TODO(paw): integrate with API
-    // final resp = await _repo.getMatkuls(query);
-    // resp.fold((failure) {
-    //   throw failure;
-    // }, (result) {
-    //   _hasReachedMax = result.data.isEmpty ||
-    //   result.data.length < query.limit;
+    final resp = await _repo?.getAllMatkul();
+    resp?.fold((failure) {
+      throw failure;
+    }, (result) {
+      _matkuls = result.data;
 
-    // dummy function ignore this
-    final _ = matkuls
-        .where((element) =>
-            (element.name?.toLowerCase().contains(query.q) ?? false) &&
-            (!filter.state.isFilteredType ||
-                filter.state.selectedType.contains(element.matkulTypeValue)))
-        .toList();
-    _hasReachedMax = _.length < 5;
-
-    // Prevent duplicate record
-    for (final matkul in matkuls) {
-      if (!(_matkuls?.contains(matkul) ?? true)) {
-        _matkuls?.add(matkul);
+      // Prevent duplicate record
+      for (final matkul in matkuls) {
+        if (!(_matkuls?.contains(matkul) ?? true)) {
+          _matkuls?.add(matkul);
+        }
       }
-    }
-    // });
+    });
   }
 
   /// Every submitted query will added to history

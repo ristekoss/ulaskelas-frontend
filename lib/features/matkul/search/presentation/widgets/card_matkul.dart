@@ -62,11 +62,11 @@ class CardMatkul extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        model.matkulType.toString(),
+                        model.code.toString(),
                         style: FontTheme.poppins12w400black(),
                       ),
                       Text(
-                        '${model.reviews} Ulasan',
+                        '${model.reviewCount} Ulasan',
                         style: FontTheme.poppins12w400black().copyWith(
                           color: BaseColors.gray2,
                         ),

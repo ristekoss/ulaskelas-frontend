@@ -25,4 +25,5 @@ jobs:
           flutter doctor
           flutter pub get
           flutter test --coverage
+          flutter analyze
           bash <(curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }})

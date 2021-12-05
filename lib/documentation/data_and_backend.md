@@ -4,24 +4,43 @@ Ulas Kelas Communication with application programming interface
 
 ## ⚡️ Getting Started
 
-### 🚚 Create Data Source & Repository
+### Define API endpoints
 
-Example how to run release development app
-```
-flutter clean
-flutter pub get
-flutter run -t lib/main_development.dart --release --flavor development
+Add endpoint to this class
+example at lib/core/environment/endpoints.dart
+```dart
+class Endpoints {
+  /// Base Endpoints.
+  static String baseUrl = Config.baseConfig.endpoints.baseUrl;
+  static const localHost = 'http://127.0.0.1:8000';
+  static const baseUrlDev = 'https://apidev-ulaskelas.ristek.cs.ui.ac.id';
+  static const baseUrlProd = 'https://apidev-ulaskelas.ristek.cs.ui.ac.id';
+  static final sso = '$baseUrl/login';
+  static final ssoMobile = '$baseUrl/login/?redirect_url=${Endpoints.token}';
+  static final token = '$baseUrl/token';
+  static final users = '$baseUrl/users';
+  static final userId = '$baseUrl/users/{{Id}}';
+  static final review = '$baseUrl/api/reviews';
+  static final courses = '$baseUrl/api/courses';
+  static final bookmarks = '$baseUrl/api/bookmarks';
+}
 ```
 
-Example how to build release development app
-```
-flutter clean
-flutter pub get
-flutter build apk -t lib/main_development.dart --release --no-shrink --flavor development --split-per-abi
+### Create Data Source & Repository
+
+example at lib/features/matkul/search/data/datasources/matkul_remote_data_source.dart
+```dart
+abstract class MatkulRemoteDataSource {}
+
+class MatkulRemoteDataSourceImpl implements MatkulRemoteDataSource {}
 ```
 
-Example how to drive automation test on development environment
-note that automation test doesn't support release mode
+example at lib/features/matkul/search/domain/repositores/matkul_repository.dart
+```dart
+abstract class MatkulRepository {}
 ```
-flutter drive -t test_driver/app.dart --flavor development
+
+example at lib/features/matkul/search/data/repositores/matkul_repository_impl.dart
+```dart
+class MatkulRepositoryImpl implements MatkulRepository {}
 ```

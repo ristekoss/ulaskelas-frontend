@@ -177,7 +177,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                   value: reviewForm.state.formData.year,
                   onChanged: (value) async {
                     await reviewForm.setState((s) => s.setYear(value!));
-                    field.setValue(value);
+                    // field.setValue(value);
                   },
                   onTap: () {
                     final currentFocus = FocusScope.of(context);
@@ -231,7 +231,6 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                 value: reviewForm.state.formData.semester,
                 onChanged: (value) async {
                   await reviewForm.setState((s) => s.setSemester(value!));
-                  field.setValue(value);
                 },
                 onTap: () {
                   final currentFocus = FocusScope.of(context);

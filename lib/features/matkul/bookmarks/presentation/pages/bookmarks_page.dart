@@ -28,15 +28,6 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
     );
   }
 
-  MatkulModel model = MatkulModel(
-    name: 'Sistem Interaksi',
-    reviews: 8,
-    shortName: 'SI',
-    matkulType: 'Ilkom SI',
-    matkulTypeValue: 'Ilkom SI',
-    sks: '3 SKS',
-  );
-
   @override
   Widget buildNarrowLayout(
     BuildContext context,
@@ -81,7 +72,7 @@ Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.'''
             itemCount: bookmark.state.bookmarks.length,
             itemBuilder: (context, index) {
               final bookmark = bookmarks[index];
-              final data = search.state.matkuls
+              final data = searchMatkul.state.matkuls
                   .where((element) => element.name == bookmark);
               return CardBookmark(model: data.first);
             },
