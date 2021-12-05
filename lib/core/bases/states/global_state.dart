@@ -1,7 +1,7 @@
 part of '_states.dart';
 
 /// Top level injection
-final search = RM.inject(
+final searchMatkul = RM.inject(
   () => SearchMatkulState(),
   autoDisposeWhenNotUsed: false,
 );

@@ -37,14 +37,13 @@ Future<Decide<Failure, T>> apiCall<T>(Future<T> t) async {
       return Left(GeneralFailure(message: message));
     }
   } catch (e) {
+    Logger().e(e.toString());
+    Logger().e(e.runtimeType);
     if (e is TypeError) {
-      Logger().e(e.toString());
       return Left(GeneralFailure(message: 'Type Error occured'));
     }
 
     ///case error FrontEnd Service
-    Logger().e(e);
-    Logger().e(e.runtimeType);
     return Left(GeneralFailure(message: ''));
   }
 }

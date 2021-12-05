@@ -13,6 +13,5 @@ part 'date_service.dart';
 part 'delay_service.dart';
 part 'duration_service.dart';
 part 'hive_db_service.dart';
-part 'notification_service.dart';
 part 'pref_service.dart';
 part 'share_service.dart';

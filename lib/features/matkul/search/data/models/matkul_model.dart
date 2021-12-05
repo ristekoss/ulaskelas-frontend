@@ -4,48 +4,51 @@ part of '_models.dart';
 
 class MatkulModel {
   MatkulModel({
+    this.code,
+    this.curriculum,
     this.name,
-    this.matkulType,
-    this.matkulTypeValue,
-    this.reviews,
-    this.shortName,
+    this.description,
     this.sks,
+    this.term,
+    this.prerequisites,
+    this.reviewCount,
   });
 
   MatkulModel.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    curriculum = json['curriculum'];
     name = json['name'];
-    matkulType = json['matkulType'];
-    matkulTypeValue = json['matkulTypeValue'];
-    reviews = json['reviews'];
-    shortName = json['shortName'];
+    description = json['description'];
     sks = json['sks'];
+    term = json['term'];
+    prerequisites = json['prerequisites'];
+    reviewCount = json['review_count'];
+    if (name?.isNotEmpty ?? false) {
+      shortName = name?.split(' ').fold<String>('',
+          (previousValue, element) => previousValue + element.substring(0, 1));
+    }
   }
 
+  String? code;
+  String? curriculum;
   String? name;
-  String? matkulType;
-  String? matkulTypeValue;
-  int? reviews;
+  String? description;
+  int? sks;
+  int? term;
+  String? prerequisites;
+  int? reviewCount;
   String? shortName;
-  String? sks;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['code'] = code;
+    data['curriculum'] = curriculum;
     data['name'] = name;
-    data['matkulType'] = matkulType;
-    data['matkulTypeValue'] = matkulTypeValue;
-    data['reviews'] = reviews;
-    data['shortName'] = shortName;
+    data['description'] = description;
+    data['sks'] = sks;
+    data['term'] = term;
+    data['prerequisites'] = prerequisites;
+    data['review_count'] = reviewCount;
     return data;
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (other is MatkulModel) {
-      return name == other.name;
-    }
-    return super == other;
-  }
-
-  @override
-  int get hashCode => super.hashCode;
 }
