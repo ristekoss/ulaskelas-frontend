@@ -170,14 +170,9 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     major: 'Ilmu Komputer',
                     year: '2018',
                     classTakenOn: rev.classTakenOn!,
-                    description: 'Lorem ipsum dolor sit amet, adisplis '
-                        'consectetur adipiscing elit, sed do '
-                        'eiusmod tempor incididun ut labore et '
-                        'dolore magna aliqua. Ut enim ad minim veniam, '
-                        'quis nostrud exercitation ullamco laboris '
-                        'nisi ut aliquip ex ea commodot.',
+                    description: rev.description!,
                     likesCount: rev.likesCount!,
-                    reviewedOn: DateTime(2021, 9, 10),
+                    reviewedOn: rev.reviewedOn!,
                     likesCountColor: review.state.isLiked(widget.matkul, rev)
                         ? BaseColors.purpleHearth
                         : BaseColors.gray1,
@@ -218,20 +213,16 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
               major: 'Sistem Informasi',
               year: '2019',
               classTakenOn: ownedReview.classTakenOn!,
-              description: 'Lorem ipsum dolor sit amet, adisplis '
-                  'consectetur adipiscing elit, sed do '
-                  'eiusmod tempor incididun ut labore et '
-                  'dolore magna aliqua. Ut enim ad minim veniam, '
-                  'quis nostrud exercitation ullamco laboris '
-                  'nisi ut aliquip ex ea commodot.',
+              description: ownedReview.description!,
               likesCount: ownedReview.likesCount!,
-              reviewedOn: DateTime(2021, 9, 10),
+              reviewedOn: ownedReview.reviewedOn!,
               likesCountColor: review.state.isLiked(widget.matkul, ownedReview)
                   ? BaseColors.purpleHearth
                   : BaseColors.gray1,
               thumbIconColor: review.state.isLiked(widget.matkul, ownedReview)
                   ? BaseColors.purpleHearth
                   : BaseColors.gray3,
+              status: ownedReview.status,
               onLiked: () {
                 review.setState((s) => s.click(widget.matkul, ownedReview));
               });
