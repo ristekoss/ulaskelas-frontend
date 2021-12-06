@@ -4,8 +4,11 @@ class ReviewModel {
   ReviewModel({
     this.author,
     this.matkul,
+    this.description,
     this.likesCount,
     this.classTakenOn,
+    this.reviewedOn,
+    this.status,
   });
 
   ReviewModel.fromJson(Map<String, dynamic> json) {
@@ -17,15 +20,21 @@ class ReviewModel {
 
   String? author;
   String? matkul;
+  String? description;
   int? likesCount;
   String? classTakenOn;
+  DateTime? reviewedOn;
+  String? status;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['author'] = author;
     data['matkul'] = matkul;
+    data['description'] = description;
     data['likesCount'] = likesCount;
     data['classTakenOn'] = classTakenOn;
+    data['reviewedOn'] = reviewedOn;
+    data['status'] = status;
     return data;
   }
 
@@ -38,7 +47,9 @@ class ReviewModel {
     if (other is ReviewModel) {
       return author == other.author &&
           matkul == other.matkul &&
-          classTakenOn == other.classTakenOn;
+          description == other.description &&
+          classTakenOn == other.classTakenOn &&
+          reviewedOn == other.reviewedOn;
     }
     return super == other;
   }
