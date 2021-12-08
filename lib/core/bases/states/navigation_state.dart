@@ -135,4 +135,11 @@ class NavigationServiceState implements Navigation {
       RouteName.ssoLogin,
     );
   }
+
+  Future<void> replaceToReviewPendingPage() {
+    return nav.pushReplacement<void, void>(
+      const SuccessFormPage(),
+      RouteName.onboardingPage,
+    );
+  }
 }

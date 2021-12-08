@@ -1,6 +1,7 @@
 part of '_states.dart';
 
 class ReviewState {
+  String? currentMatkul;
   final thisAuthor = 'Rayhan Maulana Akbar Panjang Bangetttttt UHUY UHUY UHUY';
   final likedReviews = <String, List<ReviewModel>>{};
   final reviews = <String, List<ReviewModel>>{
@@ -52,6 +53,10 @@ class ReviewState {
     'Matematika Diskret 1': [],
     'Arsitektur dan Pemrograman Aplikasi Perusahaan' : []
   };
+
+  set courseCode(String code) {
+    currentMatkul = code;
+  }
 
   // getter
   // TODO: add delay(?)
