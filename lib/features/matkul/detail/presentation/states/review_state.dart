@@ -16,8 +16,7 @@ class ReviewState {
               'nisi ut aliquip ex ea commodot.',
           likesCount: 999,
           classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11)
-      ),
+          reviewedOn: DateTime(2021, 10, 11)),
       ReviewModel(
           author: 'Thalia Theresa',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
@@ -29,8 +28,7 @@ class ReviewState {
               'nisi ut aliquip ex ea commodot.',
           likesCount: 9,
           classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11)
-      ),
+          reviewedOn: DateTime(2021, 10, 11)),
       ReviewModel(
           author: 'Rayhan Maulana Akbar Panjang Bangetttttt UHUY UHUY UHUY',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
@@ -43,14 +41,13 @@ class ReviewState {
           likesCount: 98,
           classTakenOn: 'Ganjil 2020/2021',
           reviewedOn: DateTime(2021, 10, 11),
-          status: 'Approved'
-      ),
+          status: 'Approved'),
     ],
     'Basis Data': [],
     'Pemrograman Lanjut': [],
     'Matematika Dasar 1': [],
     'Matematika Diskret 1': [],
-    'Arsitektur dan Pemrograman Aplikasi Perusahaan' : []
+    'Arsitektur dan Pemrograman Aplikasi Perusahaan': []
   };
 
   // getter
@@ -59,6 +56,14 @@ class ReviewState {
 
   void addReview(String matkul, ReviewModel review) =>
       reviews[matkul]!.add(review);
+
+  Future<void> deleteReview(String matkul, ReviewModel review, int id) async {
+    final url = '${Endpoints.review}/review_id=$id';
+    final resp = await deleteIt(url);
+    if (resp.statusCode == 200) {
+      reviews[matkul]!.remove(review);
+    }
+  }
 
   ReviewModel? findOwnedReview(String matkul) {
     // Error
