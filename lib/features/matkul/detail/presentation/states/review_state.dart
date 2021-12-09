@@ -94,7 +94,7 @@ class ReviewState {
     }
   }
 
-  void unlike(String matkul, ReviewModel review) async {
+  Future<void> unlike(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
     final response = await http.post(Uri.parse(Endpoints.likes), body: {
       'review_id': review.id,
