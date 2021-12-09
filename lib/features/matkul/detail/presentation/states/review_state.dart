@@ -82,12 +82,13 @@ class ReviewState {
 
   Future<void> like(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
-    final response = await http.post(Uri.parse(Endpoints.likes), body: {
+    final url = Endpoints.likes;
+    final resp = await postIt(url, model: {
       'review_id': review.id,
       'is_like': true,
     });
-    if (response.statusCode == 200) {
-      if (jsonDecode(response.body)['error'].toString() == 'null') {
+    if (resp.statusCode == 200) {
+      if (resp.data['tags'].toString() == 'null') {
         review.likesCount = review.likesCount! + 1;
         likedReviews[matkul]!.add(review);
       }
@@ -96,12 +97,13 @@ class ReviewState {
 
   Future<void> unlike(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
-    final response = await http.post(Uri.parse(Endpoints.likes), body: {
+    final url = Endpoints.likes;
+    final resp = await postIt(url, model: {
       'review_id': review.id,
       'is_like': false,
     });
-    if (response.statusCode == 200) {
-      if (jsonDecode(response.body)['error'].toString() == 'null') {
+    if (resp.statusCode == 200) {
+      if (resp.data['tags'].toString() == 'null') {
         review.likesCount = review.likesCount! - 1;
         likedReviews[matkul]!.remove(review);
       }
