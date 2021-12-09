@@ -16,8 +16,7 @@ class ReviewState {
               'nisi ut aliquip ex ea commodot.',
           likesCount: 999,
           classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11)
-      ),
+          reviewedOn: DateTime(2021, 10, 11)),
       ReviewModel(
           author: 'Thalia Theresa',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
@@ -29,8 +28,7 @@ class ReviewState {
               'nisi ut aliquip ex ea commodot.',
           likesCount: 9,
           classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11)
-      ),
+          reviewedOn: DateTime(2021, 10, 11)),
       ReviewModel(
           author: 'Rayhan Maulana Akbar Panjang Bangetttttt UHUY UHUY UHUY',
           matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
@@ -43,22 +41,20 @@ class ReviewState {
           likesCount: 98,
           classTakenOn: 'Ganjil 2020/2021',
           reviewedOn: DateTime(2021, 10, 11),
-          status: 'Approved'
-      ),
+          status: 'Approved'),
     ],
     'Basis Data': [],
     'Pemrograman Lanjut': [],
     'Matematika Dasar 1': [],
     'Matematika Diskret 1': [],
-    'Arsitektur dan Pemrograman Aplikasi Perusahaan' : []
+    'Arsitektur dan Pemrograman Aplikasi Perusahaan': []
   };
 
   // getter
   // TODO: add delay(?)
   List<ReviewModel>? getReviews(String matkul) => reviews[matkul];
 
-  void addReview(String matkul, ReviewModel review) =>
-      reviews[matkul]!.add(review);
+  void addReview(String matkul, ReviewModel review) => reviews[matkul]!.add(review);
 
   ReviewModel? findOwnedReview(String matkul) {
     // Error
@@ -84,16 +80,32 @@ class ReviewState {
     }
   }
 
-  void like(String matkul, ReviewModel review) {
+  Future<void> like(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
-    review.likesCount = review.likesCount! + 1;
-    likedReviews[matkul]!.add(review);
+    final response = await http.post(Uri.parse(Endpoints.likes), body: {
+      'review_id': review.id,
+      'is_like': true,
+    });
+    if (response.statusCode == 200) {
+      if (jsonDecode(response.body)['error'].toString() == 'null') {
+        review.likesCount = review.likesCount! + 1;
+        likedReviews[matkul]!.add(review);
+      }
+    }
   }
 
-  void unlike(String matkul, ReviewModel review) {
+  void unlike(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
-    review.likesCount = review.likesCount! - 1;
-    likedReviews[matkul]!.remove(review);
+    final response = await http.post(Uri.parse(Endpoints.likes), body: {
+      'review_id': review.id,
+      'is_like': false,
+    });
+    if (response.statusCode == 200) {
+      if (jsonDecode(response.body)['error'].toString() == 'null') {
+        review.likesCount = review.likesCount! - 1;
+        likedReviews[matkul]!.remove(review);
+      }
+    }
   }
 
   bool isLiked(String matkul, ReviewModel review) {
