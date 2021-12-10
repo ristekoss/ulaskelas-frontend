@@ -1,6 +1,13 @@
 part of '_states.dart';
 
 class ReviewState {
+  ReviewState() {
+    final _remoteDataSource = LikeRemoteDataSourceImpl();
+    _repo = LikeRepositoryImpl(_remoteDataSource);
+  }
+
+  LikeRepository? _repo;
+
   final thisAuthor = 'Rayhan Maulana Akbar Panjang Bangetttttt UHUY UHUY UHUY';
   final likedReviews = <String, List<ReviewModel>>{};
   final reviews = <String, List<ReviewModel>>{
@@ -82,11 +89,7 @@ class ReviewState {
 
   Future<void> like(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
-    final url = Endpoints.likes;
-    final resp = await postIt(url, model: {
-      'review_id': review.id,
-      'is_like': true,
-    });
+    final resp = await _repo?.like(review);
     if (resp.statusCode == 200) {
       if (resp.data['tags'].toString() == 'null') {
         review.likesCount = review.likesCount! + 1;
@@ -97,11 +100,7 @@ class ReviewState {
 
   Future<void> unlike(String matkul, ReviewModel review) async {
     // TODO: update likeCount to db (?)
-    final url = Endpoints.likes;
-    final resp = await postIt(url, model: {
-      'review_id': review.id,
-      'is_like': false,
-    });
+    final resp = await _repo?.like(review);
     if (resp.statusCode == 200) {
       if (resp.data['tags'].toString() == 'null') {
         review.likesCount = review.likesCount! - 1;
