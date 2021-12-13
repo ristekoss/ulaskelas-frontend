@@ -41,14 +41,14 @@ class _SuccessFormPageState extends BaseStateful<SuccessFormPage> {
             ),
             const HeightSpace(8),
             Text(
-              'Ulasan kamu sedang ditinjau kembali oleh sistem kami. '
-              'Kamu dapat melihat status tinjauan tersebut di riwayat ulasanmu.',
+              'Ulasan kamu sedang ditinjau kembali oleh sistem kami. Kamu '
+              'dapat melihat status tinjauan tersebut di riwayat ulasanmu.',
               textAlign: TextAlign.center,
               style: FontTheme.poppins14w400black(),
             ),
             const HeightSpace(48),
             PrimaryButton(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               text: 'Kembali ke Detail Mata Kuliah',
               onPressed: () {
                 nav.pop();

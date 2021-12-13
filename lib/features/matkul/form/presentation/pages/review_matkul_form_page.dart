@@ -120,7 +120,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
               await Future.delayed(const Duration(seconds: 1));
               reviewForm.state.cleanForm();
               nav.pop();
-              nav.replaceToReviewPendingPage();
+              await nav.replaceToReviewPendingPage();
               return;
             }
             WarningMessenger('Harap isi semua field').show(context);
@@ -215,7 +215,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                   value: field.value,
                   onChanged: (value) async {
                     await reviewForm.setState((s) => s.setYear(value!));
-                    field.setValue(value);
+                    field.didChange(value);
                   },
                   onTap: () {
                     final currentFocus = FocusScope.of(context);
@@ -271,7 +271,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                   value: field.value,
                   onChanged: (value) async {
                     await reviewForm.setState((s) => s.setSemester(value!));
-                    field.setValue(value);
+                    field.didChange(value);
                   },
                   onTap: () {
                     final currentFocus = FocusScope.of(context);
