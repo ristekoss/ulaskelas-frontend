@@ -86,7 +86,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                         toggleSize: 20,
                         borderRadius: 32,
                         padding: 0,
-                        value: reviewForm.state.formData.isAnonymous!,
+                        value: reviewForm.state.formData.isAnonymous,
                         activeColor: BaseColors.purpleHearth.withOpacity(0.8),
                         inactiveColor: BaseColors.gray5,
                         switchBorder: Border.all(
@@ -107,15 +107,51 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
           ),
         ),
         TulisUlasanButton(
-          onTap: () {
+          onTap: () async {
+            final currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
             if (reviewForm.state.formKey.currentState!.validate()) {
               // TODO: Navigate to PendingReviewPage
+              progressDialogue(context);
+              await reviewForm.state.submitForm();
+              await Future.delayed(const Duration(seconds: 1));
+              reviewForm.state.cleanForm();
+              nav.pop();
+              await nav.replaceToReviewPendingPage();
               return;
             }
             WarningMessenger('Harap isi semua field').show(context);
           },
         )
       ],
+    );
+  }
+
+  void progressDialogue(BuildContext context) {
+    //set up the AlertDialog
+    final alert = const AlertDialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    showDialog(
+      //prevent outside touch
+      barrierDismissible: false,
+      useRootNavigator: false,
+      context:context,
+      builder: (BuildContext context) {
+        //prevent Back button press
+        return WillPopScope(
+            onWillPop: () async {
+              return false;
+            },
+            child: alert);
+      },
     );
   }
 
@@ -144,40 +180,42 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
         if (value == null || value.isEmpty) {
           return 'This field is required.';
         }
+        reviewForm.setState((s) => s.setDesc());
         return null;
       },
     );
   }
 
   Widget _buildYearDropDown() {
-    return OnReactive(() {
-      return FormField<String>(
-        validator: (value) {
-          if (value == null) {
-            return 'This field is required.';
-          }
-          return null;
-        },
-        builder: (field) {
-          return Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 4,
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: BaseColors.gray3)),
-              child: DropdownButtonHideUnderline(
+    return FormField<String>(
+      validator: (value) {
+        if (value == null) {
+          return 'This field is required.';
+        }
+        return null;
+      },
+      builder: (field) {
+        return Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 4,
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: BaseColors.gray3)),
+          child: OnReactive(
+            () {
+              return DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   hint: Text(
                     'Tahun mengambil',
                     style: FontTheme.poppins12w400black2(),
                   ),
                   isExpanded: true,
-                  value: reviewForm.state.formData.year,
+                  value: field.value,
                   onChanged: (value) async {
                     await reviewForm.setState((s) => s.setYear(value!));
-                    // field.setValue(value);
+                    field.didChange(value);
                   },
                   onTap: () {
                     final currentFocus = FocusScope.of(context);
@@ -196,15 +234,16 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                           ))
                       .toList(),
                 ),
-              ));
-        },
-      );
-    });
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildSemesterDropDown() {
-    return OnReactive(() {
-      return FormField<String>(
+    return FormField<String>(
         initialValue: reviewForm.state.formData.semester,
         validator: (value) {
           if (value == null) {
@@ -221,39 +260,41 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(color: BaseColors.gray3)),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                hint: Text(
-                  'Periode mengambil',
-                  style: FontTheme.poppins12w400black2(),
-                ),
-                isExpanded: true,
-                value: reviewForm.state.formData.semester,
-                onChanged: (value) async {
-                  await reviewForm.setState((s) => s.setSemester(value!));
-                },
-                onTap: () {
-                  final currentFocus = FocusScope.of(context);
+            child: OnReactive(() {
+              return DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  hint: Text(
+                    'Periode mengambil',
+                    style: FontTheme.poppins12w400black2(),
+                  ),
+                  isExpanded: true,
+                  value: field.value,
+                  onChanged: (value) async {
+                    await reviewForm.setState((s) => s.setSemester(value!));
+                    field.didChange(value);
+                  },
+                  onTap: () {
+                    final currentFocus = FocusScope.of(context);
 
-                  if (!currentFocus.hasPrimaryFocus) {
-                    currentFocus.unfocus();
-                  }
-                },
-                items: reviewForm.state.semesters
-                    .map((e) => DropdownMenuItem<String>(
-                          value: e,
-                          child: Text(
-                            e,
-                            style: FontTheme.poppins12w400black(),
-                          ),
-                        ))
-                    .toList(),
-              ),
-            ),
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
+                  },
+                  items: reviewForm.state.semesters
+                      .map((e) => DropdownMenuItem<String>(
+                    value: e,
+                    child: Text(
+                      e,
+                      style: FontTheme.poppins12w400black(),
+                    ),
+                  ))
+                      .toList(),
+                ),
+              );
+            }),
           );
         },
       );
-    });
   }
 
   @override

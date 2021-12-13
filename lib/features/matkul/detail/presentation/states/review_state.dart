@@ -1,6 +1,7 @@
 part of '_states.dart';
 
 class ReviewState {
+  String? currentMatkul;
   ReviewState() {
     final _remoteDataSource = LikeRemoteDataSourceImpl();
     _repo = LikeRepositoryImpl(_remoteDataSource);
@@ -56,6 +57,10 @@ class ReviewState {
     'Matematika Diskret 1': [],
     'Arsitektur dan Pemrograman Aplikasi Perusahaan': []
   };
+
+  set courseCode(String code) {
+    currentMatkul = code;
+  }
 
   // getter
   // TODO: add delay(?)

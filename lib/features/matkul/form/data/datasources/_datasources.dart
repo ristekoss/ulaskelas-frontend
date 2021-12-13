@@ -11,3 +11,4 @@ import 'package:ulaskelas/services/_services.dart';
 
 part 'tag_local_data_source.dart';
 part 'tag_remote_data_source.dart';
+part 'review_remote_data_source.dart';
