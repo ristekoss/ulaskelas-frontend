@@ -1,11 +1,11 @@
 // Created by Muhamad Fauzi Ridwan on 05/12/21.
 part of '_datasources.dart';
 
-abstract class MatkulLocalDataSource {
+abstract class CourseLocalDataSource {
   Future<Parsed<List<MatkulModel>>> getAllMatkul();
 }
 
-class MatkulLocalDataSourceImpl implements MatkulLocalDataSource {
+class CourseLocalDataSourceImpl implements CourseLocalDataSource {
   @override
   Future<Parsed<List<MatkulModel>>> getAllMatkul() async {
     final list = <MatkulModel>[];
