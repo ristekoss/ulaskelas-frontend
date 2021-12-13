@@ -2,11 +2,11 @@
 
 part of '_datasources.dart';
 
-abstract class MatkulRemoteDataSource {
+abstract class CourseRemoteDataSource {
   Future<Parsed<List<MatkulModel>>> getAllMatkul();
 }
 
-class MatkulRemoteDataSourceImpl implements MatkulRemoteDataSource {
+class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
   Future<Parsed<List<MatkulModel>>> getAllMatkul() async {
     final list = <MatkulModel>[];

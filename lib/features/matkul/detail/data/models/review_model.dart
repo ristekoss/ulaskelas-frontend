@@ -9,6 +9,7 @@ class ReviewModel {
     this.classTakenOn,
     this.reviewedOn,
     this.status,
+    this.id,
   });
 
   ReviewModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +17,7 @@ class ReviewModel {
     matkul = json['matkul'];
     likesCount = json['likesCount'];
     classTakenOn = json['classTakenOn'];
+    id = json['id'];
   }
 
   String? author;
@@ -25,6 +27,7 @@ class ReviewModel {
   String? classTakenOn;
   DateTime? reviewedOn;
   String? status;
+  int? id;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -35,6 +38,7 @@ class ReviewModel {
     data['classTakenOn'] = classTakenOn;
     data['reviewedOn'] = reviewedOn;
     data['status'] = status;
+    data['id'] = id;
     return data;
   }
 

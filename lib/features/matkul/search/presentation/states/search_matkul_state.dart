@@ -4,8 +4,8 @@ part of '_states.dart';
 
 class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   SearchMatkulState() {
-    final _remoteDataSource = MatkulRemoteDataSourceImpl();
-    final _localDataSource = MatkulLocalDataSourceImpl();
+    final _remoteDataSource = CourseRemoteDataSourceImpl();
+    final _localDataSource = CourseLocalDataSourceImpl();
     _repo = MatkulRepositoryImpl(
       _remoteDataSource,
       _localDataSource,

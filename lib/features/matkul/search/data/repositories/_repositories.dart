@@ -3,7 +3,7 @@
 import 'package:ulaskelas/core/client/_client.dart';
 import 'package:ulaskelas/core/error/_error.dart';
 import 'package:ulaskelas/core/extension/_extension.dart';
-import 'package:ulaskelas/features/matkul/search/data/datasources/_datasources.dart';
+import 'package:ulaskelas/features/matkul/main/data/datasources/_datasources.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/domain/repositories/_repositories.dart';
 

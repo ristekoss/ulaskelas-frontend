@@ -47,6 +47,7 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     flavorDimensions "apps"
@@ -87,7 +88,6 @@ android {
         release {
             shrinkResources false
             minifyEnabled false
-            multiDexEnabled true
         }
 
         debug {}
