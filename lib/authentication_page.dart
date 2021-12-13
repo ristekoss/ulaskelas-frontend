@@ -1,6 +1,5 @@
 // Created by Muhamad Fauzi Ridwan on 22/11/21.
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';

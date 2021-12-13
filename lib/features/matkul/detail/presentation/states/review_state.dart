@@ -1,7 +1,6 @@
 part of '_states.dart';
 
 class ReviewState {
-  String? currentMatkul;
   ReviewState() {
     final _remoteDataSource = LikeRemoteDataSourceImpl();
     _repo = LikeRepositoryImpl(_remoteDataSource);
@@ -58,15 +57,12 @@ class ReviewState {
     'Arsitektur dan Pemrograman Aplikasi Perusahaan': []
   };
 
-  set courseCode(String code) {
-    currentMatkul = code;
-  }
-
   // getter
   // TODO: add delay(?)
   List<ReviewModel>? getReviews(String matkul) => reviews[matkul];
 
-  void addReview(String matkul, ReviewModel review) => reviews[matkul]!.add(review);
+  void addReview(String matkul, ReviewModel review) =>
+      reviews[matkul]!.add(review);
 
   Future<void> deleteReview(String matkul, ReviewModel review, int id) async {
     final url = '${Endpoints.review}/review_id=$id';
