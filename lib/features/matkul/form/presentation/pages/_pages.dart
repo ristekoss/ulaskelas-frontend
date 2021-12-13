@@ -16,3 +16,4 @@ import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.d
 
 part 'add_review_matkul_tag_page.dart';
 part 'review_matkul_form_page.dart';
+part 'success_form_page.dart';
