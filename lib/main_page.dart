@@ -1,6 +1,5 @@
 // Created by Muhamad Fauzi Ridwan on 24/08/21.
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/pages/_pages.dart';
@@ -22,9 +21,10 @@ class _MainPageState extends BaseStateful<MainPage> {
 
   @override
   void init() {
-    // TODO(fauzi): Navigator per page
     _children = <Widget>[
-      const HomePage(),
+      HomePage(
+        onSeeAllCourse: () => setState(() => _selectedIndex = 1),
+      ),
       const MatkulPage(),
       const BookmarksPage(),
       const ProfilePage(),
@@ -68,9 +68,7 @@ class _MainPageState extends BaseStateful<MainPage> {
   Widget? _convexNavigation() {
     return RistekBotNavBar(
       initialActiveIndex: _selectedIndex,
-      onTap: (int index) {
-        setState(() => _selectedIndex = index);
-      },
+      onTap: (int index) => setState(() => _selectedIndex = index),
       items: const [
         RistekBotNavItem(
           icon: Icons.home,

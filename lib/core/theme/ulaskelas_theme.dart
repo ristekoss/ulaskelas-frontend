@@ -11,7 +11,7 @@ class UlaskelasThemeImpl implements UlaskelasTheme {
   ThemeData normalTheme() {
     return _baseThemeData().copyWith(
       primaryColor: BaseColors.purpleHearth,
-      accentColor: BaseColors.goldenrod,
+      secondaryHeaderColor: BaseColors.goldenrod,
       shadowColor: BaseColors.gray5,
       textTheme: TextTheme(
         caption: FontTheme.poppins12w400black(),
@@ -57,7 +57,6 @@ class UlaskelasThemeImpl implements UlaskelasTheme {
     return _baseThemeData().copyWith(
       primaryColor: BaseColors.mineShaft,
       secondaryHeaderColor: BaseColors.mineShaft,
-      accentColor: BaseColors.mineShaft,
     );
   }
 

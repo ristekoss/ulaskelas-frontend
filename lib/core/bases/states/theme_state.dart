@@ -8,7 +8,6 @@ class ThemeState {
       type = themeData;
       primaryColor = type!.primaryColor;
       secondaryColor = type!.secondaryHeaderColor;
-      accentColor = type!.accentColor;
     }
   }
 
@@ -17,14 +16,12 @@ class ThemeState {
   ThemeData? type;
   Color? primaryColor;
   Color? secondaryColor;
-  Color? accentColor;
 
   void init() {
     final themeType = _mapStringToThemeType(Pref.getString(themeKey));
     type = theme.mapTheme(themeType);
     primaryColor = type?.primaryColor;
     secondaryColor = type?.secondaryHeaderColor;
-    accentColor = type?.accentColor;
   }
 
   void changeTheme(ThemeType themeType) {

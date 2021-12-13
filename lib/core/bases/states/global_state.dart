@@ -46,7 +46,6 @@ class GlobalState {
       Inject(() => ThemeState(
               themeData: ThemeData(
             primaryColor: BaseColors.purpleHearth,
-            accentColor: BaseColors.goldenrod,
           ))),
       Inject(() => NavigationServiceState()),
       Inject(() => FilterState()),
