@@ -4,6 +4,9 @@ part of '_services.dart';
 
 class FileService {
   static Future<void> saveJson(String filename, String rawJson) async {
+    if (kIsWeb) {
+      return;
+    }
     final dir = await getTemporaryDirectory();
     final file = File('${dir.path}/$filename');
     await file.writeAsString(rawJson);
