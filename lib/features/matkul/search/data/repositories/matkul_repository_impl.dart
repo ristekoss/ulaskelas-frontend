@@ -8,8 +8,8 @@ class MatkulRepositoryImpl implements MatkulRepository {
     this._localDataSource,
   );
 
-  final MatkulRemoteDataSource _remoteDataSource;
-  final MatkulLocalDataSource _localDataSource;
+  final CourseRemoteDataSource _remoteDataSource;
+  final CourseLocalDataSource _localDataSource;
 
   @override
   Future<Decide<Failure, Parsed<List<MatkulModel>>>> getAllMatkul() {
