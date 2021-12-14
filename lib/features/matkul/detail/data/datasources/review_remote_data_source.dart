@@ -6,11 +6,9 @@ abstract class ReviewRemoteDataSource {
 
 class ReviewRemoteDataSourceImpl implements ReviewRemoteDataSource {
   @override
-
-  // Gimana caranya masukin parameter, kalo dimasukkin parameter dia marah
-  Future<Parsed<List<ReviewModel>>> getAllReview() async {
+  Future<Parsed<List<ReviewModel>>> getAllReview(String matkul) async {
     final list = <ReviewModel>[];
-    final url = Endpoints.review;
+    final url = Endpoints.review + '';
     final resp = await getIt(url);
     for (final data in resp.data) {
       list.add(ReviewModel.fromJson(data));
