@@ -2,6 +2,7 @@ part of '_datasources.dart';
 
 abstract class BookmarkRemoteDataSource {
   Future<Parsed<List<BookmarkModel>>> getAllBookmark();
+  Future<void> postBookmark(BookmarkModel bookmark);
 }
 
 class BookmarkRemoteDataSourceImpl implements BookmarkRemoteDataSource {
