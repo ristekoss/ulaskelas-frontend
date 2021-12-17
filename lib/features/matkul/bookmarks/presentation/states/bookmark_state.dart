@@ -14,19 +14,18 @@ class BookmarkState {
   List<BookmarkModel>? _bookmarks;
 
 
-  get bookmarks => _bookmarks;
+  List<BookmarkModel> get bookmarks => _bookmarks ?? [];
 
   /// tap to toggle Bookmark
-  void toggleBookmark(BookmarkModel bookmark) async {
+  Future<void> toggleBookmark(BookmarkModel bookmark) async {
     final resp = await _repo?.getAllBookmark();
-
     resp?.fold((failure) {
       throw failure;
     }, (result) {
       _bookmarks = result.data;
 
       // Prevent duplicate record
-      for (final bookmark in bookmarks) {
+      for (final bookmark in _bookmarks!) {
         if (!(_bookmarks?.contains(bookmark) ?? true)) {
           _bookmarks?.add(bookmark);
         }
