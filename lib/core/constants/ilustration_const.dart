@@ -8,4 +8,5 @@ class Ilustration {
   static const String onboard1 = '${Constants.imagePath}/ilust_onboard1.png';
   static const String onboard2 = '${Constants.imagePath}/ilust_onboard2.png';
   static const String onboard3 = '${Constants.imagePath}/ilust_onboard3.png';
+  static const String processing = '${Constants.imagePath}/ilust_processing.png';
 }

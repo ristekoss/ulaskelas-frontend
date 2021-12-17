@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:logger/logger.dart';
 import 'package:ulaskelas/core/client/_client.dart';
 import 'package:ulaskelas/core/environment/_environment.dart';
+import 'package:ulaskelas/core/extension/_extension.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/data/models/_models.dart';
 import 'package:ulaskelas/services/_services.dart';
 

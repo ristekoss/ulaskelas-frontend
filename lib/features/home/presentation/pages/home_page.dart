@@ -2,14 +2,13 @@
 
 part of '_pages.dart';
 
-// TODO(Syabib): create dua page lain
-// [semua matkul semester, semua riwayat ulasan]
-
-// TODO(Yudha): modify page ini
 class HomePage extends StatefulWidget {
   const HomePage({
+    required this.onSeeAllCourse,
     Key? key,
   }) : super(key: key);
+
+  final VoidCallback onSeeAllCourse;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -63,33 +62,41 @@ class _HomePageState extends BaseStateful<HomePage> {
           ),
           Container(
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
                 border: Border.all(color: BaseColors.primary, width: 2)),
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+            margin: const EdgeInsets.all(20),
+            child: InkWell(
+              onTap: () => widget.onSeeAllCourse.call(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.list_alt_outlined,
+                          color: BaseColors.primaryColor,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Lihat Semua Mata Kuliah',
+                          style: FontTheme.poppins14w400purple(),
+                        )
+                      ],
+                    ),
                     Icon(
-                      Icons.list_alt_outlined,
+                      Icons.keyboard_arrow_right,
                       color: BaseColors.primaryColor,
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Lihat Semua Mata Kuliah',
-                      style: FontTheme.poppins14w400purple(),
-                    )
                   ],
                 ),
-                Icon(
-                  Icons.keyboard_arrow_right,
-                  color: BaseColors.primaryColor,
-                ),
-              ],
+              ),
             ),
           ),
           Padding(
