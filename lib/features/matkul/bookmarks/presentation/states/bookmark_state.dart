@@ -14,16 +14,33 @@ class BookmarkState {
   List<BookmarkModel>? _bookmarks;
 
 
-  List<BookmarkModel> get bookmarks => _bookmarks ?? [];
+  get bookmarks => _bookmarks;
 
   /// tap to toggle Bookmark
-  void toggleBookmark(BookmarkModel bookmark) {
-    if (bookmark.isBookmark == true) {
-      bookmark.isBookmark = false;
-      _repo?.postBookmark(bookmark);
-    } else {
-      bookmark.isBookmark = true;
-      _repo?.postBookmark(bookmark);
-    }
+  void toggleBookmark(BookmarkModel bookmark) async {
+    final resp = await _repo?.getAllBookmark();
+
+    resp?.fold((failure) {
+      throw failure;
+    }, (result) {
+      _bookmarks = result.data;
+
+      // Prevent duplicate record
+      for (final bookmark in bookmarks) {
+        if (!(_bookmarks?.contains(bookmark) ?? true)) {
+          _bookmarks?.add(bookmark);
+        }
+      }
+
+      if (_bookmarks?.contains(bookmark) ?? true) {
+        // remove if in _bookmarks
+        _repo?.postBookmark(bookmark, true);
+        _bookmarks?.remove(bookmark);
+      } else {
+        // create if not in _bookmarks
+        _repo?.postBookmark(bookmark, false);
+        _bookmarks?.add(bookmark);
+      }
+    });
   }
 }

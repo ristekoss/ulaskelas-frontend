@@ -17,13 +17,14 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   }
 
   @override
-  Future<Decide<Failure, void>> postBookmark(BookmarkModel bookmark) async {
-    return apiCall(_remoteDataSource.postBookmark(bookmark));
+  // ignore: lines_longer_than_80_chars
+  Future<Decide<Failure, void>> postBookmark(BookmarkModel bookmark, isBookmark) async {
+    return apiCall(_remoteDataSource.postBookmark(bookmark, isBookmark));
   }
 
   @override
   // ignore: lines_longer_than_80_chars
-  Future<Decide<Failure, void>> postBookmarkToCache(BookmarkModel bookmark) async {
-    return apiCall(_localDataSource.postBookmarkToCache(bookmark));
+  Future<Decide<Failure, void>> postBookmarkToCache(BookmarkModel bookmark, isBookmark) async {
+    return apiCall(_localDataSource.postBookmarkToCache(bookmark, isBookmark));
   }
 }
