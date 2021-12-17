@@ -22,7 +22,8 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
       'laboris nisi ut aliquip ex ea commodo consequat.';
 
   @override
-  void init() {}
+  void init() {
+  }
 
   @override
   ScaffoldAttribute buildAttribute() {
@@ -60,7 +61,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
               const HeightSpace(32),
 
               // ~~~~~~~~~~~~~~~~~~~~~~~~~
-              if (!ownedReview!.isEmpty()) _buildReviewBySelf(ownedReview),
+              if (ownedReview != null) _buildReviewBySelf(ownedReview),
 
               _buildReviews(),
             ],
@@ -163,35 +164,31 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
         OnReactive(() {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: review.state.reviews[widget.matkul]!.map((rev) {
-                if (rev.author != review.state.thisAuthor) {
-                  return ReviewCard(
-                    name: rev.author!,
-                    major: 'Ilmu Komputer',
-                    year: '2018',
-                    classTakenOn: rev.classTakenOn!,
-                    description: 'Lorem ipsum dolor sit amet, adisplis '
-                        'consectetur adipiscing elit, sed do '
-                        'eiusmod tempor incididun ut labore et '
-                        'dolore magna aliqua. Ut enim ad minim veniam, '
-                        'quis nostrud exercitation ullamco laboris '
-                        'nisi ut aliquip ex ea commodot.',
-                    likesCount: rev.likesCount!,
-                    reviewedOn: DateTime(2021, 9, 10),
-                    likesCountColor: review.state.isLiked(widget.matkul, rev)
-                        ? BaseColors.purpleHearth
-                        : BaseColors.gray1,
-                    thumbIconColor: review.state.isLiked(widget.matkul, rev)
-                        ? BaseColors.purpleHearth
-                        : BaseColors.gray3,
-                    imgUrl: 'test',
-                    onLiked: () {
-                      review.setState((s) => s.click(widget.matkul, rev));
-                    },
-                  );
-                }
-                return const SizedBox();
-              }).toList());
+              children: review.state.reviews[widget.matkul]?.map((rev) {
+                    if (rev.author != review.state.thisAuthor) {
+                      return ReviewCard(
+                        name: rev.author!,
+                        major: 'Ilmu Komputer',
+                        year: '2018',
+                        classTakenOn: rev.classTakenOn!,
+                        description: rev.description!,
+                        likesCount: rev.likesCount!,
+                        reviewedOn: rev.reviewedOn!,
+                        likesCountColor:
+                            review.state.isLiked(widget.matkul, rev)
+                                ? BaseColors.purpleHearth
+                                : BaseColors.gray1,
+                        thumbIconColor: review.state.isLiked(widget.matkul, rev)
+                            ? BaseColors.purpleHearth
+                            : BaseColors.gray3,
+                        imgUrl: 'test',
+                        onLiked: () {
+                          review.setState((s) => s.click(widget.matkul, rev));
+                        },
+                      );
+                    }
+                    return const SizedBox();
+                  }).toList() ?? []);
         }),
       ],
     );
@@ -218,20 +215,16 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
               major: 'Sistem Informasi',
               year: '2019',
               classTakenOn: ownedReview.classTakenOn!,
-              description: 'Lorem ipsum dolor sit amet, adisplis '
-                  'consectetur adipiscing elit, sed do '
-                  'eiusmod tempor incididun ut labore et '
-                  'dolore magna aliqua. Ut enim ad minim veniam, '
-                  'quis nostrud exercitation ullamco laboris '
-                  'nisi ut aliquip ex ea commodot.',
+              description: ownedReview.description!,
               likesCount: ownedReview.likesCount!,
-              reviewedOn: DateTime(2021, 9, 10),
+              reviewedOn: ownedReview.reviewedOn!,
               likesCountColor: review.state.isLiked(widget.matkul, ownedReview)
                   ? BaseColors.purpleHearth
                   : BaseColors.gray1,
               thumbIconColor: review.state.isLiked(widget.matkul, ownedReview)
                   ? BaseColors.purpleHearth
                   : BaseColors.gray3,
+              status: ownedReview.status,
               onLiked: () {
                 review.setState((s) => s.click(widget.matkul, ownedReview));
               });

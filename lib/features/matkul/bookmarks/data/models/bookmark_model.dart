@@ -2,18 +2,22 @@ part of '_models.dart';
 
 class BookmarkModel {
   BookmarkModel({
-    this.courseCode,
-    this.isBookmark
+    this.user,
+    this.course,
   });
-  
-  String? courseCode;
-  bool? isBookmark;
+
+  BookmarkModel.fromJson(Map<String, dynamic> json) {
+    user = json['user'];
+    course = json['course'];
+  }
+
+  String? user;
+  String? course;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['courseCode'] = courseCode;
-    data['isBookmark'] = isBookmark;
+    data['user'] = user;
+    data['course'] = course;
     return data;
   }
-  
 }

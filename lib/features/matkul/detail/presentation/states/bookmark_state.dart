@@ -3,6 +3,10 @@ part of '_states.dart';
 class BookmarkState {
   final bookmarks = [];
 
+  Future<void> retrieveData() async {
+    // TODO(pawpaw): retrieve bookmark data.
+  }
+
   void tapMark(String matkul) {
     if (isMarked(matkul)) {
       deleteFromBookmark(matkul);
