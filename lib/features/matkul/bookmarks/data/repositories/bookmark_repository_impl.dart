@@ -1,7 +1,7 @@
 part of '_repositories.dart';
 
-class BookmarkRepositoyImpl implements BookmarkRepository {
-  BookmarkRepositoyImpl(this._remoteDataSource, this._localDataSource);
+class BookmarkRepositoryImpl implements BookmarkRepository {
+  BookmarkRepositoryImpl(this._remoteDataSource, this._localDataSource);
   final BookmarkRemoteDataSource _remoteDataSource;
   final BookmarkLocalDataSource _localDataSource;
 
@@ -17,9 +17,7 @@ class BookmarkRepositoyImpl implements BookmarkRepository {
   }
 
   @override
-  Future<Decide<Failure, void>> postBookmark(
-    BookmarkModel bookmark
-    ) async {
+  Future<Decide<Failure, void>> postBookmark(BookmarkModel bookmark) async {
     return apiCall(_remoteDataSource.postBookmark(bookmark));
   }
 
