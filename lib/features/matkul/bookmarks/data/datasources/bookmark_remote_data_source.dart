@@ -2,7 +2,7 @@ part of '_datasources.dart';
 
 abstract class BookmarkRemoteDataSource {
   Future<Parsed<List<BookmarkModel>>> getAllBookmark();
-  Future<void> postBookmark(BookmarkModel bookmark);
+  Future<void> postBookmark(BookmarkModel bookmark, bool isBookmark);
 }
 
 class BookmarkRemoteDataSourceImpl implements BookmarkRemoteDataSource {
@@ -21,13 +21,22 @@ class BookmarkRemoteDataSourceImpl implements BookmarkRemoteDataSource {
     return resp.parse(list);
   }
 
-  Future<void> postBookmark(BookmarkModel bookmark) async {
+  Future<void> postBookmark(BookmarkModel bookmark, bool isBookmark) async {
     final url = Endpoints.bookmarks;
-    final resp = await postIt(url, model: bookmark.toJson());
-    if (resp.statusCode == 200) {
-      Logger().i('Bookmark posted');
+    if (isBookmark) {
+      final resp = await postIt(url, model: bookmark.toJson());
+      if (resp.statusCode == 200) {
+        Logger().i('Bookmark posted');
+      } else {
+        Logger().e('Error posting bookmark');
+      }
     } else {
-      Logger().e('Error posting bookmark');
+      final resp = await deleteIt(url, model: bookmark.toJson());
+      if (resp.statusCode == 200 || resp.statusCode == 204) {
+        Logger().i('Bookmark deleted');
+      } else {
+        Logger().e('Error deleting bookmark');
+      }
     }
   }
 }

@@ -2,7 +2,7 @@ part of '_datasources.dart';
 
 abstract class BookmarkLocalDataSource {
   Future<Parsed<List<BookmarkModel>>> getAllBookmark();
-  Future<void> postBookmarkToCache(BookmarkModel bookmark);
+  Future<void> postBookmarkToCache(BookmarkModel bookmark, bool isBookmark);
 }
 
 class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
@@ -21,10 +21,43 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
     return Parsed.fromJson(json, 200, list);
   }
 
-  Future<void> postBookmarkToCache(BookmarkModel bookmark) async {
-      final rawJson = json.encode(bookmark.toJson());
-      await FileService.saveJson('bookmark.json', rawJson);
-      Logger().i(rawJson);
+  @override
+  // ignore: lines_longer_than_80_chars
+  Future<void> postBookmarkToCache(BookmarkModel bookmark, bool isBookmark) async {
+    final resp = await getAllBookmark();
+    if (resp.statusCode == 200) {
+      if (!isBookmark) {
+        final bookmarks = resp.data;
+
+        if (!bookmarks.contains(bookmark)) {
+          bookmarks.add(bookmark);
+          final data = jsonEncode({
+              'data': bookmarks.map((e) => e.toJson()).toList(),
+          });
+
+          final rawJson = json.encode(data);
+          await FileService.saveJson('bookmark.json', rawJson);
+
+          // log if bookmarks change
+          Logger().i(rawJson);
+        }
+      } else {
+        final bookmarks = resp.data;
+        if (bookmarks.contains(bookmark)) {
+          bookmarks.remove(bookmark);
+          final data = jsonEncode({
+              'data': bookmarks.map((e) => e.toJson()).toList(),
+          });
+
+          final rawJson = json.encode(data);
+          await FileService.saveJson('bookmark.json', rawJson);
+
+          // log if bookmarks change
+          Logger().i(rawJson);
+        }
+      }
+    } 
+
   }
   
 }
