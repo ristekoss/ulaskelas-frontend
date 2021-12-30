@@ -61,8 +61,7 @@ class ReviewState {
   // TODO: add delay(?)
   List<ReviewModel>? getReviews(String matkul) => reviews[matkul];
 
-  void addReview(String matkul, ReviewModel review) =>
-      reviews[matkul]!.add(review);
+  void addReview(String matkul, ReviewModel review) => reviews[matkul]!.add(review);
 
   Future<void> deleteReview(String matkul, ReviewModel review, int id) async {
     final url = '${Endpoints.review}/review_id=$id';
@@ -70,6 +69,10 @@ class ReviewState {
     if (resp.statusCode == 200) {
       reviews[matkul]!.remove(review);
     }
+  }
+
+  void updateReview(String matkul, ReviewModel review, int id) {
+    reviews[matkul]![id] = review;
   }
 
   ReviewModel? findOwnedReview(String matkul) {
