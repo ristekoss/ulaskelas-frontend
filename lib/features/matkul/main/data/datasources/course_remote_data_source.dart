@@ -3,14 +3,15 @@
 part of '_datasources.dart';
 
 abstract class CourseRemoteDataSource {
-  Future<Parsed<List<MatkulModel>>> getAllMatkul();
+  Future<Parsed<List<MatkulModel>>> getAllMatkul(QuerySearch querySearch);
 }
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
-  Future<Parsed<List<MatkulModel>>> getAllMatkul() async {
+  Future<Parsed<List<MatkulModel>>> getAllMatkul(
+      QuerySearch querySearch) async {
     final list = <MatkulModel>[];
-    final url = Endpoints.courses;
+    final url = '${Endpoints.courses}?$querySearch';
     final resp = await getIt(url);
     for (final data in resp.dataBodyAsMap['courses']) {
       list.add(MatkulModel.fromJson(data));

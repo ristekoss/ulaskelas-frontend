@@ -22,8 +22,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
       'laboris nisi ut aliquip ex ea commodo consequat.';
 
   @override
-  void init() {
-  }
+  void init() {}
 
   @override
   ScaffoldAttribute buildAttribute() {
@@ -120,17 +119,17 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 return GestureDetector(
                   onTap: () {
                     //TODO(bim): bookmark matkul
-                    bookmark.setState((s) => s.tapMark(widget.matkul));
-                    if (bookmark.state.isMarked(widget.matkul)) {
-                      SuccessMessenger('Mata kuliah berhasil disimpan')
-                          .show(context);
-                    }
+                    // bookmarkRM.setState((s) => s.tapMark(widget.matkul));
+                    // if (bookmarkRM.state.isMarked(widget.matkul)) {
+                    //   SuccessMessenger('Mata kuliah berhasil disimpan')
+                    //       .show(context);
+                    // }
                   },
                   child: Icon(
                     Icons.bookmark,
-                    color: bookmark.state.isMarked(widget.matkul)
-                        ? BaseColors.goldenrod
-                        : BaseColors.gray3,
+                    // color: bookmarkRM.state.isMarked(widget.matkul)
+                    //     ? BaseColors.goldenrod
+                    //     : BaseColors.gray3,
                   ),
                 );
               }),
@@ -188,7 +187,8 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                       );
                     }
                     return const SizedBox();
-                  }).toList() ?? []);
+                  }).toList() ??
+                  []);
         }),
       ],
     );

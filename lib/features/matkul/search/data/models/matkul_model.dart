@@ -54,4 +54,12 @@ class MatkulModel {
     data['review_count'] = reviewCount;
     return data;
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is MatkulModel) {
+      return code == other.code;
+    }
+    return super == other;
+  }
 }

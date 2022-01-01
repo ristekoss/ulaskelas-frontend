@@ -40,7 +40,7 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
           vertical: 10,
         ),
         child: OnReactive(() {
-          final bookmarks = bookmark.state.bookmarks;
+          final bookmarks = bookmarkRM.state.bookmarks;
           if (bookmarks.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +69,7 @@ Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.'''
             );
           }
           return ListView.separated(
-            itemCount: bookmark.state.bookmarks.length,
+            itemCount: bookmarkRM.state.bookmarks.length,
             itemBuilder: (context, index) {
               final bookmark = bookmarks[index];
               final data = searchMatkul.state.matkuls

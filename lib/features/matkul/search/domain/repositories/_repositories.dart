@@ -3,5 +3,6 @@
 import 'package:ulaskelas/core/error/_error.dart';
 import 'package:ulaskelas/core/extension/_extension.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
+import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart';
 
 part 'matkul_repository.dart';
