@@ -12,8 +12,9 @@ class MatkulRepositoryImpl implements MatkulRepository {
   final CourseLocalDataSource _localDataSource;
 
   @override
-  Future<Decide<Failure, Parsed<List<MatkulModel>>>> getAllMatkul() {
-    return apiCall(_remoteDataSource.getAllMatkul());
+  Future<Decide<Failure, Parsed<List<MatkulModel>>>> getAllMatkul(
+      QuerySearch querySearch) {
+    return apiCall(_remoteDataSource.getAllMatkul(querySearch));
   }
 
   @override

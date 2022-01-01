@@ -31,6 +31,8 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   /// Defaults to empty string.
   String? _lastQuery;
 
+  int page = 1;
+
   /// Matkuls getter with dummy data at default.
   List<MatkulModel> get matkuls => _matkuls ?? [];
   List<MatkulModel> get filteredMatkuls {
@@ -74,20 +76,43 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   ///
   /// Prevent duplicates record.
   Future<void> searchMatkul(QuerySearch query) async {
-    final resp = await _repo?.getAllMatkul();
+    page = 1;
+    query.page = 1;
+    _hasReachedMax = false;
+    final resp = await _repo?.getAllMatkul(query);
     resp?.fold((failure) {
       throw failure;
     }, (result) {
-      _matkuls = result.data;
-      _hasReachedMax = true;
+      final lessThanLimit = result.data.length < query.limit;
+      _hasReachedMax = result.data.isEmpty || lessThanLimit;
 
       // Prevent duplicate record
-      for (final matkul in matkuls) {
-        if (!(_matkuls?.contains(matkul) ?? true)) {
-          _matkuls?.add(matkul);
-        }
-      }
+      filterCourse(result.data);
     });
+  }
+
+  Future<void> retrieveMoreData(QuerySearch query) async {
+    ++page;
+    query.page = page;
+    final resp = await _repo?.getAllMatkul(query);
+    resp?.fold((failure) {
+      throw failure;
+    }, (result) {
+      final lessThanLimit = result.data.length < query.limit;
+      _hasReachedMax = result.data.isEmpty || lessThanLimit;
+
+      // Prevent duplicate record
+      filterCourse(result.data);
+    });
+  }
+
+  void filterCourse(List<MatkulModel> matkuls) {
+    _matkuls ??= matkuls;
+    for (final matkul in matkuls) {
+      if (!(_matkuls?.contains(matkul) ?? true)) {
+        _matkuls?.add(matkul);
+      }
+    }
   }
 
   /// Every submitted query will added to history

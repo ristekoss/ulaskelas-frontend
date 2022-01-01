@@ -25,7 +25,7 @@ final searchTag = RM.inject(
   () => SearchTagState(),
 );
 
-final bookmark = RM.inject(
+final bookmarkRM = RM.inject(
   () => BookmarkState(),
   autoDisposeWhenNotUsed: false,
 );

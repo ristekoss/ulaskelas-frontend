@@ -83,7 +83,7 @@ class CardBookmark extends StatelessWidget {
             right: 12,
             child: InkWell(
               onTap: () {
-                bookmark.setState((s) => s.deleteFromBookmark(model.name!));
+                // bookmarkRM.setState((s) => s.deleteFromBookmark(model.name!));
                 SuccessMessenger(
                         'Berhasil menghapus ${model.name} dari bookmark')
                     .show(ctx!);

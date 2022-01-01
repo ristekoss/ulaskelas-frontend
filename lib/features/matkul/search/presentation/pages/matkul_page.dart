@@ -81,7 +81,12 @@ class _MatkulPageState
                 searchMatkul.state.controller.text.isEmpty) {
               return _buildHistory();
             } else {
-              return _buildSearchList(sizeInfo);
+              return SearchListView(
+                refreshIndicatorKey: refreshIndicatorKey,
+                scrollController: scrollController,
+                onScroll: onScroll,
+                onRefresh: retrieveData,
+              );
             }
           }),
         ),
@@ -107,8 +112,8 @@ class _MatkulPageState
   @override
   void onScroll() {
     completer?.complete();
-    final query = QuerySearch();
-    searchMatkul.state.searchMatkul(query).then((value) {
+    final query = QuerySearch(q: searchMatkul.state.controller.text);
+    searchMatkul.state.retrieveMoreData(query).then((value) {
       completer = Completer<void>();
       searchMatkul.notify();
     }).onError((error, stackTrace) {
@@ -132,14 +137,14 @@ class _MatkulPageState
       if (_debounce?.isActive ?? false) {
         _debounce?.cancel();
       }
-      // await searchMatkul.setState((s) {
-      //   s.hasReachedMax = false;
-      // });
+      await searchMatkul.setState((s) {
+        s.hasReachedMax = false;
+      });
       _debounce = Timer(const Duration(milliseconds: 2000), () {
-        // final query = QuerySearch(q: searchMatkul.state.controller.text);
-        // searchMatkul.state
-        //     .searchMatkul(query)
-        //     .then((value) => searchMatkul.notify());
+        final query = QuerySearch(q: searchMatkul.state.controller.text);
+        searchMatkul.state
+            .searchMatkul(query)
+            .then((value) => searchMatkul.notify());
       });
     }
   }
@@ -202,93 +207,4 @@ class _MatkulPageState
   }
 
   bool enable = true;
-
-  Widget _buildSearchList(SizingInformation sizeInfo) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: SizedBox(
-            height: 40,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Daftar Mata Kuliah',
-                  style: FontTheme.poppins14w700black(),
-                ),
-                StateBuilder(
-                  observe: () => filter,
-                  builder: (context, snapshot) {
-                    return FilterButton(
-                      hasFilter: filter.state.hasFilter,
-                      text: 'Filter',
-                      onPressed: () async {
-                        await nav.goToFilterPage();
-                        if (filter.state.hasFilter) {
-                          onScroll();
-                        }
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-        Expanded(
-          child: RefreshIndicator(
-            key: refreshIndicatorKey,
-            onRefresh: retrieveData,
-            child: OnBuilder<SearchMatkulState>.all(
-              listenTo: searchMatkul,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
-              onError: (dynamic error, refresh) {
-                final failure = error as Failure;
-                return DetailView(
-                  title: failure.title ?? 'Error',
-                  description: failure.message ?? 'Something error',
-                );
-              },
-              onData: (data) {
-                final matkuls = data.filteredMatkuls;
-                if (data.hasReachedMax && matkuls.isEmpty) {
-                  return const DetailView(
-                    isEmptyView: true,
-                    title: 'Mata Kuliah Tidak Ditemukan',
-                    description: '''
-Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata kunci lain.''',
-                  );
-                }
-                return ListView.separated(
-                  controller: scrollController,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  itemCount:
-                      data.hasReachedMax ? matkuls.length : matkuls.length + 1,
-                  separatorBuilder: (c, i) => const HeightSpace(16),
-                  itemBuilder: (c, i) {
-                    if (!data.hasReachedMax && i == matkuls.length) {
-                      return const CircleLoading(size: 25);
-                    }
-                    final matkul = matkuls[i];
-                    return CardMatkul(
-                      model: matkul,
-                      onTap: () => nav.goToDetailMatkulPage(matkul.name!),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }

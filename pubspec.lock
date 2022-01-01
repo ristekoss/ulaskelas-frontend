@@ -429,7 +429,7 @@ packages:
       name: ristek_material_component
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.10"
+    version: "0.0.13"
   rxdart:
     dependency: "direct main"
     description:
