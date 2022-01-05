@@ -1,4 +1,4 @@
-include: package:very_good_analysis/analysis_options.2.3.0.yaml
+include: package:very_good_analysis/analysis_options.2.4.0.yaml
 
 analyzer:
   # We should disable linter for generated code
@@ -32,6 +32,10 @@ linter:
     avoid_web_libraries_in_flutter: false
     use_setters_to_change_properties: false
     avoid_dynamic_calls: false
+    library_private_types_in_public_api: false
+    one_member_abstracts: false
+    avoid_positional_boolean_parameters: false
+    sort_constructors_first: false
 
     # DO avoid print calls in production code.
     #

@@ -13,42 +13,45 @@ class ReviewState {
   final reviews = <String, List<ReviewModel>>{
     'Kecerdasan Artifisial dan Sains Data Dasar': [
       ReviewModel(
-          author: 'Astrida Nayla',
-          matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          description: 'Lorem ipsum dolor sit amet, adisplis '
-              'consectetur adipiscing elit, sed do '
-              'eiusmod tempor incididun ut labore et '
-              'dolore magna aliqua. Ut enim ad minim veniam, '
-              'quis nostrud exercitation ullamco laboris '
-              'nisi ut aliquip ex ea commodot.',
-          likesCount: 999,
-          classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11)),
+        author: 'Astrida Nayla',
+        matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
+        description: 'Lorem ipsum dolor sit amet, adisplis '
+            'consectetur adipiscing elit, sed do '
+            'eiusmod tempor incididun ut labore et '
+            'dolore magna aliqua. Ut enim ad minim veniam, '
+            'quis nostrud exercitation ullamco laboris '
+            'nisi ut aliquip ex ea commodot.',
+        likesCount: 999,
+        classTakenOn: 'Ganjil 2020/2021',
+        reviewedOn: DateTime(2021, 10, 11),
+      ),
       ReviewModel(
-          author: 'Thalia Theresa',
-          matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          description: 'Lorem ipsum dolor sit amet, adisplis '
-              'consectetur adipiscing elit, sed do '
-              'eiusmod tempor incididun ut labore et '
-              'dolore magna aliqua. Ut enim ad minim veniam, '
-              'quis nostrud exercitation ullamco laboris '
-              'nisi ut aliquip ex ea commodot.',
-          likesCount: 9,
-          classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11)),
+        author: 'Thalia Theresa',
+        matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
+        description: 'Lorem ipsum dolor sit amet, adisplis '
+            'consectetur adipiscing elit, sed do '
+            'eiusmod tempor incididun ut labore et '
+            'dolore magna aliqua. Ut enim ad minim veniam, '
+            'quis nostrud exercitation ullamco laboris '
+            'nisi ut aliquip ex ea commodot.',
+        likesCount: 9,
+        classTakenOn: 'Ganjil 2020/2021',
+        reviewedOn: DateTime(2021, 10, 11),
+      ),
       ReviewModel(
-          author: 'Rayhan Maulana Akbar Panjang Bangetttttt UHUY UHUY UHUY',
-          matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
-          description: 'Lorem ipsum dolor sit amet, adisplis '
-              'consectetur adipiscing elit, sed do '
-              'eiusmod tempor incididun ut labore et '
-              'dolore magna aliqua. Ut enim ad minim veniam, '
-              'quis nostrud exercitation ullamco laboris '
-              'nisi ut aliquip ex ea commodot.',
-          likesCount: 98,
-          classTakenOn: 'Ganjil 2020/2021',
-          reviewedOn: DateTime(2021, 10, 11),
-          status: 'Approved'),
+        author: 'Rayhan Maulana Akbar Panjang Bangetttttt UHUY UHUY UHUY',
+        matkul: 'Kecerdasan Artifisial dan Sains Data Dasar',
+        description: 'Lorem ipsum dolor sit amet, adisplis '
+            'consectetur adipiscing elit, sed do '
+            'eiusmod tempor incididun ut labore et '
+            'dolore magna aliqua. Ut enim ad minim veniam, '
+            'quis nostrud exercitation ullamco laboris '
+            'nisi ut aliquip ex ea commodot.',
+        likesCount: 98,
+        classTakenOn: 'Ganjil 2020/2021',
+        reviewedOn: DateTime(2021, 10, 11),
+        status: 'Approved',
+      ),
     ],
     'Basis Data': [],
     'Pemrograman Lanjut': [],
@@ -58,7 +61,7 @@ class ReviewState {
   };
 
   // getter
-  // TODO: add delay(?)
+  // TODO(Any): add delay(?)
   List<ReviewModel>? getReviews(String matkul) => reviews[matkul];
 
   void addReview(String matkul, ReviewModel review) {
@@ -102,7 +105,7 @@ class ReviewState {
   }
 
   Future<void> like(String matkul, ReviewModel review) async {
-    // TODO: update likeCount to db (?)
+    // TODO(Any): update likeCount to db (?)
     final resp = await _repo?.like(review);
     if (resp.statusCode == 200) {
       if (resp.data['tags'].toString() == 'null') {
@@ -113,7 +116,7 @@ class ReviewState {
   }
 
   Future<void> unlike(String matkul, ReviewModel review) async {
-    // TODO: update likeCount to db (?)
+    // TODO(Any): update likeCount to db (?)
     final resp = await _repo?.like(review);
     if (resp.statusCode == 200) {
       if (resp.data['tags'].toString() == 'null') {

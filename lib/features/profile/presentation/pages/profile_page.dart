@@ -1,6 +1,13 @@
 // Created by Muhamad Fauzi Ridwan on 08/11/21.
 
-part of '_pages.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:ristek_material_component/ristek_material_component.dart';
+import 'package:ulaskelas/core/bases/states/_states.dart';
+import 'package:ulaskelas/core/theme/_theme.dart';
+import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
+import 'package:ulaskelas/features/profile/presentation/widgets/profile_data.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
@@ -47,11 +54,19 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
             backgroundColor: Colors.grey[300],
           ),
           const SizedBox(height: 34),
-          const ProfileData('Nama', '''
-Astrida Nayla'''),
-          const ProfileData('Angkatan', '2018'),
-          const ProfileData('Jurusan', 'Ilmu Komputer'),
-          const Spacer(),
+          ProfileData(
+            'Nama',
+            profileRM.state.profile.name.toString(),
+          ),
+          // TODO(pawpaw): angkatan.
+          // const ProfileData('Angkatan', profileRM.state.profile..toString()),
+          ProfileData(
+            'Jurusan',
+            profileRM.state.profile.studyProgram.toString(),
+          ),
+          const Expanded(
+            child: SizedBox(),
+          ),
           SecondaryButton(
             width: double.infinity,
             text: 'Keluar',

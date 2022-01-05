@@ -78,23 +78,24 @@ Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ul
         ],
       ),
       body: PageView.builder(
-          controller: pageController,
-          onPageChanged: (value) {
-            setState(() {
-              pageIndex = value;
-            });
-          },
-          itemCount: titles.length,
-          itemBuilder: (context, index) {
-            return OnboardingPageBody(
-              index: index,
-              height: height,
-              width: width,
-              title: titles[index],
-              description: descriptions[index],
-              image: 'assets/images/ilust_onboard${index + 1}.png',
-            );
-          }),
+        controller: pageController,
+        onPageChanged: (value) {
+          setState(() {
+            pageIndex = value;
+          });
+        },
+        itemCount: titles.length,
+        itemBuilder: (context, index) {
+          return OnboardingPageBody(
+            index: index,
+            height: height,
+            width: width,
+            title: titles[index],
+            description: descriptions[index],
+            image: 'assets/images/ilust_onboard${index + 1}.png',
+          );
+        },
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,

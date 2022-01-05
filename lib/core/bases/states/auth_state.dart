@@ -18,6 +18,9 @@ class AuthState {
   Future<void> initialize() async {
     isNewInstall = await _isNewInstall();
     _isLogin = await _hasToken();
+    if (_isLogin ?? false) {
+      await profileRM.setState((s) => s.retrieveData());
+    }
   }
 
   Future<void> ssoLogin() async {
@@ -51,7 +54,7 @@ class AuthState {
         Pref.saveToken(param.value);
       } else if (param.key == 'username') {
         Pref.saveString(param.key, param.value);
-        auth.setState((s) {
+        authRM.setState((s) {
           s
             ..isLogin = true
             ..isLoading = false;
@@ -63,7 +66,7 @@ class AuthState {
     if (_popupWin != null) {
       _popupWin?.close();
       _popupWin = null;
-      if (auth.state.isLogin) {
+      if (authRM.state.isLogin) {
         unawaited(nav.replaceToMainPage());
         SuccessMessenger('Login Successful').show(ctx!);
       }

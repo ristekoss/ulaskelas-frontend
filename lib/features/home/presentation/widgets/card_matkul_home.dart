@@ -37,7 +37,7 @@ class CardMatkulHome extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  model.shortName.toString(),
+                  model.shortName,
                   style: FontTheme.poppins14w700black().copyWith(
                     color: theme.colorScheme.primary,
                   ),
@@ -50,7 +50,7 @@ class CardMatkulHome extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.nama.toString(),
+                    model.nama,
                     style: FontTheme.poppins14w700black().copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -60,7 +60,7 @@ class CardMatkulHome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        model.statusWajib.toString(),
+                        model.statusWajib,
                         style: FontTheme.poppins12w400black(),
                       ),
                       Text(

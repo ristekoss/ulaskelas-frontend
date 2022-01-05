@@ -2,14 +2,14 @@
 
 part of '_widgets.dart';
 
-class CardMatkul extends StatelessWidget {
-  const CardMatkul({
+class CardCourse extends StatelessWidget {
+  const CardCourse({
     Key? key,
     required this.model,
     this.onTap,
   }) : super(key: key);
 
-  final MatkulModel model;
+  final CourseModel model;
   final VoidCallback? onTap;
 
   @override
@@ -62,7 +62,7 @@ class CardMatkul extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        model.code.toString(),
+                        model.codeDesc.toString(),
                         style: FontTheme.poppins12w400black(),
                       ),
                       Text(

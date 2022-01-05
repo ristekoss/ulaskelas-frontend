@@ -58,7 +58,7 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
               () => AutoLayoutButton(
                 text: 'Masuk Dengan SSO',
                 onTap: _ssoLogin,
-                isLoading: auth.state.isLoading,
+                isLoading: authRM.state.isLoading,
               ),
             ),
           ],
@@ -68,12 +68,14 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
   }
 
   Future<void> _ssoLogin() async {
-    unawaited(auth.setState((s) {
-      s.isLoading = true;
-    }));
+    unawaited(
+      authRM.setState((s) {
+        s.isLoading = true;
+      }),
+    );
     await Future.delayed(const Duration(seconds: 1));
 
-    await auth.setState((s) => s.ssoLogin());
+    await authRM.setState((s) => s.ssoLogin());
   }
 }
 

@@ -37,9 +37,6 @@ class DioFailure implements Exception {
       case DioErrorType.response:
         message = _handleResponseError(dioError.response);
         break;
-      default:
-        message = 'Something went wrong';
-        break;
     }
   }
 

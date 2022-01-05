@@ -16,27 +16,28 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StateBuilder<ThemeState>(
-        observeMany: const [
-          GlobalState.theme,
-          GlobalState.navigation,
-        ],
-        initState: (_, __) => __?.setState((s) => s.init()),
-        builder: (context, snapshot) {
-          return MaterialApp(
-            title: Constants.ulaskelas,
-            navigatorKey: nav.navigatorKey,
-            debugShowCheckedModeBanner: false,
-            theme: GlobalState.theme().state.type,
-            navigatorObservers: [
-              FirebaseAnalyticsObserver(analytics: analytics),
-            ],
-            home: const AppWrapper(),
-            routes: {
-              '/callback': (context) => Scaffold(
-                    body: Container(),
-                  ),
-            },
-          );
-        });
+      observeMany: const [
+        GlobalState.theme,
+        GlobalState.navigation,
+      ],
+      initState: (_, __) => __?.setState((s) => s.init()),
+      builder: (context, snapshot) {
+        return MaterialApp(
+          title: Constants.ulaskelas,
+          navigatorKey: nav.navigatorKey,
+          debugShowCheckedModeBanner: false,
+          theme: GlobalState.theme().state.type,
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
+          home: const AppWrapper(),
+          routes: {
+            '/callback': (context) => Scaffold(
+                  body: Container(),
+                ),
+          },
+        );
+      },
+    );
   }
 }

@@ -15,7 +15,8 @@ Future<Response> getIt(
       sendTimeout: 6000,
     ),
   );
-  Logger().d('Response $resp');
+  Logger().d('Response');
+  Logger().d(resp.data);
   Logger().d('Response code ${resp.statusCode}');
   return resp;
 }
@@ -50,13 +51,15 @@ Future<Response> putIt(
   Logger().i('Url $url');
   Logger().i('Header ${Pref.getHeaders()}');
   final _getHeaders = headers ?? Pref.getHeaders();
-  final resp = await Dio().put(url,
-      data: model,
-      options: Options(
-        headers: _getHeaders,
-        receiveTimeout: 5000,
-        sendTimeout: 6000,
-      ));
+  final resp = await Dio().put(
+    url,
+    data: model,
+    options: Options(
+      headers: _getHeaders,
+      receiveTimeout: 5000,
+      sendTimeout: 6000,
+    ),
+  );
   Logger().d('Response $resp');
   Logger().d('Response code ${resp.statusCode}');
   return resp;
@@ -70,13 +73,15 @@ Future<Response> deleteIt(
   Logger().i('Url $url');
   Logger().i('Header ${Pref.getHeaders()}');
   final _getHeaders = headers ?? Pref.getHeaders();
-  final resp = await Dio().delete(url,
-      data: model,
-      options: Options(
-        headers: _getHeaders,
-        receiveTimeout: 5000,
-        sendTimeout: 6000,
-      ));
+  final resp = await Dio().delete(
+    url,
+    data: model,
+    options: Options(
+      headers: _getHeaders,
+      receiveTimeout: 5000,
+      sendTimeout: 6000,
+    ),
+  );
   Logger().d('Response $resp');
   Logger().d('Response code ${resp.statusCode}');
   return resp;

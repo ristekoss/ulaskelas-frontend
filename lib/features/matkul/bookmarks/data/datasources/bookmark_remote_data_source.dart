@@ -21,6 +21,7 @@ class BookmarkRemoteDataSourceImpl implements BookmarkRemoteDataSource {
     return resp.parse(list);
   }
 
+  @override
   Future<void> postBookmark(BookmarkModel bookmark, bool isBookmark) async {
     final url = Endpoints.bookmarks;
     if (isBookmark) {

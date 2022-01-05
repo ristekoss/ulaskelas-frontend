@@ -2,17 +2,17 @@
 
 part of '_pages.dart';
 
-class MatkulPage extends StatefulWidget {
-  const MatkulPage({
+class SearchCoursePage extends StatefulWidget {
+  const SearchCoursePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  _MatkulPageState createState() => _MatkulPageState();
+  _SearchCoursePageState createState() => _SearchCoursePageState();
 }
 
-class _MatkulPageState
-    extends BasePaginationState<MatkulPage, SearchMatkulState> {
+class _SearchCoursePageState
+    extends BasePaginationState<SearchCoursePage, SearchCourseState> {
   final focusNode = FocusNode();
 
   Timer? _debounce;
@@ -20,16 +20,22 @@ class _MatkulPageState
   @override
   void init() {
     focusNode.addListener(() {
-      final controller = searchMatkul.state.controller;
+      final controller = searchCourseRM.state.controller;
       if (controller.text.isNotEmpty && !focusNode.hasFocus) {
-        searchMatkul.setState((s) => s.addToHistory(controller.text));
+        searchCourseRM.setState((s) => s.addToHistory(controller.text));
       }
     });
   }
 
   @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  @override
   Future<void> retrieveData() async {
-    await searchMatkul.setState((s) => s.retrieveData(QuerySearch()));
+    await searchCourseRM.setState((s) => s.retrieveData(QuerySearchCourse()));
   }
 
   @override
@@ -45,7 +51,7 @@ class _MatkulPageState
   @override
   Widget buildNarrowLayout(
     BuildContext context,
-    ReactiveModel<SearchMatkulState> k,
+    ReactiveModel<SearchCourseState> k,
     SizingInformation sizeInfo,
   ) {
     return Column(
@@ -61,13 +67,13 @@ class _MatkulPageState
                 () => SearchField(
                   hintText: 'Cari mata kuliah',
                   focusNode: focusNode,
-                  controller: searchMatkul.state.controller,
+                  controller: searchCourseRM.state.controller,
                   onClear: () {
                     focusNode.unfocus();
-                    searchMatkul.state.controller.clear();
+                    searchCourseRM.state.controller.clear();
                   },
                   onFieldSubmitted: (val) {
-                    searchMatkul.state.addToHistory(val);
+                    searchCourseRM.state.addToHistory(val);
                   },
                   onChange: onQueryChanged,
                 ),
@@ -78,7 +84,7 @@ class _MatkulPageState
         Expanded(
           child: OnReactive(() {
             if (focusNode.hasFocus &&
-                searchMatkul.state.controller.text.isEmpty) {
+                searchCourseRM.state.controller.text.isEmpty) {
               return _buildHistory();
             } else {
               return SearchListView(
@@ -97,7 +103,7 @@ class _MatkulPageState
   @override
   Widget buildWideLayout(
     BuildContext context,
-    ReactiveModel<SearchMatkulState> k,
+    ReactiveModel<SearchCourseState> k,
     SizingInformation sizeInfo,
   ) {
     return buildNarrowLayout(context, k, sizeInfo);
@@ -112,10 +118,11 @@ class _MatkulPageState
   @override
   void onScroll() {
     completer?.complete();
-    final query = QuerySearch(q: searchMatkul.state.controller.text);
-    searchMatkul.state.retrieveMoreData(query).then((value) {
+    final query = QuerySearchCourse();
+    // final query = QuerySearch(q: searchMatkul.state.controller.text);
+    searchCourseRM.state.retrieveMoreData(query).then((value) {
       completer = Completer<void>();
-      searchMatkul.notify();
+      searchCourseRM.notify();
     }).onError((error, stackTrace) {
       completer = Completer<void>();
     });
@@ -123,30 +130,28 @@ class _MatkulPageState
 
   @override
   bool scrollCondition() {
-    return !searchMatkul.state.hasReachedMax;
+    return !searchCourseRM.state.hasReachedMax;
   }
 
   /// Every Query changed do debouncing and rebuild.
   Future<void> onQueryChanged(String val) async {
-    if (val == searchMatkul.state.lastQuery) {
+    if (val == searchCourseRM.state.lastQuery) {
       return;
     }
-    searchMatkul.state.lastQuery = val;
-    searchMatkul.notify();
-    if (_debounce == null || !(_debounce?.isActive ?? true)) {
-      if (_debounce?.isActive ?? false) {
-        _debounce?.cancel();
-      }
-      await searchMatkul.setState((s) {
-        s.hasReachedMax = false;
-      });
-      _debounce = Timer(const Duration(milliseconds: 2000), () {
-        final query = QuerySearch(q: searchMatkul.state.controller.text);
-        searchMatkul.state
-            .searchMatkul(query)
-            .then((value) => searchMatkul.notify());
-      });
-    }
+    searchCourseRM.state.lastQuery = val;
+    searchCourseRM.notify();
+
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    await searchCourseRM.setState((s) {
+      s.hasReachedMax = false;
+    });
+    _debounce = Timer(const Duration(milliseconds: 1400), () {
+      // final query = QuerySearch(q: searchMatkul.state.controller.text);
+      final query = QuerySearchCourse();
+      searchCourseRM.state
+          .searchMatkul(query)
+          .then((value) => searchCourseRM.notify());
+    });
   }
 
   Widget _buildHistory() {
@@ -168,7 +173,7 @@ class _MatkulPageState
                 ),
                 InkWell(
                   onTap: () {
-                    searchMatkul.setState((s) => s.clearHistory());
+                    searchCourseRM.setState((s) => s.clearHistory());
                   },
                   child: Text(
                     'Hapus',
@@ -183,24 +188,28 @@ class _MatkulPageState
           ),
           const HeightSpace(10),
           Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: searchMatkul.state.history.map((element) {
-                return InkWell(
-                  onTap: () {
-                    final controller = searchMatkul.state.controller;
-                    focusNode.requestFocus();
-                    controller
-                      ..text = element
-                      ..selection = TextSelection.fromPosition(TextPosition(
-                          offset: searchMatkul.state.controller.text.length));
-                    onQueryChanged(element);
-                  },
-                  child: Tag(
-                    label: element,
-                  ),
-                );
-              }).toList()),
+            spacing: 10,
+            runSpacing: 10,
+            children: searchCourseRM.state.history.map((element) {
+              return InkWell(
+                onTap: () {
+                  final controller = searchCourseRM.state.controller;
+                  focusNode.requestFocus();
+                  controller
+                    ..text = element
+                    ..selection = TextSelection.fromPosition(
+                      TextPosition(
+                        offset: searchCourseRM.state.controller.text.length,
+                      ),
+                    );
+                  onQueryChanged(element);
+                },
+                child: Tag(
+                  label: element,
+                ),
+              );
+            }).toList(),
+          ),
         ],
       ),
     );

@@ -1,27 +1,27 @@
 part of '_states.dart';
 
 /// Top level injection
-final searchMatkul = RM.inject(
-  () => SearchMatkulState(),
+final searchCourseRM = RM.inject(
+  () => SearchCourseState(),
   autoDisposeWhenNotUsed: false,
 );
 
-final filter = RM.inject(
+final filterRM = RM.inject(
   () => FilterState(),
   autoDisposeWhenNotUsed: false,
 );
 
-final review = RM.inject(
+final reviewRM = RM.inject(
   () => ReviewState(),
   autoDisposeWhenNotUsed: false,
 );
 
-final reviewForm = RM.inject(
-  () => ReviewMatkulFormState(),
+final reviewFormRM = RM.inject(
+  () => ReviewCourseFormState(),
   autoDisposeWhenNotUsed: false,
 );
 
-final searchTag = RM.inject(
+final searchTagRM = RM.inject(
   () => SearchTagState(),
 );
 
@@ -30,7 +30,7 @@ final bookmarkRM = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
-final auth = RM.inject(
+final authRM = RM.inject(
   () => AuthState(),
   autoDisposeWhenNotUsed: false,
 );
@@ -39,17 +39,35 @@ final progressWebView = RM.inject(
   () => ProgressWebViewState(),
 );
 
+final currentTermCourseRM = RM.inject(
+  () => CurrentTermCourseState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final profileRM = RM.inject(
+  () => ProfileState(),
+  autoDisposeWhenNotUsed: false,
+);
+
+final reviewCourseRM = RM.inject(
+  () => ReviewCourseState(),
+  autoDisposeWhenNotUsed: false,
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
     return <Injectable>[
-      Inject(() => ThemeState(
-              themeData: ThemeData(
+      Inject(
+        () => ThemeState(
+          themeData: ThemeData(
             primaryColor: BaseColors.purpleHearth,
-          ))),
+          ),
+        ),
+      ),
       Inject(() => NavigationServiceState()),
       Inject(() => FilterState()),
-      Inject(() => SearchMatkulState()),
+      Inject(() => SearchCourseState()),
       Inject(() => ReviewState()),
       Inject(() => SearchTagState()),
       Inject(() => BookmarkState()),
@@ -60,7 +78,7 @@ class GlobalState {
     Inject(() => ThemeState()),
     Inject(() => NavigationServiceState()),
     Inject(() => FilterState()),
-    Inject(() => SearchMatkulState()),
+    Inject(() => SearchCourseState()),
     Inject(() => ReviewState()),
     Inject(() => SearchTagState()),
     Inject(() => BookmarkState()),

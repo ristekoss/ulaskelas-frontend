@@ -21,7 +21,7 @@ class _AddReviewMatkulTagPageState
   Future<void> retrieveData() async {
     await Future.delayed(const Duration(seconds: 1));
     final query = QuerySearch();
-    await searchTag.setState((s) => s.retrieveData(query));
+    await searchTagRM.setState((s) => s.retrieveData(query));
   }
 
   @override
@@ -68,10 +68,10 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
                     () => SearchField(
                       hintText: 'Cari mata kuliah',
                       focusNode: focusNode,
-                      controller: searchTag.state.controller,
+                      controller: searchTagRM.state.controller,
                       onClear: () {
                         focusNode.unfocus();
-                        searchTag.state.controller.clear();
+                        searchTagRM.state.controller.clear();
                       },
                       onChange: onQueryChanged,
                     ),
@@ -97,7 +97,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
             child: AutoLayoutButton(
               text: 'Terapkan',
               onTap: () {
-                searchTag.state.select();
+                searchTagRM.state.select();
               },
             ),
           ),
@@ -123,13 +123,13 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
             key: refreshIndicatorKey,
             onRefresh: retrieveData,
             child: OnBuilder<SearchTagState>.all(
-              listenTo: searchTag,
+              listenTo: searchTagRM,
               onIdle: () => WaitingView(),
               onWaiting: () => WaitingView(),
               // onError: (dynamic error) => ErrorView(error: error),
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
-                final matkulTags = searchTag.state.localSearch();
+                final matkulTags = searchTagRM.state.localSearch();
                 if (data.hasReachedMax && matkulTags.isEmpty) {
                   return SingleChildScrollView(
                     child: Padding(
@@ -190,7 +190,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                       isSelected: isSelected,
                       onChanged: (val) {
                         if (selectedTags.length <= 3) {
-                          searchTag.setState((s) => s.switchTag(tag));
+                          searchTagRM.setState((s) => s.switchTag(tag));
                         }
                       },
                     );
@@ -206,7 +206,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
 
   @override
   Future<bool> onBackPressed() async {
-    searchTag.state.cleanSearch();
+    searchTagRM.state.cleanSearch();
     nav.pop<void>();
     return true;
   }
@@ -215,9 +215,9 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
   void onScroll() {
     completer?.complete();
     final query = QuerySearch();
-    searchTag.state.searchTag(query).then((value) {
+    searchTagRM.state.searchTag(query).then((value) {
       completer = Completer<void>();
-      searchTag.notify();
+      searchTagRM.notify();
     }).onError((error, stackTrace) {
       completer = Completer<void>();
     });
@@ -225,26 +225,28 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
 
   @override
   bool scrollCondition() {
-    return !searchTag.state.hasReachedMax;
+    return !searchTagRM.state.hasReachedMax;
   }
 
   /// Every Query changed do debouncing and rebuild
   Future<void> onQueryChanged(String val) async {
-    if (val == searchTag.state.lastQuery) {
+    if (val == searchTagRM.state.lastQuery) {
       return;
     }
-    searchTag.state.lastQuery = val;
-    searchTag.notify();
+    searchTagRM.state.lastQuery = val;
+    searchTagRM.notify();
     if (_debounce == null || !(_debounce?.isActive ?? true)) {
       if (_debounce?.isActive ?? false) {
         _debounce?.cancel();
       }
-      await searchTag.setState((s) {
+      await searchTagRM.setState((s) {
         s.hasReachedMax = false;
       });
       _debounce = Timer(const Duration(milliseconds: 2000), () {
-        final query = QuerySearch(q: searchTag.state.controller.text);
-        searchTag.state.searchTag(query).then((value) => searchTag.notify());
+        final query = QuerySearch(q: searchTagRM.state.controller.text);
+        searchTagRM.state
+            .searchTag(query)
+            .then((value) => searchTagRM.notify());
       });
     }
   }

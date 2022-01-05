@@ -16,7 +16,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends BaseStateful<HomePage> {
   @override
-  void init() {}
+  void init() {
+    if (!currentTermCourseRM.state.hasCourse) {
+      currentTermCourseRM.setState((s) => s.retrieveData());
+    }
+  }
 
   @override
   ScaffoldAttribute buildAttribute() {
@@ -55,15 +59,18 @@ class _HomePageState extends BaseStateful<HomePage> {
               bottom: 10,
             ),
             alignment: Alignment.centerLeft,
-            child: Text(
-              'Hi, Raihan Fikriansyah!',
-              style: FontTheme.poppins20w700black(),
+            child: OnReactive(
+              () => Text(
+                'Hi, ${profileRM.state.profile.name ?? 'Something Error'}!',
+                style: FontTheme.poppins20w700black(),
+              ),
             ),
           ),
           Container(
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(6)),
-                border: Border.all(color: BaseColors.primary, width: 2)),
+              borderRadius: const BorderRadius.all(Radius.circular(6)),
+              border: Border.all(color: BaseColors.primary, width: 2),
+            ),
             margin: const EdgeInsets.all(20),
             child: InkWell(
               onTap: () => widget.onSeeAllCourse.call(),
@@ -108,8 +115,9 @@ class _HomePageState extends BaseStateful<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  // TODO(pawpaw): current semester on profile.
                   Text(
-                    'Mata Kuliah Semester 5',
+                    'Mata Kuliah Semester ',
                     style: FontTheme.poppins14w700black(),
                   ),
                   InkWell(
@@ -123,22 +131,33 @@ class _HomePageState extends BaseStateful<HomePage> {
               ),
             ),
           ),
-          ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            itemCount: 3,
-            separatorBuilder: (c, i) => const HeightSpace(16),
-            itemBuilder: (c, i) {
-              final matkul = DummyMatkul.matkul[i];
-              if (matkul.semester == 5) {
-                return CardMatkulHome(model: matkul, onTap: () {});
+          OnBuilder<CurrentTermCourseState>.all(
+            listenTo: currentTermCourseRM,
+            onIdle: () => const Text('Waiting'),
+            onWaiting: () => const CircleLoading(),
+            onError: (dynamic error, refresh) {
+              if (error is Failure) {
+                return Text(error.message.toString());
               }
-              return Container(
-                height: 0,
+              return const Text('Something Error');
+            },
+            onData: (data) {
+              return ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                itemCount: data.summaries.length,
+                separatorBuilder: (c, i) => const HeightSpace(16),
+                itemBuilder: (c, i) {
+                  final course = data.summaries[i];
+                  return CardCourse(
+                    model: course,
+                    onTap: () {},
+                  );
+                },
               );
             },
           ),

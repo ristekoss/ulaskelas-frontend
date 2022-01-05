@@ -83,7 +83,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
           Pref.saveToken(param.value);
         } else if (param.key == 'username') {
           Pref.saveString(param.key, param.value);
-          auth.setState((s) {
+          authRM.setState((s) {
             s
               ..isLogin = true
               ..isLoading = false;
@@ -91,7 +91,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
         }
       }
       nav.pop<void>();
-      if (auth.state.isLogin) {
+      if (authRM.state.isLogin) {
         unawaited(nav.replaceToMainPage());
         SuccessMessenger('Login Successful').show(ctx!);
       }
@@ -101,7 +101,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
   void _onProgress(int progress) {
     Logger().i(progress);
     progressWebView.setState((s) {
-      s.progress = (progress / 100).toDouble();
+      s.progress = progress / 100;
     });
   }
 

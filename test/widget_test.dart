@@ -8,13 +8,14 @@ typedef PumperWidget = Widget Function(Widget widget);
 
 Widget material(Widget child) {
   return Injector(
-      inject: GlobalState.injectDataMocks(),
-      builder: (context) {
-        return MaterialApp(
-          navigatorKey: nav.navigatorKey,
-          home: child,
-        );
-      });
+    inject: GlobalState.injectDataMocks(),
+    builder: (context) {
+      return MaterialApp(
+        navigatorKey: nav.navigatorKey,
+        home: child,
+      );
+    },
+  );
 }
 
 Widget scaffold({
@@ -22,11 +23,13 @@ Widget scaffold({
   Widget? child,
   Widget? botNav,
 }) {
-  return material(Scaffold(
-    appBar: appBar,
-    body: child,
-    bottomNavigationBar: botNav,
-  ));
+  return material(
+    Scaffold(
+      appBar: appBar,
+      body: child,
+      bottomNavigationBar: botNav,
+    ),
+  );
 }
 
 void main() {
@@ -35,10 +38,11 @@ void main() {
   setUpAll(() async {
     widget = (Widget? child) => scaffold(
           child: Injector(
-              inject: GlobalState.injectDataMocks(),
-              builder: (context) {
-                return child!;
-              }),
+            inject: GlobalState.injectDataMocks(),
+            builder: (context) {
+              return child!;
+            },
+          ),
         );
   });
 

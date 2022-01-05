@@ -15,17 +15,21 @@ class NavigationServiceState implements Navigation {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   Future<T?> push<T>(Widget widget, [String? routeName]) async {
-    return navigatorKey.currentState!.push<T>(MaterialPageRoute(
-      builder: (_) => widget,
-      settings: RouteSettings(name: routeName),
-    ));
+    return navigatorKey.currentState!.push<T>(
+      MaterialPageRoute(
+        builder: (_) => widget,
+        settings: RouteSettings(name: routeName),
+      ),
+    );
   }
 
   Future<T?> pushReplacement<T, K>(Widget widget, [String? routeName]) async {
-    return navigatorKey.currentState!.pushReplacement<T, K>(MaterialPageRoute(
-      builder: (_) => widget,
-      settings: RouteSettings(name: routeName),
-    ));
+    return navigatorKey.currentState!.pushReplacement<T, K>(
+      MaterialPageRoute(
+        builder: (_) => widget,
+        settings: RouteSettings(name: routeName),
+      ),
+    );
   }
 
   @override
@@ -78,10 +82,10 @@ class NavigationServiceState implements Navigation {
     );
   }
 
-  Future<void> goToDetailMatkulPage(String matkul) {
+  Future<void> goToDetailMatkulPage(CourseModel course) {
     return nav.push<void>(
       DetailMatkulPage(
-        matkul: matkul,
+        course: course,
       ),
       RouteName.mainPage,
     );
@@ -94,9 +98,11 @@ class NavigationServiceState implements Navigation {
     );
   }
 
-  Future<void> goToReviewMatkulFormPage() {
+  Future<void> goToReviewMatkulFormPage({required CourseModel course}) {
     return nav.push<void>(
-      const ReviewMatkulFormPage(),
+      ReviewMatkulFormPage(
+        course: course,
+      ),
       RouteName.reviewMatkulFormPage,
     );
   }
@@ -110,7 +116,7 @@ class NavigationServiceState implements Navigation {
 
   Future<void> goToHomeDaftarMatkul() {
     return nav.push<void>(
-      const HomeDaftarMatkulPage(),
+      const HomeCourseListPage(),
       RouteName.homeDaftarMatkul,
     );
   }

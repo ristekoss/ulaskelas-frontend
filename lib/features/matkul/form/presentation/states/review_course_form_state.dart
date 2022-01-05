@@ -2,15 +2,17 @@
 
 part of '_states.dart';
 
-class ReviewMatkulFormState {
-  ReviewMatkulFormState() {
+class ReviewCourseFormState {
+  ReviewCourseFormState() {
     final _remoteDataSource = ReviewRemoteDataSourceImpl();
-    _repo = FormReviewRepositoryImpl(
+    final _localDataSource = ReviewLocalDataSourceImpl();
+    _repo = ReviewRepositoryImpl(
       _remoteDataSource,
+      _localDataSource,
     );
   }
 
-  late FormReviewRepository _repo;
+  late ReviewRepository _repo;
   final formKey = GlobalKey<FormState>();
   var _formData = ReviewMatkulData();
   final _descController = TextEditingController();
@@ -21,7 +23,7 @@ class ReviewMatkulFormState {
   /// Submitting form data
   Future<void> submitForm() async {
     final result = <String, dynamic>{};
-    // TODO: sync with current matkul
+    // TODO(Any): sync with current matkul
     result['course_code'] = 'CSCE604231';
     result['semester'] = _formData.semester! == semesters[0] ? 1 : 2;
     result['academic_year'] =
@@ -36,7 +38,6 @@ class ReviewMatkulFormState {
     }, (result) {
       final successSubmittedReview = result.data;
       print(successSubmittedReview);
-
     });
   }
 
@@ -65,7 +66,7 @@ class ReviewMatkulFormState {
     _formData.description = descController.text;
   }
 
-  void setAnon(bool val) {
+  void setAnon({required bool val}) {
     _formData.isAnonymous = val;
   }
 
@@ -73,7 +74,7 @@ class ReviewMatkulFormState {
   void cleanForm() {
     _formData = ReviewMatkulData();
     _descController.text = '';
-    searchTag.state.cleanSearch();
+    searchTagRM.state.cleanSearch();
   }
 }
 

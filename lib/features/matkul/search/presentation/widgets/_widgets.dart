@@ -10,6 +10,6 @@ import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/states/_states.dart';
 
 part 'base_app_bar.dart';
-part 'card_matkul.dart';
+part 'card_course.dart';
 part 'empty_view.dart';
 part 'search_list_view.dart';

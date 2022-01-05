@@ -37,108 +37,110 @@ class _FilterPageState extends BaseStateful<FilterPage> {
         return Stack(
           children: [
             Positioned.fromRelativeRect(
-                rect: const RelativeRect.fromLTRB(0, 0, 0, 40),
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+              rect: const RelativeRect.fromLTRB(0, 0, 0, 40),
+              child: ListView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                children: [
+                  Text(
+                    'Jenis Mata Kuliah',
+                    style: FontTheme.poppins14w700black(),
                   ),
-                  children: [
-                    Text(
-                      'Jenis Mata Kuliah',
-                      style: FontTheme.poppins14w700black(),
-                    ),
-                    const HeightSpace(8),
-                    GridView.count(
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 4,
-                      children: filter.state.matkulTypes.map((item) {
-                        return CheckboxTile(
-                          value: filter.state.selectedType.contains(item.value),
-                          text: item.text,
-                          onChanged: (val) {
-                            if (val ?? true) {
-                              filter.setState(
-                                (s) => s.pickMatkulType(item.value.toString()),
-                              );
-                            } else {
-                              filter.setState(
-                                (s) =>
-                                    s.discardMatkulType(item.value.toString()),
-                              );
-                            }
-                            setState(() {});
-                          },
-                        );
-                      }).toList(),
-                    ),
-                    const HeightSpace(20),
-                    Text(
-                      'Jumlah SKS',
-                      style: FontTheme.poppins14w700black(),
-                    ),
-                    const HeightSpace(8),
-                    GridView.count(
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 4,
-                      children: filter.state.sksTotals.map((item) {
-                        return CheckboxTile(
-                          value: filter.state.selectedSks.contains(item.value),
-                          text: item.text,
-                          onChanged: (val) {
-                            if (val ?? true) {
-                              filter.setState(
-                                (s) => s.pickSksTotal(item.value.toString()),
-                              );
-                            } else {
-                              filter.setState(
-                                (s) => s.discardSksTotal(item.value.toString()),
-                              );
-                            }
-                            setState(() {});
-                          },
-                        );
-                      }).toList(),
-                    ),
-                    const HeightSpace(20),
-                    Text(
-                      'Semester Wajib Mengambil',
-                      style: FontTheme.poppins14w700black(),
-                    ),
-                    const HeightSpace(8),
-                    GridView.count(
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 4,
-                      children: filter.state.semesterPreconditions.map((item) {
-                        return CheckboxTile(
-                          value: filter.state.selectedSemester
-                              .contains(item.value),
-                          text: item.text,
-                          onChanged: (val) {
-                            if (val ?? true) {
-                              filter.setState(
-                                (s) => s.pickSemesterPrecondition(
-                                    item.value.toString()),
-                              );
-                            } else {
-                              filter.setState(
-                                (s) => s.discardSemesterPrecondition(
-                                    item.value.toString()),
-                              );
-                            }
-                            setState(() {});
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                )),
+                  const HeightSpace(8),
+                  GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 4,
+                    children: filterRM.state.matkulTypes.map((item) {
+                      return CheckboxTile(
+                        value: filterRM.state.selectedType.contains(item.value),
+                        text: item.text,
+                        onChanged: (val) {
+                          if (val ?? true) {
+                            filterRM.setState(
+                              (s) => s.pickMatkulType(item.value.toString()),
+                            );
+                          } else {
+                            filterRM.setState(
+                              (s) => s.discardMatkulType(item.value.toString()),
+                            );
+                          }
+                          setState(() {});
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  const HeightSpace(20),
+                  Text(
+                    'Jumlah SKS',
+                    style: FontTheme.poppins14w700black(),
+                  ),
+                  const HeightSpace(8),
+                  GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 4,
+                    children: filterRM.state.sksTotals.map((item) {
+                      return CheckboxTile(
+                        value: filterRM.state.selectedSks.contains(item.value),
+                        text: item.text,
+                        onChanged: (val) {
+                          if (val ?? true) {
+                            filterRM.setState(
+                              (s) => s.pickSksTotal(item.value.toString()),
+                            );
+                          } else {
+                            filterRM.setState(
+                              (s) => s.discardSksTotal(item.value.toString()),
+                            );
+                          }
+                          setState(() {});
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  const HeightSpace(20),
+                  Text(
+                    'Semester Wajib Mengambil',
+                    style: FontTheme.poppins14w700black(),
+                  ),
+                  const HeightSpace(8),
+                  GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 4,
+                    children: filterRM.state.semesterPreconditions.map((item) {
+                      return CheckboxTile(
+                        value: filterRM.state.selectedSemester
+                            .contains(item.value),
+                        text: item.text,
+                        onChanged: (val) {
+                          if (val ?? true) {
+                            filterRM.setState(
+                              (s) => s.pickSemesterPrecondition(
+                                item.value.toString(),
+                              ),
+                            );
+                          } else {
+                            filterRM.setState(
+                              (s) => s.discardSemesterPrecondition(
+                                item.value.toString(),
+                              ),
+                            );
+                          }
+                          setState(() {});
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
             Positioned(
               bottom: 0,
               right: 0,

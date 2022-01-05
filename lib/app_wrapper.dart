@@ -26,10 +26,10 @@ class _AppWrapperState extends State<AppWrapper> {
     Timer(
       const Duration(milliseconds: 2500),
       () async {
-        await auth.state.initialize();
-        if (auth.state.isLogin) {
+        await authRM.state.initialize();
+        if (authRM.state.isLogin) {
           mainPageRoute();
-        } else if (auth.state.isNewInstall) {
+        } else if (authRM.state.isNewInstall) {
           onboardingPageRoute();
         } else {
           ssoPageRoute();
@@ -71,15 +71,17 @@ class _AppWrapperState extends State<AppWrapper> {
                 children: [
                   RichText(
                     text: TextSpan(
-                        text: 'Ulas',
-                        style: FontTheme.poppins20w700white(),
-                        children: const <TextSpan>[
-                          TextSpan(
-                              text: 'Kelas',
-                              style: TextStyle(
-                                color: BaseColors.malibu,
-                              )),
-                        ]),
+                      text: 'Ulas',
+                      style: FontTheme.poppins20w700white(),
+                      children: const <TextSpan>[
+                        TextSpan(
+                          text: 'Kelas',
+                          style: TextStyle(
+                            color: BaseColors.malibu,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Text(
                     'by RISTEK Fasilkom UI',

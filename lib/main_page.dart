@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
-import 'package:ulaskelas/features/profile/presentation/pages/_pages.dart';
-
 import 'features/home/presentation/pages/_pages.dart';
+import 'features/profile/presentation/pages/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class _MainPageState extends BaseStateful<MainPage> {
       HomePage(
         onSeeAllCourse: () => setState(() => _selectedIndex = 1),
       ),
-      const MatkulPage(),
+      const SearchCoursePage(),
       const BookmarksPage(),
       const ProfilePage(),
     ];

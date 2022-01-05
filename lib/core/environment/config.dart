@@ -44,11 +44,13 @@ class Config {
     ///Initialize Future variables
 
     ///Initialize SystemUI
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: BaseColors.transparent,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: BaseColors.transparent,
+      ),
+    );
   }
 
   static bool get isDevelopment => appFlavor == Flavor.development;
