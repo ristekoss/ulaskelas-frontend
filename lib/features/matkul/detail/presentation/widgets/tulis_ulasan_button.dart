@@ -3,7 +3,7 @@ part of '_widgets.dart';
 class TulisUlasanButton extends StatelessWidget {
   const TulisUlasanButton({
     Key? key,
-    required this.onTap
+    required this.onTap,
   }) : super(key: key);
 
   final VoidCallback onTap;
@@ -11,8 +11,7 @@ class TulisUlasanButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:
-      const EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 24),
+      padding: const EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 24),
       decoration: const BoxDecoration(
         color: BaseColors.white,
         boxShadow: [

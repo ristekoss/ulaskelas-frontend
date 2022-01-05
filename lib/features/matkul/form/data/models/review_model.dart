@@ -1,7 +1,7 @@
 part of '_models.dart';
 
-class ReviewNewModel {
-  ReviewNewModel({
+class ReviewModel {
+  ReviewModel({
     this.id,
     this.author,
     this.courseCode,
@@ -17,7 +17,7 @@ class ReviewNewModel {
     this.likesBy,
   });
 
-  ReviewNewModel.fromJson(Map<String, dynamic> json) {
+  ReviewModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     author = json['author'];
     courseCode = json['course_code'];
@@ -72,7 +72,7 @@ class ReviewNewModel {
 
   @override
   bool operator ==(Object other) {
-    if (other is ReviewNewModel) {
+    if (other is ReviewModel) {
       return author == other.author &&
           courseCode == other.courseCode &&
           createdAt == other.createdAt;

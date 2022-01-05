@@ -1,40 +1,24 @@
 part of '_widgets.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard(
-      {Key? key,
-      required this.name,
-      required this.major,
-      required this.year,
-      required this.classTakenOn,
-      required this.description,
-      required this.likesCount,
-      required this.reviewedOn,
-      required this.thumbIconColor,
-      required this.likesCountColor,
-      this.imgUrl,
-      this.onLiked,
-      this.status})
-      : super(key: key);
+  const ReviewCard({
+    Key? key,
+    required this.review,
+    this.imgUrl,
+    this.onLiked,
+    this.status,
+  }) : super(key: key);
 
-  final String name;
-  final String major;
-  final String year;
-  final String classTakenOn;
-  final String description;
-  final int likesCount;
-  final DateTime reviewedOn;
+  final ReviewModel review;
   final String? imgUrl;
   final VoidCallback? onLiked;
-  final Color thumbIconColor;
-  final Color likesCountColor;
   final String? status;
 
   @override
   Widget build(BuildContext context) {
     final imgDummy = 'https://pbs.twimg.com/media/EtvfOFTWYAc3j1q.jpg';
     final color = GlobalState.theme().state.secondaryColor;
-    final formattedDate = DateFormat('dd/MM/yyyy').format(reviewedOn);
+    // final formattedDate = DateFormat('dd/MM/yyyy').format(reviewedOn);
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -76,7 +60,7 @@ class ReviewCard extends StatelessWidget {
                       children: [
                         Flexible(
                           child: Text(
-                            name,
+                            review.author.toString(),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: FontTheme.poppins14w600black(),
@@ -95,7 +79,7 @@ class ReviewCard extends StatelessWidget {
                           ),
                       ],
                     ),
-                    Text('$major $year', style: FontTheme.poppins12w400black())
+                    // Text('$major $year', style: FontTheme.poppins12w400black())
                   ],
                 ),
               )
@@ -127,14 +111,14 @@ class ReviewCard extends StatelessWidget {
             height: 12,
           ),
           Text(
-            'Semester mengambil: $classTakenOn',
+            'Semester mengambil: classTakenOn',
             style: FontTheme.poppins12w500black().copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 4),
           Text(
-            description,
+            review.content.toString(),
             textAlign: TextAlign.justify,
             style: FontTheme.poppins12w400black(),
           ),
@@ -143,7 +127,7 @@ class ReviewCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Diulas pada $formattedDate',
+                'Diulas pada formattedDate',
                 style: FontTheme.poppins10w400black().copyWith(
                   color: const Color(0xFF828282),
                 ),
@@ -151,22 +135,22 @@ class ReviewCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // TODO: change color &
+                  // TODO(Any): change color &
                   GestureDetector(
                     onTap: onLiked,
                     child: Icon(
                       Icons.thumb_up,
                       size: 22,
-                      color: thumbIconColor,
+                      // color: thumbIconColor,
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      likesCount.toString(),
+                      review.likesBy!.length.toString(),
                       style: FontTheme.poppins14w600black().copyWith(
-                        color: likesCountColor,
-                      ),
+                          // color: likesCountColor,
+                          ),
                     ),
                   )
                 ],

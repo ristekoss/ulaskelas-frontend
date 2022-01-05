@@ -12,24 +12,24 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.4
   ristek_material_component: ^0.0.13
   states_rebuilder: ^5.0.0
   logger: ^1.0.0
   firebase_analytics: ^8.2.0
-  firebase_crashlytics: ^2.1.1
-  google_fonts: ^2.1.0
+  firebase_crashlytics: ^2.4.4
+  firebase_messaging: ^10.0.9
+  google_fonts: ^2.2.0
   flutter_local_notifications: ^8.0.0
-  firebase_messaging: ^10.0.4
   share: ^2.0.4
   hive: ^1.4.4
-  path_provider: ^2.0.2
+  path_provider: ^2.0.8
   rxdart: ^0.27.1
-  shared_preferences: ^2.0.6
+  shared_preferences: ^2.0.11
   flutter_svg: ^0.22.0
   intl: ^0.17.0
-  webview_flutter: ^2.0.13
-  url_launcher: ^6.0.10
+  webview_flutter: ^2.8.0
+  url_launcher: ^6.0.17
   flutter_switch: ^0.3.2
   universal_html: ^2.0.8
   dio: ^4.0.4
@@ -39,7 +39,7 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  very_good_analysis: ^2.3.0
+  very_good_analysis: ^2.4.0
 
 flutter:
 

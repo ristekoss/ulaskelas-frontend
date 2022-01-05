@@ -9,20 +9,26 @@ class LikeRemoteDataSourceImpl implements LikeRemoteDataSource {
   @override
   Future<dynamic> like(ReviewModel review) async {
     final url = Endpoints.likes;
-    final resp = await postIt(url, model: {
-      'review_id': review.id,
-      'is_like': true,
-    });
+    final resp = await postIt(
+      url,
+      model: {
+        'review_id': review.id,
+        'is_like': true,
+      },
+    );
     return resp;
   }
 
   @override
   Future<dynamic> unlike(ReviewModel review) async {
     final url = Endpoints.likes;
-    final resp = await postIt(url, model: {
-      'review_id': review.id,
-      'is_like': false,
-    });
+    final resp = await postIt(
+      url,
+      model: {
+        'review_id': review.id,
+        'is_like': false,
+      },
+    );
     return resp;
   }
 }

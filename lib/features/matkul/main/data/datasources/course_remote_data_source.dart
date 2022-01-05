@@ -3,21 +3,43 @@
 part of '_datasources.dart';
 
 abstract class CourseRemoteDataSource {
-  Future<Parsed<List<MatkulModel>>> getAllMatkul(QuerySearch querySearch);
+  Future<Parsed<List<CourseModel>>> getAllCourse(QuerySearchCourse querySearch);
+  Future<Parsed<List<CourseModel>>> getCurrentTermCourse();
 }
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
-  Future<Parsed<List<MatkulModel>>> getAllMatkul(
-      QuerySearch querySearch) async {
-    final list = <MatkulModel>[];
+  Future<Parsed<List<CourseModel>>> getAllCourse(
+    QuerySearchCourse querySearch,
+  ) async {
+    final list = <CourseModel>[];
     final url = '${Endpoints.courses}?$querySearch';
     final resp = await getIt(url);
     for (final data in resp.dataBodyAsMap['courses']) {
-      list.add(MatkulModel.fromJson(data));
+      list.add(CourseModel.fromJson(data));
     }
     if (resp.statusCode == 200) {
-      await FileService.saveJson('matkul.json', jsonEncode(resp.data));
+      const filename = Filename.courses;
+      await FileService.saveJson(filename, jsonEncode(resp.data));
+      await Pref.saveString(filename, DateTime.now().toIso8601String());
+    }
+    return resp.parse(list);
+  }
+
+  @override
+  Future<Parsed<List<CourseModel>>> getCurrentTermCourse() async {
+    final list = <CourseModel>[];
+    final url = Endpoints.courses;
+    final resp = await getIt(url);
+    for (final data in resp.dataBodyAsMap['courses']) {
+      list.add(CourseModel.fromJson(data));
+    }
+    if (resp.statusCode == 200) {
+      final filename = 'current-semester-course.json';
+      await FileService.saveJson(
+        filename,
+        jsonEncode(resp.data),
+      );
     }
     return resp.parse(list);
   }

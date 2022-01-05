@@ -11,20 +11,24 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   }
 
   @override
-  // ignore: lines_longer_than_80_chars
-  Future<Decide<Failure, Parsed<List<BookmarkModel>>>> getAllBookmarkFromCache() {
+  Future<Decide<Failure, Parsed<List<BookmarkModel>>>>
+      getAllBookmarkFromCache() {
     return apiCall(_localDataSource.getAllBookmark());
   }
 
   @override
-  // ignore: lines_longer_than_80_chars
-  Future<Decide<Failure, void>> postBookmark(BookmarkModel bookmark, isBookmark) async {
+  Future<Decide<Failure, void>> postBookmark(
+    BookmarkModel bookmark,
+    bool isBookmark,
+  ) async {
     return apiCall(_remoteDataSource.postBookmark(bookmark, isBookmark));
   }
 
   @override
-  // ignore: lines_longer_than_80_chars
-  Future<Decide<Failure, void>> postBookmarkToCache(BookmarkModel bookmark, isBookmark) async {
+  Future<Decide<Failure, void>> postBookmarkToCache(
+    BookmarkModel bookmark,
+    bool isBookmark,
+  ) async {
     return apiCall(_localDataSource.postBookmarkToCache(bookmark, isBookmark));
   }
 }

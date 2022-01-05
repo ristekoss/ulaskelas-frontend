@@ -2,4 +2,4 @@
 
 import 'dart:math';
 
-part 'matkul_model.dart';
+part 'course_model.dart';

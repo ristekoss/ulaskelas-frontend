@@ -72,8 +72,9 @@ Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.'''
             itemCount: bookmarkRM.state.bookmarks.length,
             itemBuilder: (context, index) {
               final bookmark = bookmarks[index];
-              final data = searchMatkul.state.matkuls
-                  .where((element) => element.name == bookmark);
+              final data = searchCourseRM.state.courses.where(
+                (element) => element.name == bookmark.course,
+              );
               return CardBookmark(model: data.first);
             },
             separatorBuilder: (BuildContext context, int index) =>

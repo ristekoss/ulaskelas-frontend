@@ -22,8 +22,10 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
   }
 
   @override
-  // ignore: lines_longer_than_80_chars
-  Future<void> postBookmarkToCache(BookmarkModel bookmark, bool isBookmark) async {
+  Future<void> postBookmarkToCache(
+    BookmarkModel bookmark,
+    bool isBookmark,
+  ) async {
     final resp = await getAllBookmark();
     if (resp.statusCode == 200) {
       if (!isBookmark) {
@@ -32,7 +34,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
         if (!bookmarks.contains(bookmark)) {
           bookmarks.add(bookmark);
           final data = jsonEncode({
-              'data': bookmarks.map((e) => e.toJson()).toList(),
+            'data': bookmarks.map((e) => e.toJson()).toList(),
           });
 
           final rawJson = json.encode(data);
@@ -46,7 +48,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
         if (bookmarks.contains(bookmark)) {
           bookmarks.remove(bookmark);
           final data = jsonEncode({
-              'data': bookmarks.map((e) => e.toJson()).toList(),
+            'data': bookmarks.map((e) => e.toJson()).toList(),
           });
 
           final rawJson = json.encode(data);
@@ -56,8 +58,6 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
           Logger().i(rawJson);
         }
       }
-    } 
-
+    }
   }
-  
 }

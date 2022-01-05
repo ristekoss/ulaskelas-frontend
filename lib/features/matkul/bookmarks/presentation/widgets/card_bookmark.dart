@@ -7,7 +7,7 @@ class CardBookmark extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
 
-  final MatkulModel model;
+  final CourseModel model;
   final VoidCallback? onTap;
 
   @override
@@ -83,10 +83,11 @@ class CardBookmark extends StatelessWidget {
             right: 12,
             child: InkWell(
               onTap: () {
-                // bookmarkRM.setState((s) => s.deleteFromBookmark(model.name!));
+                // bookmarkRM.setState((s) =>
+                // s.deleteFromBookmark(model.name!));
                 SuccessMessenger(
-                        'Berhasil menghapus ${model.name} dari bookmark')
-                    .show(ctx!);
+                  'Berhasil menghapus ${model.name} dari bookmark',
+                ).show(ctx!);
               },
               child: const Icon(
                 Icons.bookmark_sharp,

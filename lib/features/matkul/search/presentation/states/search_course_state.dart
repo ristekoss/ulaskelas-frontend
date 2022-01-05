@@ -2,22 +2,23 @@
 
 part of '_states.dart';
 
-class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
-  SearchMatkulState() {
+class SearchCourseState
+    implements FutureState<SearchCourseState, QuerySearchCourse> {
+  SearchCourseState() {
     final _remoteDataSource = CourseRemoteDataSourceImpl();
     final _localDataSource = CourseLocalDataSourceImpl();
-    _repo = MatkulRepositoryImpl(
+    _repo = CourseRepositoryImpl(
       _remoteDataSource,
       _localDataSource,
     );
   }
 
-  MatkulRepository? _repo;
+  CourseRepository? _repo;
 
   /// Search controller.
   final controller = TextEditingController();
 
-  List<MatkulModel>? _matkuls;
+  List<CourseModel>? _matkuls;
 
   /// Search history using queue list.
   ///
@@ -33,19 +34,21 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
 
   int page = 1;
 
-  /// Matkuls getter with dummy data at default.
-  List<MatkulModel> get matkuls => _matkuls ?? [];
-  List<MatkulModel> get filteredMatkuls {
+  /// Courses getter with dummy data at default.
+  List<CourseModel> get courses => _matkuls ?? [];
+  List<CourseModel> get filteredCourses {
     return (_matkuls ?? [])
-        .where((element) =>
-            (element.name
-                    ?.toLowerCase()
-                    .contains(controller.text.toLowerCase()) ??
-                false) &&
-            (!filter.state.isFilteredType ||
-                filter.state.selectedSks.contains(element.sks.toString()) ||
-                filter.state.selectedSemester
-                    .contains(element.term.toString())))
+        .where(
+          (element) =>
+              (element.name
+                      ?.toLowerCase()
+                      .contains(controller.text.toLowerCase()) ??
+                  false) &&
+              (!filterRM.state.isFilteredType ||
+                  filterRM.state.selectedSks.contains(element.sks.toString()) ||
+                  filterRM.state.selectedSemester
+                      .contains(element.term.toString())),
+        )
         .toList();
   }
 
@@ -68,33 +71,54 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
   }
 
   @override
-  Future<void> retrieveData(QuerySearch query) async {
+  Future<void> retrieveData(QuerySearchCourse query) async {
     await searchMatkul(query);
   }
 
   /// Advanced searching combine stateful & stateless search data.
   ///
   /// Prevent duplicates record.
-  Future<void> searchMatkul(QuerySearch query) async {
+  Future<void> searchMatkul(QuerySearchCourse query) async {
     page = 1;
     query.page = 1;
     _hasReachedMax = false;
-    final resp = await _repo?.getAllMatkul(query);
+    final now = DateTime.now();
+    final cachedDay = DateTime.parse(
+      Pref.getString(Filename.courses) ?? now.toIso8601String(),
+    );
+    final isDiffDay = cachedDay.difference(now) > const Duration(days: 1) ||
+        !Pref.containsKey(Filename.courses);
+    final resp = isDiffDay
+        ? await _repo?.getAllCourse(query)
+        : await _repo?.getAllCachedCourse();
     resp?.fold((failure) {
-      throw failure;
+      if (failure is NetworkFailure) {
+      } else {
+        throw failure;
+      }
     }, (result) {
       final lessThanLimit = result.data.length < query.limit;
       _hasReachedMax = result.data.isEmpty || lessThanLimit;
-
+      // TODO(pawpaw): set this to false.
+      _hasReachedMax = true;
       // Prevent duplicate record
       filterCourse(result.data);
     });
   }
 
-  Future<void> retrieveMoreData(QuerySearch query) async {
+  Future<void> retrieveFromCache() async {
+    final resp = await _repo?.getAllCachedCourse();
+    resp?.fold((failure) {
+      throw failure;
+    }, (result) {
+      filterCourse(result.data);
+    });
+  }
+
+  Future<void> retrieveMoreData(QuerySearchCourse query) async {
     ++page;
     query.page = page;
-    final resp = await _repo?.getAllMatkul(query);
+    final resp = await _repo?.getAllCourse(query);
     resp?.fold((failure) {
       throw failure;
     }, (result) {
@@ -106,7 +130,7 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
     });
   }
 
-  void filterCourse(List<MatkulModel> matkuls) {
+  void filterCourse(List<CourseModel> matkuls) {
     _matkuls ??= matkuls;
     for (final matkul in matkuls) {
       if (!(_matkuls?.contains(matkul) ?? true)) {
@@ -124,12 +148,12 @@ class SearchMatkulState implements FutureState<SearchMatkulState, QuerySearch> {
     if (history.length == 11) {
       _history?.removeLast();
     }
-    // TODO(pawpaw: save to local storage)
+    // TODO(pawpaw): save to local storage
   }
 
   /// Clear search history from local state and local storage.
   void clearHistory() {
     _history?.clear();
-    // TODO(pawpaw: clear from local storage)
+    // TODO(pawpaw): clear from local storage
   }
 }

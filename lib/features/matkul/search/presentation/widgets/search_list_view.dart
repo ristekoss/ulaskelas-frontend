@@ -34,14 +34,14 @@ class SearchListView extends StatelessWidget {
                   style: FontTheme.poppins14w700black(),
                 ),
                 StateBuilder(
-                  observe: () => filter,
+                  observe: () => filterRM,
                   builder: (context, snapshot) {
                     return FilterButton(
-                      hasFilter: filter.state.hasFilter,
+                      hasFilter: filterRM.state.hasFilter,
                       text: 'Filter',
                       onPressed: () async {
                         await nav.goToFilterPage();
-                        if (filter.state.hasFilter) {
+                        if (filterRM.state.hasFilter) {
                           onScroll();
                         }
                       },
@@ -56,8 +56,8 @@ class SearchListView extends StatelessWidget {
           child: RefreshIndicator(
             key: refreshIndicatorKey,
             onRefresh: onRefresh,
-            child: OnBuilder<SearchMatkulState>.all(
-              listenTo: searchMatkul,
+            child: OnBuilder<SearchCourseState>.all(
+              listenTo: searchCourseRM,
               onIdle: () => WaitingView(),
               onWaiting: () => WaitingView(),
               onError: (dynamic error, refresh) {
@@ -68,7 +68,7 @@ class SearchListView extends StatelessWidget {
                 );
               },
               onData: (data) {
-                final matkuls = data.filteredMatkuls;
+                final matkuls = data.filteredCourses;
                 if (data.hasReachedMax && matkuls.isEmpty) {
                   return const DetailView(
                     isEmptyView: true,
@@ -92,9 +92,9 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                       return const CircleLoading(size: 25);
                     }
                     final matkul = matkuls[i];
-                    return CardMatkul(
+                    return CardCourse(
                       model: matkul,
-                      onTap: () => nav.goToDetailMatkulPage(matkul.name!),
+                      onTap: () => nav.goToDetailMatkulPage(matkul),
                     );
                   },
                 );

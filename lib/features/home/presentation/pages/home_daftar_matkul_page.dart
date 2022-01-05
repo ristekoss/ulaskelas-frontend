@@ -1,19 +1,19 @@
 part of '_pages.dart';
 
-class HomeDaftarMatkulPage extends StatefulWidget {
-  const HomeDaftarMatkulPage({
+class HomeCourseListPage extends StatefulWidget {
+  const HomeCourseListPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  _HomeDaftarMatkulPageState createState() => _HomeDaftarMatkulPageState();
+  _HomeCourseListPageState createState() => _HomeCourseListPageState();
 }
 
-class _HomeDaftarMatkulPageState extends BaseStateful<HomeDaftarMatkulPage> {
+class _HomeCourseListPageState extends BaseStateful<HomeCourseListPage> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BaseAppBar(
-      label: 'Mata Kuliah Semester 5',
+      label: 'Mata Kuliah Semester ',
       elevation: 0,
     );
   }
@@ -32,11 +32,11 @@ class _HomeDaftarMatkulPageState extends BaseStateful<HomeDaftarMatkulPage> {
           horizontal: 20,
           vertical: 10,
         ),
-        itemCount: DummyMatkul.matkul.length,
+        itemCount: currentTermCourseRM.state.courses.length,
         separatorBuilder: (c, i) => const HeightSpace(16),
         itemBuilder: (c, i) {
-          final matkul = DummyMatkul.matkul[i];
-          return CardMatkulHome(model: matkul, onTap: () {});
+          final course = currentTermCourseRM.state.courses[i];
+          return CardCourse(model: course, onTap: () {});
         },
       ),
     );
