@@ -19,7 +19,13 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
   @override
   void init() {
     reviewCourseRM.setState(
-      (s) => s.retrieveData(QueryReview(courseCode: widget.course.code!)),
+      (s) => s.retrieveData(QueryReview(courseCode: widget.course.code)),
+    );
+  }
+
+  Future<void> retrieveData() async {
+    await reviewCourseRM.setState(
+      (s) => s.retrieveData(QueryReview(courseCode: widget.course.code)),
     );
   }
 
@@ -38,31 +44,33 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    // final ownedReview = reviewRM.state.findOwnedReview(widget.matkul);
     return Column(
       children: [
         Expanded(
-          child: ListView(
-            padding: const EdgeInsets.all(24),
-            children: [
-              // Title + BookmarkIcon
-              _buildTitleAndBookmark(context),
-              const HeightSpace(24),
+          child: RefreshIndicator(
+            key: refreshIndicatorKey,
+            onRefresh: retrieveData,
+            child: ListView(
+              padding: const EdgeInsets.all(24),
+              children: [
+                // Title + BookmarkIcon
+                _buildTitleAndBookmark(context),
+                const HeightSpace(24),
 
-              _buildMatkulTag(),
-              const HeightSpace(16),
+                if (widget.course.tags?.isNotEmpty ?? false) _buildMatkulTag(),
+                const HeightSpace(16),
 
-              _buildMatkulDescription(),
-              const HeightSpace(32),
-              // ~~~~~~~~~~~~~~~~~~~~~~~~~
-              _buildMatkulPrerequisite(),
-              const HeightSpace(32),
+                _buildMatkulDescription(),
+                const HeightSpace(32),
+                // ~~~~~~~~~~~~~~~~~~~~~~~~~
+                _buildMatkulPrerequisite(),
+                const HeightSpace(32),
 
-              // ~~~~~~~~~~~~~~~~~~~~~~~~~
-              // if (ownedReview != null) _buildReviewBySelf(ownedReview),
-
-              _buildReviews(),
-            ],
+                // ~~~~~~~~~~~~~~~~~~~~~~~~~
+                _buildReviewBySelf(),
+                _buildReviews(),
+              ],
+            ),
           ),
         ),
         TulisUlasanButton(
@@ -74,7 +82,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
 
   Widget _buildMatkulDescription() {
     return Text(
-      widget.course.description.toString(),
+      widget.course.cleanedDesc,
       textAlign: TextAlign.justify,
       style: FontTheme.poppins12w400black(),
     );
@@ -82,19 +90,13 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
 
   Widget _buildMatkulTag() {
     return Row(
-      children: const [
-        Tag(
-          label: 'Tags here',
-        ),
-        WidthSpace(8),
-        Tag(
-          label: 'Tags here',
-        ),
-        WidthSpace(8),
-        Tag(
-          label: 'Tags here',
-        ),
-      ],
+      children: widget.course.tags!
+          .map(
+            (e) => Tag(
+              label: e,
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -117,18 +119,20 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
               child: OnReactive(() {
                 return GestureDetector(
                   onTap: () {
-                    // TODO(bim): bookmark matkul
-                    // bookmarkRM.setState((s) => s.tapMark(widget.matkul));
-                    // if (bookmarkRM.state.isMarked(widget.matkul)) {
-                    //   SuccessMessenger('Mata kuliah berhasil disimpan')
-                    //       .show(context);
-                    // }
+                    final bookmark = BookmarkModel(
+                      courseCode: widget.course.code,
+                      courseName: widget.course.name,
+                      courseCodeDesc: widget.course.codeDesc,
+                      courseReviewCount: widget.course.reviewCount,
+                      shortName: widget.course.shortName,
+                    );
+                    bookmarkRM.setState((s) => s.toggleBookmark(bookmark));
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.bookmark,
-                    // color: bookmarkRM.state.isMarked(widget.matkul)
-                    //     ? BaseColors.goldenrod
-                    //     : BaseColors.gray3,
+                    color: bookmarkRM.state.isMarked(widget.course)
+                        ? BaseColors.goldenrod
+                        : BaseColors.gray3,
                   ),
                 );
               }),
@@ -165,7 +169,14 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           onWaiting: () => const CircleLoading(),
           onError: (dynamic error, refresh) => Text(error.toString()),
           onData: (data) {
+            if (data.reviews.isEmpty) {
+              return Text(
+                'Belum ada Ulasan',
+                style: FontTheme.poppins12w500black(),
+              );
+            }
             return ListView.separated(
+              physics: const ScrollPhysics(),
               shrinkWrap: true,
               itemCount: data.reviews.length,
               separatorBuilder: (c, i) {
@@ -175,89 +186,65 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 final review = data.reviews[i];
                 return ReviewCard(
                   review: review,
+                  onLiked: () {
+                    reviewCourseRM.state.like(review);
+                  },
                 );
               },
             );
-            return Container();
           },
         ),
-        // OnReactive(() {
-        //   return Column(
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: reviewRM.state.reviews[widget.matkul]?.map((rev) {
-        //           if (rev.author != reviewRM.state.thisAuthor) {
-        //             return ReviewCard(
-        //               name: rev.author!,
-        //               major: 'Ilmu Komputer',
-        //               year: '2018',
-        //               classTakenOn: rev.classTakenOn!,
-        //               description: rev.description!,
-        //               likesCount: rev.likesCount!,
-        //               reviewedOn: rev.reviewedOn!,
-        //               likesCountColor:
-        //                   reviewRM.state.isLiked(widget.matkul, rev)
-        //                       ? BaseColors.purpleHearth
-        //                       : BaseColors.gray1,
-        //               thumbIconColor: reviewRM.state.isLiked
-        //               (widget.matkul, rev)
-        //                   ? BaseColors.purpleHearth
-        //                   : BaseColors.gray3,
-        //               imgUrl: 'test',
-        //               onLiked: () {
-        //                 reviewRM.setState((s) =>
-        //                 s.click(widget.matkul, rev));
-        //               },
-        //             );
-        //           }
-        //           return const SizedBox();
-        //         }).toList() ??
-        //         [],
-        //   );
-        // }),
       ],
     );
   }
 
-  // Widget _buildReviewBySelf(ReviewModel ownedReview) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Text(
-  //         'Ulasan Kamu',
-  //         style: FontTheme.poppins14w700black(),
-  //       ),
-  //       const HeightSpace(8),
-  //       const Divider(
-  //         height: 1,
-  //         thickness: 1,
-  //         color: Color(0xFFE0E0E0),
-  //       ),
-  //       const HeightSpace(12),
-  //       // OnReactive(() {
-  //       //   return ReviewCard(
-  //       //     name: ownedReview.author!,
-  //       //     major: 'Sistem Informasi',
-  //       //     year: '2019',
-  //       //     classTakenOn: ownedReview.classTakenOn!,
-  //       //     description: ownedReview.description!,
-  //       //     likesCount: ownedReview.likesCount!,
-  //       //     reviewedOn: ownedReview.reviewedOn!,
-  //       //     likesCountColor: reviewRM.state.isLiked(widget.matkul, ownedReview)
-  //       //         ? BaseColors.purpleHearth
-  //       //         : BaseColors.gray1,
-  //       //     thumbIconColor: reviewRM.state.isLiked(widget.matkul, ownedReview)
-  //       //         ? BaseColors.purpleHearth
-  //       //         : BaseColors.gray3,
-  //       //     status: ownedReview.status,
-  //       //     onLiked: () {
-  //       //       reviewRM.setState((s) => s.click(widget.matkul, ownedReview));
-  //       //     },
-  //       //   );
-  //       // }),
-  //       const HeightSpace(32),
-  //     ],
-  //   );
-  // }
+  Widget _buildReviewBySelf() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Ulasan Kamu',
+          style: FontTheme.poppins14w700black(),
+        ),
+        const HeightSpace(8),
+        const Divider(
+          height: 1,
+          thickness: 1,
+          color: Color(0xFFE0E0E0),
+        ),
+        const HeightSpace(12),
+        OnBuilder<ReviewCourseState>.all(
+          listenTo: reviewCourseRM,
+          onIdle: () => const CircleLoading(),
+          onWaiting: () => const CircleLoading(),
+          onError: (dynamic error, refresh) => Text(error.toString()),
+          onData: (data) {
+            if (data.myReviews.isEmpty) {
+              return Text(
+                'Belum ada Ulasan',
+                style: FontTheme.poppins12w500black(),
+              );
+            }
+            return ListView.separated(
+              physics: const ScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: data.myReviews.length,
+              separatorBuilder: (c, i) {
+                return const Divider();
+              },
+              itemBuilder: (c, i) {
+                final review = data.myReviews[i];
+                return ReviewCard(
+                  review: review,
+                );
+              },
+            );
+          },
+        ),
+        const HeightSpace(32),
+      ],
+    );
+  }
 
   Widget _buildMatkulPrerequisite() {
     return Column(
@@ -285,13 +272,18 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     (e) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: Text(
-                        '\u2022  Statistika dan Probabilitas',
+                        '\u2022  $e',
                         style: FontTheme.poppins12w400black(),
                       ),
                     ),
                   )
                   .toList(),
             ),
+          )
+        else
+          Text(
+            'Tidak ada prasyarat',
+            style: FontTheme.poppins12w500black(),
           ),
       ],
     );

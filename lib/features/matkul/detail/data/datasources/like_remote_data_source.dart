@@ -1,13 +1,13 @@
 part of '_datasources.dart';
 
 abstract class LikeRemoteDataSource {
-  Future<dynamic> like(ReviewModel review);
-  Future<dynamic> unlike(ReviewModel review);
+  Future<Parsed<String>> like(ReviewModel review);
+  Future<Parsed<String>> unlike(ReviewModel review);
 }
 
 class LikeRemoteDataSourceImpl implements LikeRemoteDataSource {
   @override
-  Future<dynamic> like(ReviewModel review) async {
+  Future<Parsed<String>> like(ReviewModel review) async {
     final url = Endpoints.likes;
     final resp = await postIt(
       url,
@@ -16,11 +16,11 @@ class LikeRemoteDataSourceImpl implements LikeRemoteDataSource {
         'is_like': true,
       },
     );
-    return resp;
+    return resp.parse('');
   }
 
   @override
-  Future<dynamic> unlike(ReviewModel review) async {
+  Future<Parsed<String>> unlike(ReviewModel review) async {
     final url = Endpoints.likes;
     final resp = await postIt(
       url,
@@ -29,6 +29,6 @@ class LikeRemoteDataSourceImpl implements LikeRemoteDataSource {
         'is_like': false,
       },
     );
-    return resp;
+    return resp.parse('');
   }
 }

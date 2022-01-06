@@ -3,6 +3,6 @@
 part of '_repositories.dart';
 
 abstract class TagRepository {
-  Future<Decide<Failure, Parsed<List<TagModel>>>> getAllTag();
-  Future<Decide<Failure, Parsed<List<TagModel>>>> getAllTagFromCache();
+  Future<Decide<Failure, Parsed<List<String>>>> getAllTag();
+  Future<Decide<Failure, Parsed<List<String>>>> getAllTagFromCache();
 }

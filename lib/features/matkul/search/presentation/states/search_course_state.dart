@@ -18,7 +18,7 @@ class SearchCourseState
   /// Search controller.
   final controller = TextEditingController();
 
-  List<CourseModel>? _matkuls;
+  List<CourseModel>? _courses;
 
   /// Search history using queue list.
   ///
@@ -35,19 +35,30 @@ class SearchCourseState
   int page = 1;
 
   /// Courses getter with dummy data at default.
-  List<CourseModel> get courses => _matkuls ?? [];
+  List<CourseModel> get courses => _courses ?? [];
   List<CourseModel> get filteredCourses {
-    return (_matkuls ?? [])
+    return (_courses ?? [])
         .where(
           (element) =>
-              (element.name
-                      ?.toLowerCase()
-                      .contains(controller.text.toLowerCase()) ??
-                  false) &&
-              (!filterRM.state.isFilteredType ||
-                  filterRM.state.selectedSks.contains(element.sks.toString()) ||
-                  filterRM.state.selectedSemester
-                      .contains(element.term.toString())),
+              ((element.name
+                          ?.toLowerCase()
+                          .contains(controller.text.toLowerCase()) ??
+                      false) ||
+                  (element.code
+                          ?.toLowerCase()
+                          .contains(controller.text.toLowerCase()) ??
+                      false) ||
+                  (element.description
+                          ?.toLowerCase()
+                          .contains(controller.text.toLowerCase()) ??
+                      false)) &&
+              (!filterRM.state.hasFilter ||
+                  (filterRM.state.selectedType
+                          .contains(element.codeDesc.toString()) ||
+                      filterRM.state.selectedSks
+                          .contains(element.sks.toString()) ||
+                      filterRM.state.selectedSemester
+                          .contains(element.term.toString()))),
         )
         .toList();
   }
@@ -86,11 +97,12 @@ class SearchCourseState
     final cachedDay = DateTime.parse(
       Pref.getString(Filename.courses) ?? now.toIso8601String(),
     );
-    final isDiffDay = cachedDay.difference(now) > const Duration(days: 1) ||
+    final isDiffDay = cachedDay.difference(now) > const Duration(hours: 12) ||
         !Pref.containsKey(Filename.courses);
     final resp = isDiffDay
         ? await _repo?.getAllCourse(query)
         : await _repo?.getAllCachedCourse();
+    // final resp = await _repo?.getAllCourse(query);
     resp?.fold((failure) {
       if (failure is NetworkFailure) {
       } else {
@@ -131,10 +143,10 @@ class SearchCourseState
   }
 
   void filterCourse(List<CourseModel> matkuls) {
-    _matkuls ??= matkuls;
+    _courses ??= matkuls;
     for (final matkul in matkuls) {
-      if (!(_matkuls?.contains(matkul) ?? true)) {
-        _matkuls?.add(matkul);
+      if (!(_courses?.contains(matkul) ?? true)) {
+        _courses?.add(matkul);
       }
     }
   }

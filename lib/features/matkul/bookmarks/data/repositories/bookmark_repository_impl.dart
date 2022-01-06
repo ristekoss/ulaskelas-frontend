@@ -1,13 +1,18 @@
 part of '_repositories.dart';
 
 class BookmarkRepositoryImpl implements BookmarkRepository {
-  BookmarkRepositoryImpl(this._remoteDataSource, this._localDataSource);
+  BookmarkRepositoryImpl(
+    this._remoteDataSource,
+    this._localDataSource,
+  );
   final BookmarkRemoteDataSource _remoteDataSource;
   final BookmarkLocalDataSource _localDataSource;
 
   @override
-  Future<Decide<Failure, Parsed<List<BookmarkModel>>>> getAllBookmark() {
-    return apiCall(_remoteDataSource.getAllBookmark());
+  Future<Decide<Failure, Parsed<List<BookmarkModel>>>> getAllBookmark(
+    QueryBookmark q,
+  ) {
+    return apiCall(_remoteDataSource.getAllBookmark(q));
   }
 
   @override

@@ -10,6 +10,8 @@ class ProfileModel {
   String? orgCode;
   bool? isBlocked;
   int? user;
+  int? term;
+  String? generation;
 
   ProfileModel({
     this.id,
@@ -23,6 +25,8 @@ class ProfileModel {
     this.orgCode,
     this.isBlocked,
     this.user,
+    this.term,
+    this.generation,
   });
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +41,8 @@ class ProfileModel {
     orgCode = json['org_code'];
     isBlocked = json['is_blocked'];
     user = json['user'];
+    term = json['term'];
+    generation = json['generation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +58,8 @@ class ProfileModel {
     data['org_code'] = orgCode;
     data['is_blocked'] = isBlocked;
     data['user'] = user;
+    data['term'] = term;
+    data['generation'] = generation;
     return data;
   }
 }

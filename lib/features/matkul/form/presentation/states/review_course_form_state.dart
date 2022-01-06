@@ -20,19 +20,25 @@ class ReviewCourseFormState {
   final semesters = <String>['Semester ganjil', 'Semester genap'];
   final years = <String>['2021', '2020', '2019', '2018', '2017'];
 
+  bool isLoading = false;
+
   /// Submitting form data
-  Future<void> submitForm() async {
+  Future<void> submitForm(String courseCode) async {
+    isLoading = true;
+    reviewFormRM.notify();
     final result = <String, dynamic>{};
     // TODO(Any): sync with current matkul
-    result['course_code'] = 'CSCE604231';
+    result['course_code'] = courseCode;
     result['semester'] = _formData.semester! == semesters[0] ? 1 : 2;
     result['academic_year'] =
         getPairedYear(result['semester'], _formData.year!);
     result['content'] = _formData.description;
     result['is_anonym'] = _formData.isAnonymous;
-    result['tags'] = [for (var i in _formData.tagData) i.name];
+    result['tags'] = [for (final i in _formData.tagData) i];
 
     final resp = await _repo.createReview(result);
+    isLoading = false;
+    reviewFormRM.notify();
     resp.fold((failure) {
       throw failure;
     }, (result) {
@@ -52,7 +58,7 @@ class ReviewCourseFormState {
 
   TextEditingController get descController => _descController;
 
-  set selectTag(List<TagModel> data) => _formData.tagData = data;
+  set selectTag(List<String> data) => _formData.tagData = data;
 
   void setSemester(String sem) {
     _formData.semester = sem;
@@ -84,7 +90,7 @@ class ReviewMatkulData {
     isAnonymous = false;
   }
 
-  late List<TagModel> tagData;
+  late List<String> tagData;
   String? semester;
   String? year;
   String? description;

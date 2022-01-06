@@ -42,7 +42,7 @@ class SearchListView extends StatelessWidget {
                       onPressed: () async {
                         await nav.goToFilterPage();
                         if (filterRM.state.hasFilter) {
-                          onScroll();
+                          // onScroll();
                         }
                       },
                     );

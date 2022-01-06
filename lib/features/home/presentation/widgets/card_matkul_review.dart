@@ -3,16 +3,17 @@ part of '_widgets.dart';
 class CardMatkulReview extends StatelessWidget {
   const CardMatkulReview({
     Key? key,
-    required this.model,
+    required this.review,
     this.onTap,
   }) : super(key: key);
 
-  final UlasanUserModel model;
+  final ReviewModel review;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final formattedDate = DateFormat('dd/MM/yyyy').format(review.createdAt!);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -39,7 +40,7 @@ class CardMatkulReview extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      model.matkul.shortName,
+                      review.shortName.toString(),
                       style: FontTheme.poppins14w700black().copyWith(
                         color: theme.colorScheme.primary,
                       ),
@@ -52,7 +53,7 @@ class CardMatkulReview extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.matkul.nama,
+                        review.courseName.toString(),
                         style: FontTheme.poppins14w700black().copyWith(
                           fontWeight: FontWeight.w600,
                         ),
@@ -62,11 +63,11 @@ class CardMatkulReview extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            model.matkul.statusWajib,
+                            review.courseCodeDesc.toString(),
                             style: FontTheme.poppins12w400black(),
                           ),
                           Text(
-                            '${model.matkul.banyakUlasan} Ulasan',
+                            '${review.courseReviewCount} Ulasan',
                             style: FontTheme.poppins12w400black().copyWith(
                               color: BaseColors.gray2,
                             ),
@@ -79,12 +80,13 @@ class CardMatkulReview extends StatelessWidget {
               ],
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const HeightSpace(4),
                 Container(
                   padding: const EdgeInsets.only(bottom: 10, top: 8),
                   child: Text(
-                    'Anda: ${model.ulasan}',
+                    'Anda: ${review.content}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: FontTheme.poppins12w400black().copyWith(
@@ -96,16 +98,16 @@ class CardMatkulReview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Diulas pada ${model.tanggal}',
+                      'Diulas pada $formattedDate',
                       style: FontTheme.poppins10w400black().copyWith(
                         color: BaseColors.gray2,
                       ),
                     ),
                     Tag(
-                      label: model.status,
-                      state: model.status == 'Approved'
+                      label: review.hateSpeechStatus.toString(),
+                      state: review.hateSpeechStatus == 'APPROVED'
                           ? TagStatus.approved
-                          : (model.status == 'Pending')
+                          : (review.hateSpeechStatus == 'WAITING')
                               ? TagStatus.pending
                               : TagStatus.rejected,
                     )

@@ -28,6 +28,8 @@ Future<Response> postIt(
 }) async {
   Logger().i('Url $url');
   Logger().i('Header ${Pref.getHeaders()}');
+  Logger().i('Model');
+  Logger().i(model);
   final _getHeaders = headers ?? Pref.getHeaders();
   final resp = await Dio().post(
     url,

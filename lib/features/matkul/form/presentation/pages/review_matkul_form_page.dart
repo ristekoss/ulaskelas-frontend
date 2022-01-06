@@ -109,25 +109,31 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
             ),
           ),
         ),
-        TulisUlasanButton(
-          onTap: () async {
-            final currentFocus = FocusScope.of(context);
+        OnReactive(
+          () => TulisUlasanButton(
+            isLoading: reviewFormRM.state.isLoading,
+            onTap: () async {
+              final currentFocus = FocusScope.of(context);
 
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-            if (reviewFormRM.state.formKey.currentState!.validate()) {
-              // TODO(Any): Navigate to PendingReviewPage
-              progressDialogue(context);
-              await reviewFormRM.state.submitForm();
-              await Future.delayed(const Duration(seconds: 1));
-              reviewFormRM.state.cleanForm();
-              nav.pop();
-              await nav.replaceToReviewPendingPage();
-              return;
-            }
-            WarningMessenger('Harap isi semua field').show(context);
-          },
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+              if (reviewFormRM.state.isLoading) {
+                return;
+              }
+              if (reviewFormRM.state.formKey.currentState!.validate()) {
+                // TODO(Any): Navigate to PendingReviewPage
+                // progressDialogue(context);
+                await reviewFormRM.state.submitForm(widget.course.code!);
+                await Future.delayed(const Duration(milliseconds: 150));
+                reviewFormRM.state.cleanForm();
+                nav.pop();
+                await nav.replaceToReviewPendingPage();
+                return;
+              }
+              WarningMessenger('Harap isi semua field').show(context);
+            },
+          ),
         )
       ],
     );
@@ -183,6 +189,9 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'This field is required.';
+        }
+        if (value.length < 6) {
+          return 'This field is too short';
         }
         reviewFormRM.setState((s) => s.setDesc());
         return null;
@@ -342,7 +351,7 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
             runSpacing: 10,
             children: reviewFormRM.state.formData.tagData.map((element) {
               return Tag(
-                label: element.name,
+                label: element,
               );
             }).toList(),
           );

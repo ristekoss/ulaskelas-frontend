@@ -1,13 +1,24 @@
 part of '_states.dart';
 
 class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
+  SearchTagState() {
+    final _remoteDataSource = TagRemoteDataSourceImpl();
+    final _localDataSource = TagLocalDataSourceImpl();
+    _repo = TagRepositoryImpl(
+      _remoteDataSource,
+      _localDataSource,
+    );
+  }
+
+  late TagRepository _repo;
+
   /// Search controller.
   final controller = TextEditingController();
 
-  List<TagModel>? _selectedTags;
-  List<TagModel>? _tags;
+  List<String>? _selectedTags;
+  List<String>? _tags;
 
-  List<TagModel> get selectedTags => _selectedTags ?? [];
+  List<String> get selectedTags => _selectedTags ?? [];
 
   bool? _hasReachedMax;
   QuerySearch? _query;
@@ -18,42 +29,7 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
   String? _lastQuery;
 
   /// Matkuls getter with dummy data at default.
-  List<TagModel> get tags =>
-      _tags ??
-      <TagModel>[
-        TagModel(
-          id: 1,
-          name: 'Pemrograman Lanjut',
-        ),
-        TagModel(
-          id: 2,
-          name: 'Basis Data',
-        ),
-        TagModel(
-          id: 3,
-          name: 'Kecerdasan Artifisial dan Sains Data Dasar',
-        ),
-        TagModel(
-          id: 4,
-          name: 'Arsitektur dan Pemrograman Aplikasi Perusahaan',
-        ),
-        TagModel(
-          id: 5,
-          name: 'Matematika Dasar 1',
-        ),
-        TagModel(
-          id: 6,
-          name: 'Matematika Diskret 1',
-        ),
-        TagModel(
-          id: 7,
-          name: 'Matematika Diskret 1',
-        ),
-        TagModel(
-          id: 8,
-          name: 'Matematika Diskret 2',
-        ),
-      ];
+  List<String> get tags => _tags!;
 
   bool get hasReachedMax => _hasReachedMax ?? false;
   set hasReachedMax(bool val) => _hasReachedMax = val;
@@ -73,8 +49,9 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
 
   @override
   Future<void> retrieveData(QuerySearch query) async {
-    await Future<void>.delayed(const Duration(seconds: 1));
-    _tags = tags;
+    _hasReachedMax = true;
+    final resp = await _repo.getAllTag();
+    resp.fold((failure) => throw failure, (result) => _tags = result.data);
   }
 
   /// Advanced searching combine stateful & stateless search data.
@@ -92,10 +69,11 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
     // dummy function ignore this
     final _ = tags
         .where(
-          (element) => element.name.toLowerCase().contains(query.q),
+          (element) => element.toLowerCase().contains(query.q),
         )
         .toList();
-    _hasReachedMax = _.length < 5;
+    // _hasReachedMax = _.length < 5;
+    _hasReachedMax = true;
 
     // Prevent duplicate record
     for (final tag in tags) {
@@ -107,8 +85,8 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
   }
 
   /// Switching Tag
-  void switchTag(TagModel model) {
-    _selectedTags ??= <TagModel>[];
+  void switchTag(String model) {
+    _selectedTags ??= <String>[];
     if (!(_selectedTags?.contains(model) ?? true)) {
       _selectedTags?.add(model);
     } else {
@@ -116,12 +94,18 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
     }
   }
 
+  void addNewTag(String tag) {
+    if (!(_tags?.contains(tag) ?? true)) {
+      _tags?.add(tag);
+    }
+  }
+
   /// Local Search
-  List<TagModel> localSearch() {
+  List<String> localSearch() {
     final query = controller.text.toLowerCase();
     final matkulTags = tags
         .where(
-          (element) => element.name.toLowerCase().contains(query),
+          (element) => element.toLowerCase().contains(query),
         )
         .toList();
     return matkulTags;
@@ -129,7 +113,7 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
 
   /// Terapkan tag
   void select() {
-    nav.pop<List<TagModel>>(selectedTags);
+    nav.pop<List<String>>(selectedTags);
   }
 
   void cleanSearch() {

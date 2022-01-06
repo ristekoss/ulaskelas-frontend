@@ -49,17 +49,25 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           const SizedBox(height: 42),
-          CircleAvatar(
-            radius: 100,
-            backgroundColor: Colors.grey[300],
+          Icon(
+            Icons.account_circle,
+            size: 140,
+            color: Colors.grey[300],
           ),
+          // CircleAvatar(
+          //   radius: 100,
+          //   backgroundColor: Colors.grey[300],
+          // ),
           const SizedBox(height: 34),
           ProfileData(
             'Nama',
             profileRM.state.profile.name.toString(),
           ),
           // TODO(pawpaw): angkatan.
-          // const ProfileData('Angkatan', profileRM.state.profile..toString()),
+          ProfileData(
+            'Angkatan',
+            profileRM.state.profile.generation.toString(),
+          ),
           ProfileData(
             'Jurusan',
             profileRM.state.profile.studyProgram.toString(),
