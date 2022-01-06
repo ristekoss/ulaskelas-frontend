@@ -13,6 +13,7 @@ class CourseModel {
     this.prerequisites,
     this.reviewCount,
     this.codeDesc,
+    this.tags,
   });
 
   CourseModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +34,11 @@ class CourseModel {
           );
       shortName = shortName!.substring(0, min(shortName!.length, 2));
     }
+    if (description?.isEmpty ?? true) {
+      description = 'Tidak ada deskripsi';
+    }
+
+    tags = json['tags'].cast<String>();
   }
 
   String? code;
@@ -45,6 +51,7 @@ class CourseModel {
   String? prerequisites;
   int? reviewCount;
   String? shortName;
+  List<String>? tags;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -57,6 +64,7 @@ class CourseModel {
     data['term'] = term;
     data['prerequisites'] = prerequisites;
     data['review_count'] = reviewCount;
+    data['tags'] = tags;
     return data;
   }
 
@@ -72,4 +80,6 @@ class CourseModel {
   int get hashCode => super.hashCode;
 
   String get describe => '$code  •  $sks SKS  •  $codeDesc';
+  String get cleanedDesc =>
+      description?.isEmpty ?? true ? 'Tidak ada deskripsi' : '$description';
 }

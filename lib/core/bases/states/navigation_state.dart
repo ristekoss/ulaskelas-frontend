@@ -107,8 +107,8 @@ class NavigationServiceState implements Navigation {
     );
   }
 
-  Future<List<TagModel>?> goToAddReviewMatkulTagPage() {
-    return nav.push<List<TagModel>>(
+  Future<List<String>?> goToAddReviewMatkulTagPage() {
+    return nav.push<List<String>>(
       const AddReviewMatkulTagPage(),
       RouteName.addReviewMatkulTagPage,
     );

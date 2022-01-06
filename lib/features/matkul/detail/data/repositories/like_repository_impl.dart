@@ -8,12 +8,12 @@ class LikeRepositoryImpl implements LikeRepository {
   final LikeRemoteDataSource _remoteDataSource;
 
   @override
-  Future<void> like(ReviewModel review) {
+  Future<Decide<Failure, Parsed<String>>> like(ReviewModel review) {
     return apiCall(_remoteDataSource.like(review));
   }
 
   @override
-  Future unlike(ReviewModel review) {
-    return apiCall(_remoteDataSource.like(review));
+  Future<Decide<Failure, Parsed<String>>> unlike(ReviewModel review) {
+    return apiCall(_remoteDataSource.unlike(review));
   }
 }

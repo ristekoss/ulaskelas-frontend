@@ -33,6 +33,8 @@ dependencies:
   flutter_switch: ^0.3.2
   universal_html: ^2.0.8
   dio: ^4.0.4
+  material_design_icons_flutter: ^4.0.5955
+  flutter_vector_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:

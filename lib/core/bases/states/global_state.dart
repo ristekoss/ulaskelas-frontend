@@ -11,10 +11,10 @@ final filterRM = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
-final reviewRM = RM.inject(
-  () => ReviewState(),
-  autoDisposeWhenNotUsed: false,
-);
+// final reviewRM = RM.inject(
+//   () => ReviewState(),
+//   autoDisposeWhenNotUsed: false,
+// );
 
 final reviewFormRM = RM.inject(
   () => ReviewCourseFormState(),
@@ -54,6 +54,11 @@ final reviewCourseRM = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final reviewHistoryRM = RM.inject(
+  () => ReviewHistoryState(),
+  autoDisposeWhenNotUsed: false,
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
@@ -68,7 +73,7 @@ class GlobalState {
       Inject(() => NavigationServiceState()),
       Inject(() => FilterState()),
       Inject(() => SearchCourseState()),
-      Inject(() => ReviewState()),
+      // Inject(() => ReviewState()),
       Inject(() => SearchTagState()),
       Inject(() => BookmarkState()),
     ];
@@ -79,7 +84,7 @@ class GlobalState {
     Inject(() => NavigationServiceState()),
     Inject(() => FilterState()),
     Inject(() => SearchCourseState()),
-    Inject(() => ReviewState()),
+    // Inject(() => ReviewState()),
     Inject(() => SearchTagState()),
     Inject(() => BookmarkState()),
   ];

@@ -9,27 +9,27 @@ class FilterState {
   final matkulTypes = [
     CheckboxItem(
       text: 'Wajib UI',
-      value: 'wajibui',
+      value: 'Wajib UI',
     ),
     CheckboxItem(
-      text: 'Wajib IK',
-      value: 'wajibik',
+      text: 'Wajib CS',
+      value: 'Wajib CS',
     ),
     CheckboxItem(
-      text: 'Wajib SI',
-      value: 'wajibsi',
+      text: 'Wajib IS',
+      value: 'Wajib IS',
     ),
     CheckboxItem(
       text: 'Wajib Fakultas',
-      value: 'wajibfakultas',
+      value: 'Wajib Fakultas',
     ),
     CheckboxItem(
-      text: 'Peminatan IK',
-      value: 'peminatanik',
+      text: 'Peminatan CS',
+      value: 'Peminatan CS',
     ),
     CheckboxItem(
-      text: 'Peminatan SI',
-      value: 'peminatansi',
+      text: 'Peminatan IS',
+      value: 'Peminatan IS',
     ),
   ];
 
@@ -55,35 +55,35 @@ class FilterState {
   final semesterPreconditions = [
     CheckboxItem(
       text: 'Semester 1',
-      value: 'semester1',
+      value: '1',
     ),
     CheckboxItem(
       text: 'Semester 2',
-      value: 'semester2',
+      value: '2',
     ),
     CheckboxItem(
       text: 'Semester 3',
-      value: 'semester3',
+      value: '3',
     ),
     CheckboxItem(
       text: 'Semester 4',
-      value: 'semester4',
+      value: '4',
     ),
     CheckboxItem(
       text: 'Semester 5',
-      value: 'semester5',
+      value: '5',
     ),
     CheckboxItem(
       text: 'Semester 6',
-      value: 'semester6',
+      value: '6',
     ),
     CheckboxItem(
       text: 'Semester 7',
-      value: 'semester7',
+      value: '7',
     ),
     CheckboxItem(
       text: 'Semester 8',
-      value: 'semester8',
+      value: '8',
     ),
   ];
 

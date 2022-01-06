@@ -66,7 +66,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
                   const HeightSpace(10),
                   OnReactive(
                     () => SearchField(
-                      hintText: 'Cari mata kuliah',
+                      hintText: 'Cari Tag',
                       focusNode: focusNode,
                       controller: searchTagRM.state.controller,
                       onClear: () {
@@ -126,45 +126,9 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
               listenTo: searchTagRM,
               onIdle: () => WaitingView(),
               onWaiting: () => WaitingView(),
-              // onError: (dynamic error) => ErrorView(error: error),
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
                 final matkulTags = searchTagRM.state.localSearch();
-                if (data.hasReachedMax && matkulTags.isEmpty) {
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 20,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          HeightSpace(sizeInfo.screenSize.height * .1),
-                          Image.asset(
-                            Ilustration.notfound,
-                            width: sizeInfo.screenSize.width * .6,
-                          ),
-                          const HeightSpace(20),
-                          Text(
-                            'Mata Kuliah Tidak Ditemukan',
-                            style: FontTheme.poppins14w700black().copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                          const HeightSpace(10),
-                          Text(
-                            '''
-Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata kunci lain.''',
-                            style: Theme.of(context).textTheme.caption,
-                            textAlign: TextAlign.center,
-                          ),
-                          const HeightSpace(20),
-                        ],
-                      ),
-                    ),
-                  );
-                }
                 return ListView.separated(
                   controller: scrollController,
                   padding: const EdgeInsets.symmetric(
@@ -172,10 +136,30 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     vertical: 10,
                   ),
                   itemCount: data.hasReachedMax
-                      ? matkulTags.length
+                      ? matkulTags.isEmpty
+                          ? 1
+                          : matkulTags.length
                       : matkulTags.length + 1,
                   separatorBuilder: (c, i) => const HeightSpace(16),
                   itemBuilder: (c, i) {
+                    if (matkulTags.isEmpty) {
+                      final tag = searchTagRM.state.controller.text;
+                      final selectedTags = data.selectedTags;
+                      final isSelected = selectedTags.contains(tag);
+                      return SelectTag(
+                        label: tag,
+                        enabled: selectedTags.length < 3 || isSelected,
+                        isSelected: isSelected,
+                        onChanged: (val) {
+                          if (selectedTags.length <= 3) {
+                            searchTagRM.setState((s) => s.switchTag(tag));
+                          }
+                          if (!isSelected) {
+                            searchTagRM.setState((s) => s.addNewTag(tag));
+                          }
+                        },
+                      );
+                    }
                     if (!data.hasReachedMax && i == matkulTags.length) {
                       return const CircleLoading(
                         size: 25,
@@ -185,7 +169,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     final selectedTags = data.selectedTags;
                     final isSelected = selectedTags.contains(tag);
                     return SelectTag(
-                      label: tag.name,
+                      label: tag,
                       enabled: selectedTags.length < 3 || isSelected,
                       isSelected: isSelected,
                       onChanged: (val) {

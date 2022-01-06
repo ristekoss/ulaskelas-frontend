@@ -14,7 +14,7 @@ class BaseAppBar extends AppBar {
     Color? color,
   }) : super(
           key: key,
-          elevation: elevation ?? 2,
+          elevation: elevation ?? 1,
           shadowColor: Colors.grey[300],
           backgroundColor: color ?? BaseColors.white,
           foregroundColor: color ?? BaseColors.white,

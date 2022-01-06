@@ -4,9 +4,11 @@ class TulisUlasanButton extends StatelessWidget {
   const TulisUlasanButton({
     Key? key,
     required this.onTap,
+    this.isLoading = false,
   }) : super(key: key);
 
   final VoidCallback onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class TulisUlasanButton extends StatelessWidget {
       ),
       child: AutoLayoutButton(
         text: 'Tulis Ulasan',
+        isLoading: isLoading,
         onTap: onTap,
       ),
     );

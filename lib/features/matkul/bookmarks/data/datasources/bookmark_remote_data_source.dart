@@ -1,15 +1,15 @@
 part of '_datasources.dart';
 
 abstract class BookmarkRemoteDataSource {
-  Future<Parsed<List<BookmarkModel>>> getAllBookmark();
+  Future<Parsed<List<BookmarkModel>>> getAllBookmark(QueryBookmark q);
   Future<void> postBookmark(BookmarkModel bookmark, bool isBookmark);
 }
 
 class BookmarkRemoteDataSourceImpl implements BookmarkRemoteDataSource {
   @override
-  Future<Parsed<List<BookmarkModel>>> getAllBookmark() async {
+  Future<Parsed<List<BookmarkModel>>> getAllBookmark(QueryBookmark q) async {
     final list = <BookmarkModel>[];
-    final url = Endpoints.bookmarks;
+    final url = '${Endpoints.bookmarks}?$q';
     final resp = await getIt(url);
     for (final data in resp.dataBodyIterable) {
       list.add(BookmarkModel.fromJson(data));
@@ -24,20 +24,17 @@ class BookmarkRemoteDataSourceImpl implements BookmarkRemoteDataSource {
   @override
   Future<void> postBookmark(BookmarkModel bookmark, bool isBookmark) async {
     final url = Endpoints.bookmarks;
-    if (isBookmark) {
-      final resp = await postIt(url, model: bookmark.toJson());
-      if (resp.statusCode == 200) {
-        Logger().i('Bookmark posted');
-      } else {
-        Logger().e('Error posting bookmark');
-      }
+    final resp = await postIt(
+      url,
+      model: <String, dynamic>{
+        'course_code': bookmark.courseCode,
+        'is_bookmark': isBookmark,
+      },
+    );
+    if (resp.statusCode == 200 || resp.statusCode == 204) {
+      Logger().i('Bookmark deleted');
     } else {
-      final resp = await deleteIt(url, model: bookmark.toJson());
-      if (resp.statusCode == 200 || resp.statusCode == 204) {
-        Logger().i('Bookmark deleted');
-      } else {
-        Logger().e('Error deleting bookmark');
-      }
+      Logger().e('Error deleting bookmark');
     }
   }
 }

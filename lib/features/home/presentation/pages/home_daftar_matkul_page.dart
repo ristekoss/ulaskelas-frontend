@@ -13,7 +13,7 @@ class _HomeCourseListPageState extends BaseStateful<HomeCourseListPage> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BaseAppBar(
-      label: 'Mata Kuliah Semester ',
+      label: 'Mata Kuliah Semester ${profileRM.state.profile.term}',
       elevation: 0,
     );
   }

@@ -90,11 +90,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
           });
         }
       }
-      nav.pop<void>();
-      if (authRM.state.isLogin) {
-        unawaited(nav.replaceToMainPage());
-        SuccessMessenger('Login Successful').show(ctx!);
-      }
+      nav.pop<bool>(true);
     }
   }
 

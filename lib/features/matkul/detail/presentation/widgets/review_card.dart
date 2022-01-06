@@ -18,7 +18,7 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final imgDummy = 'https://pbs.twimg.com/media/EtvfOFTWYAc3j1q.jpg';
     final color = GlobalState.theme().state.secondaryColor;
-    // final formattedDate = DateFormat('dd/MM/yyyy').format(reviewedOn);
+    final formattedDate = DateFormat('dd/MM/yyyy').format(review.createdAt!);
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -79,40 +79,45 @@ class ReviewCard extends StatelessWidget {
                           ),
                       ],
                     ),
-                    // Text('$major $year', style: FontTheme.poppins12w400black())
+                    Text(
+                      '${review.authorStudyProgram} ${review.authorGeneration}',
+                      style: FontTheme.poppins12w400black(),
+                    ),
                   ],
                 ),
-              )
+              ),
+              if (review.user != profileRM.state.profile.id)
+                PopupMenu(
+                  username: review.author.toString(),
+                ),
             ],
           ),
           const SizedBox(
             height: 8,
           ),
-          Row(
-            children: const [
-              Tag(
-                label: 'Tags here',
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Tag(
-                label: 'Tags here',
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Tag(
-                label: 'Tags here',
-              ),
-            ],
-          ),
+          if (review.tags?.isNotEmpty ?? false) ...[
+            Row(
+              children: review.tags!
+                  .map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Tag(
+                        label: e,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+          ],
           const SizedBox(
-            height: 12,
+            height: 4,
           ),
           Text(
-            'Semester mengambil: classTakenOn',
-            style: FontTheme.poppins12w500black().copyWith(
+            '''Semester mengambil: ${review.semester == 1 ? 'Ganjil' : 'Genap'} ${review.academicYear}''',
+            style: FontTheme.poppins12w700black().copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -120,15 +125,15 @@ class ReviewCard extends StatelessWidget {
           Text(
             review.content.toString(),
             textAlign: TextAlign.justify,
-            style: FontTheme.poppins12w400black(),
+            style: FontTheme.poppins12w500black(),
           ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Diulas pada formattedDate',
-                style: FontTheme.poppins10w400black().copyWith(
+                'Diulas pada $formattedDate',
+                style: FontTheme.poppins12w400black().copyWith(
                   color: const Color(0xFF828282),
                 ),
               ),
@@ -141,13 +146,15 @@ class ReviewCard extends StatelessWidget {
                     child: Icon(
                       Icons.thumb_up,
                       size: 22,
-                      // color: thumbIconColor,
+                      color: review.isLiked ?? false
+                          ? BaseColors.primaryColor
+                          : BaseColors.gray3,
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      review.likesBy!.length.toString(),
+                      review.likesCount.toString(),
                       style: FontTheme.poppins14w600black().copyWith(
                           // color: likesCountColor,
                           ),
@@ -160,5 +167,70 @@ class ReviewCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class PopupMenu extends StatelessWidget {
+  const PopupMenu({
+    Key? key,
+    required this.username,
+  }) : super(key: key);
+
+  final String username;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<int>(
+      padding: EdgeInsets.zero,
+      iconSize: 18,
+      onSelected: (value) => _onSelected(context, value),
+      itemBuilder: (context) => [
+        _buildItem(
+          value: 1,
+          icon: Feather.trash_2,
+          text: 'Report',
+        ),
+      ],
+    );
+  }
+
+  PopupMenuItem<int> _buildItem({
+    required int value,
+    required IconData icon,
+    required String text,
+  }) {
+    return PopupMenuItem(
+      value: value,
+      height: 32,
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: BaseColors.mineShaft,
+            size: 16,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            text,
+            style: FontTheme.poppins12w400black().apply(
+              color: BaseColors.mineShaft,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _onSelected(BuildContext context, int value) {
+    switch (value) {
+      case 1:
+        LaunchServices.openEmail(
+          'team@ristek.cs.ui.ac.id',
+          'Report User Content for $username',
+          'enter report message',
+        );
+        break;
+      default:
+    }
   }
 }

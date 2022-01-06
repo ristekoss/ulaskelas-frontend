@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:ulaskelas/features/matkul/bookmarks/domain/entities/query_bookmark.dart';
 
 import 'core/bases/states/_states.dart';
 import 'core/constants/_constants.dart';
@@ -68,14 +69,31 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
   }
 
   Future<void> _ssoLogin() async {
+    if (authRM.state.isLoading) {
+      return;
+    }
     unawaited(
       authRM.setState((s) {
         s.isLoading = true;
       }),
     );
     await Future.delayed(const Duration(seconds: 1));
-
     await authRM.setState((s) => s.ssoLogin());
+    if (authRM.state.isLogin) {
+      await profileRM.state.retrieveData();
+      await bookmarkRM.state.retrieveData(QueryBookmark());
+      if (profileRM.state.profile.isBlocked ?? false) {
+        ErrorMessenger('Your account is blocked').show(ctx!);
+        return;
+      }
+      unawaited(nav.replaceToMainPage());
+      SuccessMessenger('Login Successful').show(ctx!);
+    }
+    unawaited(
+      authRM.setState((s) {
+        s.isLoading = false;
+      }),
+    );
   }
 }
 

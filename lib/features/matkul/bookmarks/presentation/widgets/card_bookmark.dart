@@ -7,7 +7,7 @@ class CardBookmark extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
 
-  final CourseModel model;
+  final BookmarkModel model;
   final VoidCallback? onTap;
 
   @override
@@ -52,7 +52,7 @@ class CardBookmark extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.name.toString(),
+                        model.courseName.toString(),
                         style: FontTheme.poppins14w700black().copyWith(
                           fontWeight: FontWeight.w600,
                         ),
@@ -62,11 +62,11 @@ class CardBookmark extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            model.code.toString(),
+                            model.courseCodeDesc.toString(),
                             style: FontTheme.poppins12w400black(),
                           ),
                           Text(
-                            '${model.reviewCount} Ulasan',
+                            '${model.courseReviewCount} Ulasan',
                             style: FontTheme.poppins12w400black().copyWith(
                               color: BaseColors.gray2,
                             ),
@@ -86,7 +86,7 @@ class CardBookmark extends StatelessWidget {
                 // bookmarkRM.setState((s) =>
                 // s.deleteFromBookmark(model.name!));
                 SuccessMessenger(
-                  'Berhasil menghapus ${model.name} dari bookmark',
+                  'Berhasil menghapus ${model.courseName} dari bookmark',
                 ).show(ctx!);
               },
               child: const Icon(
