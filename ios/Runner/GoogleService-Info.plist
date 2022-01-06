@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>178086714441-go1mil91kkn5rgbr548v5rd3kl8mjefl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.178086714441-go1mil91kkn5rgbr548v5rd3kl8mjefl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>178086714441-36ol5lmhilsud4lkard9f8l8ejc3itbn.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDms2KUABjdfr8aw3aYTckkV6ZJWi4g1Io</string>
+	<key>GCM_SENDER_ID</key>
+	<string>178086714441</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ristek.ulaskelas</string>
+	<key>PROJECT_ID</key>
+	<string>ulas-kelas</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ulas-kelas.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:178086714441:ios:5010d42d36f3eb82cc7398</string>
+</dict>
+</plist>
