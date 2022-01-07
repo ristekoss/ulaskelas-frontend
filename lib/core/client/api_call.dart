@@ -24,7 +24,11 @@ Future<Decide<Failure, T>> apiCall<T>(Future<T> t) async {
       return Left(GeneralFailure(message: 'Format Exception'));
     } else if ((e.response?.statusCode ?? 0) == 403) {
       Logger().e('Unauthorized');
-      return Left(GeneralFailure(message: 'Unauthorize'));
+      while (nav.canPop()) {
+        nav.pop();
+      }
+      await nav.replaceToSsoPage();
+      return Left(UnAuthorizeFailure(message: 'Unauthorize'));
     } else if ((e.response?.statusCode ?? 0) == 404) {
       Logger().e('Not Found Failure');
       return Left(

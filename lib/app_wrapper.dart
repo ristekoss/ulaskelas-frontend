@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/core/_core.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 
@@ -28,6 +29,11 @@ class _AppWrapperState extends State<AppWrapper> {
       () async {
         await authRM.state.initialize();
         if (authRM.state.isLogin) {
+          if (profileRM.state.profile.isBlocked ?? false) {
+            ErrorMessenger('Your account is blocked').show(ctx!);
+            ssoPageRoute();
+            return;
+          }
           mainPageRoute();
         } else if (authRM.state.isNewInstall) {
           onboardingPageRoute();

@@ -18,10 +18,8 @@ dependencies:
   logger: ^1.0.0
   firebase_analytics: ^8.2.0
   firebase_crashlytics: ^2.4.4
-  firebase_messaging: ^10.0.9
   firebase_core: ^1.10.6
   google_fonts: ^2.2.0
-  flutter_local_notifications: ^8.0.0
   share: ^2.0.4
   hive: ^1.4.4
   path_provider: ^2.0.8

@@ -7,9 +7,6 @@ PODS:
   - Firebase/Crashlytics (8.9.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 8.9.0)
-  - Firebase/Messaging (8.9.0):
-    - Firebase/CoreOnly
-    - FirebaseMessaging (~> 8.9.0)
   - firebase_analytics (8.3.4):
     - Firebase/AnalyticsWithoutAdIdSupport (= 8.9.0)
     - firebase_core
@@ -19,10 +16,6 @@ PODS:
     - Flutter
   - firebase_crashlytics (2.4.4):
     - Firebase/Crashlytics (= 8.9.0)
-    - firebase_core
-    - Flutter
-  - firebase_messaging (10.0.9):
-    - Firebase/Messaging (= 8.9.0)
     - firebase_core
     - Flutter
   - FirebaseAnalytics/WithoutAdIdSupport (8.9.1):
@@ -55,18 +48,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.6)
     - GoogleUtilities/UserDefaults (~> 7.6)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FirebaseMessaging (8.9.0):
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
-    - GoogleDataTransport (~> 9.1)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
-    - GoogleUtilities/Environment (~> 7.6)
-    - GoogleUtilities/Reachability (~> 7.6)
-    - GoogleUtilities/UserDefaults (~> 7.6)
-    - nanopb (~> 2.30908.0)
   - Flutter (1.0.0)
-  - flutter_local_notifications (0.0.1):
-    - Flutter
   - GoogleAppMeasurement/WithoutAdIdSupport (8.9.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
     - GoogleUtilities/MethodSwizzler (~> 7.6)
@@ -117,9 +99,7 @@ DEPENDENCIES:
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
-  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
-  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
@@ -134,7 +114,6 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
     - FirebaseInstallations
-    - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -148,12 +127,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_crashlytics:
     :path: ".symlinks/plugins/firebase_crashlytics/ios"
-  firebase_messaging:
-    :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
-  flutter_local_notifications:
-    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
   share:
@@ -170,15 +145,12 @@ SPEC CHECKSUMS:
   firebase_analytics: fc22c02d8c200e3600bc15899a34ac2264ddf763
   firebase_core: c263d7daf1dc92fcd9895e6abdc04872b0ee07ff
   firebase_crashlytics: 9cbd5d9e8560b218f02fce3c7359567ac822d05f
-  firebase_messaging: 1109f5449638254c47fb5904d24e11a4d7736c77
   FirebaseAnalytics: 4ab446ce08a3fe52e8a4303dd997cf26276bf968
   FirebaseCore: 599ee609343eaf4941bd188f85e3aa077ffe325b
   FirebaseCoreDiagnostics: 56fb7216d87e0e6ec2feddefa9d8a392fe8b2c18
   FirebaseCrashlytics: 40efbd81157dae307ec95612fa1328347284d2c2
   FirebaseInstallations: 830327b45345ffc859eaa9c17bcd5ae893fd5425
-  FirebaseMessaging: 82c4a48638f53f7b184f3cc9f6cd2cbe533ab316
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   GoogleAppMeasurement: 837649ad3987936c232f6717c5680216f6243d24
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
