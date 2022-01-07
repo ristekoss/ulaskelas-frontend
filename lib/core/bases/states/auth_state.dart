@@ -42,7 +42,7 @@ class AuthState {
     return Pref.containsKey(key);
   }
 
-  void _webLogin(String data) {
+  Future<void> _webLogin(String data) async {
     /// Parse data into an Uri to extract the token easily.
     final receivedUri = Uri.parse(data);
 
@@ -52,10 +52,10 @@ class AuthState {
     final params = receivedUri.queryParameters;
     for (final param in params.entries) {
       if (param.key == 'token') {
-        Pref.saveToken(param.value);
+        await Pref.saveToken(param.value);
       } else if (param.key == 'username') {
-        Pref.saveString(param.key, param.value);
-        authRM.setState((s) {
+        await Pref.saveString(param.key, param.value);
+        await authRM.setState((s) {
           s
             ..isLogin = true
             ..isLoading = false;
@@ -68,6 +68,12 @@ class AuthState {
       _popupWin?.close();
       _popupWin = null;
       if (authRM.state.isLogin) {
+        await profileRM.state.retrieveData();
+        await bookmarkRM.state.retrieveData(QueryBookmark());
+        if (profileRM.state.profile.isBlocked ?? false) {
+          ErrorMessenger('Your account is blocked').show(ctx!);
+          return;
+        }
         unawaited(nav.replaceToMainPage());
         SuccessMessenger('Login Successful').show(ctx!);
       }
