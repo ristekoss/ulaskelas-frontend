@@ -65,6 +65,7 @@ class _HomePageState extends BaseStateful<HomePage> {
       key: refreshIndicatorKey,
       onRefresh: retrieveData,
       child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
             Container(

@@ -24,6 +24,12 @@ class ProfileState {
     resp?.fold(
       (failure) {
         Logger().e(failure.message);
+        // if(failure is UnAuthorizeFailure) {
+        //   while(nav.canPop()) {
+        //     nav.pop();
+        //   }
+        //   nav.replaceToSsoPage();
+        // }
       },
       (result) => _profile = result.data,
     );
