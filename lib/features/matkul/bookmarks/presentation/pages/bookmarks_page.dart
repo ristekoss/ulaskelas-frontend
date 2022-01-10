@@ -51,30 +51,33 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
           onData: (data) {
             final bookmarks = data.bookmarks;
             if (bookmarks.isEmpty) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  HeightSpace(sizeInfo.screenSize.height * .1),
-                  Image.asset(
-                    Ilustration.notfound,
-                    width: sizeInfo.screenSize.width * .6,
-                  ),
-                  const HeightSpace(20),
-                  Text(
-                    'Belum Ada Mata Kuliah Tersimpan',
-                    style: FontTheme.poppins14w700black().copyWith(
-                      color: Theme.of(context).colorScheme.primary,
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    HeightSpace(sizeInfo.screenSize.height * .1),
+                    Image.asset(
+                      Ilustration.notfound,
+                      width: sizeInfo.screenSize.width * .6,
                     ),
-                  ),
-                  const HeightSpace(10),
-                  Text(
-                    '''
+                    const HeightSpace(20),
+                    Text(
+                      'Belum Ada Mata Kuliah Tersimpan',
+                      style: FontTheme.poppins14w700black().copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const HeightSpace(10),
+                    Text(
+                      '''
 Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.''',
-                    style: Theme.of(context).textTheme.caption,
-                    textAlign: TextAlign.center,
-                  ),
-                  const HeightSpace(40),
-                ],
+                      style: Theme.of(context).textTheme.caption,
+                      textAlign: TextAlign.center,
+                    ),
+                    const HeightSpace(40),
+                  ],
+                ),
               );
             }
             return ListView.separated(
@@ -82,7 +85,14 @@ Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.'''
               itemCount: bookmarkRM.state.bookmarks.length,
               itemBuilder: (context, index) {
                 final bookmark = bookmarks[index];
-                return CardBookmark(model: bookmark);
+                // TODO(paw): set course_id
+                return CardBookmark(
+                  model: bookmark,
+                  onTap: () => nav.goToDetailMatkulPage(
+                    bookmark.hashCode,
+                    bookmark.courseCode!,
+                  ),
+                );
               },
               separatorBuilder: (BuildContext context, int index) =>
                   const SizedBox(height: 16),

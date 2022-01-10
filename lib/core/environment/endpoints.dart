@@ -16,4 +16,5 @@ class Endpoints {
   static final bookmarks = '$baseUrl/api/bookmarks';
   static final tags = '$baseUrl/api/tags';
   static final likes = '$baseUrl/api/likes';
+  static final course = '$baseUrl/api/courses/{courseId}';
 }

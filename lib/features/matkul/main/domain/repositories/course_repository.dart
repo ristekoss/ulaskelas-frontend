@@ -10,4 +10,5 @@ abstract class CourseRepository {
   Future<Decide<Failure, Parsed<List<CourseModel>>>> getCurrentTermCourse();
 
   Future<Decide<Failure, Parsed<List<CourseModel>>>> getAllCachedCourse();
+  Future<Decide<Failure, Parsed<CourseModel>>> getDetailCourse(int courseId);
 }

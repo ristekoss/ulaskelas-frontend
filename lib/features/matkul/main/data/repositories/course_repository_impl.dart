@@ -27,4 +27,9 @@ class CourseRepositoryImpl implements CourseRepository {
   Future<Decide<Failure, Parsed<List<CourseModel>>>> getAllCachedCourse() {
     return apiCall(_localDataSource.getAllCourse());
   }
+
+  @override
+  Future<Decide<Failure, Parsed<CourseModel>>> getDetailCourse(int courseId) {
+    return apiCall(_remoteDataSource.getDetailCourse(courseId));
+  }
 }

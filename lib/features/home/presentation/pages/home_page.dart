@@ -170,7 +170,10 @@ class _HomePageState extends BaseStateful<HomePage> {
                     final course = data.summaries[i];
                     return CardCourse(
                       model: course,
-                      onTap: () {},
+                      onTap: () => nav.goToDetailMatkulPage(
+                        course.id!,
+                        course.code!,
+                      ),
                     );
                   },
                 );
@@ -212,19 +215,9 @@ class _HomePageState extends BaseStateful<HomePage> {
               },
               onData: (data) {
                 if (data.reviewHistories.isEmpty) {
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            'Tidak ada riwayat ulasan',
-                            style: FontTheme.poppins12w500black(),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ),
-                    ],
+                  return const EmptyView(
+                    title: 'Tidak ada Riwayat Ulasan',
+                    description: '',
                   );
                 }
                 return ListView.separated(
@@ -238,7 +231,13 @@ class _HomePageState extends BaseStateful<HomePage> {
                   separatorBuilder: (c, i) => const HeightSpace(16),
                   itemBuilder: (c, i) {
                     final review = data.summaries[i];
-                    return CardMatkulReview(review: review, onTap: () {});
+                    return CardMatkulReview(
+                      review: review,
+                      onTap: () => nav.goToDetailMatkulPage(
+                        review.course!,
+                        review.courseCode.toString(),
+                      ),
+                    );
                   },
                 );
               },

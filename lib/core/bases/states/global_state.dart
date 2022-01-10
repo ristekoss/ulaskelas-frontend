@@ -59,6 +59,10 @@ final reviewHistoryRM = RM.inject(
   autoDisposeWhenNotUsed: false,
 );
 
+final courseDetailRM = RM.inject(
+  () => CourseDetailState(),
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
