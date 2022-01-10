@@ -125,6 +125,15 @@ class ArgumentFailure extends Failure {
         );
 }
 
+class UnAuthorizeFailure extends Failure {
+  UnAuthorizeFailure({
+    String? message,
+  }) : super(
+          message: message,
+          title: 'UnAuthorize Failure',
+        );
+}
+
 class ParseFailure extends Failure {}
 
 class EmptyFailure extends Failure {}

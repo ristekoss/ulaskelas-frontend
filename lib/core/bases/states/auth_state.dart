@@ -20,6 +20,7 @@ class AuthState {
     _isLogin = await _hasToken();
     if (_isLogin ?? false) {
       await profileRM.setState((s) => s.retrieveData());
+      await bookmarkRM.state.retrieveData(QueryBookmark());
     }
   }
 
