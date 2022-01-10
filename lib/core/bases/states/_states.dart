@@ -13,6 +13,7 @@ import 'package:ulaskelas/features/home/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/domain/entities/query_bookmark.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/matkul/detail/presentation/states/course_detail_state.dart';
 import 'package:ulaskelas/features/matkul/form/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/form/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';

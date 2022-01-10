@@ -68,8 +68,8 @@ class SearchListView extends StatelessWidget {
                 );
               },
               onData: (data) {
-                final matkuls = data.filteredCourses;
-                if (data.hasReachedMax && matkuls.isEmpty) {
+                final courses = data.filteredCourses;
+                if (data.hasReachedMax && courses.isEmpty) {
                   return const DetailView(
                     isEmptyView: true,
                     title: 'Mata Kuliah Tidak Ditemukan',
@@ -85,16 +85,19 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     vertical: 10,
                   ),
                   itemCount:
-                      data.hasReachedMax ? matkuls.length : matkuls.length + 1,
+                      data.hasReachedMax ? courses.length : courses.length + 1,
                   separatorBuilder: (c, i) => const HeightSpace(16),
                   itemBuilder: (c, i) {
-                    if (!data.hasReachedMax && i == matkuls.length) {
+                    if (!data.hasReachedMax && i == courses.length) {
                       return const CircleLoading(size: 25);
                     }
-                    final matkul = matkuls[i];
+                    final course = courses[i];
                     return CardCourse(
-                      model: matkul,
-                      onTap: () => nav.goToDetailMatkulPage(matkul),
+                      model: course,
+                      onTap: () => nav.goToDetailMatkulPage(
+                        course.id!,
+                        course.code!,
+                      ),
                     );
                   },
                 );

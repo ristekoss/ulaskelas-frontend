@@ -7,9 +7,14 @@ part of '_pages.dart';
 /// nav.push<void>(ReviewMatkulPage, RouteName.reviewMatkul,);
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
-  const DetailMatkulPage({Key? key, required this.course}) : super(key: key);
+  const DetailMatkulPage({
+    Key? key,
+    required this.courseId,
+    required this.courseCode,
+  }) : super(key: key);
 
-  final CourseModel course;
+  final int courseId;
+  final String courseCode;
 
   @override
   _DetailMatkulPageState createState() => _DetailMatkulPageState();
@@ -18,14 +23,19 @@ class DetailMatkulPage extends StatefulWidget {
 class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
   @override
   void init() {
-    reviewCourseRM.setState(
-      (s) => s.retrieveData(QueryReview(courseCode: widget.course.code)),
-    );
+    // courseDetailRM.setState((s) => s.retrieveData(widget.courseId));
+    // reviewCourseRM.setState(
+    //   (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
+    // );
+    refreshIndicatorKey?.currentState?.show();
   }
 
   Future<void> retrieveData() async {
+    unawaited(
+      courseDetailRM.setState((s) => s.retrieveData(widget.courseId)),
+    );
     await reviewCourseRM.setState(
-      (s) => s.retrieveData(QueryReview(courseCode: widget.course.code)),
+      (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
     );
   }
 
@@ -50,47 +60,58 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           child: RefreshIndicator(
             key: refreshIndicatorKey,
             onRefresh: retrieveData,
-            child: ListView(
-              padding: const EdgeInsets.all(24),
-              children: [
-                // Title + BookmarkIcon
-                _buildTitleAndBookmark(context),
-                const HeightSpace(24),
-
-                if (widget.course.tags?.isNotEmpty ?? false) _buildMatkulTag(),
-                const HeightSpace(16),
-
-                _buildMatkulDescription(),
-                const HeightSpace(32),
-                // ~~~~~~~~~~~~~~~~~~~~~~~~~
-                _buildMatkulPrerequisite(),
-                const HeightSpace(32),
-
-                // ~~~~~~~~~~~~~~~~~~~~~~~~~
-                _buildReviewBySelf(),
-                _buildReviews(),
-              ],
+            child: OnBuilder<CourseDetailState>.all(
+              listenTo: courseDetailRM,
+              onIdle: () => WaitingView(),
+              onWaiting: () => WaitingView(),
+              onError: (dynamic error, refresh) => const Text('error'),
+              onData: (data) {
+                final course = data.detailCourse;
+                return ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(24),
+                  children: [
+                    _buildTitleAndBookmark(course),
+                    const HeightSpace(24),
+                    if (course.tags?.isNotEmpty ?? false)
+                      _buildMatkulTag(course),
+                    const HeightSpace(16),
+                    _buildMatkulDescription(course),
+                    const HeightSpace(32),
+                    _buildMatkulPrerequisite(course),
+                    const HeightSpace(32),
+                    _buildReviewBySelf(),
+                    _buildReviews(),
+                  ],
+                );
+              },
             ),
           ),
         ),
         TulisUlasanButton(
-          onTap: () => nav.goToReviewMatkulFormPage(course: widget.course),
+          onTap: () {
+            if (courseDetailRM.isDone && courseDetailRM.hasData) {
+              nav.goToReviewMatkulFormPage(
+                course: courseDetailRM.state.detailCourse,
+              );
+            }
+          },
         )
       ],
     );
   }
 
-  Widget _buildMatkulDescription() {
+  Widget _buildMatkulDescription(CourseModel course) {
     return Text(
-      widget.course.cleanedDesc,
+      course.cleanedDesc,
       textAlign: TextAlign.justify,
       style: FontTheme.poppins12w400black(),
     );
   }
 
-  Widget _buildMatkulTag() {
+  Widget _buildMatkulTag(CourseModel course) {
     return Row(
-      children: widget.course.tags!
+      children: course.tags!
           .map(
             (e) => Tag(
               label: e,
@@ -100,7 +121,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     );
   }
 
-  Widget _buildTitleAndBookmark(BuildContext context) {
+  Widget _buildTitleAndBookmark(CourseModel course) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -110,7 +131,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           children: [
             Flexible(
               child: Text(
-                widget.course.name.toString(),
+                course.name.toString(),
                 style: FontTheme.poppins20w700black(),
               ),
             ),
@@ -120,17 +141,17 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 return GestureDetector(
                   onTap: () {
                     final bookmark = BookmarkModel(
-                      courseCode: widget.course.code,
-                      courseName: widget.course.name,
-                      courseCodeDesc: widget.course.codeDesc,
-                      courseReviewCount: widget.course.reviewCount,
-                      shortName: widget.course.shortName,
+                      courseCode: course.code,
+                      courseName: course.name,
+                      courseCodeDesc: course.codeDesc,
+                      courseReviewCount: course.reviewCount,
+                      shortName: course.shortName,
                     );
                     bookmarkRM.setState((s) => s.toggleBookmark(bookmark));
                   },
                   child: Icon(
                     Icons.bookmark,
-                    color: bookmarkRM.state.isMarked(widget.course)
+                    color: bookmarkRM.state.isMarked(course)
                         ? BaseColors.goldenrod
                         : BaseColors.gray3,
                   ),
@@ -141,7 +162,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
         ),
         const HeightSpace(8),
         Text(
-          widget.course.describe,
+          course.describe,
           style: FontTheme.poppins16w500black(),
         ),
       ],
@@ -246,7 +267,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     );
   }
 
-  Widget _buildMatkulPrerequisite() {
+  Widget _buildMatkulPrerequisite(CourseModel course) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -261,12 +282,12 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           color: Color(0xFFE0E0E0),
         ),
         const HeightSpace(12),
-        if (widget.course.prerequisites?.isNotEmpty ?? false)
+        if (course.prerequisites?.isNotEmpty ?? false)
           Padding(
             padding: const EdgeInsets.only(left: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.course.prerequisites!
+              children: course.prerequisites!
                   .split(',')
                   .map(
                     (e) => Padding(

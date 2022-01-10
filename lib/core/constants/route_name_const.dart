@@ -16,4 +16,5 @@ class RouteName {
   static const String homeDaftarMatkul = 'home-daftar-matkul';
   static const String homeDaftarUlasan = 'home-daftar-ulasan';
   static const String ssoLogin = 'sso-login';
+  static const String courseDetail = 'course-detail';
 }

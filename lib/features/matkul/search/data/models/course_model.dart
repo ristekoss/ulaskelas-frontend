@@ -4,6 +4,7 @@ part of '_models.dart';
 
 class CourseModel {
   CourseModel({
+    this.id,
     this.code,
     this.curriculum,
     this.name,
@@ -17,6 +18,7 @@ class CourseModel {
   });
 
   CourseModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     code = json['code'];
     codeDesc = json['code_desc'] ?? code;
     curriculum = json['curriculum'];
@@ -38,9 +40,12 @@ class CourseModel {
       description = 'Tidak ada deskripsi';
     }
 
-    tags = json['tags'].cast<String>();
+    if (json['tags'] != null) {
+      tags = json['tags'].cast<String>();
+    }
   }
 
+  int? id;
   String? code;
   String? codeDesc;
   String? curriculum;
@@ -55,6 +60,7 @@ class CourseModel {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['id'] = id;
     data['code'] = code;
     data['code_desc'] = codeDesc;
     data['curriculum'] = curriculum;
@@ -71,7 +77,7 @@ class CourseModel {
   @override
   bool operator ==(Object other) {
     if (other is CourseModel) {
-      return code == other.code;
+      return code == other.code || id == other.id;
     }
     return super == other;
   }

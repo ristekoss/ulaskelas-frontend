@@ -5,6 +5,7 @@ part of '_datasources.dart';
 abstract class CourseRemoteDataSource {
   Future<Parsed<List<CourseModel>>> getAllCourse(QuerySearchCourse querySearch);
   Future<Parsed<List<CourseModel>>> getCurrentTermCourse();
+  Future<Parsed<CourseModel>> getDetailCourse(int courseId);
 }
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
@@ -42,5 +43,12 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
       );
     }
     return resp.parse(list);
+  }
+
+  @override
+  Future<Parsed<CourseModel>> getDetailCourse(int courseId) async {
+    final url = Endpoints.course.replaceAll('{courseId}', courseId.toString());
+    final resp = await getIt(url);
+    return resp.parse(CourseModel.fromJson(resp.dataBodyAsMap['course']));
   }
 }

@@ -82,12 +82,16 @@ class NavigationServiceState implements Navigation {
     );
   }
 
-  Future<void> goToDetailMatkulPage(CourseModel course) {
+  Future<void> goToDetailMatkulPage(
+    int courseId,
+    String courseCode,
+  ) {
     return nav.push<void>(
       DetailMatkulPage(
-        course: course,
+        courseId: courseId,
+        courseCode: courseCode,
       ),
-      RouteName.mainPage,
+      RouteName.courseDetail,
     );
   }
 
