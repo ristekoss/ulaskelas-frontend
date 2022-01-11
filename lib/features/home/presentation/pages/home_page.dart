@@ -218,7 +218,8 @@ class _HomePageState extends BaseStateful<HomePage> {
                 if (data.reviewHistories.isEmpty) {
                   return const EmptyView(
                     title: 'Tidak ada Riwayat Ulasan',
-                    description: '',
+                    description: 'Mulailah untuk menulis ulasan pada matkul!',
+                    padTop: 20,
                   );
                 }
                 return ListView.separated(

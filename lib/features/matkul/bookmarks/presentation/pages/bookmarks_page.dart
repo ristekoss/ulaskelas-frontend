@@ -89,7 +89,7 @@ Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.'''
                 return CardBookmark(
                   model: bookmark,
                   onTap: () => nav.goToDetailMatkulPage(
-                    bookmark.hashCode,
+                    bookmark.courseId!,
                     bookmark.courseCode!,
                   ),
                 );

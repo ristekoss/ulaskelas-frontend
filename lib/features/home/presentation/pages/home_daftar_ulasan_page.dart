@@ -43,13 +43,14 @@ class _HomeDaftarUlasanPageState extends BaseStateful<HomeDaftarUlasanPage> {
         onError: (dynamic error, refresh) => Text(error.toString()),
         onData: (data) {
           if (data.reviewHistories.isEmpty) {
-            return ListView(
-              children: [
-                Text(
-                  'Belum ada history',
-                  style: FontTheme.poppins12w500black(),
+            return const Center(
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: EmptyView(
+                  title: 'Tidak ada Riwayat Ulasan',
+                  description: 'Mulailah untuk menulis ulasan pada matkul!',
                 ),
-              ],
+              ),
             );
           }
           return ListView.separated(

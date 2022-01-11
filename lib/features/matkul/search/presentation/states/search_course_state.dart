@@ -92,17 +92,17 @@ class SearchCourseState
   Future<void> searchMatkul(QuerySearchCourse query) async {
     page = 1;
     query.page = 1;
-    _hasReachedMax = false;
-    final now = DateTime.now();
-    final cachedDay = DateTime.parse(
-      Pref.getString(Filename.courses) ?? now.toIso8601String(),
-    );
-    final isDiffDay = cachedDay.difference(now) > const Duration(hours: 12) ||
-        !Pref.containsKey(Filename.courses);
-    final resp = isDiffDay
-        ? await _repo?.getAllCourse(query)
-        : await _repo?.getAllCachedCourse();
-    // final resp = await _repo?.getAllCourse(query);
+    // _hasReachedMax = false;
+    // final now = DateTime.now();
+    // final cachedDay = DateTime.parse(
+    //   Pref.getString(Filename.courses) ?? now.toIso8601String(),
+    // );
+    // final isDiffDay = cachedDay.difference(now) > const Duration(hours: 12) ||
+    //     !Pref.containsKey(Filename.courses);
+    // final resp = isDiffDay
+    //     ? await _repo?.getAllCourse(query)
+    //     : await _repo?.getAllCachedCourse();
+    final resp = await _repo?.getAllCourse(query);
     resp?.fold((failure) {
       if (failure is NetworkFailure) {
       } else {
@@ -112,7 +112,7 @@ class SearchCourseState
       final lessThanLimit = result.data.length < query.limit;
       _hasReachedMax = result.data.isEmpty || lessThanLimit;
       // TODO(pawpaw): set this to false.
-      _hasReachedMax = true;
+      // _hasReachedMax = true;
       // Prevent duplicate record
       filterCourse(result.data);
     });

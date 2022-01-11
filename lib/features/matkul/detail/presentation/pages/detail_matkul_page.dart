@@ -27,7 +27,11 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     // reviewCourseRM.setState(
     //   (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
     // );
-    refreshIndicatorKey?.currentState?.show();
+    StateInitializer(
+      rIndicator: refreshIndicatorKey!,
+      cacheKey: 'detail-course',
+      state: false,
+    ).initialize();
   }
 
   Future<void> retrieveData() async {
@@ -113,8 +117,11 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     return Row(
       children: course.tags!
           .map(
-            (e) => Tag(
-              label: e,
+            (e) => Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Tag(
+                label: e,
+              ),
             ),
           )
           .toList(),

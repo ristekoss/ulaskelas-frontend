@@ -19,6 +19,7 @@ class Config {
     appEntrypoint = entrypoint;
     appName = flavor.value;
     assetsPath = baseConfig.assetAbsolutePath;
+    packageName = 'com.ristek.ulaskelas';
     //todo grouping
     imagesPath = '${assetsPath!}/images';
     iconsPath = '${assetsPath!}/icons';
