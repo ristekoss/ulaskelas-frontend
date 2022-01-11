@@ -110,7 +110,7 @@ class SearchCourseState
         throw failure;
       }
     }, (result) {
-      final lessThanLimit = result.data.length < query.limit;
+      final lessThanLimit = result.data.length < 10;
       _hasReachedMax = result.data.isEmpty || lessThanLimit;
       // TODO(pawpaw): set this to false.
       // _hasReachedMax = true;

@@ -20,7 +20,9 @@ class _AddReviewMatkulTagPageState
   @override
   Future<void> retrieveData() async {
     await Future.delayed(const Duration(seconds: 1));
-    final query = QuerySearch();
+    final query = QuerySearchTag(
+      name: searchTagRM.state.controller.text,
+    );
     await searchTagRM.setState((s) => s.retrieveData(query));
   }
 
@@ -72,6 +74,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
                       onClear: () {
                         focusNode.unfocus();
                         searchTagRM.state.controller.clear();
+                        refreshIndicatorKey.currentState?.show();
                       },
                       onChange: onQueryChanged,
                     ),
@@ -80,9 +83,10 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
               ),
             ),
             Expanded(
-              child: OnReactive(() {
-                return _buildSearchList(sizeInfo);
-              }),
+              child: _buildSearchList(sizeInfo),
+              // OnReactive(() {
+              //   return _buildSearchList(sizeInfo);
+              // }),
             ),
             const HeightSpace(90),
           ],
@@ -128,7 +132,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
               onWaiting: () => WaitingView(),
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
-                final matkulTags = searchTagRM.state.localSearch();
+                final matkulTags = data.tags;
                 return ListView.separated(
                   controller: scrollController,
                   padding: const EdgeInsets.symmetric(
@@ -198,8 +202,8 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
   @override
   void onScroll() {
     completer?.complete();
-    final query = QuerySearch();
-    searchTagRM.state.searchTag(query).then((value) {
+    final query = QuerySearchTag(name: searchTagRM.state.controller.text);
+    searchTagRM.state.retrieveMoreData(query).then((value) {
       completer = Completer<void>();
       searchTagRM.notify();
     }).onError((error, stackTrace) {
@@ -219,19 +223,16 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
     }
     searchTagRM.state.lastQuery = val;
     searchTagRM.notify();
-    if (_debounce == null || !(_debounce?.isActive ?? true)) {
-      if (_debounce?.isActive ?? false) {
-        _debounce?.cancel();
-      }
-      await searchTagRM.setState((s) {
-        s.hasReachedMax = false;
-      });
-      _debounce = Timer(const Duration(milliseconds: 2000), () {
-        final query = QuerySearch(q: searchTagRM.state.controller.text);
-        searchTagRM.state
-            .searchTag(query)
-            .then((value) => searchTagRM.notify());
-      });
-    }
+
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    await searchTagRM.setState((s) {
+      s.hasReachedMax = false;
+    });
+    _debounce = Timer(const Duration(milliseconds: 1000), () {
+      final query = QuerySearchTag(name: searchTagRM.state.controller.text);
+      searchTagRM.state
+          .retrieveData(query)
+          .then((value) => searchTagRM.notify());
+    });
   }
 }

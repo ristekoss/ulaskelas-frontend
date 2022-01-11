@@ -1,6 +1,6 @@
 part of '_states.dart';
 
-class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
+class SearchTagState implements FutureState<SearchTagState, QuerySearchTag> {
   SearchTagState() {
     final _remoteDataSource = TagRemoteDataSourceImpl();
     final _localDataSource = TagLocalDataSourceImpl();
@@ -14,6 +14,7 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
 
   /// Search controller.
   final controller = TextEditingController();
+  int page = 1;
 
   List<String>? _selectedTags;
   List<String>? _tags;
@@ -28,7 +29,7 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
   /// Defaults to empty string.
   String? _lastQuery;
 
-  /// Matkuls getter with dummy data at default.
+  /// Tags getter with dummy data at default.
   List<String> get tags => _tags!;
 
   bool get hasReachedMax => _hasReachedMax ?? false;
@@ -48,10 +49,39 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearch> {
   }
 
   @override
-  Future<void> retrieveData(QuerySearch query) async {
-    _hasReachedMax = true;
-    final resp = await _repo.getAllTag();
-    resp.fold((failure) => throw failure, (result) => _tags = result.data);
+  Future<void> retrieveData(QuerySearchTag query) async {
+    page = 1;
+    query.page = 1;
+    final resp = await _repo.getAllTag(query);
+    resp.fold((failure) => throw failure, (result) {
+      final lessThanLimit = result.data.length < 10;
+      _hasReachedMax = result.data.isEmpty || lessThanLimit;
+      _tags = result.data;
+    });
+  }
+
+  Future<void> retrieveMoreData(QuerySearchTag query) async {
+    ++page;
+    query.page = page;
+    final resp = await _repo.getAllTag(query);
+    resp.fold((failure) {
+      throw failure;
+    }, (result) {
+      final lessThanLimit = result.data.length < 10;
+      _hasReachedMax = result.data.isEmpty || lessThanLimit;
+
+      // Prevent duplicate record
+      filterTag(result.data);
+    });
+  }
+
+  void filterTag(List<String> tags) {
+    _tags ??= tags;
+    for (final tag in tags) {
+      if (!(_tags?.contains(tag) ?? true)) {
+        _tags?.add(tag);
+      }
+    }
   }
 
   /// Advanced searching combine stateful & stateless search data.

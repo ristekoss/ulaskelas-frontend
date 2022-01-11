@@ -131,7 +131,6 @@ class _HomePageState extends BaseStateful<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    // TODO(pawpaw): current semester on profile.
                     Text(
                       'Mata Kuliah Semester ${profileRM.state.profile.term}',
                       style: FontTheme.poppins14w700black(),
@@ -149,8 +148,34 @@ class _HomePageState extends BaseStateful<HomePage> {
             ),
             OnBuilder<CurrentTermCourseState>.all(
               listenTo: currentTermCourseRM,
-              onIdle: () => const Text('Waiting'),
-              onWaiting: () => const CircleLoading(),
+              onIdle: () => ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                children: List.generate(
+                  3,
+                  (index) => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: SkeletonCardCourse(),
+                  ),
+                ),
+              ),
+              onWaiting: () => ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                children: List.generate(
+                  3,
+                  (index) => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: SkeletonCardCourse(),
+                  ),
+                ),
+              ),
               onError: (dynamic error, refresh) {
                 if (error is Failure) {
                   return Text(error.message.toString());

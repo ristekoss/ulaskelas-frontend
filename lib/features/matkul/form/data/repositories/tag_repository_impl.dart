@@ -10,8 +10,10 @@ class TagRepositoryImpl implements TagRepository {
   final TagLocalDataSource _localDataSource;
 
   @override
-  Future<Decide<Failure, Parsed<List<String>>>> getAllTag() {
-    return apiCall(_remoteDataSource.getAllTag());
+  Future<Decide<Failure, Parsed<List<String>>>> getAllTag(
+    QuerySearchTag query,
+  ) {
+    return apiCall(_remoteDataSource.getAllTag(query));
   }
 
   @override
