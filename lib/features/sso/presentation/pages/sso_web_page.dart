@@ -86,7 +86,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
           authRM.setState((s) {
             s
               ..isLogin = true
-              ..isLoading = false;
+              ..isLoading = true;
           });
         }
       }

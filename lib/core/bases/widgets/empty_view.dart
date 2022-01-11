@@ -8,20 +8,23 @@ class EmptyView extends StatelessWidget {
     Key? key,
     required this.title,
     required this.description,
+    this.padTop,
   }) : super(key: key);
 
   final String title;
   final String description;
+  final double? padTop;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final _padTop = padTop ?? size.height * .1;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          HeightSpace(size.height * .1),
+          HeightSpace(_padTop),
           Image.asset(
             Ilustration.notfound,
             width: size.width * .6,

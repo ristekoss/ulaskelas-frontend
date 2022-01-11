@@ -2,6 +2,7 @@ part of '_models.dart';
 
 class BookmarkModel {
   String? user;
+  int? courseId;
   String? courseCode;
   String? courseCodeDesc;
   String? courseName;
@@ -10,6 +11,7 @@ class BookmarkModel {
 
   BookmarkModel({
     this.user,
+    this.courseId,
     this.courseCode,
     this.courseCodeDesc,
     this.courseName,
@@ -19,6 +21,7 @@ class BookmarkModel {
 
   BookmarkModel.fromJson(Map<String, dynamic> json) {
     user = json['user'];
+    courseId = json['course_id'];
     courseCode = json['course_code'];
     courseCodeDesc = json['course_code_desc'] ?? courseCode;
     courseName = json['course_name'];
@@ -36,6 +39,7 @@ class BookmarkModel {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['user'] = user;
+    data['course_id'] = courseId;
     data['course_code'] = courseCode;
     data['course_code_desc'] = courseCodeDesc;
     data['course_name'] = courseName;

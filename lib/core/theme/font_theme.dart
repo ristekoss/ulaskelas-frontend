@@ -442,4 +442,12 @@ class FontTheme {
       color: BaseColors.primaryColor,
     );
   }
+
+  static TextStyle rubik16w400neutral() {
+    return GoogleFonts.rubik(
+      color: BaseColors.neutral90,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    );
+  }
 }

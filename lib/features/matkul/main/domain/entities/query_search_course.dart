@@ -16,9 +16,9 @@ class QuerySearchCourse extends QuerySearch {
   String toString() {
     final data = <String, String>{};
     data['show_all'] = isShowAll.toString();
-    // if (page != null) {
-    //   data['page'] = page.toString();
-    // }
+    if (page != null) {
+      data['page'] = page.toString();
+    }
     // if (q.isNotEmpty) {
     //   data['q'] = q;
     // }
