@@ -35,6 +35,7 @@ dependencies:
   material_design_icons_flutter: ^4.0.5955
   flutter_vector_icons: ^1.0.0
   package_info: ^2.0.2
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

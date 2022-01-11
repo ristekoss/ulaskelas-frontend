@@ -42,7 +42,7 @@ class SearchListView extends StatelessWidget {
                       onPressed: () async {
                         await nav.goToFilterPage();
                         if (filterRM.state.hasFilter) {
-                          onScroll();
+                          await refreshIndicatorKey.currentState?.show();
                         }
                       },
                     );
@@ -58,8 +58,32 @@ class SearchListView extends StatelessWidget {
             onRefresh: onRefresh,
             child: OnBuilder<SearchCourseState>.all(
               listenTo: searchCourseRM,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
+              onIdle: () => ListView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                children: List.generate(
+                  8,
+                  (index) => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: SkeletonCardCourse(),
+                  ),
+                ),
+              ),
+              onWaiting: () => ListView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                children: List.generate(
+                  8,
+                  (index) => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: SkeletonCardCourse(),
+                  ),
+                ),
+              ),
               onError: (dynamic error, refresh) {
                 final failure = error as Failure;
                 return DetailView(
