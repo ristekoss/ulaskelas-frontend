@@ -1,3 +1,4 @@
+import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart';
 
 class QuerySearchCourse extends QuerySearch {
@@ -11,8 +12,6 @@ class QuerySearchCourse extends QuerySearch {
         );
 
   bool isShowAll;
-  int? sks;
-  int? term;
 
   @override
   String toString() {
@@ -23,6 +22,15 @@ class QuerySearchCourse extends QuerySearch {
     }
     if (q.isNotEmpty) {
       data['name'] = q;
+    }
+    if (filterRM.state.selectedSks.isNotEmpty) {
+      data['sks'] = filterRM.state.selectedSks.join(',');
+    }
+    if (filterRM.state.selectedSemester.isNotEmpty) {
+      data['term'] = filterRM.state.selectedSemester.join(',');
+    }
+    if (filterRM.state.selectedType.isNotEmpty) {
+      data['code_desc'] = filterRM.state.selectedType.join(',');
     }
     return Uri(queryParameters: data).query;
   }
