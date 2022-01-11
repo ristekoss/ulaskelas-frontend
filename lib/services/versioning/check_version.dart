@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:ulaskelas/services/versioning/store_version_service.dart';

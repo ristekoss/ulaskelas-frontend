@@ -35,7 +35,7 @@ class _AppWrapperState extends State<AppWrapper> {
       const Duration(milliseconds: 2500),
       () async {
         final forceUpdate = await canUpdate(context);
-        if (!forceUpdate) {
+        if (forceUpdate) {
           final confirm = await const ConfirmationModalDialog(
             title: 'title',
             description: '''

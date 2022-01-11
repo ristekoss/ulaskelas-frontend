@@ -3,14 +3,16 @@ import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart'
 class QuerySearchCourse extends QuerySearch {
   QuerySearchCourse({
     this.isShowAll = true,
-    String q = '',
+    String name = '',
     int page = 1,
   }) : super(
-          q: q,
+          q: name,
           page: page,
         );
 
   bool isShowAll;
+  int? sks;
+  int? term;
 
   @override
   String toString() {
@@ -19,9 +21,9 @@ class QuerySearchCourse extends QuerySearch {
     if (page != null) {
       data['page'] = page.toString();
     }
-    // if (q.isNotEmpty) {
-    //   data['q'] = q;
-    // }
+    if (q.isNotEmpty) {
+      data['name'] = q;
+    }
     return Uri(queryParameters: data).query;
   }
 }

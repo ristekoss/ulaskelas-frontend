@@ -58,7 +58,7 @@ class ReviewCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Flexible(
+                        Expanded(
                           child: Text(
                             review.author.toString(),
                             maxLines: 2,
@@ -66,14 +66,13 @@ class ReviewCard extends StatelessWidget {
                             style: FontTheme.poppins14w600black(),
                           ),
                         ),
-                        if (status == null)
-                          Container()
-                        else
+                        const WidthSpace(10),
+                        if (status != null)
                           Tag(
                             label: status!,
-                            state: status == 'Approved'
+                            state: status == 'APPROVED'
                                 ? TagStatus.approved
-                                : (status == 'Pending')
+                                : (status == 'WAITING')
                                     ? TagStatus.pending
                                     : TagStatus.rejected,
                           ),
@@ -89,6 +88,9 @@ class ReviewCard extends StatelessWidget {
               if (review.user != profileRM.state.profile.id)
                 PopupMenu(
                   username: review.author.toString(),
+                  isAnonymous: review.isAnonym ?? false,
+                  reviewId: review.id!,
+                  // userId: review.author,
                 ),
             ],
           ),
@@ -174,9 +176,13 @@ class PopupMenu extends StatelessWidget {
   const PopupMenu({
     Key? key,
     required this.username,
+    required this.reviewId,
+    this.isAnonymous = false,
   }) : super(key: key);
 
   final String username;
+  final bool isAnonymous;
+  final int reviewId;
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +232,8 @@ class PopupMenu extends StatelessWidget {
       case 1:
         LaunchServices.openEmail(
           'team@ristek.cs.ui.ac.id',
-          'Report User Content for $username',
+          '''
+Report User Content for ${isAnonymous ? 'Review id $reviewId' : username}''',
           'enter report message',
         );
         break;

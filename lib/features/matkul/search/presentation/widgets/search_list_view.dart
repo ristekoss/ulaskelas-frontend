@@ -42,7 +42,7 @@ class SearchListView extends StatelessWidget {
                       onPressed: () async {
                         await nav.goToFilterPage();
                         if (filterRM.state.hasFilter) {
-                          // onScroll();
+                          onScroll();
                         }
                       },
                     );
@@ -68,7 +68,8 @@ class SearchListView extends StatelessWidget {
                 );
               },
               onData: (data) {
-                final courses = data.filteredCourses;
+                final courses = data.courses;
+                // final courses = data.filteredCourses;
                 if (data.hasReachedMax && courses.isEmpty) {
                   return const DetailView(
                     isEmptyView: true,

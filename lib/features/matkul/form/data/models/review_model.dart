@@ -81,6 +81,11 @@ class ReviewModel {
           );
       shortName = shortName!.substring(0, min(shortName!.length, 2));
     }
+    if (isAnonym ?? false) {
+      author = 'Anonymous';
+      authorStudyProgram = '****';
+      authorGeneration = '****';
+    }
   }
 
   Map<String, dynamic> toJson() {

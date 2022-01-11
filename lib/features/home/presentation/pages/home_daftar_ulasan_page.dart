@@ -68,7 +68,15 @@ class _HomeDaftarUlasanPageState extends BaseStateful<HomeDaftarUlasanPage> {
                 return const CircleLoading(size: 25);
               }
               final review = data.reviewHistories[i];
-              return CardMatkulReview(review: review, onTap: () {});
+              return CardMatkulReview(
+                review: review,
+                onTap: () {
+                  nav.goToDetailMatkulPage(
+                    review.course!,
+                    review.courseCode!,
+                  );
+                },
+              );
             },
           );
         },

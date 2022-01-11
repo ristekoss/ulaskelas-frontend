@@ -39,7 +39,10 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
         WebView(
           initialUrl: Endpoints.ssoMobile,
           javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: controller.complete,
+          onWebViewCreated: (webViewController) async {
+            await CookieManager().clearCookies();
+            controller.complete(webViewController);
+          },
           onProgress: _onProgress,
           navigationDelegate: _navigationDelegate,
           onPageStarted: (String url) {
