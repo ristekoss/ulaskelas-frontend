@@ -35,7 +35,13 @@ class _SearchCoursePageState
 
   @override
   Future<void> retrieveData() async {
-    await searchCourseRM.setState((s) => s.retrieveData(QuerySearchCourse()));
+    await searchCourseRM.setState(
+      (s) => s.retrieveData(
+        QuerySearchCourse(
+          name: searchCourseRM.state.controller.text,
+        ),
+      ),
+    );
   }
 
   @override
@@ -118,8 +124,9 @@ class _SearchCoursePageState
   @override
   void onScroll() {
     completer?.complete();
-    final query = QuerySearchCourse();
-    // final query = QuerySearch(q: searchMatkul.state.controller.text);
+    final query = QuerySearchCourse(
+      name: searchCourseRM.state.controller.text,
+    );
     searchCourseRM.state.retrieveMoreData(query).then((value) {
       completer = Completer<void>();
       searchCourseRM.notify();
@@ -146,8 +153,8 @@ class _SearchCoursePageState
       s.hasReachedMax = false;
     });
     _debounce = Timer(const Duration(milliseconds: 1400), () {
-      // final query = QuerySearch(q: searchMatkul.state.controller.text);
-      final query = QuerySearchCourse();
+      final query = QuerySearchCourse(name: val);
+      // final query = QuerySearchCourse();
       searchCourseRM.state
           .searchMatkul(query)
           .then((value) => searchCourseRM.notify());

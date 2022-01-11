@@ -148,6 +148,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 return GestureDetector(
                   onTap: () {
                     final bookmark = BookmarkModel(
+                      courseId: course.id,
                       courseCode: course.code,
                       courseName: course.name,
                       courseCodeDesc: course.codeDesc,
@@ -264,6 +265,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 final review = data.myReviews[i];
                 return ReviewCard(
                   review: review,
+                  status: review.hateSpeechStatus,
                 );
               },
             );

@@ -67,20 +67,6 @@ class ConfirmationModalDialog extends DialogBox {
                 ),
               ),
             ),
-            // Expanded(
-            //   child: GhostButton(
-            //     onPressed: cancelAction ?? () => nav.pop(false),
-            //     child: Text(
-            //       noLabel,
-            //       style: Theme.of(context).textTheme.button?.copyWith(
-            //             color: BaseColors.mineShaft,
-            //           ),
-            //       textAlign: TextAlign.center,
-            //     ),
-            //     // backgroundColor: BaseColors.primaryColor,
-            //     // isBorder: true,
-            //   ),
-            // ),
             const WidthSpace(10),
             Expanded(
               child: PrimaryButton(

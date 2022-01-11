@@ -21,8 +21,8 @@ class _HomePageState extends BaseStateful<HomePage> {
 
     StateInitializer(
       rIndicator: refreshIndicatorKey!,
-      state: bookmarkRM.state.getCondition(),
-      cacheKey: bookmarkRM.state.cacheKey!,
+      state: true,
+      cacheKey: 'home-page',
     ).initialize();
   }
 

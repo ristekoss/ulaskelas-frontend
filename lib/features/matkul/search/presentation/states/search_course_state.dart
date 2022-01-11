@@ -97,7 +97,8 @@ class SearchCourseState
     // final cachedDay = DateTime.parse(
     //   Pref.getString(Filename.courses) ?? now.toIso8601String(),
     // );
-    // final isDiffDay = cachedDay.difference(now) > const Duration(hours: 12) ||
+    // final isDiffDay = cachedDay.difference(now) > const Duration(hours: 12)
+    // ||
     //     !Pref.containsKey(Filename.courses);
     // final resp = isDiffDay
     //     ? await _repo?.getAllCourse(query)
@@ -114,7 +115,8 @@ class SearchCourseState
       // TODO(pawpaw): set this to false.
       // _hasReachedMax = true;
       // Prevent duplicate record
-      filterCourse(result.data);
+      _courses = result.data;
+      // filterCourse(result.data);
     });
   }
 

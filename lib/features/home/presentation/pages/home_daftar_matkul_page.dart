@@ -36,7 +36,15 @@ class _HomeCourseListPageState extends BaseStateful<HomeCourseListPage> {
         separatorBuilder: (c, i) => const HeightSpace(16),
         itemBuilder: (c, i) {
           final course = currentTermCourseRM.state.courses[i];
-          return CardCourse(model: course, onTap: () {});
+          return CardCourse(
+            model: course,
+            onTap: () {
+              nav.goToDetailMatkulPage(
+                course.id!,
+                course.code!,
+              );
+            },
+          );
         },
       ),
     );

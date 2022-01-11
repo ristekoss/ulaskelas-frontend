@@ -20,7 +20,7 @@ class BookmarkState {
   String? cacheKey = 'bookmark-state';
 
   bool getCondition() {
-    print('data ${bookmarks.isNotEmpty}');
+    print('data ${_bookmarks?.isNotEmpty}');
     return _bookmarks?.isNotEmpty ?? false;
   }
 
@@ -32,6 +32,7 @@ class BookmarkState {
       _bookmarks = result.data;
       print(_bookmarks);
     });
+    bookmarkRM.notify();
   }
 
   bool isMarked(CourseModel model) {
