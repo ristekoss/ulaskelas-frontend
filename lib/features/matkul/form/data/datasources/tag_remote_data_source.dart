@@ -1,14 +1,14 @@
 part of '_datasources.dart';
 
 abstract class TagRemoteDataSource {
-  Future<Parsed<List<String>>> getAllTag();
+  Future<Parsed<List<String>>> getAllTag(QuerySearchTag query);
 }
 
 class TagRemoteDataSourceImpl implements TagRemoteDataSource {
   @override
-  Future<Parsed<List<String>>> getAllTag() async {
+  Future<Parsed<List<String>>> getAllTag(QuerySearchTag query) async {
     final list = <String>[];
-    final url = Endpoints.tags;
+    final url = '${Endpoints.tags}?$query';
     final resp = await getIt(url);
     for (final data in resp.dataBodyAsMap['tags']) {
       list.add(data);

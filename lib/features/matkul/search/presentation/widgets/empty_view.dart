@@ -26,7 +26,8 @@ class DetailView extends StatelessWidget {
         HeightSpace(size.height * .1),
         Image.asset(
           isEmptyView ? Ilustration.notfound : Ilustration.onboard3,
-          width: size.width * .6,
+          // width: size.width * .4,
+          height: size.width * .6,
         ),
         const HeightSpace(20),
         Text(

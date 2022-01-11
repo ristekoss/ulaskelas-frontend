@@ -152,7 +152,7 @@ class _SearchCoursePageState
     await searchCourseRM.setState((s) {
       s.hasReachedMax = false;
     });
-    _debounce = Timer(const Duration(milliseconds: 1400), () {
+    _debounce = Timer(const Duration(milliseconds: 1000), () {
       final query = QuerySearchCourse(name: val);
       // final query = QuerySearchCourse();
       searchCourseRM.state

@@ -19,8 +19,8 @@ class SkeletonCardCourse extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Shimmer.fromColors(
-        baseColor: Colors.grey,
-        highlightColor: Colors.grey.shade300,
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
         child: Row(
           children: <Widget>[
             Container(
@@ -39,13 +39,13 @@ class SkeletonCardCourse extends StatelessWidget {
                 children: [
                   Container(
                     width: 120,
-                    height: 12,
+                    height: 10,
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  const HeightSpace(6),
+                  const HeightSpace(8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
