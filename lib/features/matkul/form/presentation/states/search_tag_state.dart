@@ -45,7 +45,7 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearchTag> {
 
   @override
   bool getCondition() {
-    return true;
+    return false;
   }
 
   @override
@@ -57,6 +57,7 @@ class SearchTagState implements FutureState<SearchTagState, QuerySearchTag> {
       final lessThanLimit = result.data.length < 10;
       _hasReachedMax = result.data.isEmpty || lessThanLimit;
       _tags = result.data;
+      _selectedTags = reviewFormRM.state.formData.tagData;
     });
   }
 
