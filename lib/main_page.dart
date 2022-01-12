@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
+import 'core/bases/states/_states.dart';
 import 'features/home/presentation/pages/_pages.dart';
 import 'features/profile/presentation/pages/profile_page.dart';
 
@@ -89,8 +90,19 @@ class _MainPageState extends BaseStateful<MainPage> {
     );
   }
 
+  DateTime? preBackPress;
+
   @override
   Future<bool> onBackPressed() async {
-    return true;
+    final timeGap = DateTime.now().difference(preBackPress ?? DateTime.now());
+    final cantExit = timeGap >= const Duration(seconds: 2);
+    preBackPress = DateTime.now();
+    if (cantExit) {
+      // show warning messenger.
+      WarningMessenger('Press Back button again to Exit').show(ctx!);
+      return false;
+    } else {
+      return true;
+    }
   }
 }
