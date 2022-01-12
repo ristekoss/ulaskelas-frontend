@@ -21,17 +21,51 @@ class DetailMatkulPage extends StatefulWidget {
 }
 
 class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
+  late ScrollController scrollController;
+  Completer<void>? completer;
+
   @override
   void init() {
-    // courseDetailRM.setState((s) => s.retrieveData(widget.courseId));
-    // reviewCourseRM.setState(
-    //   (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
-    // );
+    scrollController = ScrollController();
+    completer = Completer<void>();
+    scrollController.addListener(_onScroll);
     StateInitializer(
       rIndicator: refreshIndicatorKey!,
       cacheKey: 'detail-course',
       state: false,
     ).initialize();
+  }
+
+  void _onScroll() {
+    if (_isBottom && !completer!.isCompleted && scrollCondition()) {
+      onScroll();
+    }
+  }
+
+  bool scrollCondition() {
+    return !reviewCourseRM.state.hasReachedMax;
+  }
+
+  void onScroll() {
+    completer?.complete();
+    final query = QueryReview(courseCode: widget.courseCode);
+    reviewCourseRM.state.retrieveMoreData(query).then((value) {
+      completer = Completer<void>();
+      reviewCourseRM.notify();
+    }).onError((error, stackTrace) {
+      completer = Completer<void>();
+    });
+  }
+
+  bool get _isBottom {
+    if (!scrollController.hasClients) {
+      print('no client');
+      return false;
+    }
+    final maxScroll = scrollController.position.maxScrollExtent;
+    final currentScroll = scrollController.offset;
+    print(currentScroll >= (maxScroll * 0.9));
+    return currentScroll >= (maxScroll * 0.9);
   }
 
   Future<void> retrieveData() async {
@@ -73,6 +107,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 final course = data.detailCourse;
                 return ListView(
                   shrinkWrap: true,
+                  controller: scrollController,
                   padding: const EdgeInsets.all(24),
                   children: [
                     _buildTitleAndBookmark(course),
@@ -207,11 +242,18 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             return ListView.separated(
               physics: const ScrollPhysics(),
               shrinkWrap: true,
-              itemCount: data.reviews.length,
+              itemCount: data.hasReachedMax
+                  ? data.reviews.length
+                  : data.reviews.length + 1,
               separatorBuilder: (c, i) {
                 return const Divider();
               },
               itemBuilder: (c, i) {
+                if (!data.hasReachedMax && i == data.reviews.length) {
+                  return const CircleLoading(
+                    size: 25,
+                  );
+                }
                 final review = data.reviews[i];
                 return ReviewCard(
                   review: review,

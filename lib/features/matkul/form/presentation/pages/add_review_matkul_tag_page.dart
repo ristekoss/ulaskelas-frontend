@@ -83,7 +83,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
               ),
             ),
             Expanded(
-              child: _buildSearchList(sizeInfo),
+              child: OnReactive(() => _buildSearchList(sizeInfo)),
               // OnReactive(() {
               //   return _buildSearchList(sizeInfo);
               // }),
@@ -194,7 +194,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
 
   @override
   Future<bool> onBackPressed() async {
-    searchTagRM.state.cleanSearch();
+    // searchTagRM.state.cleanSearch();
     nav.pop<void>();
     return true;
   }

@@ -112,7 +112,6 @@ class SearchCourseState
     }, (result) {
       final lessThanLimit = result.data.length < 10;
       _hasReachedMax = result.data.isEmpty || lessThanLimit;
-      // TODO(pawpaw): set this to false.
       // _hasReachedMax = true;
       // Prevent duplicate record
       _courses = result.data;
