@@ -12,9 +12,7 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/form/domain/entities/query_search_tag.dart';
 import 'package:ulaskelas/features/matkul/form/presentation/states/_states.dart';
-import 'package:ulaskelas/features/matkul/main/domain/entities/query_search_course.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
-import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
 part 'add_review_matkul_tag_page.dart';
