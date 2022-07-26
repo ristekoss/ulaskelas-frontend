@@ -13,17 +13,7 @@ class TulisUlasanButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 24),
-      decoration: const BoxDecoration(
-        color: BaseColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.05),
-            blurRadius: 4,
-            offset: Offset(0, -2),
-          )
-        ],
-      ),
+      padding: const EdgeInsets.only(top: 16),
       child: AutoLayoutButton(
         text: 'Tulis Ulasan',
         isLoading: isLoading,

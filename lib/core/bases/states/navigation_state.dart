@@ -111,6 +111,17 @@ class NavigationServiceState implements Navigation {
     );
   }
 
+  Future<void> goToAllReviewMatkulPage(
+      {required int courseId, required String courseCode,}) {
+    return nav.push<void>(
+      AllReviewMatkulPage(
+        courseId: courseId,
+        courseCode: courseCode,
+      ),
+      RouteName.allReviewMatkulPage,
+    );
+  }
+
   Future<List<String>?> goToAddReviewMatkulTagPage() {
     return nav.push<List<String>>(
       const AddReviewMatkulTagPage(),
