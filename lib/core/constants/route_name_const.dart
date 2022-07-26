@@ -17,4 +17,5 @@ class RouteName {
   static const String homeDaftarUlasan = 'home-daftar-ulasan';
   static const String ssoLogin = 'sso-login';
   static const String courseDetail = 'course-detail';
+  static const String allReviewMatkulPage = 'all-review-matkul';
 }

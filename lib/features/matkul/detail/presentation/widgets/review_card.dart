@@ -97,6 +97,23 @@ class ReviewCard extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
+          Row(
+            children: [
+              const StarRating(rating: 3,),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(
+                'Diulas pada $formattedDate',
+                style: FontTheme.poppins12w400black().copyWith(
+                  color: const Color(0xFF828282),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
           if (review.tags?.isNotEmpty ?? false) ...[
             Row(
               children: review.tags!
@@ -131,39 +148,27 @@ class ReviewCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                'Diulas pada $formattedDate',
-                style: FontTheme.poppins12w400black().copyWith(
-                  color: const Color(0xFF828282),
+              GestureDetector(
+                onTap: onLiked,
+                child: Icon(
+                  Icons.thumb_up,
+                  size: 22,
+                  color: review.isLiked ?? false
+                      ? BaseColors.primaryColor
+                      : BaseColors.gray3,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // TODO(Any): change color &
-                  GestureDetector(
-                    onTap: onLiked,
-                    child: Icon(
-                      Icons.thumb_up,
-                      size: 22,
-                      color: review.isLiked ?? false
-                          ? BaseColors.primaryColor
-                          : BaseColors.gray3,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      review.likesCount.toString(),
-                      style: FontTheme.poppins14w600black().copyWith(
-                          // color: likesCountColor,
-                          ),
-                    ),
-                  )
-                ],
-              ),
+              Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  review.likesCount.toString(),
+                  style: FontTheme.poppins14w600black().copyWith(
+                      // color: likesCountColor,
+                      ),
+                ),
+              )
             ],
           )
         ],
