@@ -182,6 +182,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
           );
         }
         return ListView.separated(
+          reverse: true,
           physics: const ScrollPhysics(),
           shrinkWrap: true,
           itemCount: data.hasReachedMax
@@ -197,11 +198,16 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
               );
             }
             final review = data.reviews[i];
-            return ReviewCard(
-              review: review,
-              onLiked: () {
-                reviewCourseRM.state.like(review);
-              },
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: data.hasReachedMax ? 32.0 : 0,
+              ),
+              child: ReviewCard(
+                review: review,
+                onLiked: () {
+                  reviewCourseRM.state.like(review);
+                },
+              ),
             );
           },
         );

@@ -4,33 +4,37 @@ class StarRating extends StatelessWidget {
   final int starCount;
   final double rating;
   final RatingChangeCallback? onRatingChanged;
+  final double starSize;
+  final double paddingSize;
 
   const StarRating({
     Key? key,
     this.starCount = 5,
     this.rating = .0,
     this.onRatingChanged,
+    this.starSize = 16,
+    this.paddingSize = 0,
   }) : super(key: key);
 
   Widget buildStar(BuildContext context, int index) {
     Icon icon;
     if (index >= rating) {
-      icon = const Icon(
+      icon = Icon(
         Icons.star,
-        color: BaseColors.gray2,
-        size: 16,
+        color: BaseColors.gray3,
+        size: starSize,
       );
     } else if (index > rating - 1 && index < rating) {
-      icon = const Icon(
+      icon = Icon(
         Icons.star_half,
         color: BaseColors.purpleHearth,
-        size: 16,
+        size: starSize,
       );
     } else {
-      icon = const Icon(
+      icon = Icon(
         Icons.star,
         color: BaseColors.purpleHearth,
-        size: 16,
+        size: starSize,
       );
     }
     return InkResponse(
@@ -43,6 +47,7 @@ class StarRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(
         starCount,
         (index) => buildStar(context, index),

@@ -243,12 +243,14 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           children: [
             Center(
               child: Text(
-                "4.7",
+                '${course.ratingAverage ?? 0.0}',
                 style: FontTheme.poppins36w700black(),
               ),
             ),
             const HeightSpace(8),
-            StarRating(),
+            StarRating(
+              rating: course.ratingAverage ?? 0.0,
+            ),
             const HeightSpace(4),
             Center(
               child: Text(
@@ -262,11 +264,26 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
         Expanded(
           child: Column(
             children: [
-              _buildRatingComponent('Mudah dipahami', 0),
-              _buildRatingComponent('Kesesuaian SKS', 0),
-              _buildRatingComponent('Kesesuaian BRP', 0),
-              _buildRatingComponent('Manfaat', 0),
-              _buildRatingComponent('Direkomendasikan', 0),
+              _buildRatingComponent(
+                'Mudah dipahami',
+                course.ratingUnderstandable,
+              ),
+              _buildRatingComponent(
+                'Kesesuaian SKS',
+                course.ratingFitToCredit,
+              ),
+              _buildRatingComponent(
+                'Kesesuaian BRP',
+                course.ratingFitToStudyBook,
+              ),
+              _buildRatingComponent(
+                'Manfaat',
+                course.ratingBeneficial,
+              ),
+              _buildRatingComponent(
+                'Direkomendasikan',
+                course.ratingRecommended,
+              ),
             ],
           ),
         ),
@@ -274,7 +291,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     );
   }
 
-  Widget _buildRatingComponent(String text, double rating) {
+  Widget _buildRatingComponent(String text, double? rating) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
@@ -284,7 +301,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             text,
             style: FontTheme.poppins12w400black(),
           ),
-          StarRating(rating: rating),
+          StarRating(rating: rating ?? 0),
         ],
       ),
     );
