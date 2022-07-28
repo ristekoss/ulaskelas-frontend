@@ -99,7 +99,9 @@ class ReviewCard extends StatelessWidget {
           ),
           Row(
             children: [
-              const StarRating(rating: 3,),
+              StarRating(
+                rating: review.ratingAverage ?? 0,
+              ),
               const SizedBox(
                 width: 8,
               ),
