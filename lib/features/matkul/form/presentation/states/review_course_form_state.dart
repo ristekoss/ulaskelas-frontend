@@ -36,6 +36,12 @@ class ReviewCourseFormState {
     result['is_anonym'] = _formData.isAnonymous;
     result['tags'] = [for (final i in _formData.tagData) i];
 
+    result['rating_understandable'] = _formData.ratingUnderstandable;
+    result['rating_fit_to_credit'] = _formData.ratingFitToCredit;
+    result['rating_fit_to_study_book'] = _formData.ratingFitToStudyBook;
+    result['rating_beneficial'] = _formData.ratingBeneficial;
+    result['rating_recommended'] = _formData.ratingRecommended;
+
     final resp = await _repo.createReview(result);
     isLoading = false;
     reviewFormRM.notify();
@@ -76,6 +82,36 @@ class ReviewCourseFormState {
     _formData.isAnonymous = val;
   }
 
+  void setRatingUnderstandable({
+    required double ratingUnderstandable,
+  }) {
+    _formData.ratingUnderstandable = ratingUnderstandable;
+  }
+
+  void setRatingFitToCredit({
+    required double ratingFitToCredit,
+  }) {
+    _formData.ratingFitToCredit = ratingFitToCredit;
+  }
+
+  void setRatingFitToStudyBook({
+    required double ratingFitToStudyBook,
+  }) {
+    _formData.ratingFitToStudyBook = ratingFitToStudyBook;
+  }
+
+  void setRatingBeneficial({
+    required double ratingBeneficial,
+  }) {
+    _formData.ratingBeneficial = ratingBeneficial;
+  }
+
+  void setRatingRecommended({
+    required double ratingRecommended,
+  }) {
+    _formData.ratingRecommended = ratingRecommended;
+  }
+
   /// Cleaning form when success submitting form
   void cleanForm() {
     _formData = ReviewMatkulData();
@@ -95,4 +131,9 @@ class ReviewMatkulData {
   String? year;
   String? description;
   late bool isAnonymous;
+  late double? ratingUnderstandable;
+  late double? ratingFitToCredit;
+  late double? ratingFitToStudyBook;
+  late double? ratingBeneficial;
+  late double? ratingRecommended;
 }
