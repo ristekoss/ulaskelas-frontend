@@ -355,6 +355,14 @@ class FontTheme {
     );
   }
 
+  static TextStyle poppins10w600white() {
+    return GoogleFonts.poppins(
+      fontSize: 10,
+      fontWeight: FontWeight.w600,
+      color: BaseColors.alabaster,
+    );
+  }
+
   static TextStyle poppins10w700white() {
     return GoogleFonts.poppins(
       fontSize: 10,
