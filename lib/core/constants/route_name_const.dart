@@ -18,4 +18,5 @@ class RouteName {
   static const String ssoLogin = 'sso-login';
   static const String courseDetail = 'course-detail';
   static const String allReviewMatkulPage = 'all-review-matkul';
+  static const String leaderboardPage = 'leaderboard';
 }

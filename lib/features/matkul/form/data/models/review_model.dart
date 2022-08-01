@@ -30,6 +30,7 @@ class ReviewModel {
   double? ratingFitToStudyBook;
   double? ratingBeneficial;
   double? ratingRecommended;
+  int? rankTop20;
 
   ReviewModel({
     this.id,
@@ -60,6 +61,7 @@ class ReviewModel {
     this.ratingFitToStudyBook = 0,
     this.ratingBeneficial = 0,
     this.ratingRecommended = 0,
+    this.rankTop20 = 0,
   });
 
   ReviewModel.fromJson(Map<String, dynamic> json, {this.likesCount = 0}) {

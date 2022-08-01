@@ -219,7 +219,7 @@ class _HomePageState extends BaseStateful<HomePage> {
                       style: FontTheme.poppins14w700black(),
                     ),
                     InkWell(
-                      onTap: () => nav.goToHomeDaftarUlasan(),
+                      onTap: () => nav.goToLeaderboardPage(),
                       child: Text(
                         'Lihat Semua',
                         style: FontTheme.poppins13w400purple(),
