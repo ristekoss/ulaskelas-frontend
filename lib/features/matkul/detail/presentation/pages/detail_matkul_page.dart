@@ -75,6 +75,9 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     await reviewCourseRM.setState(
       (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
     );
+    await Future.wait([
+      leaderboardRM.setState((s) => s.retrieveData()),
+    ]);
   }
 
   @override
@@ -113,7 +116,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                      _buildMatkulTag(course),
+                    _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),

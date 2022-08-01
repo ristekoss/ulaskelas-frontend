@@ -76,6 +76,12 @@ class ReviewCard extends StatelessWidget {
                                     ? TagStatus.pending
                                     : TagStatus.rejected,
                           ),
+                        if (status == null && review.rankTop20 != null &&
+                            review.rankTop20! > 0 &&
+                            review.rankTop20! < 21)
+                          TagLeaderboard(
+                            rank: review.rankTop20,
+                          ),
                       ],
                     ),
                     Text(
@@ -92,6 +98,7 @@ class ReviewCard extends StatelessWidget {
                   reviewId: review.id!,
                   // userId: review.author,
                 ),
+              Container(),
             ],
           ),
           const SizedBox(

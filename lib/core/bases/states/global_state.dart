@@ -63,6 +63,10 @@ final courseDetailRM = RM.inject(
   () => CourseDetailState(),
 );
 
+final leaderboardRM = RM.inject(
+      () => LeaderboardState(),
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {

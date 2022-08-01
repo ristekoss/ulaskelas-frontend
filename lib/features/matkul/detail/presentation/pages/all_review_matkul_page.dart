@@ -182,7 +182,6 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
           );
         }
         return ListView.separated(
-          reverse: true,
           physics: const ScrollPhysics(),
           shrinkWrap: true,
           itemCount: data.hasReachedMax
@@ -197,7 +196,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
                 size: 25,
               );
             }
-            final review = data.reviews[i];
+            final review = data.reviews[data.reviews.length - i - 1];
             return Padding(
               padding: EdgeInsets.only(
                 bottom: data.hasReachedMax ? 32.0 : 0,
