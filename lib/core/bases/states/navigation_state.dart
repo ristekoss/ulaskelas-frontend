@@ -163,4 +163,18 @@ class NavigationServiceState implements Navigation {
       RouteName.onboardingPage,
     );
   }
+
+  Future<void> goToLeaderboardPage() {
+    return nav.push<void>(
+      const LeaderboardPage(),
+      RouteName.leaderboardPage,
+    );
+  }
+
+  Future<void> goToGuidelinePage() {
+    return nav.push<void>(
+      const GuidelinePage(),
+      RouteName.leaderboardPage,
+    );
+  }
 }
