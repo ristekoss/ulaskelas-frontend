@@ -29,12 +29,14 @@ class GuidelineCard extends StatelessWidget {
                           'membaca aturan yang berlaku dalam UlasKelas ',
                     ),
                     TextSpan(
-                      text: 'disini',
+                      text: 'di sini',
                       style: FontTheme.poppins10w600white().copyWith(
                         decoration: TextDecoration.underline,
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () {},
+                        ..onTap = () {
+                          nav.goToGuidelinePage();
+                        },
                     ),
                   ],
                 ),
