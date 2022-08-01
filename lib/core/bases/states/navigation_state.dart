@@ -152,4 +152,39 @@ class NavigationServiceState implements Navigation {
       RouteName.onboardingPage,
     );
   }
+
+  Future<void> goToSearchCourseCalculatorPage() {
+    return nav.push<void>(
+      const SearchCourseCalculator(),
+      RouteName.searchCourseCalculator,
+    );
+  }
+
+  Future<void> goToComponentCalculatorPage({
+    required int calculatorId,
+    required String courseName,
+    required double totalScore,
+    required double totalPercentage,
+  }) {
+    return nav.push<void>(
+      CalculatorComponentPage(
+          calculatorId: calculatorId,
+          courseName: courseName,
+          totalScore: totalScore,
+          totalPercentage: totalPercentage,
+      ),
+      RouteName.calculatorComponent,
+    );
+  }
+
+  Future<void> goToComponentFormPage({
+    required int calculatorId,
+  }) {
+    return nav.push<void>(
+      ComponentFormPage(
+          calculatorId: calculatorId,
+      ),
+      RouteName.componentFormPage,
+    );
+  }
 }
