@@ -14,8 +14,8 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
   void init() {
     StateInitializer(
       rIndicator: refreshIndicatorKey!,
-      state: bookmarkRM.state.getCondition(),
-      cacheKey: bookmarkRM.state.cacheKey!,
+      state: calculatorRM.state.getCondition(),
+      cacheKey: calculatorRM.state.cacheKey!,
     ).initialize();
   }
 
@@ -26,7 +26,12 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return null;
+    return BaseAppBar(
+      hasLeading: false,
+      label: 'Kalkulator Nilai Mata Kuliah',
+      centerTitle: false,
+      elevation: 0,
+    );
   }
 
   @override
@@ -38,82 +43,95 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
       child: RefreshIndicator(
         key: refreshIndicatorKey,
         onRefresh: retrieveData,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text(
-                'Kalkulator Nilai Mata Kuliah',
-                style: FontTheme.poppins14w700black(),
-              ),
-            ),
-            Expanded(
-              child: OnBuilder<BookmarkState>.all(
-                listenTo: bookmarkRM,
-                onIdle: () => WaitingView(),
-                onWaiting: () => WaitingView(),
-                onError: (dynamic error, refresh) => const Text('error'),
-                onData: (data) {
-                  final bookmarks = data.bookmarks;
-                  if (bookmarks.isEmpty) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          HeightSpace(sizeInfo.screenSize.height * .05),
-                          Image.asset(
-                            Ilustration.notfound,
-                            width: sizeInfo.screenSize.width * .6,
-                          ),
-                          const HeightSpace(20),
-                          Text(
-                            'Belum Ada Kalkulator Nilai Tersimpan',
-                            style: FontTheme.poppins14w700black().copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                          const HeightSpace(10),
-                          Text(
-                            '''
+        child: OnBuilder<CalculatorState>.all(
+          listenTo: calculatorRM,
+          onIdle: () => WaitingView(),
+          onWaiting: () => WaitingView(),
+          onError: (dynamic error, refresh) => const Text('error'),
+          onData: (data) {
+            final calculators = data.calculators;
+            if (calculators.isEmpty) {
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      HeightSpace(sizeInfo.screenSize.height * .05),
+                      Image.asset(
+                        Ilustration.notfound,
+                        width: sizeInfo.screenSize.width * .6,
+                      ),
+                      const HeightSpace(20),
+                      Text(
+                        'Belum Ada Kalkulator Nilai Tersimpan',
+                        style: FontTheme.poppins14w700black().copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      const HeightSpace(10),
+                      Text(
+                        '''
 Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahulu.''',
-                            style: Theme.of(context).textTheme.caption,
-                            textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.caption,
+                        textAlign: TextAlign.center,
+                      ),
+                      const HeightSpace(30),
+                      SecondaryButton(
+                        width: double.infinity,
+                        text: 'Tambah Mata Kuliah',
+                        backgroundColor: BaseColors.purpleHearth,
+                        onPressed: () =>
+                            nav.goToSearchCourseCalculatorPage(),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(20),
+                    itemCount: calculatorRM.state.calculators.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == calculators.length){
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
                           ),
-                          const HeightSpace(30),
-                          SecondaryButton(
+                          child: SecondaryButton(
                             width: double.infinity,
                             text: 'Tambah Mata Kuliah',
                             backgroundColor: BaseColors.purpleHearth,
                             onPressed: () =>
                                 nav.goToSearchCourseCalculatorPage(),
                           ),
-                        ],
-                      ),
-                    );
-                  }
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(20),
-                    itemCount: bookmarkRM.state.bookmarks.length,
-                    itemBuilder: (context, index) {
-                      final bookmark = bookmarks[index];
-                      // TODO(paw): set course_id
-                      return CardBookmark(
-                        model: bookmark,
-                        onTap: () => nav.goToDetailMatkulPage(
-                          bookmark.courseId!,
-                          bookmark.courseCode!,
-                        ),
+                        );
+                      }
+                      final calculator = calculators[index];
+                      return CardCalculator(
+                        model: calculator,
+                        onTap: () {
+                          nav.goToComponentCalculatorPage(
+                              calculatorId: calculator.id!,
+                              courseName: calculator.courseName!,
+                              totalScore: calculator.totalScore!,
+                              totalPercentage: calculator.totalPercentage!,
+                          );
+                        },
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                     const SizedBox(height: 16),
-                  );
-                },
-              ),
-            ),
-          ],
+                  ),
+                ),
+
+              ],
+            );
+          },
         ),
       ),
     );
@@ -135,7 +153,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
   void onScroll() {}
 
   Future<void> retrieveData() async {
-    await bookmarkRM.setState((s) => s.retrieveData(QueryBookmark()));
+    await calculatorRM.setState((s) => s.retrieveData());
   }
 
   bool scrollCondition() {

@@ -31,7 +31,7 @@ class SearchListViewSimplified extends StatelessWidget {
                 ),
                 children: List.generate(
                   8,
-                      (index) => const Padding(
+                  (index) => const Padding(
                     padding: EdgeInsets.symmetric(vertical: 8),
                     child: SkeletonCardCourse(),
                   ),
@@ -44,7 +44,7 @@ class SearchListViewSimplified extends StatelessWidget {
                 ),
                 children: List.generate(
                   8,
-                      (index) => const Padding(
+                  (index) => const Padding(
                     padding: EdgeInsets.symmetric(vertical: 8),
                     child: SkeletonCardCourse(),
                   ),
@@ -76,7 +76,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     vertical: 10,
                   ),
                   itemCount:
-                  data.hasReachedMax ? courses.length : courses.length + 1,
+                      data.hasReachedMax ? courses.length : courses.length + 1,
                   separatorBuilder: (c, i) => const HeightSpace(16),
                   itemBuilder: (c, i) {
                     if (!data.hasReachedMax && i == courses.length) {
@@ -85,12 +85,16 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     final course = courses[i];
                     return CardCourseSimplified(
                       model: course,
-                      onTap: () => nav.goToComponentCalculatorPage(
+                      onTap: () {
+                        nav.goToComponentCalculatorPage(
                           calculatorId: 1,
-                          courseName: 'courseName',
+                          courseName: course.name!,
                           totalScore: 87.33,
                           totalPercentage: 80,
-                      ),
+                        );
+                        calculatorRM.setState((s) =>
+                            s.postCalculator(course.code!),);
+                      },
                     );
                   },
                 );

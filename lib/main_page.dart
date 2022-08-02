@@ -25,7 +25,8 @@ class _MainPageState extends BaseStateful<MainPage> {
       HomePage(
         onSeeAllCourse: () => setState(() => _selectedIndex = 1),
       ),
-      const SearchCoursePage(),
+      const SearchCoursePage(
+      ),
       const CalculatorPage(),
       const ProfilePage(),
     ];
