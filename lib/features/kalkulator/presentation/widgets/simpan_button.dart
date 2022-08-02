@@ -4,10 +4,12 @@ class SimpanButton extends StatelessWidget {
   const SimpanButton({
     Key? key,
     required this.onTap,
+    required this.text,
     this.isLoading = false,
   }) : super(key: key);
 
   final VoidCallback onTap;
+  final String text;
   final bool isLoading;
 
   @override
@@ -25,7 +27,7 @@ class SimpanButton extends StatelessWidget {
         ],
       ),
       child: AutoLayoutButton(
-        text: 'Simpan',
+        text: text,
         isLoading: isLoading,
         onTap: onTap,
       ),

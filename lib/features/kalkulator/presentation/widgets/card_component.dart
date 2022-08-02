@@ -53,7 +53,7 @@ class CardCompononent extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Text('${weight.toStringAsFixed(0)}%',
+                child: Text('${weight.toStringAsFixed(1)}%',
                   style: FontTheme.poppins12w400black(),
                   textAlign: TextAlign.right,
                 ),

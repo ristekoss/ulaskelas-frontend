@@ -25,15 +25,12 @@ class _CalculatorComponentPageState
   Completer<void>? completer;
 
   @override
-  void init() {}
-
-  Future<void> retrieveData() async {
-    // unawaited(
-    //   courseDetailRM.setState((s) => s.retrieveData(widget.courseId)),
-    // );
-    // await reviewCourseRM.setState(
-    //       (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
-    // );
+  void init() {
+    StateInitializer(
+      rIndicator: refreshIndicatorKey!,
+      state: false,
+      cacheKey: componentRM.state.cacheKey!,
+    ).initialize();
   }
 
   @override
@@ -43,7 +40,10 @@ class _CalculatorComponentPageState
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BaseAppBar(label: 'Detail Mata Kuliah');
+    return BaseAppBar(
+      label: 'Tambah Nilai Mata Kuliah',
+      onBackPress: onBackPressed,
+    );
   }
 
   @override
@@ -51,146 +51,157 @@ class _CalculatorComponentPageState
     BuildContext context,
     SizingInformation sizeInfo,
   ) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Text(
-              widget.courseName,
-              style: FontTheme.poppins20w700black(),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Nilai Akhir',
-                style: FontTheme.poppins14w400black(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  widget.courseName,
+                  style: FontTheme.poppins20w700black(),
+                ),
               ),
-              Text(
-                _getFinalScoreAndGrade(widget.totalScore),
-                style: FontTheme.poppins14w600black(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Nilai Akhir',
+                    style: FontTheme.poppins14w400black(),
+                  ),
+                  Text(
+                    _getFinalScoreAndGrade(widget.totalScore),
+                    style: FontTheme.poppins14w600black(),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Text(
+                        'Komponen',
+                        style: FontTheme.poppins12w600black(),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Nilai',
+                        style: FontTheme.poppins12w600black(),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Bobot',
+                        textAlign: TextAlign.center,
+                        style: FontTheme.poppins12w600black(),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              RefreshIndicator(
+                onRefresh: retrieveData,
+                key: refreshIndicatorKey,
+                child: OnBuilder<ComponentState>.all(
+                  listenTo: componentRM,
+                  onIdle: () => const CircleLoading(),
+                  onWaiting: () => const CircleLoading(),
+                  onError: (dynamic error, refresh) => Text(error.toString()),
+                  onData: (data) {
+                    final components = data.components;
+                    if (components.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Center(
+                          child: Text(
+                            'Belum Ada Komponen',
+                            style: FontTheme.poppins12w500black(),
+                          ),
+                        ),
+                      );
+                    }
+                    return Column(
+                      children: [
+                        ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.only(top: 20),
+                          itemCount: componentRM.state.components.length,
+                          itemBuilder: (context, index) {
+                            final component = components[index];
+                            return CardCompononent(
+                              id: component.id!,
+                              name: component.name!,
+                              score: component.score!,
+                              weight: component.weight!,
+                              onTap: () {
+                                nav.goToEditComponentPage(
+                                  id: component.id!,
+                                  calculatorId: widget.calculatorId,
+                                  courseName: widget.courseName,
+                                  totalScore: widget.totalScore,
+                                  totalPercentage: widget.totalPercentage,
+                                  componentName: component.name!,
+                                  componentScore: component.score!,
+                                  componentWeight: component.weight!,
+                                );
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(height: 1),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              const HeightSpace(30),
+              SecondaryButton(
+                width: double.infinity,
+                text: 'Tambah Komponen',
+                backgroundColor: BaseColors.purpleHearth,
+                onPressed: () {
+                  nav.goToComponentFormPage(
+                    calculatorId: widget.calculatorId,
+                    courseName: widget.courseName,
+                    totalScore: widget.totalScore,
+                    totalPercentage: widget.totalPercentage,
+                  );
+                },
+              ),
+              const HeightSpace(70),
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    nav.pop();
+                    calculatorRM.setState(
+                      (s) => s.deleteCalculator(
+                        QueryCalculator(id: widget.calculatorId),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Hapus Kalkulator Mata Kuliah',
+                    style: FontTheme.poppins14w500black().copyWith(
+                      color: BaseColors.error,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 20,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: Text(
-                    'Komponen',
-                    style: FontTheme.poppins12w600black(),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    'Nilai',
-                    style: FontTheme.poppins12w600black(),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    'Bobot',
-                    textAlign: TextAlign.center,
-                    style: FontTheme.poppins12w600black(),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-              children: [
-                const CardCompononent(
-                  id: 1, name: 'Komponen', score: 50, weight: 15,
-                ),
-                const CardCompononent(
-                  id: 1, name: 'Komponen', score: 50, weight: 15,
-                ),
-                const CardCompononent(
-                  id: 1, name: 'Komponen', score: 50, weight: 15,
-                ),
-                const CardCompononent(
-                  id: 1, name: 'Komponen', score: 50, weight: 15,
-                ),
-                const CardCompononent(
-                  id: 1, name: 'Komponen', score: 50, weight: 15,
-                ),
-
-                const HeightSpace(30),
-
-                SecondaryButton(
-                  width: double.infinity,
-                  text: 'Tambah Komponen',
-                  backgroundColor: BaseColors.purpleHearth,
-                  onPressed: () {
-                    nav.goToComponentFormPage(
-                        calculatorId: widget.calculatorId,);
-                  },
-                ),
-
-                const HeightSpace(70),
-
-                Center(
-                  child: InkWell(
-                    onTap: () {nav.pop();},
-                    child: Text(
-                      'Hapus Kalkulator Mata Kuliah',
-                      style: FontTheme.poppins14w500black().copyWith(
-                        color: BaseColors.error,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
-          // Expanded(
-          //   child: RefreshIndicator(
-          //     key: refreshIndicatorKey,
-          //     onRefresh: retrieveData,
-          //     child: OnBuilder<CourseDetailState>.all(
-          //       listenTo: courseDetailRM,
-          //       onIdle: () => WaitingView(),
-          //       onWaiting: () => WaitingView(),
-          //       onError: (dynamic error, refresh) => const Text('error'),
-          //       onData: (data) {
-          //         final course = data.detailCourse;
-          //         return ListView(
-          //           shrinkWrap: true,
-          //           controller: scrollController,
-          //           padding: const EdgeInsets.all(24),
-          //           children: [
-          //             _buildTitleAndBookmark(course),
-          //             const HeightSpace(24),
-          //             if (course.tags?.isNotEmpty ?? false)
-          //               _buildMatkulTag(course),
-          //             const HeightSpace(16),
-          //             _buildMatkulDescription(course),
-          //             const HeightSpace(32),
-          //             _buildMatkulPrerequisite(course),
-          //             const HeightSpace(32),
-          //             _buildReviewBySelf(),
-          //             _buildReviews(),
-          //           ],
-          //         );
-          //       },
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -204,6 +215,8 @@ class _CalculatorComponentPageState
 
   @override
   Future<bool> onBackPressed() async {
+    nav.pop();
+    await nav.replaceToMainPage();
     return true;
   }
 
@@ -226,7 +239,17 @@ class _CalculatorComponentPageState
     } else if (score >= 40) {
       grade = 'D';
     }
-    
+
     return '$grade (${score.toStringAsFixed(2)})';
+  }
+
+  Future<void> retrieveData() async {
+    await componentRM.setState(
+      (s) => s.retrieveData(
+        QueryComponent(
+          calculatorId: widget.calculatorId,
+        ),
+      ),
+    );
   }
 }

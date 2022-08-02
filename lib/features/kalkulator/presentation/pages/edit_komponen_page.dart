@@ -1,26 +1,40 @@
 part of '_pages.dart';
 
-class ComponentFormPage extends StatefulWidget {
-  const ComponentFormPage({
+class EditComponentPage extends StatefulWidget {
+  const EditComponentPage({
     Key? key,
+    required this.id,
     required this.calculatorId,
     required this.courseName,
     required this.totalScore,
     required this.totalPercentage,
+    required this.componentName,
+    required this.componentScore,
+    required this.componentWeight,
   }) : super(key: key);
 
+  final int id;
   final int calculatorId;
   final String courseName;
   final double totalScore;
   final double totalPercentage;
+  final String componentName;
+  final double componentScore;
+  final double componentWeight;
 
   @override
-  _ComponentFormPageState createState() => _ComponentFormPageState();
+  _EditComponentPageState createState() => _EditComponentPageState();
 }
 
-class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
+class _EditComponentPageState extends BaseStateful<EditComponentPage> {
   @override
-  void init() {}
+  void init() {
+    componentFormRM.state.nameController.text = widget.componentName;
+    componentFormRM.state.scoreController.text =
+        widget.componentScore.toString();
+    componentFormRM.state.weightController.text =
+        widget.componentWeight.toString();
+  }
 
   @override
   ScaffoldAttribute buildAttribute() {
@@ -57,10 +71,38 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
             ),
           ),
         ),
+        Center(
+          child: InkWell(
+            onTap: () {
+              nav.pop();
+              componentRM.setState(
+                (s) => s.deleteComponent(
+                  QueryComponent(id: widget.id),
+                ),
+              );
+              nav.replaceToComponentPage(
+                  calculatorId: widget.calculatorId,
+                  courseName: widget.courseName,
+                  totalScore: widget.totalScore -
+                      (widget.componentScore * widget.componentWeight / 100),
+                  totalPercentage:
+                      widget.totalPercentage - widget.componentWeight,
+              );
+            },
+            child: Text(
+              'Hapus Komponen Nilai',
+              style: FontTheme.poppins14w500black().copyWith(
+                color: BaseColors.error,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+        const HeightSpace(30),
         OnReactive(
           () => SimpanButton(
             isLoading: componentFormRM.state.isLoading,
-            text: 'Simpan',
+            text: 'Simpan Perubahan',
             onTap: () async {
               final currentFocus = FocusScope.of(context);
 
@@ -72,8 +114,12 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
               }
               if (componentFormRM.state.formKey.currentState!.validate()) {
                 // progressDialogue(context);
-                await componentFormRM.state.submitForm(widget.calculatorId);
+                await componentFormRM.state.submitEditForm(
+                  widget.id,
+                  widget.calculatorId,
+                );
                 await Future.delayed(const Duration(milliseconds: 150));
+
                 nav.pop();
                 await nav.replaceToComponentPage(
                   calculatorId: widget.calculatorId,
@@ -83,7 +129,8 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
                     componentFormRM.state.formData.weight!,
                   ),
                   totalPercentage: _temporaryUpdateWeight(
-                      componentFormRM.state.formData.weight!,),
+                    componentFormRM.state.formData.weight!,
+                  ),
                 );
                 componentFormRM.state.cleanForm();
                 return;
@@ -219,11 +266,13 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
     double newScore,
     double newWeight,
   ) {
-    return widget.totalScore - (newScore * newWeight / 100);
+    return widget.totalScore -
+        (widget.componentScore * widget.componentWeight / 100) +
+        (newScore * newWeight / 100);
   }
 
   double _temporaryUpdateWeight(double newWeight) {
-    return widget.totalPercentage + newWeight;
+    return widget.totalPercentage - widget.componentWeight + newWeight;
   }
 
   @override
