@@ -75,6 +75,21 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
           const Expanded(
             child: SizedBox(),
           ),
+          Center(
+            child: InkWell(
+              onTap: () {
+                nav.goToHomeDaftarUlasan();
+              },
+              child: Text(
+                'Riwawayat Ulasan',
+                style: FontTheme.poppins14w500black().copyWith(
+                  color: BaseColors.purpleHearth,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          const HeightSpace(30),
           SecondaryButton(
             width: double.infinity,
             text: 'Keluar',
