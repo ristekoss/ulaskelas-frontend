@@ -17,22 +17,22 @@ class StarRating extends StatelessWidget {
   }) : super(key: key);
 
   Widget buildStar(BuildContext context, int index) {
-    Icon icon;
+    Widget icon;
     if (index >= rating) {
       icon = Icon(
-        Icons.star,
+        Icons.star_rounded,
         color: BaseColors.gray3,
         size: starSize,
       );
     } else if (index > rating - 1 && index < rating) {
-      icon = Icon(
-        Icons.star_half,
+      icon = HalfFilledIcon(
+        icon: Icons.star_rounded,
         color: BaseColors.purpleHearth,
         size: starSize,
       );
     } else {
       icon = Icon(
-        Icons.star,
+        Icons.star_rounded,
         color: BaseColors.purpleHearth,
         size: starSize,
       );
@@ -57,3 +57,38 @@ class StarRating extends StatelessWidget {
 }
 
 typedef void RatingChangeCallback(double rating);
+
+class HalfFilledIcon extends StatelessWidget {
+  final IconData icon;
+  final double size;
+  final Color color;
+
+  const HalfFilledIcon({
+    Key? key,
+    required this.icon,
+    required this.size,
+    required this.color,
+  }): super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      blendMode: BlendMode.srcATop,
+      shaderCallback: (Rect rect) {
+        return LinearGradient(
+          stops: const [0, 0.5, 0.5],
+          colors: [color, color, color.withOpacity(0)],
+        ).createShader(rect);
+      },
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: Icon(
+          icon,
+          size: size,
+          color: BaseColors.gray3,
+        ),
+      ),
+    );
+  }
+}

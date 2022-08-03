@@ -10,7 +10,10 @@ class LeaderboardPage extends StatefulWidget {
 class _LeaderboardPageState extends BaseStateful<LeaderboardPage> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return BaseAppBar(label: 'Leaderboard');
+    return BaseAppBar(
+      hasLeading: false,
+      label: 'Leaderboard',
+    );
   }
 
   @override
@@ -85,7 +88,7 @@ class _LeaderboardPageState extends BaseStateful<LeaderboardPage> {
     ]);
   }
 
-  Widget _buildSkeleton(){
+  Widget _buildSkeleton() {
     return Expanded(
       child: ListView(
         shrinkWrap: true,
@@ -95,7 +98,7 @@ class _LeaderboardPageState extends BaseStateful<LeaderboardPage> {
         ),
         children: List.generate(
           20,
-              (index) => const Padding(
+          (index) => const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: SkeletonCardLeaderboard(),
           ),

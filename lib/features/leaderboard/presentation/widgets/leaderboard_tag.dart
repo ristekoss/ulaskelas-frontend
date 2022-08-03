@@ -25,6 +25,7 @@ class TagLeaderboard extends StatelessWidget {
     ];
 
     final colors = _mapColor();
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
@@ -39,7 +40,7 @@ class TagLeaderboard extends StatelessWidget {
         ),
       ),
       child: Text(
-        rank! > 20 ? label : labels[rank! - 1],
+        rank == null ? label : labels[rank! <= 3 ? rank!-1 : 3],
         style: GoogleFonts.poppins(
           fontSize: 10,
           fontWeight: FontWeight.w600,
@@ -57,19 +58,19 @@ class TagLeaderboard extends StatelessWidget {
         BaseColors.purpleHearth,
         BaseColors.white
       ];
-    }else if(rank! == 1){
+    }else if(rank == 1){
       return [
         const Color(0xFFFFD668),
         const Color(0xFFFFC62D),
         const Color(0xFFDDA200),
       ];
-    }else if(rank! == 2){
+    }else if(rank == 2){
       return [
         const Color(0xFFC7C6C4),
         const Color(0xFFB4B4B4),
         const Color(0xFF7D7D7D),
       ];
-    }else if(rank! == 3){
+    }else if(rank == 3){
       return [
         const Color(0xFFCD7F32),
         const Color(0xFFA15810),
