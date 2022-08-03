@@ -28,6 +28,7 @@ class _HomeCourseListPageState extends BaseStateful<HomeCourseListPage> {
     return SingleChildScrollView(
       child: ListView.separated(
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 10,
