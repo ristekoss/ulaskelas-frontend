@@ -29,7 +29,6 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return BaseAppBar(
-      hasLeading: false,
       label: 'Mata Kuliah Tersimpan',
     );
   }
