@@ -81,7 +81,7 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
                 nav.goToHomeDaftarUlasan();
               },
               child: Text(
-                'Riwawayat Ulasan',
+                'Riwayat Ulasan',
                 style: FontTheme.poppins14w500black().copyWith(
                   color: BaseColors.purpleHearth,
                   fontWeight: FontWeight.w700,
