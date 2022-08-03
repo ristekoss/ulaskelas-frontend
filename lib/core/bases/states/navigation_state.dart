@@ -113,6 +113,17 @@ class NavigationServiceState implements Navigation {
     );
   }
 
+  Future<void> goToAllReviewMatkulPage(
+      {required int courseId, required String courseCode,}) {
+    return nav.push<void>(
+      AllReviewMatkulPage(
+        courseId: courseId,
+        courseCode: courseCode,
+      ),
+      RouteName.allReviewMatkulPage,
+    );
+  }
+
   Future<List<String>?> goToAddReviewMatkulTagPage() {
     return nav.push<List<String>>(
       const AddReviewMatkulTagPage(),
@@ -152,6 +163,20 @@ class NavigationServiceState implements Navigation {
     return nav.pushReplacement<void, void>(
       const SuccessFormPage(),
       RouteName.onboardingPage,
+    );
+  }
+
+  Future<void> goToLeaderboardPage() {
+    return nav.push<void>(
+      const LeaderboardPage(),
+      RouteName.leaderboardPage,
+    );
+  }
+
+  Future<void> goToGuidelinePage() {
+    return nav.push<void>(
+      const GuidelinePage(),
+      RouteName.leaderboardPage,
     );
   }
 

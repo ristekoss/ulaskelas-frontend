@@ -17,6 +17,8 @@ class RouteName {
   static const String homeDaftarUlasan = 'home-daftar-ulasan';
   static const String ssoLogin = 'sso-login';
   static const String courseDetail = 'course-detail';
+  static const String allReviewMatkulPage = 'all-review-matkul';
+  static const String leaderboardPage = 'leaderboard';
   static const String searchCourseCalculator = 'search-course-calculator';
   static const String calculatorComponent = 'calculator-component';
   static const String componentFormPage = 'component-form';

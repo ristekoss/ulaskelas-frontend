@@ -259,6 +259,14 @@ class FontTheme {
     );
   }
 
+  static TextStyle poppins36w700black() {
+    return GoogleFonts.poppins(
+      fontSize: 36,
+      fontWeight: FontWeight.w700,
+      color: BaseColors.mineShaft,
+    );
+  }
+
   static TextStyle poppins12w400black2() {
     return GoogleFonts.poppins(
       fontSize: 12,
@@ -351,6 +359,14 @@ class FontTheme {
     return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w500,
+      color: BaseColors.alabaster,
+    );
+  }
+
+  static TextStyle poppins10w600white() {
+    return GoogleFonts.poppins(
+      fontSize: 10,
+      fontWeight: FontWeight.w600,
       color: BaseColors.alabaster,
     );
   }

@@ -63,6 +63,10 @@ final courseDetailRM = RM.inject(
   () => CourseDetailState(),
 );
 
+final leaderboardRM = RM.inject(
+      () => LeaderboardState(),
+);
+
 final calculatorRM = RM.inject(
   () => CalculatorState(),
 );
@@ -75,6 +79,7 @@ final componentFormRM = RM.inject(
       () => ComponentFormState(),
   autoDisposeWhenNotUsed: false,
 );
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {

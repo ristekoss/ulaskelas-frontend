@@ -12,6 +12,7 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/form/domain/entities/query_search_tag.dart';
 import 'package:ulaskelas/features/matkul/form/presentation/states/_states.dart';
+import 'package:ulaskelas/features/matkul/form/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
