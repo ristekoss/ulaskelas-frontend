@@ -163,6 +163,14 @@ class FontTheme {
     );
   }
 
+  static TextStyle poppins12w600black() {
+    return GoogleFonts.poppins(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: BaseColors.mineShaft,
+    );
+  }
+
   static TextStyle poppins14w600black() {
     return GoogleFonts.poppins(
       fontSize: 14,
