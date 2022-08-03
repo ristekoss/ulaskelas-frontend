@@ -7,7 +7,9 @@ BuildContext? ctx = GlobalState.navigation().state.navigatorKey.currentContext;
 
 abstract class Navigation {
   Future<T?> pushRoute<T>(ModalRoute<T> route, [String? routeName]);
+
   void pop<T>([T result]);
+
   void popUntil(String routeName);
 }
 
@@ -150,6 +152,89 @@ class NavigationServiceState implements Navigation {
     return nav.pushReplacement<void, void>(
       const SuccessFormPage(),
       RouteName.onboardingPage,
+    );
+  }
+
+  Future<void> goToSearchCourseCalculatorPage() {
+    return nav.push<void>(
+      const SearchCourseCalculator(),
+      RouteName.searchCourseCalculator,
+    );
+  }
+
+  Future<void> goToComponentCalculatorPage({
+    required int calculatorId,
+    required String courseName,
+    required double totalScore,
+    required double totalPercentage,
+  }) {
+    return nav.push<void>(
+      CalculatorComponentPage(
+        calculatorId: calculatorId,
+        courseName: courseName,
+        totalScore: totalScore,
+        totalPercentage: totalPercentage,
+      ),
+      RouteName.calculatorComponent,
+    );
+  }
+
+  Future<void> goToComponentFormPage({
+    required int calculatorId,
+    required String courseName,
+    required double totalScore,
+    required double totalPercentage,
+  }) {
+    return nav.push<void>(
+      ComponentFormPage(
+        calculatorId: calculatorId,
+        courseName: courseName,
+        totalScore: totalScore,
+        totalPercentage: totalPercentage,
+      ),
+      RouteName.componentFormPage,
+    );
+  }
+
+  Future<void> replaceToComponentPage({
+    required int calculatorId,
+    required String courseName,
+    required double totalScore,
+    required double totalPercentage,
+  }) {
+    return nav.pushReplacement<void, void>(
+      CalculatorComponentPage(
+        calculatorId: calculatorId,
+        courseName: courseName,
+        totalScore: totalScore,
+        totalPercentage: totalPercentage,
+      ),
+      RouteName.calculatorComponent,
+    );
+  }
+
+  Future<void> goToEditComponentPage({
+    required int id,
+    required int calculatorId,
+    required String courseName,
+    required double totalScore,
+    required double totalPercentage,
+    required String componentName,
+    required double componentScore,
+    required double componentWeight,
+  }) {
+    return nav.push<void>(
+      EditComponentPage(
+        id: id,
+        calculatorId: calculatorId,
+        courseName: courseName,
+        totalScore: totalScore,
+        totalPercentage: totalPercentage,
+        componentName: componentName,
+        componentScore: componentScore,
+        componentWeight: componentWeight,
+      ),
+      RouteName.editComponent,
     );
   }
 }
