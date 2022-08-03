@@ -8,18 +8,28 @@ class GuidelinePage extends StatelessWidget {
     final guidelineDo = <String>[
       'Menggunakan bahasa yang sopan.',
       'Menyampaikan ulasan dengan sudut pandang objektif.',
-'Mengulas kelas yang sudah diambil, bukan dosen yang mengampu kelas tersebut.',
-'Menyampaikan ulasan kelas sejujur-jujurnya dan sekomprehensif mungkin.',
-  'Menuliskan ulasan dengan tujuan untuk membantu teman-teman lainnya yang belum mengambil kelas tersebut.',
+      '''
+Mengulas kelas yang sudah diambil, 
+bukan dosen yang mengampu kelas tersebut.''',
+      'Menyampaikan ulasan kelas sejujur-jujurnya dan sekomprehensif mungkin.',
+      '''
+Menuliskan ulasan dengan tujuan untuk
+membantu teman-teman lainnya yang belum mengambil kelas tersebut.''',
     ];
 
     final guidelineDont = <String>[
       'Menyampaikan ulasan dengan sudut pandang objektif.',
-      'Menambah tag yang kurang relevan dengan mata kuliah yang diulas, seperti: “Nilai tidak wangy” dsb..',
-      'Melibatkan unsur Suku, Ras, Agama (SARA) maupun unsur sosial dalam review.',
+      '''
+Menambah tag yang kurang relevan dengan mata kuliah yang diulas, 
+      seperti: "Nilai tidak wangy" dsb..''',
+      '''
+Melibatkan unsur Suku, Ras, Agama (SARA) maupun unsur sosial dalam review.''',
       'Menulis ujaran kebencian',
-      'Menulis review yang berpotensi mencela nama “Fakultas Ilmu Komputer Universitas Indonesia” maupun “Universitas Indonesia”',
-      'Menyebarluaskan informasi dari mata kuliah yang (mungkin) bersifat konfidensial',
+      '''
+Menulis review yang berpotensi mencela nama "Fakultas Ilmu Komputer 
+Universitas Indonesia" maupun "Universitas Indonesia"''',
+      '''
+Menyebarluaskan informasi dari mata kuliah yang (mungkin) bersifat konfidensial''',
     ];
 
     return Scaffold(
