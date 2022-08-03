@@ -216,6 +216,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
 
   Widget _buildYearDropDown() {
     return FormField<String>(
+      initialValue: reviewFormRM.state.formData.year,
       validator: (value) {
         if (value == null) {
           return 'This field is required.';
