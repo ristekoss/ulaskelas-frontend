@@ -21,7 +21,7 @@ membantu teman-teman lainnya yang belum mengambil kelas tersebut.''',
       'Menyampaikan ulasan dengan sudut pandang objektif.',
       '''
 Menambah tag yang kurang relevan dengan mata kuliah yang diulas, 
-      seperti: "Nilai tidak wangy" dsb..''',
+seperti: "Nilai tidak wangy" dsb..''',
       '''
 Melibatkan unsur Suku, Ras, Agama (SARA) maupun unsur sosial dalam review.''',
       'Menulis ujaran kebencian',
