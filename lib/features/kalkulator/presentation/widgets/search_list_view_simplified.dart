@@ -86,12 +86,7 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                     return CardCourseSimplified(
                       model: course,
                       onTap: () {
-                        nav.goToComponentCalculatorPage(
-                          calculatorId: 1,
-                          courseName: course.name!,
-                          totalScore: 87.33,
-                          totalPercentage: 80,
-                        );
+                        nav.pop();
                         calculatorRM.setState((s) =>
                             s.postCalculator(course.code!),);
                       },
