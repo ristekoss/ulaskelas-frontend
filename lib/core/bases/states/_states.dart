@@ -12,6 +12,8 @@ import 'package:ulaskelas/features/home/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/home/presentation/states/_states.dart';
 import 'package:ulaskelas/features/kalkulator/presentation/pages/_pages.dart';
 import 'package:ulaskelas/features/kalkulator/presentation/states/_states.dart';
+import 'package:ulaskelas/features/leaderboard/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/leaderboard/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/domain/entities/query_bookmark.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/detail/presentation/pages/_pages.dart';
