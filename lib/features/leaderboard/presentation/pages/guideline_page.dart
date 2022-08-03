@@ -8,9 +8,9 @@ class GuidelinePage extends StatelessWidget {
     final guidelineDo = <String>[
       'Menggunakan bahasa yang sopan.',
       'Menyampaikan ulasan dengan sudut pandang objektif.',
-      'Mengulas kelas yang sudah diambil, bukan dosen yang mengampu kelas tersebut.',
-      'Menyampaikan ulasan kelas sejujur-jujurnya dan sekomprehensif mungkin.',
-      'Menuliskan ulasan dengan tujuan untuk membantu teman-teman lainnya yang belum mengambil kelas tersebut.',
+'Mengulas kelas yang sudah diambil, bukan dosen yang mengampu kelas tersebut.',
+'Menyampaikan ulasan kelas sejujur-jujurnya dan sekomprehensif mungkin.',
+  'Menuliskan ulasan dengan tujuan untuk membantu teman-teman lainnya yang belum mengambil kelas tersebut.',
     ];
 
     final guidelineDont = <String>[

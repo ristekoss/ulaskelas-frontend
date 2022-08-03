@@ -24,7 +24,7 @@ class StarRating extends StatelessWidget {
         color: BaseColors.gray3,
         size: starSize,
       );
-    } else if (index > rating - 1 && index < rating) {
+    } else if (index > rating - 1) {
       icon = HalfFilledIcon(
         icon: Icons.star_rounded,
         color: BaseColors.purpleHearth,
@@ -56,7 +56,7 @@ class StarRating extends StatelessWidget {
   }
 }
 
-typedef void RatingChangeCallback(double rating);
+typedef RatingChangeCallback = void Function(double rating);
 
 class HalfFilledIcon extends StatelessWidget {
   final IconData icon;

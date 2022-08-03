@@ -31,37 +31,38 @@ class LeaderboardModel {
   int term;
   String generation;
 
-  factory LeaderboardModel.fromJson(Map<String, dynamic> json) => LeaderboardModel(
-    id: json["id"],
-    user: json["user"],
-    username: json["username"],
-    name: json["name"],
-    npm: json["npm"],
-    faculty: json["faculty"],
-    studyProgram: json["study_program"],
-    educationalProgram: json["educational_program"],
-    role: json["role"],
-    orgCode: json["org_code"],
-    isBlocked: json["is_blocked"],
-    likesCount: json["likes_count"],
-    term: json["term"],
-    generation: json["generation"],
-  );
+  factory LeaderboardModel.fromJson(Map<String, dynamic> json) =>
+      LeaderboardModel(
+        id: json['id'],
+        user: json['user'],
+        username: json['username'],
+        name: json['name'],
+        npm: json['npm'],
+        faculty: json['faculty'],
+        studyProgram: json['study_program'],
+        educationalProgram: json['educational_program'],
+        role: json['role'],
+        orgCode: json['org_code'],
+        isBlocked: json['is_blocked'],
+        likesCount: json['likes_count'],
+        term: json['term'],
+        generation: json['generation'],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "user": user,
-    "username": username,
-    "name": name,
-    "npm": npm,
-    "faculty": faculty,
-    "study_program": studyProgram,
-    "educational_program": educationalProgram,
-    "role": role,
-    "org_code": orgCode,
-    "is_blocked": isBlocked,
-    "likes_count": likesCount,
-    "term": term,
-    "generation": generation,
-  };
+        'id': id,
+        'user': user,
+        'username': username,
+        'name': name,
+        'npm': npm,
+        'faculty': faculty,
+        'study_program': studyProgram,
+        'educational_program': educationalProgram,
+        'role': role,
+        'org_code': orgCode,
+        'is_blocked': isBlocked,
+        'likes_count': likesCount,
+        'term': term,
+        'generation': generation,
+      };
 }
