@@ -27,7 +27,6 @@ class ReviewRemoteDataSourceImpl implements ReviewRemoteDataSource {
     final resp = await getIt(url);
     for (final data in resp.dataBodyIterable) {
       final reviewModel = ReviewModel.fromJson(data);
-      await leaderboardRM.setState((s) => s.retrieveData());
 
       if (!(reviewModel.isAnonym ?? true) ) {
         reviewModel.rankTop20 = leaderboardRM.state.leaderboard.indexWhere(
