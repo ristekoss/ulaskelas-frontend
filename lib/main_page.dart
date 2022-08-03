@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/kalkulator/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/matkul/bookmarks/presentation/pages/_pages.dart';
 import 'core/bases/states/_states.dart';
 import 'features/home/presentation/pages/_pages.dart';
 import 'features/leaderboard/presentation/pages/_pages.dart';
