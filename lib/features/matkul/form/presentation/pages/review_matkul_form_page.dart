@@ -78,14 +78,13 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Unggah ulasanmu secara anonim',
+                            'Gunakan anonim',
                             style: FontTheme.poppins12w400black()
                                 .copyWith(fontWeight: FontWeight.w600),
                           ),
                           Text(
-                            'Kamu bisa memilih untuk mengunggah ulasanmu '
-                            'secara anonim agar namamu tidak '
-                            'terlihat oleh orang lain.',
+                            'Unggah ulasanmu secara anonim agar '
+                            'namamu tidak terlihat oleh orang lain.',
                             style: FontTheme.poppins10w400black(),
                           ),
                         ],
@@ -127,7 +126,12 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                       if (reviewFormRM.state.isLoading) {
                         return;
                       }
-                      if (reviewFormRM.state.formKey.currentState!.validate()) {
+                      if (reviewFormRM.state.formKey.currentState!.validate() &&
+                          currentRatingUnderstandable != 0 &&
+                          currentRatingFitToCredit != 0 &&
+                          currentRatingFitToStudyBook != 0 &&
+                          currentRatingBeneficial != 0 &&
+                          currentRatingRecommended != 0) {
                         // TODO(Any): Navigate to PendingReviewPage
                         // progressDialogue(context);
                         await reviewFormRM.state
@@ -347,7 +351,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Tag Mata Kuliah (Optional)',
+          'Tag Mata Kuliah (opsional)',
           style: FontTheme.poppins14w700black(),
         ),
         const HeightSpace(8),
