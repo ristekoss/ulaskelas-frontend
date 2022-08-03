@@ -113,8 +113,10 @@ class NavigationServiceState implements Navigation {
     );
   }
 
-  Future<void> goToAllReviewMatkulPage(
-      {required int courseId, required String courseCode,}) {
+  Future<void> goToAllReviewMatkulPage({
+    required int courseId,
+    required String courseCode,
+  }) {
     return nav.push<void>(
       AllReviewMatkulPage(
         courseId: courseId,
@@ -149,6 +151,13 @@ class NavigationServiceState implements Navigation {
     return nav.push<void>(
       const ProfilePage(),
       RouteName.profilePage,
+    );
+  }
+
+  Future<void> goToBookmarksPage() {
+    return nav.push<void>(
+      const BookmarksPage(),
+      RouteName.bookmarksPage,
     );
   }
 

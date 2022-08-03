@@ -24,4 +24,5 @@ class RouteName {
   static const String componentFormPage = 'component-form';
   static const String calculatorPage = 'calculator';
   static const String editComponent = 'edit-component';
+  static const String bookmarksPage = 'bookmarks';
 }
