@@ -25,7 +25,7 @@ class StarRating extends StatelessWidget {
         size: starSize,
       );
     } else if (index > rating - 1) {
-      icon = HalfFilledIcon(
+      icon = _HalfFilledIcon(
         icon: Icons.star_rounded,
         color: BaseColors.purpleHearth,
         size: starSize,
@@ -58,12 +58,12 @@ class StarRating extends StatelessWidget {
 
 typedef RatingChangeCallback = void Function(double rating);
 
-class HalfFilledIcon extends StatelessWidget {
+class _HalfFilledIcon extends StatelessWidget {
   final IconData icon;
   final double size;
   final Color color;
 
-  const HalfFilledIcon({
+  const _HalfFilledIcon({
     Key? key,
     required this.icon,
     required this.size,
