@@ -219,7 +219,7 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
     double newScore,
     double newWeight,
   ) {
-    return widget.totalScore - (newScore * newWeight / 100);
+    return widget.totalScore + (newScore * newWeight / 100);
   }
 
   double _temporaryUpdateWeight(double newWeight) {
