@@ -115,7 +115,7 @@ class ReviewCard extends StatelessWidget {
               Text(
                 'Diulas pada $formattedDate',
                 style: FontTheme.poppins12w400black().copyWith(
-                  color: const Color(0xFF828282),
+                  color: BaseColors.gray2,
                 ),
               ),
             ],

@@ -60,21 +60,21 @@ class TagLeaderboard extends StatelessWidget {
       ];
     }else if(rank == 1){
       return [
-        const Color(0xFFFFD668),
-        const Color(0xFFFFC62D),
-        const Color(0xFFDDA200),
+        BaseColors.gold1,
+        BaseColors.gold3,
+        BaseColors.gold2,
       ];
     }else if(rank == 2){
       return [
-        const Color(0xFFC7C6C4),
-        const Color(0xFFB4B4B4),
-        const Color(0xFF7D7D7D),
+        BaseColors.silver1,
+        BaseColors.silver3,
+        BaseColors.silver2,
       ];
     }else if(rank == 3){
       return [
-        const Color(0xFFCD7F32),
-        const Color(0xFFA15810),
-        const Color(0xFFAE5906),
+        BaseColors.bronze1,
+        BaseColors.bronze3,
+        BaseColors.bronze2,
       ];
     }else if(rank! < 20){
       return [
