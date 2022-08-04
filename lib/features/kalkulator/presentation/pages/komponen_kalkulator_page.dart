@@ -128,38 +128,34 @@ class _CalculatorComponentPageState
                         ),
                       );
                     }
-                    return Column(
-                      children: [
-                        ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.only(top: 20),
-                          itemCount: componentRM.state.components.length,
-                          itemBuilder: (context, index) {
-                            final component = components[index];
-                            return CardCompononent(
+                    return ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(top: 20),
+                      itemCount: componentRM.state.components.length,
+                      itemBuilder: (context, index) {
+                        final component = components[index];
+                        return CardCompononent(
+                          id: component.id!,
+                          name: component.name!,
+                          score: component.score!,
+                          weight: component.weight!,
+                          onTap: () {
+                            nav.goToEditComponentPage(
                               id: component.id!,
-                              name: component.name!,
-                              score: component.score!,
-                              weight: component.weight!,
-                              onTap: () {
-                                nav.goToEditComponentPage(
-                                  id: component.id!,
-                                  calculatorId: widget.calculatorId,
-                                  courseName: widget.courseName,
-                                  totalScore: widget.totalScore,
-                                  totalPercentage: widget.totalPercentage,
-                                  componentName: component.name!,
-                                  componentScore: component.score!,
-                                  componentWeight: component.weight!,
-                                );
-                              },
+                              calculatorId: widget.calculatorId,
+                              courseName: widget.courseName,
+                              totalScore: widget.totalScore,
+                              totalPercentage: widget.totalPercentage,
+                              componentName: component.name!,
+                              componentScore: component.score!,
+                              componentWeight: component.weight!,
                             );
                           },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const SizedBox(height: 1),
-                        ),
-                      ],
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 1),
                     );
                   },
                 ),
