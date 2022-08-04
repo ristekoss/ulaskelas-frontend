@@ -9,5 +9,5 @@ abstract class ComponentRepository {
   Future<Decide<Failure, Parsed<ComponentModel>>> editComponent(
       Map<String, dynamic> model,
       );
-  Future<Decide<Failure, void>> deleteComponent(QueryComponent q);
+  Future<Decide<Failure, Parsed<void>>> deleteComponent(QueryComponent q);
 }
