@@ -132,8 +132,6 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                           currentRatingFitToStudyBook != 0 &&
                           currentRatingBeneficial != 0 &&
                           currentRatingRecommended != 0) {
-                        // TODO(Any): Navigate to PendingReviewPage
-                        // progressDialogue(context);
                         await reviewFormRM.state
                             .submitForm(widget.course.code!);
                         await Future.delayed(const Duration(milliseconds: 150));
@@ -410,6 +408,7 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
           child: ListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
+            clipBehavior: Clip.none,
             children: <Widget>[
               //your widget items here
               _ratingComponent(
@@ -439,6 +438,7 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
       ],
     );
   }
+
 
   Widget _ratingComponent(String text, double rating) {
     return Padding(
