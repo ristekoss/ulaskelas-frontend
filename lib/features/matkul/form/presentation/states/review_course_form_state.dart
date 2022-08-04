@@ -131,9 +131,9 @@ class ReviewMatkulData {
   String? year;
   String? description;
   late bool isAnonymous;
-  late double? ratingUnderstandable;
-  late double? ratingFitToCredit;
-  late double? ratingFitToStudyBook;
-  late double? ratingBeneficial;
-  late double? ratingRecommended;
+  double? ratingUnderstandable;
+  double? ratingFitToCredit;
+  double? ratingFitToStudyBook;
+  double? ratingBeneficial;
+  double? ratingRecommended;
 }

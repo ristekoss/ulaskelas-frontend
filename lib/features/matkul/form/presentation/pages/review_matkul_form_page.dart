@@ -15,11 +15,6 @@ class ReviewMatkulFormPage extends StatefulWidget {
 }
 
 class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
-  double currentRatingUnderstandable = 0;
-  double currentRatingFitToCredit = 0;
-  double currentRatingFitToStudyBook = 0;
-  double currentRatingBeneficial = 0;
-  double currentRatingRecommended = 0;
   @override
   void init() {}
 
@@ -126,12 +121,15 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                       if (reviewFormRM.state.isLoading) {
                         return;
                       }
-                      if (reviewFormRM.state.formKey.currentState!.validate() &&
-                          currentRatingUnderstandable != 0 &&
-                          currentRatingFitToCredit != 0 &&
-                          currentRatingFitToStudyBook != 0 &&
-                          currentRatingBeneficial != 0 &&
-                          currentRatingRecommended != 0) {
+
+                      final reviewFormState = reviewFormRM.state;
+                      final reviewFormStateData = reviewFormState.formData;
+                      if (reviewFormState.formKey.currentState!.validate() &&
+                          reviewFormStateData.ratingUnderstandable != null &&
+                          reviewFormStateData.ratingFitToCredit != null &&
+                          reviewFormStateData.ratingFitToStudyBook != null &&
+                          reviewFormStateData.ratingBeneficial != null &&
+                          reviewFormStateData.ratingRecommended != null) {
                         await reviewFormRM.state
                             .submitForm(widget.course.code!);
                         await Future.delayed(const Duration(milliseconds: 150));
@@ -412,110 +410,91 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
             clipBehavior: Clip.none,
             children: <Widget>[
               //your widget items here
-              _ratingComponent(
-                'Saya dapat dengan mudah memahami mata kuliah',
-                currentRatingUnderstandable,
+              RatingComponent(
+                text: 'Saya dapat dengan mudah memahami mata kuliah',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingUnderstandable ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingUnderstandable(
+                          ratingUnderstandable: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-              _ratingComponent(
-                'Pelaksanaan mata kuliah sesuai dengan SKS',
-                currentRatingFitToCredit,
+              RatingComponent(
+                text: 'Pelaksanaan mata kuliah sesuai dengan SKS',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingFitToCredit ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingFitToCredit(
+                          ratingFitToCredit: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-              _ratingComponent(
-                'Pelaksanaan mata kuliah sesuai dengan BRP',
-                currentRatingFitToStudyBook,
+              RatingComponent(
+                text: 'Pelaksanaan mata kuliah sesuai dengan BRP',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingFitToStudyBook ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingFitToStudyBook(
+                          ratingFitToStudyBook: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-              _ratingComponent(
-                'Saya mendapat banyak manfaat dari mata kuliah',
-                currentRatingBeneficial,
+              RatingComponent(
+                text: 'Saya mendapat banyak manfaat dari mata kuliah',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingBeneficial ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingBeneficial(
+                          ratingBeneficial: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-              _ratingComponent(
-                'Saya merekomendasikan pengambilan mata kuliah',
-                currentRatingRecommended,
+              RatingComponent(
+                text: 'Saya merekomendasikan pengambilan mata kuliah',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingRecommended ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingRecommended(
+                          ratingRecommended: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
             ],
           ),
         ),
         const HeightSpace(10),
       ],
-    );
-  }
-
-
-  Widget _ratingComponent(String text, double rating) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8, right: 16),
-      child: Container(
-        width: 277,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          border: Border.all(color: BaseColors.gray3),
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  text,
-                  style: FontTheme.poppins12w400black(),
-                ),
-                const HeightSpace(4),
-                OnReactive(
-                  () {
-                    return StarRating(
-                      rating: rating,
-                      starSize: 30,
-                      onRatingChanged: (newRating) => setState(
-                        () {
-                          if (text.contains('memahami')) {
-                            currentRatingUnderstandable = newRating;
-                            reviewFormRM.setState(
-                              (s) => s.setRatingUnderstandable(
-                                ratingUnderstandable:
-                                    currentRatingUnderstandable,
-                              ),
-                            );
-                          } else if (text.contains('SKS')) {
-                            currentRatingFitToCredit = newRating;
-                            reviewFormRM.setState(
-                              (s) => s.setRatingFitToCredit(
-                                ratingFitToCredit: currentRatingFitToCredit,
-                              ),
-                            );
-                          } else if (text.contains('BRP')) {
-                            currentRatingFitToStudyBook = newRating;
-                            reviewFormRM.setState(
-                              (s) => s.setRatingFitToStudyBook(
-                                ratingFitToStudyBook:
-                                    currentRatingFitToStudyBook,
-                              ),
-                            );
-                          } else if (text.contains('manfaat')) {
-                            currentRatingBeneficial = newRating;
-                            reviewFormRM.setState(
-                              (s) => s.setRatingBeneficial(
-                                ratingBeneficial: currentRatingBeneficial,
-                              ),
-                            );
-                          } else if (text.contains('rekomendasi')) {
-                            currentRatingRecommended = newRating;
-                            reviewFormRM.setState(
-                              (s) => s.setRatingRecommended(
-                                ratingRecommended: currentRatingRecommended,
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
