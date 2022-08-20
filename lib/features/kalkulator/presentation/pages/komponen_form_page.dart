@@ -62,33 +62,7 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
             isLoading: componentFormRM.state.isLoading,
             text: 'Simpan',
             onTap: () async {
-              final currentFocus = FocusScope.of(context);
-
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
-              if (componentFormRM.state.isLoading) {
-                return;
-              }
-              if (componentFormRM.state.formKey.currentState!.validate()) {
-                // progressDialogue(context);
-                await componentFormRM.state.submitForm(widget.calculatorId);
-                await Future.delayed(const Duration(milliseconds: 150));
-                nav.pop();
-                await nav.replaceToComponentPage(
-                  calculatorId: widget.calculatorId,
-                  courseName: widget.courseName,
-                  totalScore: _temporaryUpdateScore(
-                    componentFormRM.state.formData.score!,
-                    componentFormRM.state.formData.weight!,
-                  ),
-                  totalPercentage: _temporaryUpdateWeight(
-                      componentFormRM.state.formData.weight!,),
-                );
-                componentFormRM.state.cleanForm();
-                return;
-              }
-              WarningMessenger('Harap isi semua field').show(context);
+              await onSubmitCallBack(context);
             },
           ),
         )
@@ -96,30 +70,45 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
     );
   }
 
-  void progressDialogue(BuildContext context) {
-    //set up the AlertDialog
-    final alert = const AlertDialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      content: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    showDialog(
-      //prevent outside touch
-      barrierDismissible: false,
-      useRootNavigator: false,
-      context: context,
-      builder: (BuildContext context) {
-        //prevent Back button press
-        return WillPopScope(
-          onWillPop: () async {
-            return false;
-          },
-          child: alert,
-        );
-      },
-    );
+  double _temporaryUpdateScore(
+      double newScore,
+      double newWeight,
+      ) {
+    return widget.totalScore + (newScore * newWeight / 100);
+  }
+
+  double _temporaryUpdateWeight(double newWeight) {
+    return widget.totalPercentage + newWeight;
+  }
+
+  Future<void> onSubmitCallBack(BuildContext context) async {
+    final currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+    if (componentFormRM.state.isLoading) {
+      return;
+    }
+    if (componentFormRM.state.formKey.currentState!.validate()) {
+      // progressDialogue(context);
+      await componentFormRM.state.submitForm(widget.calculatorId);
+      await Future.delayed(const Duration(milliseconds: 150));
+      nav.pop();
+      await nav.replaceToComponentPage(
+        calculatorId: widget.calculatorId,
+        courseName: widget.courseName,
+        totalScore: _temporaryUpdateScore(
+          componentFormRM.state.formData.score!,
+          componentFormRM.state.formData.weight!,
+        ),
+        totalPercentage: _temporaryUpdateWeight(
+          componentFormRM.state.formData.weight!,),
+      );
+      componentFormRM.state.cleanForm();
+      return;
+    }
+    WarningMessenger('Harap isi semua field').show(context);
   }
 
   TextFormField _buildNameField() {
@@ -213,17 +202,6 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
         return null;
       },
     );
-  }
-
-  double _temporaryUpdateScore(
-    double newScore,
-    double newWeight,
-  ) {
-    return widget.totalScore + (newScore * newWeight / 100);
-  }
-
-  double _temporaryUpdateWeight(double newWeight) {
-    return widget.totalPercentage + newWeight;
   }
 
   @override

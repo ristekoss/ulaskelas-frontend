@@ -2,8 +2,8 @@ part of '_datasources.dart';
 
 abstract class CalculatorRemoteDataSource {
   Future<Parsed<List<CalculatorModel>>> getAllCalculator();
-  Future<void> postCalculator(String courseCode);
-  Future<void> deleteCalculator(QueryCalculator q);
+  Future<Parsed<void>> postCalculator(String courseCode);
+  Future<Parsed<void>> deleteCalculator(QueryCalculator q);
 }
 
 class CalculatorRemoteDataSourceImpl extends CalculatorRemoteDataSource {
@@ -19,7 +19,7 @@ class CalculatorRemoteDataSourceImpl extends CalculatorRemoteDataSource {
   }
 
   @override
-  Future<void> postCalculator(String courseCode) async {
+  Future<Parsed<void>> postCalculator(String courseCode) async {
     final url = Endpoints.calculators;
     final resp = await postIt(
       url,
@@ -27,21 +27,13 @@ class CalculatorRemoteDataSourceImpl extends CalculatorRemoteDataSource {
         'course_code': courseCode,
       },
     );
-    if (resp.statusCode == 201) {
-      Logger().i('Calculator successfully created');
-    } else {
-      Logger().e('Something went wrong');
-    }
+    return resp.parse(null);
   }
 
   @override
-  Future<void> deleteCalculator(QueryCalculator q) async {
+  Future<Parsed<void>> deleteCalculator(QueryCalculator q) async {
     final url = '${Endpoints.calculators}?$q';
     final resp = await deleteIt(url);
-    if (resp.statusCode == 200) {
-      Logger().i('Calculator successfully deleted');
-    } else {
-      Logger().e('Something went wrong');
-    }
+    return resp.parse(null);
   }
 }

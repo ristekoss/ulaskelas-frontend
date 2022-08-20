@@ -28,7 +28,7 @@ class ComponentRepositoryImpl extends ComponentRepository {
   }
 
   @override
-  Future<Decide<Failure, void>> deleteComponent(QueryComponent q) {
+  Future<Decide<Failure, Parsed<void>>> deleteComponent(QueryComponent q) {
     return apiCall(_remoteDataSource.deleteComponent(q));
   }
 }

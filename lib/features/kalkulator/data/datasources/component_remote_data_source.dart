@@ -7,7 +7,7 @@ abstract class ComponentRemoteDataSource {
 
   Future<Parsed<ComponentModel>> editComponent(Map<String, dynamic> model);
 
-  Future<void> deleteComponent(QueryComponent q);
+  Future<Parsed<void>> deleteComponent(QueryComponent q);
 
 
 }
@@ -43,13 +43,9 @@ class ComponentRemoteDataSourceImpl extends ComponentRemoteDataSource {
   }
 
   @override
-  Future<void> deleteComponent(QueryComponent q) async {
+  Future<Parsed<void>> deleteComponent(QueryComponent q) async {
     final url = '${Endpoints.components}?$q';
     final resp = await deleteIt(url);
-    if (resp.statusCode == 200) {
-      Logger().i('Component successfully deleted');
-    } else {
-      Logger().e('Something went wrong');
-    }
+    return resp.parse(null);
   }
 }

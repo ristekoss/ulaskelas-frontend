@@ -104,38 +104,7 @@ class _EditComponentPageState extends BaseStateful<EditComponentPage> {
             isLoading: componentFormRM.state.isLoading,
             text: 'Simpan Perubahan',
             onTap: () async {
-              final currentFocus = FocusScope.of(context);
-
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
-              if (componentFormRM.state.isLoading) {
-                return;
-              }
-              if (componentFormRM.state.formKey.currentState!.validate()) {
-                // progressDialogue(context);
-                await componentFormRM.state.submitEditForm(
-                  widget.id,
-                  widget.calculatorId,
-                );
-                await Future.delayed(const Duration(milliseconds: 150));
-
-                nav.pop();
-                await nav.replaceToComponentPage(
-                  calculatorId: widget.calculatorId,
-                  courseName: widget.courseName,
-                  totalScore: _temporaryUpdateScore(
-                    componentFormRM.state.formData.score!,
-                    componentFormRM.state.formData.weight!,
-                  ),
-                  totalPercentage: _temporaryUpdateWeight(
-                    componentFormRM.state.formData.weight!,
-                  ),
-                );
-                componentFormRM.state.cleanForm();
-                return;
-              }
-              WarningMessenger('Harap isi semua field').show(context);
+              await onSubmitCallBack(context);
             },
           ),
         )
@@ -143,30 +112,38 @@ class _EditComponentPageState extends BaseStateful<EditComponentPage> {
     );
   }
 
-  void progressDialogue(BuildContext context) {
-    //set up the AlertDialog
-    final alert = const AlertDialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      content: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    showDialog(
-      //prevent outside touch
-      barrierDismissible: false,
-      useRootNavigator: false,
-      context: context,
-      builder: (BuildContext context) {
-        //prevent Back button press
-        return WillPopScope(
-          onWillPop: () async {
-            return false;
-          },
-          child: alert,
-        );
-      },
-    );
+  Future<void> onSubmitCallBack(BuildContext context) async {
+    final currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+    if (componentFormRM.state.isLoading) {
+      return;
+    }
+    if (componentFormRM.state.formKey.currentState!.validate()) {
+      await componentFormRM.state.submitEditForm(
+        widget.id,
+        widget.calculatorId,
+      );
+      await Future.delayed(const Duration(milliseconds: 150));
+
+      nav.pop();
+      await nav.replaceToComponentPage(
+        calculatorId: widget.calculatorId,
+        courseName: widget.courseName,
+        totalScore: _temporaryUpdateScore(
+          componentFormRM.state.formData.score!,
+          componentFormRM.state.formData.weight!,
+        ),
+        totalPercentage: _temporaryUpdateWeight(
+          componentFormRM.state.formData.weight!,
+        ),
+      );
+      componentFormRM.state.cleanForm();
+      return;
+    }
+    WarningMessenger('Harap isi semua field').show(context);
   }
 
   TextFormField _buildNameField() {
