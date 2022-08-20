@@ -54,6 +54,7 @@ class LeaderboardCard extends StatelessWidget {
               ),
               subtitle: Text(
                 'Total ${model.likesCount} Ulasan Disukai',
+                style: FontTheme.poppins12w400black(),
               ),
               trailing: profileRM.state.profile.username == model.username
                   ? const TagLeaderboard()
@@ -67,21 +68,21 @@ class LeaderboardCard extends StatelessWidget {
 
   Widget _buildRank(int rank) {
     final borderColors = <Color>[
-      const Color(0xFFFFC62D),
-      const Color(0xFFB4B4B4),
-      const Color(0xFFA15810),
+      BaseColors.gold3,
+      BaseColors.silver3,
+      BaseColors.bronze3,
     ];
 
     final baseColors = <Color>[
-      const Color(0xFFFFD668),
-      const Color(0xFFC7C6C4),
-      const Color(0xFFCD7F32),
+      BaseColors.gold1,
+      BaseColors.silver1,
+      BaseColors.bronze1,
     ];
 
     final textColors = [
-      const Color(0xFFDDA200),
-      const Color(0xFF7D7D7D),
-      const Color(0xFFAE5906),
+      BaseColors.gold2,
+      BaseColors.silver2,
+      BaseColors.bronze3,
     ];
 
     return Container(

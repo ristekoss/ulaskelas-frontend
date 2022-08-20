@@ -59,4 +59,19 @@ class BaseColors {
   static const Color neutral30 = Color(0xFFEFEFF0);
   static const Color neutral20 = Color(0xFFF6F6F6);
   static const Color neutral10 = Color(0xFFFFFFFF);
+
+  // Gold Colors
+  static const Color gold1 = Color(0xFFFFD668);
+  static const Color gold2 = Color(0xFFDDA200);
+  static const Color gold3 = Color(0xFFFFC62D);
+
+  // Silver Colors
+  static const Color silver1 = Color(0xFFC7C6C4);
+  static const Color silver2 = Color(0xFF7D7D7D);
+  static const Color silver3 = Color(0xFFB4B4B4);
+
+  // Bronze Colors
+  static const Color bronze1 = Color(0xFFCD7F32);
+  static const Color bronze2 = Color(0xFFAE5906);
+  static const Color bronze3 = Color(0xFFA15810);
 }
