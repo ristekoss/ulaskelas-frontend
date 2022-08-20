@@ -163,6 +163,14 @@ class FontTheme {
     );
   }
 
+  static TextStyle poppins12w600black() {
+    return GoogleFonts.poppins(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: BaseColors.mineShaft,
+    );
+  }
+
   static TextStyle poppins14w600black() {
     return GoogleFonts.poppins(
       fontSize: 14,
@@ -246,6 +254,14 @@ class FontTheme {
   static TextStyle poppins32w700black() {
     return GoogleFonts.poppins(
       fontSize: 32,
+      fontWeight: FontWeight.w700,
+      color: BaseColors.mineShaft,
+    );
+  }
+
+  static TextStyle poppins36w700black() {
+    return GoogleFonts.poppins(
+      fontSize: 36,
       fontWeight: FontWeight.w700,
       color: BaseColors.mineShaft,
     );
@@ -343,6 +359,14 @@ class FontTheme {
     return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.w500,
+      color: BaseColors.alabaster,
+    );
+  }
+
+  static TextStyle poppins10w600white() {
+    return GoogleFonts.poppins(
+      fontSize: 10,
+      fontWeight: FontWeight.w600,
       color: BaseColors.alabaster,
     );
   }

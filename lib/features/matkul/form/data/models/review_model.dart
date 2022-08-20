@@ -24,6 +24,13 @@ class ReviewModel {
   List<String>? tags;
   int likesCount;
   bool? isLiked;
+  double? ratingAverage;
+  double? ratingUnderstandable;
+  double? ratingFitToCredit;
+  double? ratingFitToStudyBook;
+  double? ratingBeneficial;
+  double? ratingRecommended;
+  int? rankTop20;
 
   ReviewModel({
     this.id,
@@ -48,6 +55,13 @@ class ReviewModel {
     this.tags,
     this.likesCount = 0,
     this.isLiked,
+    this.ratingAverage = 0,
+    this.ratingUnderstandable = 0,
+    this.ratingFitToCredit = 0,
+    this.ratingFitToStudyBook = 0,
+    this.ratingBeneficial = 0,
+    this.ratingRecommended = 0,
+    this.rankTop20 = 0,
   });
 
   ReviewModel.fromJson(Map<String, dynamic> json, {this.likesCount = 0}) {
@@ -86,6 +100,12 @@ class ReviewModel {
       authorStudyProgram = '****';
       authorGeneration = '****';
     }
+    ratingAverage = json['rating_average'];
+    ratingUnderstandable = json['rating_understandable'];
+    ratingFitToCredit = json['rating_fit_to_credit'];
+    ratingFitToStudyBook = json['rating_fit_to_study_book'];
+    ratingBeneficial = json['rating_beneficial'];
+    ratingRecommended = json['rating_recommended'];
   }
 
   Map<String, dynamic> toJson() {
@@ -112,6 +132,12 @@ class ReviewModel {
     data['tags'] = tags;
     data['likes_count'] = likesCount;
     data['is_liked'] = isLiked;
+    data['rating_average'] = ratingAverage;
+    data['rating_understandable'] = ratingUnderstandable;
+    data['rating_fit_to_credit'] = ratingFitToCredit;
+    data['rating_fit_to_study_book'] = ratingFitToStudyBook;
+    data['rating_beneficial'] = ratingBeneficial;
+    data['rating_recommended'] = ratingRecommended;
     return data;
   }
 

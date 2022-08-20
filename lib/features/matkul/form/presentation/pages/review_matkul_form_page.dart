@@ -58,9 +58,13 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                 const HeightSpace(24),
                 _buildYearDropDown(),
                 const HeightSpace(24),
-                _buildAddTag(),
+                const GuidelineCard(),
                 const HeightSpace(24),
                 _buildDescField(),
+                const HeightSpace(24),
+                _buildAddRating(),
+                const HeightSpace(24),
+                _buildAddTag(),
                 const HeightSpace(24),
                 Row(
                   children: [
@@ -69,14 +73,13 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Unggah ulasanmu secara anonim',
+                            'Gunakan anonim',
                             style: FontTheme.poppins12w400black()
                                 .copyWith(fontWeight: FontWeight.w600),
                           ),
                           Text(
-                            'Kamu bisa memilih untuk mengunggah ulasanmu '
-                            'secara anonim agar namamu tidak '
-                            'terlihat oleh orang lain.',
+                            'Unggah ulasanmu secara anonim agar '
+                            'namamu tidak terlihat oleh orang lain.',
                             style: FontTheme.poppins10w400black(),
                           ),
                         ],
@@ -104,37 +107,45 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                       );
                     }),
                   ],
-                )
+                ),
+                OnReactive(
+                  () => TulisUlasanButton(
+                    text: 'Kirim Ulasan',
+                    isLoading: reviewFormRM.state.isLoading,
+                    onTap: () async {
+                      final currentFocus = FocusScope.of(context);
+
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                      if (reviewFormRM.state.isLoading) {
+                        return;
+                      }
+
+                      final reviewFormState = reviewFormRM.state;
+                      final reviewFormStateData = reviewFormState.formData;
+                      if (reviewFormState.formKey.currentState!.validate() &&
+                          reviewFormStateData.ratingUnderstandable != null &&
+                          reviewFormStateData.ratingFitToCredit != null &&
+                          reviewFormStateData.ratingFitToStudyBook != null &&
+                          reviewFormStateData.ratingBeneficial != null &&
+                          reviewFormStateData.ratingRecommended != null) {
+                        await reviewFormRM.state
+                            .submitForm(widget.course.code!);
+                        await Future.delayed(const Duration(milliseconds: 150));
+                        reviewFormRM.state.cleanForm();
+                        nav.pop();
+                        await nav.replaceToReviewPendingPage();
+                        return;
+                      }
+                      WarningMessenger('Harap isi semua field').show(context);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
         ),
-        OnReactive(
-          () => TulisUlasanButton(
-            isLoading: reviewFormRM.state.isLoading,
-            onTap: () async {
-              final currentFocus = FocusScope.of(context);
-
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
-              if (reviewFormRM.state.isLoading) {
-                return;
-              }
-              if (reviewFormRM.state.formKey.currentState!.validate()) {
-                // TODO(Any): Navigate to PendingReviewPage
-                // progressDialogue(context);
-                await reviewFormRM.state.submitForm(widget.course.code!);
-                await Future.delayed(const Duration(milliseconds: 150));
-                reviewFormRM.state.cleanForm();
-                nav.pop();
-                await nav.replaceToReviewPendingPage();
-                return;
-              }
-              WarningMessenger('Harap isi semua field').show(context);
-            },
-          ),
-        )
       ],
     );
   }
@@ -201,6 +212,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
 
   Widget _buildYearDropDown() {
     return FormField<String>(
+      initialValue: reviewFormRM.state.formData.year,
       validator: (value) {
         if (value == null) {
           return 'This field is required.';
@@ -336,7 +348,7 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Tag Mata Kuliah',
+          'Tag Mata Kuliah (opsional)',
           style: FontTheme.poppins14w700black(),
         ),
         const HeightSpace(8),
@@ -376,6 +388,112 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildAddRating() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Berikan Penilaian',
+          style: FontTheme.poppins14w700black(),
+        ),
+        const HeightSpace(8),
+        SizedBox(
+          height: 115,
+          width: double.infinity,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            clipBehavior: Clip.none,
+            children: <Widget>[
+              //your widget items here
+              RatingComponent(
+                text: 'Saya dapat dengan mudah memahami mata kuliah',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingUnderstandable ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingUnderstandable(
+                          ratingUnderstandable: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              RatingComponent(
+                text: 'Pelaksanaan mata kuliah sesuai dengan SKS',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingFitToCredit ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingFitToCredit(
+                          ratingFitToCredit: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              RatingComponent(
+                text: 'Pelaksanaan mata kuliah sesuai dengan BRP',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingFitToStudyBook ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingFitToStudyBook(
+                          ratingFitToStudyBook: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              RatingComponent(
+                text: 'Saya mendapat banyak manfaat dari mata kuliah',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingBeneficial ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingBeneficial(
+                          ratingBeneficial: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              RatingComponent(
+                text: 'Saya merekomendasikan pengambilan mata kuliah',
+                starRating: StarRating(
+                  rating: reviewFormRM.state.formData.ratingRecommended ?? 0,
+                  starSize: 30,
+                  onRatingChanged: (newRating) => setState(
+                    () {
+                      reviewFormRM.setState(
+                        (s) => s.setRatingRecommended(
+                          ratingRecommended: newRating,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const HeightSpace(10),
       ],
     );
   }

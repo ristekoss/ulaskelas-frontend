@@ -26,8 +26,17 @@ class ReviewRemoteDataSourceImpl implements ReviewRemoteDataSource {
     final url = '${Endpoints.review}?$q';
     final resp = await getIt(url);
     for (final data in resp.dataBodyIterable) {
-      list.add(ReviewModel.fromJson(data));
+      final reviewModel = ReviewModel.fromJson(data);
+
+      if (!(reviewModel.isAnonym ?? true) ) {
+        reviewModel.rankTop20 = leaderboardRM.state.leaderboard.indexWhere(
+              (item) => item.username == reviewModel.author,
+            ) +
+            1;
+      }
+      list.add(reviewModel);
     }
+
     if (resp.statusCode == 200) {
       final filename = Filename.review
           .replaceAll('{code}', q.courseCode.toString())

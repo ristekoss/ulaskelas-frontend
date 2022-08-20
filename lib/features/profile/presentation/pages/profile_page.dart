@@ -75,6 +75,36 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
           const Expanded(
             child: SizedBox(),
           ),
+          Center(
+            child: InkWell(
+              onTap: () {
+                nav.goToBookmarksPage();
+              },
+              child: Text(
+                'Mata Kuliah Tersimpan',
+                style: FontTheme.poppins14w500black().copyWith(
+                  color: BaseColors.purpleHearth,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          const HeightSpace(30),
+          Center(
+            child: InkWell(
+              onTap: () {
+                nav.goToHomeDaftarUlasan();
+              },
+              child: Text(
+                'Riwayat Ulasan',
+                style: FontTheme.poppins14w500black().copyWith(
+                  color: BaseColors.purpleHearth,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          const HeightSpace(30),
           SecondaryButton(
             width: double.infinity,
             text: 'Keluar',

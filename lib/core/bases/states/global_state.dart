@@ -63,6 +63,23 @@ final courseDetailRM = RM.inject(
   () => CourseDetailState(),
 );
 
+final leaderboardRM = RM.inject(
+      () => LeaderboardState(),
+);
+
+final calculatorRM = RM.inject(
+  () => CalculatorState(),
+);
+
+final componentRM = RM.inject(
+  () => ComponentState(),
+);
+
+final componentFormRM = RM.inject(
+      () => ComponentFormState(),
+  autoDisposeWhenNotUsed: false,
+);
+
 /// Semua state harus diinject di global state
 class GlobalState {
   static List<Injectable> injectDataMocks() {
@@ -80,6 +97,7 @@ class GlobalState {
       // Inject(() => ReviewState()),
       Inject(() => SearchTagState()),
       Inject(() => BookmarkState()),
+      Inject(() => CalculatorState()),
     ];
   }
 
@@ -91,6 +109,7 @@ class GlobalState {
     // Inject(() => ReviewState()),
     Inject(() => SearchTagState()),
     Inject(() => BookmarkState()),
+    Inject(() => CalculatorState()),
   ];
 
   static ReactiveModel<ThemeState> theme() {

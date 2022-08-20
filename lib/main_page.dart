@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
-import 'package:ulaskelas/features/matkul/bookmarks/presentation/pages/_pages.dart';
-import 'package:ulaskelas/features/matkul/search/presentation/pages/_pages.dart';
+import 'package:ulaskelas/features/kalkulator/presentation/pages/_pages.dart';
 import 'core/bases/states/_states.dart';
 import 'features/home/presentation/pages/_pages.dart';
+import 'features/leaderboard/presentation/pages/_pages.dart';
+import 'features/matkul/search/presentation/pages/_pages.dart';
 import 'features/profile/presentation/pages/profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -26,7 +27,8 @@ class _MainPageState extends BaseStateful<MainPage> {
         onSeeAllCourse: () => setState(() => _selectedIndex = 1),
       ),
       const SearchCoursePage(),
-      const BookmarksPage(),
+      const LeaderboardPage(),
+      const CalculatorPage(),
       const ProfilePage(),
     ];
     _selectedIndex = 0;
@@ -79,8 +81,12 @@ class _MainPageState extends BaseStateful<MainPage> {
           text: 'Matkul',
         ),
         RistekBotNavItem(
-          icon: Icons.bookmark,
-          text: 'Tersimpan',
+          icon: Icons.leaderboard,
+          text: 'Klasemen',
+        ),
+        RistekBotNavItem(
+          icon: Icons.calculate,
+          text: 'Kalkulator',
         ),
         RistekBotNavItem(
           icon: Icons.account_circle,

@@ -15,6 +15,12 @@ class CourseModel {
     this.reviewCount,
     this.codeDesc,
     this.tags,
+    this.ratingAverage,
+    this.ratingUnderstandable,
+    this.ratingFitToCredit,
+    this.ratingFitToStudyBook,
+    this.ratingBeneficial,
+    this.ratingRecommended,
   });
 
   CourseModel.fromJson(Map<String, dynamic> json) {
@@ -43,6 +49,12 @@ class CourseModel {
     if (json['tags'] != null) {
       tags = json['tags'].cast<String>();
     }
+    ratingAverage = json['rating_average'];
+    ratingUnderstandable = json['rating_understandable'];
+    ratingFitToCredit = json['rating_fit_to_credit'];
+    ratingFitToStudyBook = json['rating_fit_to_study_book'];
+    ratingBeneficial = json['rating_beneficial'];
+    ratingRecommended = json['rating_recommended'];
   }
 
   int? id;
@@ -57,6 +69,12 @@ class CourseModel {
   int? reviewCount;
   String? shortName;
   List<String>? tags;
+  double? ratingAverage;
+  double? ratingUnderstandable;
+  double? ratingFitToCredit;
+  double? ratingFitToStudyBook;
+  double? ratingBeneficial;
+  double? ratingRecommended;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -71,6 +89,12 @@ class CourseModel {
     data['prerequisites'] = prerequisites;
     data['review_count'] = reviewCount;
     data['tags'] = tags;
+    data['rating_average'] = ratingAverage;
+    data['rating_understandable'] = ratingUnderstandable;
+    data['rating_fit_to_credit'] = ratingFitToCredit;
+    data['rating_fit_to_study_book'] = ratingFitToStudyBook;
+    data['rating_beneficial'] = ratingBeneficial;
+    data['rating_recommended'] = ratingRecommended;
     return data;
   }
 

@@ -75,6 +75,9 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     await reviewCourseRM.setState(
       (s) => s.retrieveData(QueryReview(courseCode: widget.courseCode)),
     );
+    await Future.wait([
+      leaderboardRM.setState((s) => s.retrieveData()),
+    ]);
   }
 
   @override
@@ -110,32 +113,48 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                   controller: scrollController,
                   padding: const EdgeInsets.all(24),
                   children: [
-                    _buildTitleAndBookmark(course),
+                    TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                      _buildMatkulTag(course),
+                    _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),
                     _buildMatkulPrerequisite(course),
                     const HeightSpace(32),
                     _buildReviewBySelf(),
-                    _buildReviews(),
+                    _buildReviews(course),
+                    const HeightSpace(16),
+                    if (course.reviewCount! > 3)
+                      InkWell(
+                        onTap: () => nav.goToAllReviewMatkulPage(
+                          courseId: widget.courseId,
+                          courseCode: widget.courseCode,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Lihat Semua Ulasan',
+                              style: FontTheme.poppins13w400purple(),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_rounded,
+                              color: BaseColors.purpleHearth,
+                              size: 18,
+                            ),
+                          ],
+                        ),
+                      ),
                   ],
                 );
               },
             ),
           ),
         ),
-        TulisUlasanButton(
-          onTap: () {
-            if (courseDetailRM.isDone && courseDetailRM.hasData) {
-              nav.goToReviewMatkulFormPage(
-                course: courseDetailRM.state.detailCourse,
-              );
-            }
-          },
-        )
       ],
     );
   }
@@ -163,61 +182,12 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     );
   }
 
-  Widget _buildTitleAndBookmark(CourseModel course) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Text(
-                course.name.toString(),
-                style: FontTheme.poppins20w700black(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: OnReactive(() {
-                return GestureDetector(
-                  onTap: () {
-                    final bookmark = BookmarkModel(
-                      courseId: course.id,
-                      courseCode: course.code,
-                      courseName: course.name,
-                      courseCodeDesc: course.codeDesc,
-                      courseReviewCount: course.reviewCount,
-                      shortName: course.shortName,
-                    );
-                    bookmarkRM.setState((s) => s.toggleBookmark(bookmark));
-                  },
-                  child: Icon(
-                    Icons.bookmark,
-                    color: bookmarkRM.state.isMarked(course)
-                        ? BaseColors.goldenrod
-                        : BaseColors.gray3,
-                  ),
-                );
-              }),
-            ),
-          ],
-        ),
-        const HeightSpace(8),
-        Text(
-          course.describe,
-          style: FontTheme.poppins16w500black(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildReviews() {
+  Widget _buildReviews(CourseModel course) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Semua Ulasan',
+          'Ulasan',
           style: FontTheme.poppins14w700black(),
         ),
         const HeightSpace(8),
@@ -226,6 +196,8 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           thickness: 1,
           color: Color(0xFFE0E0E0),
         ),
+        const HeightSpace(12),
+        _buildAllRatings(course),
         const HeightSpace(12),
         OnBuilder<ReviewCourseState>.all(
           listenTo: reviewCourseRM,
@@ -242,19 +214,17 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             return ListView.separated(
               physics: const ScrollPhysics(),
               shrinkWrap: true,
-              itemCount: data.hasReachedMax
-                  ? data.reviews.length
-                  : data.reviews.length + 1,
+              itemCount: data.reviews.length >= 3 ? 3 : data.reviews.length,
               separatorBuilder: (c, i) {
                 return const Divider();
               },
               itemBuilder: (c, i) {
-                if (!data.hasReachedMax && i == data.reviews.length) {
+                if (i == data.reviews.length) {
                   return const CircleLoading(
                     size: 25,
                   );
                 }
-                final review = data.reviews[i];
+                final review = data.reviews[data.reviews.length - i - 1];
                 return ReviewCard(
                   review: review,
                   onLiked: () {
@@ -269,12 +239,83 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
     );
   }
 
+  Widget _buildAllRatings(CourseModel course) {
+    return Row(
+      children: [
+        Column(
+          children: [
+            Center(
+              child: Text(
+                '${course.ratingAverage ?? 0.0}',
+                style: FontTheme.poppins36w700black(),
+              ),
+            ),
+            const HeightSpace(8),
+            StarRating(
+              rating: course.ratingAverage ?? 0.0,
+            ),
+            const HeightSpace(4),
+            Center(
+              child: Text(
+                '${course.reviewCount} Ulasan',
+                style: FontTheme.poppins12w400black(),
+              ),
+            )
+          ],
+        ),
+        const WidthSpace(32),
+        Expanded(
+          child: Column(
+            children: [
+              _buildRatingComponent(
+                'Mudah dipahami',
+                course.ratingUnderstandable,
+              ),
+              _buildRatingComponent(
+                'Kesesuaian SKS',
+                course.ratingFitToCredit,
+              ),
+              _buildRatingComponent(
+                'Kesesuaian BRP',
+                course.ratingFitToStudyBook,
+              ),
+              _buildRatingComponent(
+                'Manfaat',
+                course.ratingBeneficial,
+              ),
+              _buildRatingComponent(
+                'Direkomendasikan',
+                course.ratingRecommended,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRatingComponent(String text, double? rating) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: FontTheme.poppins12w400black(),
+          ),
+          StarRating(rating: rating ?? 0),
+        ],
+      ),
+    );
+  }
+
   Widget _buildReviewBySelf() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Ulasan Kamu',
+          'Ulasan Kelas Ini',
           style: FontTheme.poppins14w700black(),
         ),
         const HeightSpace(8),
@@ -291,9 +332,25 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           onError: (dynamic error, refresh) => Text(error.toString()),
           onData: (data) {
             if (data.myReviews.isEmpty) {
-              return Text(
-                'Belum ada Ulasan',
-                style: FontTheme.poppins12w500black(),
+              return Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Ceritakan pengalaman kamu selama menjalani kelas ini',
+                      style: FontTheme.poppins12w400black(),
+                    ),
+                  ),
+                  TulisUlasanButton(
+                    onTap: () {
+                      if (courseDetailRM.isDone && courseDetailRM.hasData) {
+                        nav.goToReviewMatkulFormPage(
+                          course: courseDetailRM.state.detailCourse,
+                        );
+                      }
+                    },
+                  )
+                ],
               );
             }
             return ListView.separated(
