@@ -12,12 +12,12 @@ class CalculatorRepositoryImpl implements CalculatorRepository{
   }
 
   @override
-  Future<Decide<Failure, void>> postCalculator(String courseCode) {
+  Future<Decide<Failure, Parsed<void>>> postCalculator(String courseCode) {
     return apiCall(_remoteDataSource.postCalculator(courseCode));
   }
 
   @override
-  Future<Decide<Failure, void>> deleteCalculator(QueryCalculator q) {
+  Future<Decide<Failure, Parsed<void>>> deleteCalculator(QueryCalculator q) {
     return apiCall(_remoteDataSource.deleteCalculator(q));
   }
 }
