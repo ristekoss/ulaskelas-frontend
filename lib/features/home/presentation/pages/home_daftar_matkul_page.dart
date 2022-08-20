@@ -25,29 +25,26 @@ class _HomeCourseListPageState extends BaseStateful<HomeCourseListPage> {
 
   @override
   Widget buildNarrowLayout(BuildContext context, SizingInformation sizeInfo) {
-    return SingleChildScrollView(
-      child: ListView.separated(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 10,
-        ),
-        itemCount: currentTermCourseRM.state.courses.length,
-        separatorBuilder: (c, i) => const HeightSpace(16),
-        itemBuilder: (c, i) {
-          final course = currentTermCourseRM.state.courses[i];
-          return CardCourse(
-            model: course,
-            onTap: () {
-              nav.goToDetailMatkulPage(
-                course.id!,
-                course.code!,
-              );
-            },
-          );
-        },
+    return ListView.separated(
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
       ),
+      itemCount: currentTermCourseRM.state.courses.length,
+      separatorBuilder: (c, i) => const HeightSpace(16),
+      itemBuilder: (c, i) {
+        final course = currentTermCourseRM.state.courses[i];
+        return CardCourse(
+          model: course,
+          onTap: () {
+            nav.goToDetailMatkulPage(
+              course.id!,
+              course.code!,
+            );
+          },
+        );
+      },
     );
   }
 
