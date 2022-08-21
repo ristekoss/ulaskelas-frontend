@@ -8,7 +8,7 @@ class TagRemoteDataSourceImpl implements TagRemoteDataSource {
   @override
   Future<Parsed<List<String>>> getAllTag(QuerySearchTag query) async {
     final list = <String>[];
-    final url = '${Endpoints.tags}?$query';
+    final url = '${EndpointsV1.tags}?$query';
     final resp = await getIt(url);
     for (final data in resp.dataBodyAsMap['tags']) {
       list.add(data);

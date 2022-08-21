@@ -14,7 +14,7 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
     QuerySearchCourse querySearch,
   ) async {
     final list = <CourseModel>[];
-    final url = '${Endpoints.courses}?$querySearch';
+    final url = '${EndpointsV1.courses}?$querySearch';
     final resp = await getIt(url);
     for (final data in resp.dataBodyAsMap['courses']) {
       list.add(CourseModel.fromJson(data));
@@ -30,7 +30,7 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
   Future<Parsed<List<CourseModel>>> getCurrentTermCourse() async {
     final list = <CourseModel>[];
-    final url = Endpoints.courses;
+    final url = EndpointsV1.courses;
     final resp = await getIt(url);
     for (final data in resp.dataBodyAsMap['courses']) {
       list.add(CourseModel.fromJson(data));
@@ -47,7 +47,8 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
 
   @override
   Future<Parsed<CourseModel>> getDetailCourse(int courseId) async {
-    final url = Endpoints.course.replaceAll('{courseId}', courseId.toString());
+    final url =
+        EndpointsV1.course.replaceAll('{courseId}', courseId.toString());
     final resp = await getIt(url);
     return resp.parse(CourseModel.fromJson(resp.dataBodyAsMap['course']));
   }

@@ -36,9 +36,9 @@ class UlaskelasThemeImpl implements UlaskelasTheme {
       dividerColor: BaseColors.gray5,
       colorScheme: const ColorScheme(
         primary: BaseColors.purpleHearth,
-        primaryVariant: BaseColors.malibu,
+        primaryContainer: BaseColors.malibu,
         secondary: BaseColors.mineShaft,
-        secondaryVariant: BaseColors.cerise,
+        secondaryContainer: BaseColors.cerise,
         surface: BaseColors.alabaster,
         background: BaseColors.white,
         error: BaseColors.error,

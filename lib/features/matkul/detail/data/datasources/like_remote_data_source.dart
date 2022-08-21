@@ -8,7 +8,7 @@ abstract class LikeRemoteDataSource {
 class LikeRemoteDataSourceImpl implements LikeRemoteDataSource {
   @override
   Future<Parsed<String>> like(ReviewModel review) async {
-    final url = Endpoints.likes;
+    final url = EndpointsV1.likes;
     final resp = await postIt(
       url,
       model: {
@@ -21,7 +21,7 @@ class LikeRemoteDataSourceImpl implements LikeRemoteDataSource {
 
   @override
   Future<Parsed<String>> unlike(ReviewModel review) async {
-    final url = Endpoints.likes;
+    final url = EndpointsV1.likes;
     final resp = await postIt(
       url,
       model: {

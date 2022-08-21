@@ -10,7 +10,7 @@ abstract class ProfileRemoteDataSource {
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   @override
   Future<Parsed<ProfileModel>> getProfile() async {
-    final url = Endpoints.account;
+    final url = EndpointsV1.account;
     final resp = await getIt(url);
     return resp.parse(ProfileModel.fromJson(resp.dataBodyAsMap));
   }

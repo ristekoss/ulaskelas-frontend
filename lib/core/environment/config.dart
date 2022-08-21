@@ -68,6 +68,7 @@ class Config {
           endpoints: BaseEndpoints(baseUrl: Endpoints.baseUrlProd),
         );
     }
+    return null;
   }
 }
 

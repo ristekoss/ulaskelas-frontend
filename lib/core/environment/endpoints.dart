@@ -10,8 +10,8 @@ class Endpoints {
   static final sso = '$baseUrl/login';
   static final ssoMobile = '$baseUrl/login/?redirect_url=${Endpoints.token}';
   static final token = '$baseUrl/token';
-  static final account = '$baseUrl/api/account';
   static final userId = '$baseUrl/users/{{Id}}';
+  static final account = '$baseUrl/api/account';
   static final review = '$baseUrl/api/reviews';
   static final courses = '$baseUrl/api/courses';
   static final bookmarks = '$baseUrl/api/bookmarks';

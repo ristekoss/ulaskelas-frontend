@@ -28,6 +28,13 @@ flutter pub get
 flutter build apk -t lib/main_development.dart --release --no-shrink --flavor development --split-per-abi
 ```
 
+Example how to build bundle release production app
+```
+flutter clean
+flutter pub get
+flutter build appbundle -t lib/main_production.dart --release --no-shrink --flavor production
+```
+
 Example how to run flutter web app
 ```
 flutter run -t lib/main_development.dart -d chrome

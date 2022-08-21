@@ -5,11 +5,10 @@ abstract class LeaderboardRemoteDataSource {
 }
 
 class LeaderboardRemoteDataSourceImpl implements LeaderboardRemoteDataSource {
-
   @override
   Future<Parsed<List<LeaderboardModel>>> getTop20Leaderboard() async {
     final list = <LeaderboardModel>[];
-    final url = Endpoints.leaderboard;
+    final url = EndpointsV1.leaderboard;
     final resp = await getIt(url);
 
     for (final data in resp.dataBodyIterable) {
@@ -18,5 +17,4 @@ class LeaderboardRemoteDataSourceImpl implements LeaderboardRemoteDataSource {
 
     return resp.parse(list);
   }
-
 }

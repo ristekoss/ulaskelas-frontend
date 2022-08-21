@@ -10,9 +10,9 @@ class ReviewRemoteDataSourceImpl implements ReviewRemoteDataSource {
   Future<Parsed<ReviewModel>> createReview(
     Map<String, dynamic> model,
   ) async {
-    final url = Endpoints.review;
+    final url = EndpointsV2.review;
     await postIt(
-      Endpoints.tags,
+      EndpointsV1.tags,
       model: <String, dynamic>{'tags': model['tags']},
     );
     final resp = await postIt(url, model: model);
@@ -23,12 +23,12 @@ class ReviewRemoteDataSourceImpl implements ReviewRemoteDataSource {
   @override
   Future<Parsed<List<ReviewModel>>> getAllReview(QueryReview q) async {
     final list = <ReviewModel>[];
-    final url = '${Endpoints.review}?$q';
+    final url = '${EndpointsV2.review}?$q';
     final resp = await getIt(url);
     for (final data in resp.dataBodyIterable) {
       final reviewModel = ReviewModel.fromJson(data);
 
-      if (!(reviewModel.isAnonym ?? true) ) {
+      if (!(reviewModel.isAnonym ?? true)) {
         reviewModel.rankTop20 = leaderboardRM.state.leaderboard.indexWhere(
               (item) => item.username == reviewModel.author,
             ) +

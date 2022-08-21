@@ -10,3 +10,5 @@ part 'config.dart';
 part 'endpoints.dart';
 part 'environment.dart';
 part 'flavor.dart';
+part 'endpoints/v1/endpoints.dart';
+part 'endpoints/v2/endpoints.dart';
