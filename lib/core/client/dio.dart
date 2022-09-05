@@ -4,8 +4,9 @@ Future<Response> getIt(
   String url, {
   Map<String, String>? headers,
 }) async {
-  Logger().i('Url $url');
-  Logger().i('Header ${Pref.getHeaders()}');
+  if (kDebugMode) {
+    Logger().i({'url': url, 'headers': '${Pref.getHeaders()}'});
+  }
   final _getHeaders = headers ?? Pref.getHeaders();
   final resp = await Dio().get(
     url,
@@ -15,9 +16,10 @@ Future<Response> getIt(
       sendTimeout: 6000,
     ),
   );
-  Logger().d('Response');
-  Logger().d(resp.data);
-  Logger().d('Response code ${resp.statusCode}');
+  if (kDebugMode) {
+    Logger()
+        .i({'response': '${resp.data}', 'statusCode': '${resp.statusCode}'});
+  }
   return resp;
 }
 
@@ -26,10 +28,13 @@ Future<Response> postIt(
   Map<String, String>? headers,
   Map<String, dynamic>? model,
 }) async {
-  Logger().i('Url $url');
-  Logger().i('Header ${Pref.getHeaders()}');
-  Logger().i('Model');
-  Logger().i(model);
+  if (kDebugMode) {
+    Logger().i({
+      'url': url,
+      'headers': '${Pref.getHeaders()}',
+      'model': '$model',
+    });
+  }
   final _getHeaders = headers ?? Pref.getHeaders();
   final resp = await Dio().post(
     url,
@@ -40,8 +45,10 @@ Future<Response> postIt(
       sendTimeout: 6000,
     ),
   );
-  Logger().d('Response $resp');
-  Logger().d('Response code ${resp.statusCode}');
+  if (kDebugMode) {
+    Logger()
+        .i({'response': '${resp.data}', 'statusCode': '${resp.statusCode}'});
+  }
   return resp;
 }
 
@@ -50,8 +57,13 @@ Future<Response> putIt(
   Map<String, String>? headers,
   Map<String, dynamic>? model,
 }) async {
-  Logger().i('Url $url');
-  Logger().i('Header ${Pref.getHeaders()}');
+  if (kDebugMode) {
+    Logger().i({
+      'url': url,
+      'headers': '${Pref.getHeaders()}',
+      'model': '$model',
+    });
+  }
   final _getHeaders = headers ?? Pref.getHeaders();
   final resp = await Dio().put(
     url,
@@ -62,8 +74,10 @@ Future<Response> putIt(
       sendTimeout: 6000,
     ),
   );
-  Logger().d('Response $resp');
-  Logger().d('Response code ${resp.statusCode}');
+  if (kDebugMode) {
+    Logger()
+        .i({'response': '${resp.data}', 'statusCode': '${resp.statusCode}'});
+  }
   return resp;
 }
 
@@ -72,8 +86,13 @@ Future<Response> deleteIt(
   Map<String, String>? headers,
   Map<String, dynamic>? model,
 }) async {
-  Logger().i('Url $url');
-  Logger().i('Header ${Pref.getHeaders()}');
+  if (kDebugMode) {
+    Logger().i({
+      'url': url,
+      'headers': '${Pref.getHeaders()}',
+      'model': '$model',
+    });
+  }
   final _getHeaders = headers ?? Pref.getHeaders();
   final resp = await Dio().delete(
     url,
@@ -84,7 +103,9 @@ Future<Response> deleteIt(
       sendTimeout: 6000,
     ),
   );
-  Logger().d('Response $resp');
-  Logger().d('Response code ${resp.statusCode}');
+  if (kDebugMode) {
+    Logger()
+        .i({'response': '${resp.data}', 'statusCode': '${resp.statusCode}'});
+  }
   return resp;
 }

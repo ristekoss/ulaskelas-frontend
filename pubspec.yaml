@@ -3,7 +3,7 @@ description: Ulaskelas Ristek Universitas Indonesia Project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.1.0+4
+version: 1.0.0+3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -36,13 +36,22 @@ dependencies:
   flutter_vector_icons: ^1.0.0
   package_info: ^2.0.2
   shimmer: ^2.0.0
+  envify: ^2.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_driver:
     sdk: flutter
+
+  # Help optimization.
   very_good_analysis: ^2.4.0
+
+  #  provides a concrete way of generating files using Dart code.
+  build_runner: ^2.2.0
+
+  # See envify.
+  envify_generator: ^2.0.2
 
 flutter:
 

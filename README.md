@@ -75,3 +75,7 @@ More Postman tutorial [here](https://www.postman.com/postman/workspace/postman-a
 ### Versioning
 
 Major-Minor-Patch
+
+### How to contribute
+
+To help work on this project, please refer to [CONTRIBUTING.md](CONTRIBUTING.md)

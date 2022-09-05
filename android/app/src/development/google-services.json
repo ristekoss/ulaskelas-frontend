@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "178086714441",
+    "project_id": "ulas-kelas",
+    "storage_bucket": "ulas-kelas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178086714441:android:4ba208a27cf31ae6cc7398",
+        "android_client_info": {
+          "package_name": "com.ristek.ulaskelas.development"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178086714441-88c792m4j0ss7bv5q44l54dvinklc8ij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ristek.ulaskelas.development",
+            "certificate_hash": "2279f830181e028b442d1a2aef0c82dc71771fd8"
+          }
+        },
+        {
+          "client_id": "178086714441-g086eqfp9a0k5r2opbo9cvrrse36tqrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQw1D04kEqMDuWK9JDKsjtAUedLiLU-ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178086714441-g086eqfp9a0k5r2opbo9cvrrse36tqrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
