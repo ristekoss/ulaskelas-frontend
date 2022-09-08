@@ -47,3 +47,4 @@ app.*.map.json
 
 .env
 /android/app/src/production/google-services.json
+/lib/core/environment/secrets.g.dart

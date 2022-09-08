@@ -34,6 +34,7 @@ class _AppWrapperState extends State<AppWrapper> {
     Timer(
       const Duration(milliseconds: 2500),
       () async {
+        // ignore:, deprecated_member_use_from_same_package
         final forceUpdate = await canUpdate(context);
         if (forceUpdate) {
           final confirm = await const ConfirmationModalDialog(

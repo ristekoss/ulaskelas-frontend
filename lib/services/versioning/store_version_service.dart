@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:ulaskelas/core/environment/_environment.dart';
 
+@Deprecated('Not a proper version control')
 class StoreVersionService {
   static String get _appId => Config.packageName!;
   String version = '';
@@ -43,7 +44,7 @@ class StoreVersionService {
         return _getAndroidStoreVersion(_appId);
       case TargetPlatform.iOS:
         return _getIOSStoreVersion(_appId);
-        // ignore:no_default_cases
+      // ignore:no_default_cases
       default:
         print('This target platform is not yet supported by this package.');
         return null;

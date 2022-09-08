@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:ulaskelas/services/versioning/store_version_service.dart';
 
+@Deprecated('Not a proper version control')
 Future<bool> canUpdate(
   BuildContext context,
 ) async {
