@@ -15,7 +15,7 @@ jobs:
       - run: >-
           echo "${{ secrets.ENV }}" | base64 --decode > ${{ github.workspace }}/.env &&
           sudo snap install flutter --classic && flutter
-          config --enable-web && flutter pub get && flutter pub run build_runner --delete-conflicting-outputs && 
+          config --enable-web && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs && 
           flutter build web -t lib/main_production.dart
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

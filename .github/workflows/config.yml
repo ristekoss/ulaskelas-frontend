@@ -26,7 +26,7 @@ jobs:
           flutter doctor
           flutter pub get
           echo "${{ secrets.ENV }}" | base64 --decode > ${{ github.workspace }}/.env
-          flutter pub run build_runner --delete-conflicting-outputs
+          flutter pub run build_runner build --delete-conflicting-outputs
           flutter test --coverage
           flutter analyze
           bash <(curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }})
