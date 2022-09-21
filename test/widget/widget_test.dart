@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:ulaskelas/core/_core.dart';
-import 'package:ulaskelas/main_page.dart';
 
 typedef PumperWidget = Widget Function(Widget widget);
 
@@ -47,6 +46,6 @@ void main() {
   });
 
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(widget.call(const MainPage()));
+    await tester.pumpWidget(const SizedBox());
   });
 }

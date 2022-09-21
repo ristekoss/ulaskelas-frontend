@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.4
-  ristek_material_component: ^0.0.14
-  states_rebuilder: ^5.0.0
+  ristek_material_component: ^0.0.15
+  states_rebuilder: ^6.1.0+1
   logger: ^1.0.0
   firebase_analytics: ^8.2.0
   firebase_crashlytics: ^2.4.4
