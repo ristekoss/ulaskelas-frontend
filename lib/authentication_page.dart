@@ -75,6 +75,7 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
     unawaited(
       authRM.setState((s) {
         s.isLoading = true;
+        return;
       }),
     );
     await Future.delayed(const Duration(seconds: 1));
@@ -92,6 +93,7 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
     unawaited(
       authRM.setState((s) {
         s.isLoading = false;
+        return;
       }),
     );
   }

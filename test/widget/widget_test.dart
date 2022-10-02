@@ -32,20 +32,9 @@ Widget scaffold({
 }
 
 void main() {
-  late PumperWidget widget;
+  setUpAll(() async {});
 
-  setUpAll(() async {
-    widget = (Widget? child) => scaffold(
-          child: Injector(
-            inject: GlobalState.injectDataMocks(),
-            builder: (context) {
-              return child!;
-            },
-          ),
-        );
-  });
-
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Dummy test', (WidgetTester tester) async {
     await tester.pumpWidget(const SizedBox());
   });
 }

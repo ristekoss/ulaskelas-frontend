@@ -8,15 +8,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LaunchServices {
   static Future<void> launchInBrowser(
-    String url, {
+    String urlString, {
     BuildContext? context,
   }) async {
-    Logger().i('Launch Url $url');
-    if (await canLaunch(url)) {
-      await launch(
+    Logger().i('Launch Url $urlString');
+    final url = Uri.parse(urlString);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
         url,
-        forceSafariVC: false,
-        headers: <String, String>{'my_header_key': 'my_header_value'},
       );
     } else {
       ErrorMessenger('Cant launch the url').show(ctx!);
