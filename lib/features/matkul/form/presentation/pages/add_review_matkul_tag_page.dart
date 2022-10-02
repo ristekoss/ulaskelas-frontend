@@ -227,6 +227,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     await searchTagRM.setState((s) {
       s.hasReachedMax = false;
+      return;
     });
     _debounce = Timer(const Duration(milliseconds: 1000), () {
       final query = QuerySearchTag(name: searchTagRM.state.controller.text);

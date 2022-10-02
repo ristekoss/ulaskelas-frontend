@@ -21,10 +21,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
-          flutter-version: '2.8.1'
+          flutter-version: '3.0.5'
       - run: |
           flutter doctor
           flutter pub get
+          echo "${{ secrets.ENV }}" | base64 --decode > ${{ github.workspace }}/.env
+          flutter pub run build_runner build --delete-conflicting-outputs
           flutter test --coverage
           flutter analyze
           bash <(curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }})

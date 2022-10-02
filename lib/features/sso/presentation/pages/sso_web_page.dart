@@ -90,6 +90,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
             s
               ..isLogin = true
               ..isLoading = true;
+            return;
           });
         }
       }
@@ -101,6 +102,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
     Logger().i(progress);
     progressWebView.setState((s) {
       s.progress = progress / 100;
+      return;
     });
   }
 

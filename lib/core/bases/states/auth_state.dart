@@ -59,6 +59,7 @@ class AuthState {
           s
             ..isLogin = true
             ..isLoading = false;
+          return;
         });
       }
     }

@@ -13,8 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: >-
-          sudo snap install flutter --classic && flutter
-          config --enable-web && flutter build web -t lib/main_development.dart
+          echo "${{ secrets.ENV }}" | base64 --decode > ${{ github.workspace }}/.env &&
+          sudo snap install flutter --classic && 
+          flutter config --enable-web && flutter pub get && 
+          flutter pub run build_runner build --delete-conflicting-outputs && 
+          flutter build web -t lib/main_development.dart
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

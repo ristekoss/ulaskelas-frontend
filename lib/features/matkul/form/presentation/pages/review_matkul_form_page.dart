@@ -377,6 +377,7 @@ Pilih 3 kategori yang menurutmu dapat merepresentasikan mata kuliah ini''',
             if (result != null) {
               await reviewFormRM.setState((s) {
                 s.selectTag = result;
+                return;
               });
             }
           },

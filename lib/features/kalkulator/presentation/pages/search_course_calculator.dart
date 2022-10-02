@@ -34,7 +34,7 @@ class _SearchCourseCalculatorState
   @override
   Future<void> retrieveData() async {
     await searchCourseRM.setState(
-          (s) => s.retrieveData(
+      (s) => s.retrieveData(
         QuerySearchCourse(
           name: searchCourseRM.state.controller.text,
         ),
@@ -56,10 +56,10 @@ class _SearchCourseCalculatorState
 
   @override
   Widget buildNarrowLayout(
-      BuildContext context,
-      ReactiveModel<SearchCourseState> k,
-      SizingInformation sizeInfo,
-      ) {
+    BuildContext context,
+    ReactiveModel<SearchCourseState> k,
+    SizingInformation sizeInfo,
+  ) {
     return Column(
       children: [
         Padding(
@@ -80,7 +80,7 @@ class _SearchCourseCalculatorState
                 ),
               ),
               OnReactive(
-                    () => SearchField(
+                () => SearchField(
                   hintText: 'Cari mata kuliah',
                   focusNode: focusNode,
                   controller: searchCourseRM.state.controller,
@@ -118,10 +118,10 @@ class _SearchCourseCalculatorState
 
   @override
   Widget buildWideLayout(
-      BuildContext context,
-      ReactiveModel<SearchCourseState> k,
-      SizingInformation sizeInfo,
-      ) {
+    BuildContext context,
+    ReactiveModel<SearchCourseState> k,
+    SizingInformation sizeInfo,
+  ) {
     return buildNarrowLayout(context, k, sizeInfo);
   }
 
@@ -161,6 +161,7 @@ class _SearchCourseCalculatorState
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     await searchCourseRM.setState((s) {
       s.hasReachedMax = false;
+      return;
     });
     _debounce = Timer(const Duration(milliseconds: 1000), () {
       final query = QuerySearchCourse(name: val);
