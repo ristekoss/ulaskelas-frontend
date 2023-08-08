@@ -246,7 +246,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           children: [
             Center(
               child: Text(
-                '${(course.ratingAverage ?? 0.0).toStringAsFixed(2)}',
+                '${(course.ratingAverage ?? 0.0).toStringAsFixed(1)}',
                 style: FontTheme.poppins36w700black(),
               ),
             ),
