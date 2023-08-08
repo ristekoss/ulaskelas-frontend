@@ -1,9 +1,11 @@
-import 'package:envify/envify.dart';
+import 'package:envied/envied.dart';
 
 part 'secrets.g.dart';
 
-@Envify(name: 'Secret')
+@Envied(name: 'Secret', path: '.env')
 abstract class Secret {
-  static const baseUrlDev = _Secret.baseUrlDev;
-  static const baseUrlProd = _Secret.baseUrlProd;
+  @EnviedField(varName: 'BASE_URL_DEV')
+  static const String baseUrlDev = _Secret.baseUrlDev;
+  @EnviedField(varName: 'BASE_URL_PROD')
+  static const String baseUrlProd = _Secret.baseUrlProd;
 }

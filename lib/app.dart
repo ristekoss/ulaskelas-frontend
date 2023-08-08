@@ -8,7 +8,7 @@ import 'package:ulaskelas/app_wrapper.dart';
 import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/core/constants/_constants.dart';
 
-FirebaseAnalytics analytics = FirebaseAnalytics();
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

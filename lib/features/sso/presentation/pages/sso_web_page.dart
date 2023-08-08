@@ -17,7 +17,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
 
   @override
   void init() {
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
   @override
