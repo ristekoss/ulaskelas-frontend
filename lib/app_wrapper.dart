@@ -15,7 +15,7 @@ import 'package:ulaskelas/services/versioning/check_version.dart';
 import 'core/environment/_environment.dart';
 
 class AppWrapper extends StatefulWidget {
-  const AppWrapper({Key? key}) : super(key: key);
+  const AppWrapper({super.key});
 
   @override
   _AppWrapperState createState() => _AppWrapperState();

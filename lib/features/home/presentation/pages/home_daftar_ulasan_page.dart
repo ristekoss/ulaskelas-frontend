@@ -2,8 +2,8 @@ part of '_pages.dart';
 
 class HomeDaftarUlasanPage extends StatefulWidget {
   const HomeDaftarUlasanPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _HomeDaftarUlasanPageState createState() => _HomeDaftarUlasanPageState();
@@ -38,8 +38,8 @@ class _HomeDaftarUlasanPageState extends BaseStateful<HomeDaftarUlasanPage> {
       onRefresh: retrieveData,
       child: OnBuilder<ReviewHistoryState>.all(
         listenTo: reviewHistoryRM,
-        onIdle: () => WaitingView(),
-        onWaiting: () => WaitingView(),
+        onIdle: WaitingView.new,
+        onWaiting: WaitingView.new,
         onError: (dynamic error, refresh) => Text(error.toString()),
         onData: (data) {
           if (data.reviewHistories.isEmpty) {

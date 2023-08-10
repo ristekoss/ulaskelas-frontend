@@ -38,6 +38,7 @@ dependencies:
   shimmer: ^3.0.0
 #  envify: ^2.0.3
   envied: ^0.3.0+3
+  html: ^0.15.4
 
 dev_dependencies:
   flutter_test:

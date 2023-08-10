@@ -2,10 +2,9 @@ part of '_widgets.dart';
 
 class CardMatkulReview extends StatelessWidget {
   const CardMatkulReview({
-    Key? key,
-    required this.review,
+    required this.review, super.key,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final ReviewModel review;
   final VoidCallback? onTap;

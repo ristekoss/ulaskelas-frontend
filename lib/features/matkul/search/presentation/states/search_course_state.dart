@@ -5,11 +5,11 @@ part of '_states.dart';
 class SearchCourseState
     implements FutureState<SearchCourseState, QuerySearchCourse> {
   SearchCourseState() {
-    final _remoteDataSource = CourseRemoteDataSourceImpl();
-    final _localDataSource = CourseLocalDataSourceImpl();
+    final remoteDataSource = CourseRemoteDataSourceImpl();
+    final localDataSource = CourseLocalDataSourceImpl();
     _repo = CourseRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 

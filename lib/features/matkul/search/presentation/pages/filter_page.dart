@@ -4,8 +4,8 @@ part of '_pages.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _FilterPageState createState() => _FilterPageState();

@@ -56,7 +56,7 @@ class ConfirmationModalDialog extends DialogBox {
                         padding: const EdgeInsets.all(8),
                         child: Text(
                           noLabel,
-                          style: theme.textTheme.button?.copyWith(
+                          style: theme.textTheme.labelLarge?.copyWith(
                             color: BaseColors.mineShaft,
                           ),
                           textAlign: TextAlign.center,

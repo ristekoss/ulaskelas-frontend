@@ -2,13 +2,13 @@ part of '_widgets.dart';
 
 class CardCompononent extends StatelessWidget {
   const CardCompononent({
-    Key? key,
-    this.onTap,
     required this.id,
     required this.name,
     required this.score,
     required this.weight,
-  }) : super(key: key);
+    super.key,
+    this.onTap,
+  });
 
   final int id;
   final String name;
@@ -47,13 +47,15 @@ class CardCompononent extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Text(score.toStringAsFixed(2),
+                child: Text(
+                  score.toStringAsFixed(2),
                   style: FontTheme.poppins12w400black(),
                   textAlign: TextAlign.right,
                 ),
               ),
               Expanded(
-                child: Text('${weight.toStringAsFixed(1)}%',
+                child: Text(
+                  '${weight.toStringAsFixed(1)}%',
                   style: FontTheme.poppins12w400black(),
                   textAlign: TextAlign.right,
                 ),

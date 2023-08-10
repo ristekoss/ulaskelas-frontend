@@ -1,7 +1,6 @@
 // Created by Muhamad Fauzi Ridwan on 23/08/21.
 
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:ulaskelas/app_wrapper.dart';
@@ -11,7 +10,7 @@ import 'package:ulaskelas/core/constants/_constants.dart';
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {

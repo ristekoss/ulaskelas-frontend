@@ -8,10 +8,8 @@ part of '_pages.dart';
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
   const DetailMatkulPage({
-    Key? key,
-    required this.courseId,
-    required this.courseCode,
-  }) : super(key: key);
+    required this.courseId, required this.courseCode, super.key,
+  });
 
   final int courseId;
   final String courseCode;
@@ -103,8 +101,8 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             onRefresh: retrieveData,
             child: OnBuilder<CourseDetailState>.all(
               listenTo: courseDetailRM,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
+              onIdle: WaitingView.new,
+              onWaiting: WaitingView.new,
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
                 final course = data.detailCourse;

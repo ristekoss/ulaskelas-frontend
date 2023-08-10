@@ -2,10 +2,9 @@ part of '_widgets.dart';
 
 class CardCourseSimplified extends StatelessWidget {
   const CardCourseSimplified({
-    Key? key,
-    required this.model,
+    required this.model, super.key,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final CourseModel model;
   final VoidCallback? onTap;

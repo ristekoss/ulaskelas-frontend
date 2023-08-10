@@ -10,8 +10,8 @@ import 'core/constants/_constants.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _OnboardingPageState createState() => _OnboardingPageState();
@@ -146,14 +146,14 @@ Kamu juga dapat memberikan ulasan terhadap mata kuliah yang sudah kamu ambil. Ul
 
 class OnboardingPageBody extends StatelessWidget {
   const OnboardingPageBody({
-    Key? key,
     required this.index,
     required this.height,
     required this.width,
     required this.title,
     required this.description,
     required this.image,
-  }) : super(key: key);
+    super.key,
+  });
 
   final int index;
   final double height;

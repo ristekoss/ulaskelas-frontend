@@ -1,7 +1,7 @@
 part of '_pages.dart';
 
 class LeaderboardPage extends StatefulWidget {
-  const LeaderboardPage({Key? key}) : super(key: key);
+  const LeaderboardPage({super.key});
 
   @override
   _LeaderboardPageState createState() => _LeaderboardPageState();

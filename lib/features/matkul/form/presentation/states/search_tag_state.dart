@@ -2,11 +2,11 @@ part of '_states.dart';
 
 class SearchTagState implements FutureState<SearchTagState, QuerySearchTag> {
   SearchTagState() {
-    final _remoteDataSource = TagRemoteDataSourceImpl();
-    final _localDataSource = TagLocalDataSourceImpl();
+    final remoteDataSource = TagRemoteDataSourceImpl();
+    final localDataSource = TagLocalDataSourceImpl();
     _repo = TagRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 

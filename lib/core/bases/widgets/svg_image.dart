@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+// ignore_for_file: deprecated_member_use
 // TODO(Any): next update
 
 class SVGImage extends SvgPicture {

@@ -2,11 +2,10 @@ part of '_widgets.dart';
 
 class TulisUlasanButton extends StatelessWidget {
   const TulisUlasanButton({
-    Key? key,
-    required this.onTap,
+    required this.onTap, super.key,
     this.isLoading = false,
     this.text = 'Tulis Ulasan',
-  }) : super(key: key);
+  });
 
   final VoidCallback onTap;
   final bool isLoading;

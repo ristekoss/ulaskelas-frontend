@@ -4,16 +4,15 @@ part of '_widgets.dart';
 
 class BaseAppBar extends AppBar {
   BaseAppBar({
-    Key? key,
+    super.key,
     Function()? onBackPress,
     String? label,
-    List<Widget>? actions,
+    super.actions,
     bool hasLeading = true,
-    bool centerTitle = true,
+    bool super.centerTitle = true,
     double? elevation,
     Color? color,
   }) : super(
-          key: key,
           elevation: elevation ?? 1,
           shadowColor: Colors.grey[300],
           backgroundColor: color ?? BaseColors.white,
@@ -28,11 +27,9 @@ class BaseAppBar extends AppBar {
                   onPressed: onBackPress ?? () => nav.pop<void>(),
                 )
               : null,
-          centerTitle: centerTitle,
           title: Text(
             label.toString(),
             style: FontTheme.poppins14w700black(),
           ),
-          actions: actions,
         );
 }

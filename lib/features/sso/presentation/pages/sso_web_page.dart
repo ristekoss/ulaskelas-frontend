@@ -3,7 +3,7 @@
 part of '_pages.dart';
 
 class SSOWebPage extends StatefulWidget {
-  const SSOWebPage({Key? key}) : super(key: key);
+  const SSOWebPage({super.key});
 
   @override
   _SSOWebPageState createState() => _SSOWebPageState();

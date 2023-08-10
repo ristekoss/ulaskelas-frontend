@@ -11,8 +11,8 @@ import 'package:ulaskelas/features/profile/presentation/widgets/profile_data.dar
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _ProfilePageState createState() => _ProfilePageState();

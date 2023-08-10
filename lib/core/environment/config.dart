@@ -20,7 +20,7 @@ class Config {
     appName = flavor.value;
     assetsPath = baseConfig.assetAbsolutePath;
     packageName = 'com.ristek.ulaskelas';
-    //todo grouping
+    // TODO(any): grouping
     imagesPath = '${assetsPath!}/images';
     iconsPath = '${assetsPath!}/icons';
 
@@ -74,8 +74,7 @@ class Config {
 
 class BaseConfig {
   const BaseConfig({
-    this.assetAbsolutePath = Constants.assetPath,
-    required this.endpoints,
+    required this.endpoints, this.assetAbsolutePath = Constants.assetPath,
   });
   final String assetAbsolutePath;
   final BaseEndpoints endpoints;

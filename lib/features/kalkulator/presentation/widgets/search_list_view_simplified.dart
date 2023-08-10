@@ -2,12 +2,12 @@ part of '_widgets.dart';
 
 class SearchListViewSimplified extends StatelessWidget {
   const SearchListViewSimplified({
-    Key? key,
     required this.refreshIndicatorKey,
     required this.scrollController,
     required this.onScroll,
     required this.onRefresh,
-  }) : super(key: key);
+    super.key,
+  });
 
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
   final ScrollController scrollController;
@@ -86,8 +86,9 @@ Mata kuliah yang kamu cari tidak ada di aplikasi. Silakan coba lagi dengan kata 
                       model: course,
                       onTap: () {
                         nav.pop();
-                        calculatorRM.setState((s) =>
-                            s.postCalculator(course.code!),);
+                        calculatorRM.setState(
+                          (s) => s.postCalculator(course.code!),
+                        );
                       },
                     );
                   },

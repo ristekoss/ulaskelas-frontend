@@ -2,8 +2,7 @@ part of '_models.dart';
 
 class TagModel {
   TagModel({
-    this.id,
-    required this.name,
+    required this.name, this.id,
   });
 
   TagModel.fromJson(Map<String, dynamic> json) {

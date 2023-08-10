@@ -2,12 +2,11 @@ part of '_widgets.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({
-    Key? key,
-    required this.review,
+    required this.review, super.key,
     this.imgUrl,
     this.onLiked,
     this.status,
-  }) : super(key: key);
+  });
 
   final ReviewModel review;
   final String? imgUrl;
@@ -188,11 +187,9 @@ class ReviewCard extends StatelessWidget {
 
 class PopupMenu extends StatelessWidget {
   const PopupMenu({
-    Key? key,
-    required this.username,
-    required this.reviewId,
+    required this.username, required this.reviewId, super.key,
     this.isAnonymous = false,
-  }) : super(key: key);
+  });
 
   final String username;
   final bool isAnonymous;
@@ -250,7 +247,6 @@ class PopupMenu extends StatelessWidget {
 Report User Content for ${isAnonymous ? 'Review id $reviewId' : username}''',
           'enter report message',
         );
-        break;
       default:
     }
   }

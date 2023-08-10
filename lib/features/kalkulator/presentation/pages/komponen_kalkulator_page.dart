@@ -2,12 +2,12 @@ part of '_pages.dart';
 
 class CalculatorComponentPage extends StatefulWidget {
   const CalculatorComponentPage({
-    Key? key,
     required this.calculatorId,
     required this.courseName,
     required this.totalScore,
     required this.totalPercentage,
-  }) : super(key: key);
+    super.key,
+  });
 
   final int calculatorId;
   final String courseName;

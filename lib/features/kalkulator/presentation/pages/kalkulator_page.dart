@@ -2,8 +2,8 @@ part of '_pages.dart';
 
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _CalculatorPageState createState() => _CalculatorPageState();
@@ -45,8 +45,8 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
         onRefresh: retrieveData,
         child: OnBuilder<CalculatorState>.all(
           listenTo: calculatorRM,
-          onIdle: () => WaitingView(),
-          onWaiting: () => WaitingView(),
+          onIdle: WaitingView.new,
+          onWaiting: WaitingView.new,
           onError: (dynamic error, refresh) => const Text('error'),
           onData: (data) {
             final calculators = data.calculators;
@@ -74,7 +74,7 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
                       Text(
                         '''
 Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahulu.''',
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
                       const HeightSpace(30),

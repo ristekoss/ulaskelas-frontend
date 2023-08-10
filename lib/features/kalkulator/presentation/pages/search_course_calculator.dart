@@ -2,8 +2,8 @@ part of '_pages.dart';
 
 class SearchCourseCalculator extends StatefulWidget {
   const SearchCourseCalculator({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _SearchCourseCalculatorState createState() => _SearchCourseCalculatorState();
