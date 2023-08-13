@@ -116,7 +116,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                    _buildMatkulTag(course),
+                      _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),
@@ -168,11 +168,11 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
   }
 
   Widget _buildMatkulTag(CourseModel course) {
-    return Row(
+    return Wrap(
       children: course.tags!
           .map(
             (e) => Padding(
-              padding: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.only(right: 8, top: 8),
               child: Tag(
                 label: e,
               ),
@@ -246,7 +246,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           children: [
             Center(
               child: Text(
-                '${course.ratingAverage ?? 0.0}',
+                (course.ratingAverage ?? 0.0).toStringAsFixed(1),
                 style: FontTheme.poppins36w700black(),
               ),
             ),
