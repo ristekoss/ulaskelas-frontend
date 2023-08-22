@@ -2,9 +2,9 @@ part of '_states.dart';
 
 class LeaderboardState {
   LeaderboardState() {
-    final _remoteDataSource = LeaderboardRemoteDataSourceImpl();
+    final remoteDataSource = LeaderboardRemoteDataSourceImpl();
     _repo = LeaderboardRepositoryImpl(
-      _remoteDataSource,
+      remoteDataSource,
     );
   }
 

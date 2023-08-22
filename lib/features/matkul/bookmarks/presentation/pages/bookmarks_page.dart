@@ -4,8 +4,8 @@ part of '_pages.dart';
 
 class BookmarksPage extends StatefulWidget {
   const BookmarksPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _BookmarksPageState createState() => _BookmarksPageState();
@@ -44,8 +44,8 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
         onRefresh: retrieveData,
         child: OnBuilder<BookmarkState>.all(
           listenTo: bookmarkRM,
-          onIdle: () => WaitingView(),
-          onWaiting: () => WaitingView(),
+          onIdle: WaitingView.new,
+          onWaiting: WaitingView.new,
           onError: (dynamic error, refresh) => const Text('error'),
           onData: (data) {
             final bookmarks = data.bookmarks;
@@ -71,7 +71,7 @@ class _BookmarksPageState extends BaseStateful<BookmarksPage> {
                     Text(
                       '''
 Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.''',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                       textAlign: TextAlign.center,
                     ),
                     const HeightSpace(40),

@@ -2,10 +2,8 @@ part of '_widgets.dart';
 
 class LeaderboardCard extends StatelessWidget {
   const LeaderboardCard({
-    Key? key,
-    required this.rank,
-    required this.model,
-  }) : super(key: key);
+    required this.rank, required this.model, super.key,
+  });
 
   final int rank;
   final LeaderboardModel model;

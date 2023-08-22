@@ -4,9 +4,8 @@ part of '_pages.dart';
 
 class ReviewMatkulFormPage extends StatefulWidget {
   const ReviewMatkulFormPage({
-    Key? key,
-    required this.course,
-  }) : super(key: key);
+    required this.course, super.key,
+  });
 
   final CourseModel course;
 

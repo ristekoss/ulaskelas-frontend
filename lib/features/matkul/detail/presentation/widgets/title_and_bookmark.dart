@@ -2,9 +2,8 @@ part of '_widgets.dart';
 
 class TitleAndBookMark extends StatelessWidget {
   const TitleAndBookMark({
-    Key? key,
-    required this.course,
-  }) : super(key: key);
+    required this.course, super.key,
+  });
 
   final CourseModel course;
 

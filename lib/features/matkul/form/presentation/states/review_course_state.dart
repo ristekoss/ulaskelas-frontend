@@ -4,14 +4,14 @@ part of '_states.dart';
 
 class ReviewCourseState {
   ReviewCourseState() {
-    final _remoteDataSource = ReviewRemoteDataSourceImpl();
-    final _localDataSource = ReviewLocalDataSourceImpl();
+    final remoteDataSource = ReviewRemoteDataSourceImpl();
+    final localDataSource = ReviewLocalDataSourceImpl();
     _repo = ReviewRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
-    final _likeRemoteDataSource = LikeRemoteDataSourceImpl();
-    _likeRepo = LikeRepositoryImpl(_likeRemoteDataSource);
+    final likeRemoteDataSource = LikeRemoteDataSourceImpl();
+    _likeRepo = LikeRepositoryImpl(likeRemoteDataSource);
   }
 
   late ReviewRepository _repo;

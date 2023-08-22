@@ -1,7 +1,7 @@
 part of '_pages.dart';
 
 class SuccessFormPage extends StatefulWidget {
-  const SuccessFormPage({Key? key}) : super(key: key);
+  const SuccessFormPage({super.key});
 
   @override
   _SuccessFormPageState createState() => _SuccessFormPageState();

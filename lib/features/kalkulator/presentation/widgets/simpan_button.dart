@@ -2,11 +2,9 @@ part of '_widgets.dart';
 
 class SimpanButton extends StatelessWidget {
   const SimpanButton({
-    Key? key,
-    required this.onTap,
-    required this.text,
+    required this.onTap, required this.text, super.key,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   final VoidCallback onTap;
   final String text;

@@ -4,12 +4,12 @@ part of '_widgets.dart';
 
 class SearchListView extends StatelessWidget {
   const SearchListView({
-    Key? key,
     required this.refreshIndicatorKey,
     required this.scrollController,
     required this.onScroll,
     required this.onRefresh,
-  }) : super(key: key);
+    super.key,
+  });
 
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
   final ScrollController scrollController;

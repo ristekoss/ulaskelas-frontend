@@ -3,7 +3,7 @@
 part of '_pages.dart';
 
 class ReviewMatkulPage extends StatefulWidget {
-  const ReviewMatkulPage({Key? key}) : super(key: key);
+  const ReviewMatkulPage({super.key});
 
   @override
   _ReviewMatkulPageState createState() => _ReviewMatkulPageState();

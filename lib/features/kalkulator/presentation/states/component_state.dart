@@ -2,8 +2,8 @@ part of '_states.dart';
 
 class ComponentState{
   ComponentState() {
-    final _remoteDataSource = ComponentRemoteDataSourceImpl();
-    _repo = ComponentRepositoryImpl(_remoteDataSource);
+    final remoteDataSource = ComponentRemoteDataSourceImpl();
+    _repo = ComponentRepositoryImpl(remoteDataSource);
   }
 
   late ComponentRepository _repo;

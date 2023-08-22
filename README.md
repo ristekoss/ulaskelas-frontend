@@ -1,6 +1,6 @@
 # 👨‍💻 Ulas Kelas
-[![Generic badge](https://img.shields.io/badge/Flutter-v3.0.5-blue)](https://flutter.dev/docs)
-[![Generic badge](https://img.shields.io/badge/Dart-v2.13.4-blue)](https://dart.dev/guides)
+[![Generic badge](https://img.shields.io/badge/Flutter-v3.10.5-blue)](https://flutter.dev/docs)
+[![Generic badge](https://img.shields.io/badge/Dart-v3.0.6-blue)](https://dart.dev/guides)
 [![test](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/config.yml/badge.svg)](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/config.yml)
 [![Deploy Web](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/RistekCSUI/ulaskelas-frontend/actions/workflows/firebase-hosting-merge.yml)
 [![codecov](https://codecov.io/gh/RistekCSUI/ulaskelas-frontend/branch/main/graph/badge.svg?token=SHFALBJG9U)](https://codecov.io/gh/RistekCSUI/ulaskelas-frontend)
@@ -12,38 +12,34 @@ Ulas Kelas app
 
 ## ⚡️ Getting Started
 
-### 🚚 How to run, drive, and build Apk
+### 🚚 How to run
 
-Example how to run release development app
+Make sure you have [Backend](https://github.com/ristekoss/ulaskelas-backend) running on your local's
+
+Update .env.example with your local's url, for example:
+```
+BASE_URL_DEV = localhost:3000
+BASE_URL_PROD = ""
+```
+
+Add key.properties to /android
+```
+storePassword=<storePassword>
+storePasswordDevelopment=<storePasswordDevelopment>
+keyPassword=<keyPassword>
+keyPasswordDevelopment=<keyPasswordDevelopment>
+keyAlias=<keyAlias>
+keyAliasDevelopment=<keyAliasDevelopment>
+storeFile=<storeFile>
+storeFileDevelopment=<storeFileDevelopment>
+```
+
+Example how to run development app
 ```
 flutter clean
 flutter pub get
-flutter run -t lib/main_development.dart --release --flavor development
-```
-
-Example how to build release development app
-```
-flutter clean
-flutter pub get
-flutter build apk -t lib/main_development.dart --release --no-shrink --flavor development --split-per-abi
-```
-
-Example how to build bundle release production app
-```
-flutter clean
-flutter pub get
-flutter build appbundle -t lib/main_production.dart --release --no-shrink --flavor production
-```
-
-Example how to run flutter web app
-```
-flutter run -t lib/main_development.dart -d chrome
-```
-
-Example how to drive automation test on development environment
-note that automation test doesn't support release mode
-```
-flutter drive -t test_driver/app.dart --flavor development
+dart run build_runner build --delete-conflicting-outputs
+flutter run -t lib/main_development.dart --flavor development
 ```
 
 ### ⚙️ Supported Flavor
@@ -112,7 +108,7 @@ examples:
 feat: Form Login
 ci: refactor analysis job
 
-before push
+### before push
 1. flutter analyze
 2. flutter test
 

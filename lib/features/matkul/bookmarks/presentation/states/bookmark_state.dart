@@ -2,11 +2,11 @@ part of '_states.dart';
 
 class BookmarkState {
   BookmarkState() {
-    final _remoteDataSource = BookmarkRemoteDataSourceImpl();
-    final _localDataSource = BookmarkLocalDataSourceImpl();
+    final remoteDataSource = BookmarkRemoteDataSourceImpl();
+    final localDataSource = BookmarkLocalDataSourceImpl();
     _repo = BookmarkRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 

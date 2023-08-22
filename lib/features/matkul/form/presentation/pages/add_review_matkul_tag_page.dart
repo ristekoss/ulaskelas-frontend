@@ -3,7 +3,7 @@
 part of '_pages.dart';
 
 class AddReviewMatkulTagPage extends StatefulWidget {
-  const AddReviewMatkulTagPage({Key? key}) : super(key: key);
+  const AddReviewMatkulTagPage({super.key});
 
   @override
   _AddReviewMatkulTagPageState createState() => _AddReviewMatkulTagPageState();
@@ -128,8 +128,8 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
             onRefresh: retrieveData,
             child: OnBuilder<SearchTagState>.all(
               listenTo: searchTagRM,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
+              onIdle: WaitingView.new,
+              onWaiting: WaitingView.new,
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
                 final matkulTags = data.tags;

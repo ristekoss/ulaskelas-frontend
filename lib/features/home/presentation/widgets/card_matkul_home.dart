@@ -2,10 +2,9 @@ part of '_widgets.dart';
 
 class CardMatkulHome extends StatelessWidget {
   const CardMatkulHome({
-    Key? key,
-    required this.model,
+    required this.model, super.key,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final MatkulModelHome model;
   final VoidCallback? onTap;

@@ -1,4 +1,4 @@
-include: package:very_good_analysis/analysis_options.2.4.0.yaml
+include: package:very_good_analysis/analysis_options.5.0.0.yaml
 
 analyzer:
   # We should disable linter for generated code
@@ -9,13 +9,13 @@ analyzer:
     - lib/**/*.freezed.dart
     - test/**/*.mocks.dart
 
-  strong-mode:
-    implicit-casts: true
-    implicit-dynamic: true
-
   errors:
     # Allow having TODOs in the code.
     todo: ignore
+  language:
+    strict-casts: false
+    strict-inference: false
+    strict-raw-types: false
 
 # LINTER Preferences
 #

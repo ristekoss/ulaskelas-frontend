@@ -14,8 +14,8 @@ class UlaskelasThemeImpl implements UlaskelasTheme {
       secondaryHeaderColor: BaseColors.goldenrod,
       shadowColor: BaseColors.gray5,
       textTheme: TextTheme(
-        caption: FontTheme.poppins12w400black(),
-        button: FontTheme.poppins14w700black().copyWith(
+        bodySmall: FontTheme.poppins12w400black(),
+        labelLarge: FontTheme.poppins14w700black().copyWith(
           fontWeight: FontWeight.w600,
         ),
       ),

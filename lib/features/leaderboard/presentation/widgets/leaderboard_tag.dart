@@ -4,10 +4,10 @@ part of '_widgets.dart';
 class TagLeaderboard extends StatelessWidget {
   /// Creates Tag Widget
   const TagLeaderboard({
-    Key? key,
+    super.key,
     this.label = 'Kamu',
     this.rank,
-  }) : super(key: key);
+  });
 
   /// Specify the label text
   final String label;

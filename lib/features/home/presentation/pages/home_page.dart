@@ -5,8 +5,8 @@ part of '_pages.dart';
 class HomePage extends StatefulWidget {
   const HomePage({
     required this.onSeeAllCourse,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback onSeeAllCourse;
 

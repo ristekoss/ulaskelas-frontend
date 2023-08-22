@@ -2,10 +2,9 @@ part of '_widgets.dart';
 
 class CardBookmark extends StatelessWidget {
   const CardBookmark({
-    Key? key,
-    required this.model,
+    required this.model, super.key,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final BookmarkModel model;
   final VoidCallback? onTap;

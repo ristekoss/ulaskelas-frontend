@@ -2,8 +2,8 @@ part of '_states.dart';
 
 class CalculatorState {
   CalculatorState() {
-    final _remoteDataSource = CalculatorRemoteDataSourceImpl();
-    _repo = CalculatorRepositoryImpl(_remoteDataSource);
+    final remoteDataSource = CalculatorRemoteDataSourceImpl();
+    _repo = CalculatorRepositoryImpl(remoteDataSource);
   }
 
   late CalculatorRepository _repo;

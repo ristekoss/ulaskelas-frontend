@@ -7,8 +7,8 @@ Future<Decide<Failure, T>> apiCall<T>(Future<T> t) async {
     final futureCall = await t;
     return Right(futureCall);
   } on DioError catch (e) {
-    Logger().wtf(e.error.runtimeType);
-    Logger().wtf(e.error.toString());
+    Logger().f(e.error.runtimeType);
+    Logger().f(e.error.toString());
     if (e.error is ArgumentError) {
       final error = e.error as ArgumentError;
       return Left(GeneralFailure(message: error.message));

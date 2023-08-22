@@ -2,8 +2,8 @@ part of '_pages.dart';
 
 class HomeCourseListPage extends StatefulWidget {
   const HomeCourseListPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _HomeCourseListPageState createState() => _HomeCourseListPageState();

@@ -8,10 +8,8 @@ part of '_pages.dart';
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
   const DetailMatkulPage({
-    Key? key,
-    required this.courseId,
-    required this.courseCode,
-  }) : super(key: key);
+    required this.courseId, required this.courseCode, super.key,
+  });
 
   final int courseId;
   final String courseCode;
@@ -103,8 +101,8 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             onRefresh: retrieveData,
             child: OnBuilder<CourseDetailState>.all(
               listenTo: courseDetailRM,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
+              onIdle: WaitingView.new,
+              onWaiting: WaitingView.new,
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
                 final course = data.detailCourse;
@@ -168,16 +166,16 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
   }
 
   Widget _buildMatkulTag(CourseModel course) {
-    return Row(
+    return Wrap(
       children: course.tags!
           .map(
             (e) => Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Tag(
-                label: e,
-              ),
-            ),
-          )
+          padding: const EdgeInsets.only(right: 8, bottom: 8),
+          child: Tag(
+            label: e,
+          ),
+        ),
+      )
           .toList(),
     );
   }
@@ -246,7 +244,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           children: [
             Center(
               child: Text(
-                '${course.ratingAverage ?? 0.0}',
+                (course.ratingAverage ?? 0.0).toStringAsFixed(1),
                 style: FontTheme.poppins36w700black(),
               ),
             ),

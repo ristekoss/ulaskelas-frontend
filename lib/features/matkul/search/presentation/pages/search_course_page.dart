@@ -4,8 +4,8 @@ part of '_pages.dart';
 
 class SearchCoursePage extends StatefulWidget {
   const SearchCoursePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _SearchCoursePageState createState() => _SearchCoursePageState();
