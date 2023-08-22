@@ -38,7 +38,7 @@ Example how to run development app
 ```
 flutter clean
 flutter pub get
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build --delete-conflicting-outputs
 flutter run -t lib/main_development.dart --flavor development
 ```
 
