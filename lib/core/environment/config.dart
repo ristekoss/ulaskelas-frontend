@@ -38,6 +38,7 @@ class Config {
       await HiveDataBaseService.init();
     }
     await Pref.init();
+    await MixpanelService.init();
 
     // TODO(fauzi): Implement notification plugin
     // await notificationPlugin.init();
@@ -55,6 +56,7 @@ class Config {
   }
 
   static bool get isDevelopment => appFlavor == Flavor.development;
+
   static BaseConfig get baseConfig => _baseConfig()!;
 
   static BaseConfig? _baseConfig() {
@@ -74,8 +76,10 @@ class Config {
 
 class BaseConfig {
   const BaseConfig({
-    required this.endpoints, this.assetAbsolutePath = Constants.assetPath,
+    required this.endpoints,
+    this.assetAbsolutePath = Constants.assetPath,
   });
+
   final String assetAbsolutePath;
   final BaseEndpoints endpoints;
 }
