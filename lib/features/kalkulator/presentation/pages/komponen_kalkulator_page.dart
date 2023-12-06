@@ -75,7 +75,7 @@ class _CalculatorComponentPageState
                   Text(
                     _getFinalScoreAndGrade(widget.totalScore),
                     style: FontTheme.poppins14w600black(),
-                  )
+                  ),
                 ],
               ),
               Padding(
@@ -103,7 +103,7 @@ class _CalculatorComponentPageState
                         textAlign: TextAlign.center,
                         style: FontTheme.poppins12w600black(),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -184,6 +184,14 @@ class _CalculatorComponentPageState
                         QueryCalculator(id: widget.calculatorId),
                       ),
                     );
+                    MixpanelService.track(
+                      'calculator_delete_course_component',
+                      params: {
+                        'course_id': 'CSCM12349990',
+                        'final_letter_grade': 'A',
+                        'final_grade': '88.75',
+                      },
+                    );
                   },
                   child: Text(
                     'Hapus Kalkulator Mata Kuliah',
@@ -193,7 +201,7 @@ class _CalculatorComponentPageState
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
