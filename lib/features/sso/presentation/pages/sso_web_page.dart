@@ -60,7 +60,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
             }
             return const SizedBox.shrink();
           },
-        )
+        ),
       ],
     );
   }

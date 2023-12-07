@@ -80,6 +80,12 @@ class _SearchCoursePageState
                   },
                   onFieldSubmitted: (val) {
                     searchCourseRM.state.addToHistory(val);
+                    MixpanelService.track(
+                      'search_course',
+                      params: {
+                        'query': val,
+                      },
+                    );
                   },
                   onChange: onQueryChanged,
                 ),

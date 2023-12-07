@@ -65,7 +65,7 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
               await onSubmitCallBack(context);
             },
           ),
-        )
+        ),
       ],
     );
   }

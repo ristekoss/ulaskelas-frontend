@@ -15,6 +15,7 @@ import 'package:ulaskelas/features/home/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/form/domain/entities/query_review.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/skeleton_card_course.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 part 'home_daftar_matkul_page.dart';
 part 'home_daftar_ulasan_page.dart';
