@@ -10,6 +10,7 @@ import 'package:ulaskelas/features/leaderboard/presentation/widgets/_widgets.dar
 import 'package:ulaskelas/features/matkul/bookmarks/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/form/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
+import 'package:ulaskelas/services/_services.dart';
 import 'package:ulaskelas/services/launch_service.dart';
 
 part 'review_card.dart';
