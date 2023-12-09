@@ -112,6 +112,14 @@ class ReviewCourseFormState {
     _formData.ratingRecommended = ratingRecommended;
   }
 
+  double getAvgRating() {
+    return ((_formData.ratingBeneficial ?? 0) +
+        (_formData.ratingFitToCredit ?? 0) +
+        (_formData.ratingFitToStudyBook ?? 0) +
+        (_formData.ratingRecommended ?? 0) +
+        (_formData.ratingUnderstandable ?? 0)) / 5;
+  }
+
   /// Cleaning form when success submitting form
   void cleanForm() {
     _formData = ReviewMatkulData();

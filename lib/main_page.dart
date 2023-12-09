@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/features/kalkulator/presentation/pages/_pages.dart';
+import 'package:ulaskelas/services/_services.dart';
 import 'core/bases/states/_states.dart';
 import 'features/home/presentation/pages/_pages.dart';
 import 'features/leaderboard/presentation/pages/_pages.dart';
@@ -70,7 +71,19 @@ class _MainPageState extends BaseStateful<MainPage> {
   Widget? _convexNavigation() {
     return RistekBotNavBar(
       initialActiveIndex: _selectedIndex,
-      onTap: (int index) => setState(() => _selectedIndex = index),
+      onTap: (int index) {
+        switch (index) {
+          case 1:
+            MixpanelService.track('open_courses');
+          case 2:
+            MixpanelService.track('open_klasemen');
+          case 3:
+            MixpanelService.track('open_calculator');
+          case 4:
+            MixpanelService.track('open_profile');
+        }
+        setState(() => _selectedIndex = index);
+      },
       items: const [
         RistekBotNavItem(
           icon: Icons.home,

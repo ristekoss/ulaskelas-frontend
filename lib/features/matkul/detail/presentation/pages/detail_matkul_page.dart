@@ -8,7 +8,9 @@ part of '_pages.dart';
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
   const DetailMatkulPage({
-    required this.courseId, required this.courseCode, super.key,
+    required this.courseId,
+    required this.courseCode,
+    super.key,
   });
 
   final int courseId;
@@ -57,12 +59,10 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
 
   bool get _isBottom {
     if (!scrollController.hasClients) {
-      print('no client');
       return false;
     }
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.offset;
-    print(currentScroll >= (maxScroll * 0.9));
     return currentScroll >= (maxScroll * 0.9);
   }
 
@@ -114,7 +114,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                    _buildMatkulTag(course),
+                      _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),
@@ -125,10 +125,22 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     const HeightSpace(16),
                     if (course.reviewCount! > 3)
                       InkWell(
-                        onTap: () => nav.goToAllReviewMatkulPage(
-                          courseId: widget.courseId,
-                          courseCode: widget.courseCode,
-                        ),
+                        onTap: () {
+                          nav.goToAllReviewMatkulPage(
+                            courseId: widget.courseId,
+                            courseCode: widget.courseCode,
+                          );
+                          MixpanelService.track(
+                            'view_all_reviews',
+                            params: {
+                              'course_id': course.code.toString(),
+                              'course_name': course.name.toString(),
+                              'review_count': course.reviewCount.toString(),
+                              'course_rating_avg':
+                                  course.ratingAverage.toString(),
+                            },
+                          );
+                        },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -170,12 +182,12 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
       children: course.tags!
           .map(
             (e) => Padding(
-          padding: const EdgeInsets.only(right: 8, bottom: 8),
-          child: Tag(
-            label: e,
-          ),
-        ),
-      )
+              padding: const EdgeInsets.only(right: 8, bottom: 8),
+              child: Tag(
+                label: e,
+              ),
+            ),
+          )
           .toList(),
     );
   }
@@ -227,6 +239,15 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                   review: review,
                   onLiked: () {
                     reviewCourseRM.state.like(review);
+                    MixpanelService.track(
+                      'like_review',
+                      params: {
+                        'course_id': review.courseCode.toString(),
+                        'course_name': review.courseName.toString(),
+                        'review_count': review.likesCount.toString(),
+                        'course_rating_avg': review.ratingAverage.toString(),
+                      },
+                    );
                   },
                 );
               },
