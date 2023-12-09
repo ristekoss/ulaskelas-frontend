@@ -105,7 +105,7 @@ Pilih maksimal 3 kategori yang menurutmu dapat\nmerepresentasikan mata kuliah in
               },
             ),
           ),
-        )
+        ),
       ],
     );
   }

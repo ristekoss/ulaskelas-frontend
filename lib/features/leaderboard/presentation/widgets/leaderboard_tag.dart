@@ -56,7 +56,7 @@ class TagLeaderboard extends StatelessWidget {
       return [
         BaseColors.purpleHearth,
         BaseColors.purpleHearth,
-        BaseColors.white
+        BaseColors.white,
       ];
     }else if(rank == 1){
       return [

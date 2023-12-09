@@ -11,6 +11,7 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/main/domain/entities/query_search_course.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 part 'filter_page.dart';
 part 'search_course_page.dart';

@@ -8,7 +8,9 @@ part of '_pages.dart';
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
   const DetailMatkulPage({
-    required this.courseId, required this.courseCode, super.key,
+    required this.courseId,
+    required this.courseCode,
+    super.key,
   });
 
   final int courseId;
@@ -114,7 +116,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                    _buildMatkulTag(course),
+                      _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),
@@ -170,12 +172,12 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
       children: course.tags!
           .map(
             (e) => Padding(
-          padding: const EdgeInsets.only(right: 8, bottom: 8),
-          child: Tag(
-            label: e,
-          ),
-        ),
-      )
+              padding: const EdgeInsets.only(right: 8, bottom: 8),
+              child: Tag(
+                label: e,
+              ),
+            ),
+          )
           .toList(),
     );
   }
@@ -258,7 +260,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 '${course.reviewCount} Ulasan',
                 style: FontTheme.poppins12w400black(),
               ),
-            )
+            ),
           ],
         ),
         const WidthSpace(32),
@@ -347,7 +349,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                         );
                       }
                     },
-                  )
+                  ),
                 ],
               );
             }
