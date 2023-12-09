@@ -2,7 +2,8 @@ part of '_widgets.dart';
 
 class TitleAndBookMark extends StatelessWidget {
   const TitleAndBookMark({
-    required this.course, super.key,
+    required this.course,
+    super.key,
   });
 
   final CourseModel course;
@@ -36,6 +37,7 @@ class TitleAndBookMark extends StatelessWidget {
                       shortName: course.shortName,
                     );
                     bookmarkRM.setState((s) => s.toggleBookmark(bookmark));
+                    MixpanelService.track('bookmark_course');
                   },
                   child: Icon(
                     Icons.bookmark,

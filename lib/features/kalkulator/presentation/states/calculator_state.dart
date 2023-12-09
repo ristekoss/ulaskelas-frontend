@@ -45,16 +45,14 @@ class CalculatorState {
         _calculators = result.data;
         print(_calculators);
       });
-    }
-    );
+    });
     calculatorRM.notify();
   }
 
   Future<void> deleteCalculator(QueryCalculator query) async {
     final resp = await _repo.deleteCalculator(query);
     await resp.fold((failure) {
-      ErrorMessenger('Kalkulator gagal dihapus')
-          .show(ctx!);
+      ErrorMessenger('Kalkulator gagal dihapus').show(ctx!);
     }, (result) async {
       SuccessMessenger('Kalkulator berhasil dipahus').show(ctx!);
       final calcResp = await _repo.getAllCalculator();
@@ -64,8 +62,7 @@ class CalculatorState {
         _calculators = result.data;
         print(_calculators);
       });
-    }
-    );
+    });
     calculatorRM.notify();
   }
 }

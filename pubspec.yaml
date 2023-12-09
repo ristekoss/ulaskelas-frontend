@@ -39,6 +39,7 @@ dependencies:
 #  envify: ^2.0.3
   envied: ^0.3.0+3
   html: ^0.15.4
+  mixpanel_flutter: ^2.2.0
 
 dev_dependencies:
   flutter_test:
