@@ -122,7 +122,7 @@ A new version of this app available on the store, please update into the newer v
                   Text(
                     'by RISTEK Fasilkom UI',
                     style: FontTheme.poppins14w500white(),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -8,6 +8,7 @@ import 'package:ulaskelas/core/bases/states/_states.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/profile/presentation/widgets/profile_data.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
@@ -92,6 +93,7 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
             child: InkWell(
               onTap: () {
                 nav.goToHomeDaftarUlasan();
+                MixpanelService.track('view_all_reviews');
               },
               child: Text(
                 'Riwayat Ulasan',

@@ -279,7 +279,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 '${course.reviewCount} Ulasan',
                 style: FontTheme.poppins12w400black(),
               ),
-            )
+            ),
           ],
         ),
         const WidthSpace(32),
@@ -368,7 +368,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                         );
                       }
                     },
-                  )
+                  ),
                 ],
               );
             }

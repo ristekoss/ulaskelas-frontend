@@ -107,7 +107,7 @@ class _EditComponentPageState extends BaseStateful<EditComponentPage> {
               await onSubmitCallBack(context);
             },
           ),
-        )
+        ),
       ],
     );
   }

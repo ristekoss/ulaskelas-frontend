@@ -110,7 +110,7 @@ class _HomePageState extends BaseStateful<HomePage> {
                           Text(
                             'Lihat Semua Mata Kuliah',
                             style: FontTheme.poppins14w400purple(),
-                          )
+                          ),
                         ],
                       ),
                       Icon(
@@ -141,7 +141,7 @@ class _HomePageState extends BaseStateful<HomePage> {
                         'Lihat Semua',
                         style: FontTheme.poppins13w400purple(),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -219,12 +219,16 @@ class _HomePageState extends BaseStateful<HomePage> {
                       style: FontTheme.poppins14w700black(),
                     ),
                     InkWell(
-                      onTap: () => nav.goToHomeDaftarUlasan(),
+                      onTap: () {
+                        nav.goToHomeDaftarUlasan();
+
+                        MixpanelService.track('view_all_reviews');
+                      },
                       child: Text(
                         'Lihat Semua',
                         style: FontTheme.poppins13w400purple(),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -260,10 +264,14 @@ class _HomePageState extends BaseStateful<HomePage> {
                     final review = data.summaries[i];
                     return CardMatkulReview(
                       review: review,
-                      onTap: () => nav.goToDetailMatkulPage(
-                        review.course!,
-                        review.courseCode.toString(),
-                      ),
+                      onTap: () {
+                        nav.goToDetailMatkulPage(
+                          review.course!,
+                          review.courseCode.toString(),
+                        );
+
+                        MixpanelService.track('view_my_review');
+                      },
                     );
                   },
                 );

@@ -59,7 +59,7 @@ class CardCompononent extends StatelessWidget {
                   style: FontTheme.poppins12w400black(),
                   textAlign: TextAlign.right,
                 ),
-              )
+              ),
             ],
           ),
         ),

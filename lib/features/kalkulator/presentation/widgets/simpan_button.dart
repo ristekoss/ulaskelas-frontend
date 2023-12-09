@@ -21,7 +21,7 @@ class SimpanButton extends StatelessWidget {
             color: Color.fromRGBO(0, 0, 0, 0.05),
             blurRadius: 4,
             offset: Offset(0, -2),
-          )
+          ),
         ],
       ),
       child: AutoLayoutButton(

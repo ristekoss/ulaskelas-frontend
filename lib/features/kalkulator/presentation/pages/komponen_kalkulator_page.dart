@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 part of '_pages.dart';
 
 class CalculatorComponentPage extends StatefulWidget {
@@ -75,7 +77,7 @@ class _CalculatorComponentPageState
                   Text(
                     _getFinalScoreAndGrade(widget.totalScore),
                     style: FontTheme.poppins14w600black(),
-                  )
+                  ),
                 ],
               ),
               Padding(
@@ -103,7 +105,7 @@ class _CalculatorComponentPageState
                         textAlign: TextAlign.center,
                         style: FontTheme.poppins12w600black(),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -184,6 +186,14 @@ class _CalculatorComponentPageState
                         QueryCalculator(id: widget.calculatorId),
                       ),
                     );
+                    MixpanelService.track(
+                      'calculator_delete_course_component',
+                      params: {
+                        'course_id': widget.courseName,
+                        'final_letter_grade': widget.totalScore.toString(),
+                        'final_grade': getFinalGrade(widget.totalScore),
+                      },
+                    );
                   },
                   child: Text(
                     'Hapus Kalkulator Mata Kuliah',
@@ -193,7 +203,7 @@ class _CalculatorComponentPageState
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

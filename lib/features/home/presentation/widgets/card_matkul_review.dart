@@ -109,11 +109,11 @@ class CardMatkulReview extends StatelessWidget {
                           : (review.hateSpeechStatus == 'WAITING')
                               ? TagStatus.pending
                               : TagStatus.rejected,
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
