@@ -37,7 +37,7 @@ class _ReviewMatkulPageState extends BaseStateful<ReviewMatkulPage> {
       children: [
         TulisUlasanButton(
           onTap: () {},
-        )
+        ),
       ],
     );
   }

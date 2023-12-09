@@ -53,7 +53,7 @@ class _SuccessFormPageState extends BaseStateful<SuccessFormPage> {
               onPressed: () {
                 nav.pop();
               },
-            )
+            ),
           ],
         ),
       ),

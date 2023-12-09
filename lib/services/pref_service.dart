@@ -59,7 +59,7 @@ class Pref {
     final token = getString(PreferencesKeys.ulasKelasCred);
     return <String, String>{
       'Authorization': 'Token $token',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     };
   }
 }

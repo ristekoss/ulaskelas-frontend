@@ -176,9 +176,9 @@ class ReviewCard extends StatelessWidget {
                       // color: likesCountColor,
                       ),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

@@ -133,7 +133,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
                           size: 28,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 );
               },
@@ -149,7 +149,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
                 color: Color.fromRGBO(0, 0, 0, 0.05),
                 blurRadius: 4,
                 offset: Offset(0, -2),
-              )
+              ),
             ],
           ),
           child: TulisUlasanButton(
@@ -161,7 +161,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
               }
             },
           ),
-        )
+        ),
       ],
     );
   }
