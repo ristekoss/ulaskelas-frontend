@@ -25,7 +25,10 @@ class _MainPageState extends BaseStateful<MainPage> {
   void init() {
     _children = <Widget>[
       HomePage(
-        onSeeAllCourse: () => setState(() => _selectedIndex = 1),
+        onSeeAllCourse: () {
+          setState(() => _selectedIndex = 1);
+          MixpanelService.track('view_all_courses');
+        },
       ),
       const SearchCoursePage(),
       const LeaderboardPage(),

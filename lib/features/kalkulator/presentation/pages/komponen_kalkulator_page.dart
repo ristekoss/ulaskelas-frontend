@@ -183,16 +183,10 @@ class _CalculatorComponentPageState
                     nav.pop();
                     calculatorRM.setState(
                       (s) => s.deleteCalculator(
-                        QueryCalculator(id: widget.calculatorId),
+                        query: QueryCalculator(id: widget.calculatorId,),
+                        courseName: widget.courseName,
+                        totalScore: widget.totalScore,
                       ),
-                    );
-                    MixpanelService.track(
-                      'calculator_delete_course_component',
-                      params: {
-                        'course_id': widget.courseName,
-                        'final_letter_grade': widget.totalScore.toString(),
-                        'final_grade': getFinalGrade(widget.totalScore),
-                      },
                     );
                   },
                   child: Text(

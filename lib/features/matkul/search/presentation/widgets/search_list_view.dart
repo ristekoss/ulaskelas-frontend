@@ -45,8 +45,6 @@ class SearchListView extends StatelessWidget {
                         if (filterRM.state.hasFilter) {
                           await refreshIndicatorKey.currentState?.show();
                         }
-
-                        MixpanelService.track('open_course_filter');
                       },
                     );
                   },

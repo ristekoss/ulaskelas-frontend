@@ -78,15 +78,8 @@ class _SearchCoursePageState
                     focusNode.unfocus();
                     searchCourseRM.state.controller.clear();
                   },
-                  onFieldSubmitted: (val) {
-                    searchCourseRM.state.addToHistory(val);
-                    MixpanelService.track(
-                      'search_course',
-                      params: {
-                        'query': val,
-                      },
-                    );
-                  },
+                  onFieldSubmitted: (val) =>
+                      searchCourseRM.state.addToHistory(val),
                   onChange: onQueryChanged,
                 ),
               ),

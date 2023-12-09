@@ -16,6 +16,9 @@ import 'package:ulaskelas/features/matkul/form/domain/entities/query_search_tag.
 import 'package:ulaskelas/features/matkul/form/domain/repositories/_repositories.dart';
 import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart';
 
+import '../../../../../services/_services.dart';
+import '../../../search/data/models/_models.dart';
+
 part 'review_course_form_state.dart';
 part 'search_tag_state.dart';
 part 'review_course_state.dart';

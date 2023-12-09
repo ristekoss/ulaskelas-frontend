@@ -111,5 +111,14 @@ class ReviewCourseState {
       }
       reviewCourseRM.notify();
     });
+    MixpanelService.track(
+      'like_review',
+      params: {
+        'course_id': review.courseCode.toString(),
+        'course_name': review.courseName.toString(),
+        'review_count': review.likesCount.toString(),
+        'course_rating_avg': review.ratingAverage.toString(),
+      },
+    );
   }
 }
