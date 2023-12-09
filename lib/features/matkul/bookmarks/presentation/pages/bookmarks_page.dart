@@ -92,9 +92,12 @@ Kamu Belum memiliki Mata kuliah tersimpan. Silakan tambahkan terlebih dahulu.'''
                       bookmark.courseId!,
                       bookmark.courseCode!,
                     );
-                    MixpanelService.track('open_profile_saved_course', params: {
-                      'course_id': 'CSCM12349990',
-                    },);
+                    MixpanelService.track(
+                      'open_profile_saved_course',
+                      params: {
+                        'course_id': bookmark.courseCode!,
+                      },
+                    );
                   },
                 );
               },

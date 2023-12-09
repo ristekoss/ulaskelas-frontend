@@ -73,7 +73,6 @@ class _MainPageState extends BaseStateful<MainPage> {
       initialActiveIndex: _selectedIndex,
       onTap: (int index) {
         setState(() => _selectedIndex = index);
-        //mp carlene
         if (index == 3) {
           MixpanelService.track('open_calculator');
         } else if (index == 4) {

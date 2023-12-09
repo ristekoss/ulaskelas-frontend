@@ -191,7 +191,7 @@ class _CalculatorComponentPageState
                       params: {
                         'course_id': widget.courseName,
                         'final_letter_grade': widget.totalScore.toString(),
-                        'final_grade': _getFinalScoreAndGrade(widget.totalScore),
+                        'final_grade': _getFinalGrade(widget.totalScore),
                       },
                     );
                   },
@@ -247,6 +247,29 @@ class _CalculatorComponentPageState
     }
 
     return '$grade (${score.toStringAsFixed(2)})';
+  }
+
+  String _getFinalGrade(double score) {
+    var grade = 'E';
+    if (score >= 85) {
+      grade = 'A';
+    } else if (score >= 80) {
+      grade = 'A-';
+    } else if (score >= 75) {
+      grade = 'B+';
+    } else if (score >= 70) {
+      grade = 'B';
+    } else if (score >= 65) {
+      grade = 'B-';
+    } else if (score >= 60) {
+      grade = 'C+';
+    } else if (score >= 55) {
+      grade = 'C';
+    } else if (score >= 40) {
+      grade = 'D';
+    }
+
+    return grade;
   }
 
   Future<void> retrieveData() async {
