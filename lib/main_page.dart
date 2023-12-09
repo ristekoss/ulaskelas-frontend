@@ -72,13 +72,17 @@ class _MainPageState extends BaseStateful<MainPage> {
     return RistekBotNavBar(
       initialActiveIndex: _selectedIndex,
       onTap: (int index) {
-        setState(() => _selectedIndex = index);
         switch (index) {
+          case 1:
+            MixpanelService.track('open_courses');
+          case 2:
+            MixpanelService.track('open_klasemen');
           case 3:
             MixpanelService.track('open_calculator');
           case 4:
             MixpanelService.track('open_profile');
         }
+        setState(() => _selectedIndex = index);
       },
       items: const [
         RistekBotNavItem(
