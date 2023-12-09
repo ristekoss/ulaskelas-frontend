@@ -128,7 +128,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                             'calculator_view_course',
                             params: {
                               'course_id': calculator.courseName!,
-                              'final_letter_grade': _getFinalGrade(
+                              'final_letter_grade': getFinalGrade(
                                   calculator.totalScore!,),
                               'final_grade': calculator.totalScore.toString(),
                             },
@@ -171,26 +171,4 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
     throw UnimplementedError();
   }
 
-  String _getFinalGrade(double score) {
-    var grade = 'E';
-    if (score >= 85) {
-      grade = 'A';
-    } else if (score >= 80) {
-      grade = 'A-';
-    } else if (score >= 75) {
-      grade = 'B+';
-    } else if (score >= 70) {
-      grade = 'B';
-    } else if (score >= 65) {
-      grade = 'B-';
-    } else if (score >= 60) {
-      grade = 'C+';
-    } else if (score >= 55) {
-      grade = 'C';
-    } else if (score >= 40) {
-      grade = 'D';
-    }
-
-    return grade;
-  }
 }
