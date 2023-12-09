@@ -41,9 +41,12 @@ class SearchListView extends StatelessWidget {
                       text: 'Filter',
                       onPressed: () async {
                         await nav.goToFilterPage();
+
                         if (filterRM.state.hasFilter) {
                           await refreshIndicatorKey.currentState?.show();
                         }
+
+                        MixpanelService.track('open_course_filter');
                       },
                     );
                   },

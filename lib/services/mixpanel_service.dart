@@ -20,9 +20,11 @@ class MixpanelService {
 
   static void track(String eventName, {Map<String, String>? params}) {
     _mixpanel!.track(eventName, properties: params);
-    Logger().i('''
+    Logger().i(
+      '''
       Track Events: $eventName,
       Parameters: $params
-      ''');
+      '''
+    );
   }
 }
