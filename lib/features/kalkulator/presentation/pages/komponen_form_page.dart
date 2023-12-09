@@ -63,6 +63,7 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
             text: 'Simpan',
             onTap: () async {
               await onSubmitCallBack(context);
+              MixpanelService.track('calculator_add_course_component');
             },
           ),
         ),

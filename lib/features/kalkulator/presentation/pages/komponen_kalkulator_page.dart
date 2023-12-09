@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 part of '_pages.dart';
 
 class CalculatorComponentPage extends StatefulWidget {
@@ -183,6 +185,14 @@ class _CalculatorComponentPageState
                       (s) => s.deleteCalculator(
                         QueryCalculator(id: widget.calculatorId),
                       ),
+                    );
+                    MixpanelService.track(
+                      'calculator_delete_course_component',
+                      params: {
+                        'course_id': widget.courseName,
+                        'final_letter_grade': widget.totalScore.toString(),
+                        'final_grade': getFinalGrade(widget.totalScore),
+                      },
                     );
                   },
                   child: Text(
