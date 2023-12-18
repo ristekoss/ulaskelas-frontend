@@ -44,6 +44,7 @@ class BookmarkState {
 
   /// tap to toggle Bookmark
   Future<void> toggleBookmark(BookmarkModel bookmark) async {
+    MixpanelService.track('bookmark_course');
     final resp = await _repo.getAllBookmark(QueryBookmark());
     resp.fold((failure) {
       throw failure;

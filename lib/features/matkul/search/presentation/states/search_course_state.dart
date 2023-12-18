@@ -161,6 +161,12 @@ class SearchCourseState
     if (history.length == 11) {
       _history?.removeLast();
     }
+    MixpanelService.track(
+      'search_course',
+      params: {
+        'query': query,
+      },
+    );
     // TODO(pawpaw): save to local storage
   }
 

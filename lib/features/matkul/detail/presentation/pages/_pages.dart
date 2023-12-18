@@ -15,6 +15,8 @@ import 'package:ulaskelas/features/matkul/form/presentation/states/_states.dart'
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
 
+import '../../../../../services/_services.dart';
+
 part 'detail_matkul_page.dart';
 part 'review_matkul_page.dart';
 part 'all_review_matkul_page.dart';

@@ -9,6 +9,7 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/skeleton_card_course.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 part 'base_app_bar.dart';
 part 'card_course.dart';

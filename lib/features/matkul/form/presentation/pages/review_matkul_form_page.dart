@@ -4,7 +4,8 @@ part of '_pages.dart';
 
 class ReviewMatkulFormPage extends StatefulWidget {
   const ReviewMatkulFormPage({
-    required this.course, super.key,
+    required this.course,
+    super.key,
   });
 
   final CourseModel course;
@@ -129,9 +130,11 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                           reviewFormStateData.ratingFitToStudyBook != null &&
                           reviewFormStateData.ratingBeneficial != null &&
                           reviewFormStateData.ratingRecommended != null) {
-                        await reviewFormRM.state
-                            .submitForm(widget.course.code!);
+                        await reviewFormRM.state.submitForm(
+                          course: widget.course,
+                        );
                         await Future.delayed(const Duration(milliseconds: 150));
+
                         reviewFormRM.state.cleanForm();
                         nav.pop();
                         await nav.replaceToReviewPendingPage();

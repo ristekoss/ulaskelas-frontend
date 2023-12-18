@@ -9,6 +9,9 @@ import 'package:ulaskelas/features/kalkulator/domain/entities/query_calculator.d
 import 'package:ulaskelas/features/kalkulator/domain/entities/query_component.dart';
 import 'package:ulaskelas/features/kalkulator/domain/repositories/_repositories.dart';
 
+import '../../../../core/utils/util.dart';
+import '../../../../services/_services.dart';
+
 part 'calculator_state.dart';
 part 'component_state.dart';
 part 'component_form_state.dart';

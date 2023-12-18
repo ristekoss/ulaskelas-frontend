@@ -26,7 +26,7 @@ class ProfileData extends StatelessWidget {
               data,
               style: FontTheme.poppins12w400black(),
             ),
-          )
+          ),
         ],
       ),
     );

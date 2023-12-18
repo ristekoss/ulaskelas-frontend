@@ -7,4 +7,6 @@ import 'package:ulaskelas/features/matkul/bookmarks/domain/entities/query_bookma
 import 'package:ulaskelas/features/matkul/bookmarks/domain/repositories/_repositories.dart';
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 
+import '../../../../../services/_services.dart';
+
 part 'bookmark_state.dart';

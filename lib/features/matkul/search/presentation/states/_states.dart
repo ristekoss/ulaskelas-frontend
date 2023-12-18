@@ -13,5 +13,7 @@ import 'package:ulaskelas/features/matkul/main/domain/repositories/_repositories
 import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 import 'package:ulaskelas/features/matkul/search/domain/entities/_entities.dart';
 
+import '../../../../../services/_services.dart';
+
 part 'filter_state.dart';
 part 'search_course_state.dart';

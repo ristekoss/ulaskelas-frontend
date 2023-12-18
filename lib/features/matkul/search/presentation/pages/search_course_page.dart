@@ -78,9 +78,8 @@ class _SearchCoursePageState
                     focusNode.unfocus();
                     searchCourseRM.state.controller.clear();
                   },
-                  onFieldSubmitted: (val) {
-                    searchCourseRM.state.addToHistory(val);
-                  },
+                  onFieldSubmitted: (val) =>
+                      searchCourseRM.state.addToHistory(val),
                   onChange: onQueryChanged,
                 ),
               ),

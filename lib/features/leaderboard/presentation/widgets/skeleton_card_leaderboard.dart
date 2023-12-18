@@ -42,7 +42,7 @@ class SkeletonCardLeaderboard extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
                   ],
                 ),
                 title: Container(

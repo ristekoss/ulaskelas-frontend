@@ -2,7 +2,8 @@ part of '_widgets.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({
-    required this.review, super.key,
+    required this.review,
+    super.key,
     this.imgUrl,
     this.onLiked,
     this.status,
@@ -75,7 +76,8 @@ class ReviewCard extends StatelessWidget {
                                     ? TagStatus.pending
                                     : TagStatus.rejected,
                           ),
-                        if (status == null && review.rankTop20 != null &&
+                        if (status == null &&
+                            review.rankTop20 != null &&
                             review.rankTop20! > 0 &&
                             review.rankTop20! < 21)
                           TagLeaderboard(
@@ -94,8 +96,7 @@ class ReviewCard extends StatelessWidget {
                 PopupMenu(
                   username: review.author.toString(),
                   isAnonymous: review.isAnonym ?? false,
-                  reviewId: review.id!,
-                  // userId: review.author,
+                  review: review,
                 ),
               Container(),
             ],
@@ -176,9 +177,9 @@ class ReviewCard extends StatelessWidget {
                       // color: likesCountColor,
                       ),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -187,20 +188,22 @@ class ReviewCard extends StatelessWidget {
 
 class PopupMenu extends StatelessWidget {
   const PopupMenu({
-    required this.username, required this.reviewId, super.key,
+    required this.username,
+    required this.review,
+    super.key,
     this.isAnonymous = false,
   });
 
   final String username;
   final bool isAnonymous;
-  final int reviewId;
+  final ReviewModel review;
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
       padding: EdgeInsets.zero,
       iconSize: 18,
-      onSelected: (value) => _onSelected(context, value),
+      onSelected: (value) => _onSelected(context, value, review),
       itemBuilder: (context) => [
         _buildItem(
           value: 1,
@@ -238,13 +241,22 @@ class PopupMenu extends StatelessWidget {
     );
   }
 
-  void _onSelected(BuildContext context, int value) {
+  void _onSelected(BuildContext context, int value, ReviewModel review) {
     switch (value) {
       case 1:
+        MixpanelService.track(
+          'report_review',
+          params: {
+            'course_id': review.courseCode.toString(),
+            'course_name': review.courseName.toString(),
+            'previous_likes': review.likesCount.toString(),
+            'score_given_by_review': review.courseReviewCount.toString(),
+          },
+        );
         LaunchServices.openEmail(
           'team@ristek.cs.ui.ac.id',
           '''
-Report User Content for ${isAnonymous ? 'Review id $reviewId' : username}''',
+Report User Content for ${isAnonymous ? 'Review id ${review.id}' : username}''',
           'enter report message',
         );
       default:

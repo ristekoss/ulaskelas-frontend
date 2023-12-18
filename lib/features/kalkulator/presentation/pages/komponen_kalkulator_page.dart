@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 part of '_pages.dart';
 
 class CalculatorComponentPage extends StatefulWidget {
@@ -75,7 +77,7 @@ class _CalculatorComponentPageState
                   Text(
                     _getFinalScoreAndGrade(widget.totalScore),
                     style: FontTheme.poppins14w600black(),
-                  )
+                  ),
                 ],
               ),
               Padding(
@@ -103,7 +105,7 @@ class _CalculatorComponentPageState
                         textAlign: TextAlign.center,
                         style: FontTheme.poppins12w600black(),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -181,7 +183,9 @@ class _CalculatorComponentPageState
                     nav.pop();
                     calculatorRM.setState(
                       (s) => s.deleteCalculator(
-                        QueryCalculator(id: widget.calculatorId),
+                        query: QueryCalculator(id: widget.calculatorId,),
+                        courseName: widget.courseName,
+                        totalScore: widget.totalScore,
                       ),
                     );
                   },
@@ -193,7 +197,7 @@ class _CalculatorComponentPageState
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

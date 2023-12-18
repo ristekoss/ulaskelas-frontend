@@ -36,9 +36,9 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
 
   @override
   Widget buildNarrowLayout(
-      BuildContext context,
-      SizingInformation sizeInfo,
-      ) {
+    BuildContext context,
+    SizingInformation sizeInfo,
+  ) {
     return SafeArea(
       child: RefreshIndicator(
         key: refreshIndicatorKey,
@@ -82,8 +82,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                         width: double.infinity,
                         text: 'Tambah Mata Kuliah',
                         backgroundColor: BaseColors.purpleHearth,
-                        onPressed: () =>
-                            nav.goToSearchCourseCalculatorPage(),
+                        onPressed: () => nav.goToSearchCourseCalculatorPage(),
                       ),
                     ],
                   ),
@@ -97,7 +96,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                     padding: const EdgeInsets.all(20),
                     itemCount: calculatorRM.state.calculators.length + 1,
                     itemBuilder: (context, index) {
-                      if (index == calculators.length){
+                      if (index == calculators.length) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: 20,
@@ -114,21 +113,18 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                       final calculator = calculators[index];
                       return CardCalculator(
                         model: calculator,
-                        onTap: () {
-                          nav.goToComponentCalculatorPage(
-                              calculatorId: calculator.id!,
-                              courseName: calculator.courseName!,
-                              totalScore: calculator.totalScore!,
-                              totalPercentage: calculator.totalPercentage!,
-                          );
-                        },
+                        onTap: () => nav.goToComponentCalculatorPage(
+                          calculatorId: calculator.id!,
+                          courseName: calculator.courseName!,
+                          totalScore: calculator.totalScore!,
+                          totalPercentage: calculator.totalPercentage!,
+                        ),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 16),
+                        const SizedBox(height: 16),
                   ),
                 ),
-
               ],
             );
           },
@@ -139,9 +135,9 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
 
   @override
   Widget buildWideLayout(
-      BuildContext context,
-      SizingInformation sizeInfo,
-      ) {
+    BuildContext context,
+    SizingInformation sizeInfo,
+  ) {
     return buildNarrowLayout(context, sizeInfo);
   }
 

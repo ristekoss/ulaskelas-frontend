@@ -8,7 +8,9 @@ part of '_pages.dart';
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
   const DetailMatkulPage({
-    required this.courseId, required this.courseCode, super.key,
+    required this.courseId,
+    required this.courseCode,
+    super.key,
   });
 
   final int courseId;
@@ -57,12 +59,10 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
 
   bool get _isBottom {
     if (!scrollController.hasClients) {
-      print('no client');
       return false;
     }
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.offset;
-    print(currentScroll >= (maxScroll * 0.9));
     return currentScroll >= (maxScroll * 0.9);
   }
 
@@ -114,7 +114,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                    _buildMatkulTag(course),
+                      _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),
@@ -128,6 +128,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                         onTap: () => nav.goToAllReviewMatkulPage(
                           courseId: widget.courseId,
                           courseCode: widget.courseCode,
+                          course: course,
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,12 +171,12 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
       children: course.tags!
           .map(
             (e) => Padding(
-          padding: const EdgeInsets.only(right: 8, bottom: 8),
-          child: Tag(
-            label: e,
-          ),
-        ),
-      )
+              padding: const EdgeInsets.only(right: 8, bottom: 8),
+              child: Tag(
+                label: e,
+              ),
+            ),
+          )
           .toList(),
     );
   }
@@ -225,9 +226,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 final review = data.reviews[data.reviews.length - i - 1];
                 return ReviewCard(
                   review: review,
-                  onLiked: () {
-                    reviewCourseRM.state.like(review);
-                  },
+                  onLiked: () => reviewCourseRM.state.like(review),
                 );
               },
             );
@@ -258,7 +257,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 '${course.reviewCount} Ulasan',
                 style: FontTheme.poppins12w400black(),
               ),
-            )
+            ),
           ],
         ),
         const WidthSpace(32),
@@ -347,7 +346,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                         );
                       }
                     },
-                  )
+                  ),
                 ],
               );
             }

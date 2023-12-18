@@ -8,6 +8,7 @@ class CalculatorState {
 
   late CalculatorRepository _repo;
   List<CalculatorModel>? _calculators;
+
   List<CalculatorModel> get calculators => _calculators ?? [];
 
   bool hasReachedMax = false;
@@ -45,16 +46,26 @@ class CalculatorState {
         _calculators = result.data;
         print(_calculators);
       });
-    }
-    );
+    });
     calculatorRM.notify();
   }
 
-  Future<void> deleteCalculator(QueryCalculator query) async {
+  Future<void> deleteCalculator({
+    required QueryCalculator query,
+    required String courseName,
+    required double totalScore,
+  }) async {
     final resp = await _repo.deleteCalculator(query);
+    MixpanelService.track(
+      'calculator_delete_course_component',
+      params: {
+        'course_id': courseName,
+        'final_letter_grade': totalScore.toString(),
+        'final_grade': getFinalGrade(totalScore),
+      },
+    );
     await resp.fold((failure) {
-      ErrorMessenger('Kalkulator gagal dihapus')
-          .show(ctx!);
+      ErrorMessenger('Kalkulator gagal dihapus').show(ctx!);
     }, (result) async {
       SuccessMessenger('Kalkulator berhasil dipahus').show(ctx!);
       final calcResp = await _repo.getAllCalculator();
@@ -64,8 +75,7 @@ class CalculatorState {
         _calculators = result.data;
         print(_calculators);
       });
-    }
-    );
+    });
     calculatorRM.notify();
   }
 }
