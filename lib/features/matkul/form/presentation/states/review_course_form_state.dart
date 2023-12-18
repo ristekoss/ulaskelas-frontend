@@ -18,17 +18,21 @@ class ReviewCourseFormState {
   final _descController = TextEditingController();
 
   final semesters = <String>['Semester ganjil', 'Semester genap'];
-  final years = <String>['2022', '2021', '2020', '2019', '2018', '2017'];
+  final years = <String>[
+    for (var i = 0; i < 5; i++) (DateTime.now().year - i).toString(),
+  ];
 
   bool isLoading = false;
 
   /// Submitting form data
-  Future<void> submitForm(String courseCode) async {
+  Future<void> submitForm({
+    required CourseModel course,
+  }) async {
     isLoading = true;
     reviewFormRM.notify();
     final result = <String, dynamic>{};
     // TODO(Any): sync with current matkul
-    result['course_code'] = courseCode;
+    result['course_code'] = course.code;
     result['semester'] = _formData.semester! == semesters[0] ? 1 : 2;
     result['academic_year'] =
         getPairedYear(result['semester'], _formData.year!);
@@ -43,6 +47,19 @@ class ReviewCourseFormState {
     result['rating_recommended'] = _formData.ratingRecommended;
 
     final resp = await _repo.createReview(result);
+    MixpanelService.track(
+      'write_review',
+      params: {
+        'course_id': course.code.toString(),
+        'course_name': course.name.toString(),
+        'created_at': DateTime.now().toString(),
+        'period_taking': _formData.semester.toString(),
+        'year_taking': _formData.year.toString(),
+        'avg_rating_given': reviewFormRM.state.getAvgRating().toString(),
+        'tags': _formData.tagData.toString(),
+        'anonymous_review': _formData.isAnonymous.toString(),
+      },
+    );
     isLoading = false;
     reviewFormRM.notify();
     resp.fold((failure) {
@@ -114,10 +131,11 @@ class ReviewCourseFormState {
 
   double getAvgRating() {
     return ((_formData.ratingBeneficial ?? 0) +
-        (_formData.ratingFitToCredit ?? 0) +
-        (_formData.ratingFitToStudyBook ?? 0) +
-        (_formData.ratingRecommended ?? 0) +
-        (_formData.ratingUnderstandable ?? 0)) / 5;
+            (_formData.ratingFitToCredit ?? 0) +
+            (_formData.ratingFitToStudyBook ?? 0) +
+            (_formData.ratingRecommended ?? 0) +
+            (_formData.ratingUnderstandable ?? 0)) /
+        5;
   }
 
   /// Cleaning form when success submitting form

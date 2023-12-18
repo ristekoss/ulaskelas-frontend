@@ -91,10 +91,7 @@ class _ProfilePageState extends BaseStateful<ProfilePage> {
           const HeightSpace(24),
           Center(
             child: InkWell(
-              onTap: () {
-                nav.goToHomeDaftarUlasan();
-                MixpanelService.track('view_all_reviews');
-              },
+              onTap: () => nav.goToHomeDaftarUlasan(),
               child: Text(
                 'Riwayat Ulasan',
                 style: FontTheme.poppins14w500black().copyWith(

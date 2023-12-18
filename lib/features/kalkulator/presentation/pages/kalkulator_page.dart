@@ -82,11 +82,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                         width: double.infinity,
                         text: 'Tambah Mata Kuliah',
                         backgroundColor: BaseColors.purpleHearth,
-                        onPressed: () {
-                          nav.goToSearchCourseCalculatorPage();
-                          // ignore: lines_longer_than_80_chars
-                          MixpanelService.track('calculator_add_course');
-                        },
+                        onPressed: () => nav.goToSearchCourseCalculatorPage(),
                       ),
                     ],
                   ),
@@ -117,23 +113,12 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                       final calculator = calculators[index];
                       return CardCalculator(
                         model: calculator,
-                        onTap: () {
-                          nav.goToComponentCalculatorPage(
-                            calculatorId: calculator.id!,
-                            courseName: calculator.courseName!,
-                            totalScore: calculator.totalScore!,
-                            totalPercentage: calculator.totalPercentage!,
-                          );
-                          MixpanelService.track(
-                            'calculator_view_course',
-                            params: {
-                              'course_id': calculator.courseName!,
-                              'final_letter_grade': getFinalGrade(
-                                  calculator.totalScore!,),
-                              'final_grade': calculator.totalScore.toString(),
-                            },
-                          );
-                        },
+                        onTap: () => nav.goToComponentCalculatorPage(
+                          calculatorId: calculator.id!,
+                          courseName: calculator.courseName!,
+                          totalScore: calculator.totalScore!,
+                          totalPercentage: calculator.totalPercentage!,
+                        ),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
@@ -170,5 +155,4 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
   bool scrollCondition() {
     throw UnimplementedError();
   }
-
 }

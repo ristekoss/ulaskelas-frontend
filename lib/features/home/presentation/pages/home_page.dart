@@ -219,11 +219,7 @@ class _HomePageState extends BaseStateful<HomePage> {
                       style: FontTheme.poppins14w700black(),
                     ),
                     InkWell(
-                      onTap: () {
-                        nav.goToHomeDaftarUlasan();
-
-                        MixpanelService.track('view_all_reviews');
-                      },
+                      onTap: () => nav.goToHomeDaftarUlasan(),
                       child: Text(
                         'Lihat Semua',
                         style: FontTheme.poppins13w400purple(),

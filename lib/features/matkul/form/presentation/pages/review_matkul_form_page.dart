@@ -130,25 +130,11 @@ class _ReviewMatkulFormPageState extends BaseStateful<ReviewMatkulFormPage> {
                           reviewFormStateData.ratingFitToStudyBook != null &&
                           reviewFormStateData.ratingBeneficial != null &&
                           reviewFormStateData.ratingRecommended != null) {
-                        await reviewFormRM.state
-                            .submitForm(widget.course.code!);
-                        await Future.delayed(const Duration(milliseconds: 150));
-                        MixpanelService.track(
-                          'write_review',
-                          params: {
-                            'course_id': widget.course.code.toString(),
-                            'course_name': widget.course.name.toString(),
-                            'created_at': DateTime.now().toString(),
-                            'period_taking':
-                                reviewFormStateData.semester.toString(),
-                            'year_taking': reviewFormStateData.year.toString(),
-                            'avg_rating_given':
-                                reviewFormState.getAvgRating().toString(),
-                            'tags': reviewFormStateData.tagData.toString(),
-                            'anonymous_review':
-                                reviewFormStateData.isAnonymous.toString(),
-                          },
+                        await reviewFormRM.state.submitForm(
+                          course: widget.course,
                         );
+                        await Future.delayed(const Duration(milliseconds: 150));
+
                         reviewFormRM.state.cleanForm();
                         nav.pop();
                         await nav.replaceToReviewPendingPage();

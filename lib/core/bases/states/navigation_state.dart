@@ -78,6 +78,7 @@ class NavigationServiceState implements Navigation {
   }
 
   Future<bool?> goToFilterPage() {
+    MixpanelService.track('open_course_filter');
     return nav.push<bool>(
       const FilterPage(),
       RouteName.mainPage,
@@ -88,6 +89,7 @@ class NavigationServiceState implements Navigation {
     int courseId,
     String courseCode,
   ) {
+    MixpanelService.track('view_course');
     return nav.push<void>(
       DetailMatkulPage(
         courseId: courseId,
@@ -116,7 +118,18 @@ class NavigationServiceState implements Navigation {
   Future<void> goToAllReviewMatkulPage({
     required int courseId,
     required String courseCode,
+    required CourseModel course,
   }) {
+    MixpanelService.track(
+      'view_all_reviews',
+      params: {
+        'course_id': course.code.toString(),
+        'course_name': course.name.toString(),
+        'review_count': course.reviewCount.toString(),
+        'course_rating_avg':
+        course.ratingAverage.toString(),
+      },
+    );
     return nav.push<void>(
       AllReviewMatkulPage(
         courseId: courseId,
@@ -134,6 +147,7 @@ class NavigationServiceState implements Navigation {
   }
 
   Future<void> goToHomeDaftarMatkul() {
+    MixpanelService.track('view_this_semester_courses');
     return nav.push<void>(
       const HomeCourseListPage(),
       RouteName.homeDaftarMatkul,
@@ -141,6 +155,7 @@ class NavigationServiceState implements Navigation {
   }
 
   Future<void> goToHomeDaftarUlasan() {
+    MixpanelService.track('view_all_reviews');
     return nav.push<void>(
       const HomeDaftarUlasanPage(),
       RouteName.homeDaftarUlasan,
@@ -190,6 +205,7 @@ class NavigationServiceState implements Navigation {
   }
 
   Future<void> goToSearchCourseCalculatorPage() {
+    MixpanelService.track('calculator_add_course');
     return nav.push<void>(
       const SearchCourseCalculator(),
       RouteName.searchCourseCalculator,
@@ -202,6 +218,16 @@ class NavigationServiceState implements Navigation {
     required double totalScore,
     required double totalPercentage,
   }) {
+    MixpanelService.track(
+      'calculator_view_course',
+      params: {
+        'course_id': courseName,
+        'final_letter_grade': getFinalGrade(
+          totalScore,
+        ),
+        'final_grade': totalScore.toString(),
+      },
+    );
     return nav.push<void>(
       CalculatorComponentPage(
         calculatorId: calculatorId,

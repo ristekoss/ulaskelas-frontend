@@ -125,22 +125,11 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     const HeightSpace(16),
                     if (course.reviewCount! > 3)
                       InkWell(
-                        onTap: () {
-                          nav.goToAllReviewMatkulPage(
-                            courseId: widget.courseId,
-                            courseCode: widget.courseCode,
-                          );
-                          MixpanelService.track(
-                            'view_all_reviews',
-                            params: {
-                              'course_id': course.code.toString(),
-                              'course_name': course.name.toString(),
-                              'review_count': course.reviewCount.toString(),
-                              'course_rating_avg':
-                                  course.ratingAverage.toString(),
-                            },
-                          );
-                        },
+                        onTap: () => nav.goToAllReviewMatkulPage(
+                          courseId: widget.courseId,
+                          courseCode: widget.courseCode,
+                          course: course,
+                        ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -237,18 +226,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 final review = data.reviews[data.reviews.length - i - 1];
                 return ReviewCard(
                   review: review,
-                  onLiked: () {
-                    reviewCourseRM.state.like(review);
-                    MixpanelService.track(
-                      'like_review',
-                      params: {
-                        'course_id': review.courseCode.toString(),
-                        'course_name': review.courseName.toString(),
-                        'review_count': review.likesCount.toString(),
-                        'course_rating_avg': review.ratingAverage.toString(),
-                      },
-                    );
-                  },
+                  onLiked: () => reviewCourseRM.state.like(review),
                 );
               },
             );
