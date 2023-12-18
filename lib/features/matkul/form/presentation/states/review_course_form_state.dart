@@ -18,7 +18,9 @@ class ReviewCourseFormState {
   final _descController = TextEditingController();
 
   final semesters = <String>['Semester ganjil', 'Semester genap'];
-  final years = <String>['2022', '2021', '2020', '2019', '2018', '2017'];
+  final years = <String>[
+    for (var i = 0; i < 5; i++) (DateTime.now().year - i).toString(),
+  ];
 
   bool isLoading = false;
 
