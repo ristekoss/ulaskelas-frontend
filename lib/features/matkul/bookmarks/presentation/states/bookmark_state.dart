@@ -2,11 +2,11 @@ part of '_states.dart';
 
 class BookmarkState {
   BookmarkState() {
-    final _remoteDataSource = BookmarkRemoteDataSourceImpl();
-    final _localDataSource = BookmarkLocalDataSourceImpl();
+    final remoteDataSource = BookmarkRemoteDataSourceImpl();
+    final localDataSource = BookmarkLocalDataSourceImpl();
     _repo = BookmarkRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 
@@ -44,6 +44,7 @@ class BookmarkState {
 
   /// tap to toggle Bookmark
   Future<void> toggleBookmark(BookmarkModel bookmark) async {
+    MixpanelService.track('bookmark_course');
     final resp = await _repo.getAllBookmark(QueryBookmark());
     resp.fold((failure) {
       throw failure;

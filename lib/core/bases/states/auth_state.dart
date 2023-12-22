@@ -91,7 +91,7 @@ class AuthState {
       path: '/static.html',
     );
 
-    final url = '${Endpoints.sso}/?redirect_url=${redirectUri.toString()}';
+    final url = '${Endpoints.sso}/?redirect_url=$redirectUri';
     Logger().w(Uri.parse(url).query);
 
     Logger().w(redirectUri.toString());

@@ -3,7 +3,7 @@
 part of '_pages.dart';
 
 class SSOWebPage extends StatefulWidget {
-  const SSOWebPage({Key? key}) : super(key: key);
+  const SSOWebPage({super.key});
 
   @override
   _SSOWebPageState createState() => _SSOWebPageState();
@@ -17,7 +17,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
 
   @override
   void init() {
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
   @override
@@ -60,7 +60,7 @@ class _SSOWebPageState extends BaseStateful<SSOWebPage> {
             }
             return const SizedBox.shrink();
           },
-        )
+        ),
       ],
     );
   }

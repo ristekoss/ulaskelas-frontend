@@ -2,10 +2,8 @@ part of '_pages.dart';
 
 class AllReviewMatkulPage extends StatefulWidget {
   const AllReviewMatkulPage({
-    Key? key,
-    required this.courseId,
-    required this.courseCode,
-  }) : super(key: key);
+    required this.courseId, required this.courseCode, super.key,
+  });
 
   final int courseId;
   final String courseCode;
@@ -102,8 +100,8 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
             onRefresh: retrieveData,
             child: OnBuilder<CourseDetailState>.all(
               listenTo: courseDetailRM,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
+              onIdle: WaitingView.new,
+              onWaiting: WaitingView.new,
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
                 final course = data.detailCourse;
@@ -135,7 +133,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
                           size: 28,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 );
               },
@@ -151,7 +149,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
                 color: Color.fromRGBO(0, 0, 0, 0.05),
                 blurRadius: 4,
                 offset: Offset(0, -2),
-              )
+              ),
             ],
           ),
           child: TulisUlasanButton(
@@ -163,7 +161,7 @@ class _AllReviewMatkulPageState extends BaseStateful<AllReviewMatkulPage> {
               }
             },
           ),
-        )
+        ),
       ],
     );
   }

@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/domain/entities/query_bookmark.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 import 'core/bases/states/_states.dart';
 import 'core/constants/_constants.dart';
 import 'core/theme/_theme.dart';
 
 class AuthenticationPage extends StatelessWidget {
-  const AuthenticationPage({Key? key}) : super(key: key);
+  const AuthenticationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +70,7 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
   }
 
   Future<void> _ssoLogin() async {
+    MixpanelService.track('login');
     if (authRM.state.isLoading) {
       return;
     }
@@ -81,6 +83,7 @@ Aplikasi ulasan mata kuliah Fasilkom UI.\nMasuk dan buat ulasanmu sekarang!''',
     await Future.delayed(const Duration(seconds: 1));
     await authRM.setState((s) => s.ssoLogin());
     if (authRM.state.isLogin) {
+      MixpanelService.track('login_success');
       await profileRM.state.retrieveData();
       await bookmarkRM.state.retrieveData(QueryBookmark());
       if (profileRM.state.profile.isBlocked ?? false) {

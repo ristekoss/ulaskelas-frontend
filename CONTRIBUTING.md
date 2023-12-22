@@ -8,6 +8,10 @@ This document briefly describes some guidance on how you can contribute to this 
 
 1. **[lib/main_development.dart](lib/main_development.dart)**: The entry of Project.
 
+## PR
+
+Please PR on the development branch first :smile:
+
 While creating PR, below materials could be helpful:
 
 * [Effective Dart](https://www.dartlang.org/guides/language/effective-dart)

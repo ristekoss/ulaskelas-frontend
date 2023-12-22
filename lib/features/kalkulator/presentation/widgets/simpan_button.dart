@@ -2,11 +2,9 @@ part of '_widgets.dart';
 
 class SimpanButton extends StatelessWidget {
   const SimpanButton({
-    Key? key,
-    required this.onTap,
-    required this.text,
+    required this.onTap, required this.text, super.key,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   final VoidCallback onTap;
   final String text;
@@ -23,7 +21,7 @@ class SimpanButton extends StatelessWidget {
             color: Color.fromRGBO(0, 0, 0, 0.05),
             blurRadius: 4,
             offset: Offset(0, -2),
-          )
+          ),
         ],
       ),
       child: AutoLayoutButton(

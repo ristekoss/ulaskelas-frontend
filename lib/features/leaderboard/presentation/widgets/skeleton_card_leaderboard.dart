@@ -1,7 +1,7 @@
 part of '_widgets.dart';
 
 class SkeletonCardLeaderboard extends StatelessWidget {
-  const SkeletonCardLeaderboard({Key? key}) : super(key: key);
+  const SkeletonCardLeaderboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class SkeletonCardLeaderboard extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
                   ],
                 ),
                 title: Container(

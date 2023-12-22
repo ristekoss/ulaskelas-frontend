@@ -2,10 +2,8 @@ part of '_widgets.dart';
 
 class RatingComponent extends StatelessWidget {
   const RatingComponent({
-    Key? key,
-    required this.text,
-    required this.starRating,
-  }) : super(key: key);
+    required this.text, required this.starRating, super.key,
+  });
 
   final String text;
   final StarRating starRating;

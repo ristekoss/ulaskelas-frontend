@@ -8,13 +8,13 @@ class StarRating extends StatelessWidget {
   final double paddingSize;
 
   const StarRating({
-    Key? key,
+    super.key,
     this.starCount = 5,
     this.rating = .0,
     this.onRatingChanged,
     this.starSize = 16,
     this.paddingSize = 0,
-  }) : super(key: key);
+  });
 
   Widget buildStar(BuildContext context, int index) {
     Widget icon;
@@ -64,11 +64,10 @@ class _HalfFilledIcon extends StatelessWidget {
   final Color color;
 
   const _HalfFilledIcon({
-    Key? key,
     required this.icon,
     required this.size,
     required this.color,
-  }): super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

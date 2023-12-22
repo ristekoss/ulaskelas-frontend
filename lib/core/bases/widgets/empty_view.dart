@@ -5,11 +5,9 @@ import 'package:ulaskelas/core/theme/_theme.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({
-    Key? key,
-    required this.title,
-    required this.description,
+    required this.title, required this.description, super.key,
     this.padTop,
-  }) : super(key: key);
+  });
 
   final String title;
   final String description;
@@ -18,13 +16,12 @@ class EmptyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final _padTop = padTop ?? size.height * .1;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          HeightSpace(_padTop),
+          HeightSpace(padTop ?? size.height * .1),
           Image.asset(
             Ilustration.notfound,
             width: size.width * .6,
@@ -39,7 +36,7 @@ class EmptyView extends StatelessWidget {
           const HeightSpace(10),
           Text(
             description,
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
             textAlign: TextAlign.center,
           ),
           const HeightSpace(40),

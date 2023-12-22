@@ -4,7 +4,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 
 class SkeletonCardCourse extends StatelessWidget {
-  const SkeletonCardCourse({Key? key}) : super(key: key);
+  const SkeletonCardCourse({super.key});
 
   @override
   Widget build(BuildContext context) {

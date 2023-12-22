@@ -45,7 +45,7 @@ class StateInitializer {
   }
 }
 
-//todo(fauzi) recheck this class
+// TODO(fauzi): recheck this class
 // class SlightInitializer {
 //   ReactiveModel rm;
 //   String ck;

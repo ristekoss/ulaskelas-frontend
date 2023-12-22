@@ -2,5 +2,5 @@
 
 part of '_constants.dart';
 
-//todo notification type
+// TODO(any): notification type
 class NotificationType {}

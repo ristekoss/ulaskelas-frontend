@@ -7,11 +7,11 @@ import 'package:ulaskelas/features/profile/domain/entities/profile_repository.da
 
 class ProfileState {
   ProfileState() {
-    final _remoteDataSource = ProfileRemoteDataSourceImpl();
-    final _localDataSource = ProfileLocalDataSourceImpl();
+    final remoteDataSource = ProfileRemoteDataSourceImpl();
+    final localDataSource = ProfileLocalDataSourceImpl();
     _repo = ProfileRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
   ProfileRepository? _repo;

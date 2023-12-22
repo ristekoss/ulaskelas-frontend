@@ -5,11 +5,11 @@ part of '_states.dart';
 class SearchCourseState
     implements FutureState<SearchCourseState, QuerySearchCourse> {
   SearchCourseState() {
-    final _remoteDataSource = CourseRemoteDataSourceImpl();
-    final _localDataSource = CourseLocalDataSourceImpl();
+    final remoteDataSource = CourseRemoteDataSourceImpl();
+    final localDataSource = CourseLocalDataSourceImpl();
     _repo = CourseRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 
@@ -161,6 +161,12 @@ class SearchCourseState
     if (history.length == 11) {
       _history?.removeLast();
     }
+    MixpanelService.track(
+      'search_course',
+      params: {
+        'query': query,
+      },
+    );
     // TODO(pawpaw): save to local storage
   }
 

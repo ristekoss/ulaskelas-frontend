@@ -4,11 +4,9 @@ part of '_widgets.dart';
 
 class DetailView extends StatelessWidget {
   const DetailView({
-    Key? key,
-    required this.title,
-    required this.description,
+    required this.title, required this.description, super.key,
     this.isEmptyView = false,
-  }) : super(key: key);
+  });
 
   final String title;
   final String description;
@@ -40,7 +38,7 @@ class DetailView extends StatelessWidget {
         const HeightSpace(10),
         Text(
           description,
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
           textAlign: TextAlign.center,
         ),
         const HeightSpace(20),

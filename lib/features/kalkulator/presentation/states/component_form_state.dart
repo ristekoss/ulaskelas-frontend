@@ -2,9 +2,9 @@ part of '_states.dart';
 
 class ComponentFormState {
   ComponentFormState() {
-    final _remoteDataSource = ComponentRemoteDataSourceImpl();
+    final remoteDataSource = ComponentRemoteDataSourceImpl();
     _repo = ComponentRepositoryImpl(
-      _remoteDataSource,
+      remoteDataSource,
     );
   }
 

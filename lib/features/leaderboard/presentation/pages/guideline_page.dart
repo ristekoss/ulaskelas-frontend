@@ -1,7 +1,7 @@
 part of '_pages.dart';
 
 class GuidelinePage extends StatelessWidget {
-  const GuidelinePage({Key? key}) : super(key: key);
+  const GuidelinePage({super.key});
 
   @override
   Widget build(BuildContext context) {

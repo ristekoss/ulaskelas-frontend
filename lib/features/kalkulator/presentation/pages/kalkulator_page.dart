@@ -2,8 +2,8 @@ part of '_pages.dart';
 
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _CalculatorPageState createState() => _CalculatorPageState();
@@ -36,17 +36,17 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
 
   @override
   Widget buildNarrowLayout(
-      BuildContext context,
-      SizingInformation sizeInfo,
-      ) {
+    BuildContext context,
+    SizingInformation sizeInfo,
+  ) {
     return SafeArea(
       child: RefreshIndicator(
         key: refreshIndicatorKey,
         onRefresh: retrieveData,
         child: OnBuilder<CalculatorState>.all(
           listenTo: calculatorRM,
-          onIdle: () => WaitingView(),
-          onWaiting: () => WaitingView(),
+          onIdle: WaitingView.new,
+          onWaiting: WaitingView.new,
           onError: (dynamic error, refresh) => const Text('error'),
           onData: (data) {
             final calculators = data.calculators;
@@ -74,7 +74,7 @@ class _CalculatorPageState extends BaseStateful<CalculatorPage> {
                       Text(
                         '''
 Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahulu.''',
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
                       const HeightSpace(30),
@@ -82,8 +82,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                         width: double.infinity,
                         text: 'Tambah Mata Kuliah',
                         backgroundColor: BaseColors.purpleHearth,
-                        onPressed: () =>
-                            nav.goToSearchCourseCalculatorPage(),
+                        onPressed: () => nav.goToSearchCourseCalculatorPage(),
                       ),
                     ],
                   ),
@@ -97,7 +96,7 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                     padding: const EdgeInsets.all(20),
                     itemCount: calculatorRM.state.calculators.length + 1,
                     itemBuilder: (context, index) {
-                      if (index == calculators.length){
+                      if (index == calculators.length) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: 20,
@@ -114,21 +113,18 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
                       final calculator = calculators[index];
                       return CardCalculator(
                         model: calculator,
-                        onTap: () {
-                          nav.goToComponentCalculatorPage(
-                              calculatorId: calculator.id!,
-                              courseName: calculator.courseName!,
-                              totalScore: calculator.totalScore!,
-                              totalPercentage: calculator.totalPercentage!,
-                          );
-                        },
+                        onTap: () => nav.goToComponentCalculatorPage(
+                          calculatorId: calculator.id!,
+                          courseName: calculator.courseName!,
+                          totalScore: calculator.totalScore!,
+                          totalPercentage: calculator.totalPercentage!,
+                        ),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 16),
+                        const SizedBox(height: 16),
                   ),
                 ),
-
               ],
             );
           },
@@ -139,9 +135,9 @@ Kamu Belum memiliki kalkulator nilai tersimpan. Silakan tambahkan terlebih dahul
 
   @override
   Widget buildWideLayout(
-      BuildContext context,
-      SizingInformation sizeInfo,
-      ) {
+    BuildContext context,
+    SizingInformation sizeInfo,
+  ) {
     return buildNarrowLayout(context, sizeInfo);
   }
 

@@ -1,7 +1,7 @@
 part of '_widgets.dart';
 
 class GuidelineCard extends StatelessWidget {
-  const GuidelineCard({Key? key}) : super(key: key);
+  const GuidelineCard({super.key});
 
   @override
   Widget build(BuildContext context) {

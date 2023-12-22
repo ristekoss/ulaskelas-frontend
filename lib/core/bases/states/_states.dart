@@ -33,6 +33,8 @@ import 'package:ulaskelas/onboarding_page.dart';
 import 'package:ulaskelas/services/_services.dart';
 import 'package:universal_html/html.dart';
 
+import '../../utils/util.dart';
+
 part 'auth_state.dart';
 part 'cleaner.dart';
 part 'global_state.dart';

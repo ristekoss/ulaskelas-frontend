@@ -9,13 +9,14 @@ import 'package:ristek_material_component/ristek_material_component.dart';
 import 'package:ulaskelas/core/_core.dart';
 import 'package:ulaskelas/core/bases/widgets/confirmation_modal_dialog.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
+import 'package:ulaskelas/services/_services.dart';
 import 'package:ulaskelas/services/launch_service.dart';
 import 'package:ulaskelas/services/versioning/check_version.dart';
 
 import 'core/environment/_environment.dart';
 
 class AppWrapper extends StatefulWidget {
-  const AppWrapper({Key? key}) : super(key: key);
+  const AppWrapper({super.key});
 
   @override
   _AppWrapperState createState() => _AppWrapperState();
@@ -27,6 +28,7 @@ class _AppWrapperState extends State<AppWrapper> {
   @override
   void initState() {
     super.initState();
+    MixpanelService.track('open_app');
     splashTime();
   }
 
@@ -122,7 +124,7 @@ A new version of this app available on the store, please update into the newer v
                   Text(
                     'by RISTEK Fasilkom UI',
                     style: FontTheme.poppins14w500white(),
-                  )
+                  ),
                 ],
               ),
             ),

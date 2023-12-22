@@ -2,7 +2,7 @@
 
 part of '_constants.dart';
 
-//todo routeName
+// TODO(any): routeName
 class RouteName {
   static const String mainPage = 'main';
   static const String onboardingPage = 'onboarding';

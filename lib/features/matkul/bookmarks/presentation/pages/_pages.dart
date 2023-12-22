@@ -8,5 +8,6 @@ import 'package:ulaskelas/features/matkul/bookmarks/domain/entities/query_bookma
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/states/_states.dart';
 import 'package:ulaskelas/features/matkul/bookmarks/presentation/widgets/_widgets.dart';
 import 'package:ulaskelas/features/matkul/search/presentation/widgets/_widgets.dart';
+import 'package:ulaskelas/services/_services.dart';
 
 part 'bookmarks_page.dart';

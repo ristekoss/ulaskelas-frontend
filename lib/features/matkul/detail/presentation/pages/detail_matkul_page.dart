@@ -8,10 +8,10 @@ part of '_pages.dart';
 /// ```;
 class DetailMatkulPage extends StatefulWidget {
   const DetailMatkulPage({
-    Key? key,
     required this.courseId,
     required this.courseCode,
-  }) : super(key: key);
+    super.key,
+  });
 
   final int courseId;
   final String courseCode;
@@ -59,12 +59,10 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
 
   bool get _isBottom {
     if (!scrollController.hasClients) {
-      print('no client');
       return false;
     }
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.offset;
-    print(currentScroll >= (maxScroll * 0.9));
     return currentScroll >= (maxScroll * 0.9);
   }
 
@@ -103,8 +101,8 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
             onRefresh: retrieveData,
             child: OnBuilder<CourseDetailState>.all(
               listenTo: courseDetailRM,
-              onIdle: () => WaitingView(),
-              onWaiting: () => WaitingView(),
+              onIdle: WaitingView.new,
+              onWaiting: WaitingView.new,
               onError: (dynamic error, refresh) => const Text('error'),
               onData: (data) {
                 final course = data.detailCourse;
@@ -116,7 +114,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                     TitleAndBookMark(course: course),
                     const HeightSpace(24),
                     if (course.tags?.isNotEmpty ?? false)
-                    _buildMatkulTag(course),
+                      _buildMatkulTag(course),
                     const HeightSpace(16),
                     _buildMatkulDescription(course),
                     const HeightSpace(32),
@@ -130,6 +128,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                         onTap: () => nav.goToAllReviewMatkulPage(
                           courseId: widget.courseId,
                           courseCode: widget.courseCode,
+                          course: course,
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,11 +167,11 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
   }
 
   Widget _buildMatkulTag(CourseModel course) {
-    return Row(
+    return Wrap(
       children: course.tags!
           .map(
             (e) => Padding(
-              padding: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.only(right: 8, bottom: 8),
               child: Tag(
                 label: e,
               ),
@@ -227,9 +226,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 final review = data.reviews[data.reviews.length - i - 1];
                 return ReviewCard(
                   review: review,
-                  onLiked: () {
-                    reviewCourseRM.state.like(review);
-                  },
+                  onLiked: () => reviewCourseRM.state.like(review),
                 );
               },
             );
@@ -246,7 +243,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
           children: [
             Center(
               child: Text(
-                '${course.ratingAverage ?? 0.0}',
+                (course.ratingAverage ?? 0.0).toStringAsFixed(1),
                 style: FontTheme.poppins36w700black(),
               ),
             ),
@@ -260,7 +257,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                 '${course.reviewCount} Ulasan',
                 style: FontTheme.poppins12w400black(),
               ),
-            )
+            ),
           ],
         ),
         const WidthSpace(32),
@@ -349,7 +346,7 @@ class _DetailMatkulPageState extends BaseStateful<DetailMatkulPage> {
                         );
                       }
                     },
-                  )
+                  ),
                 ],
               );
             }

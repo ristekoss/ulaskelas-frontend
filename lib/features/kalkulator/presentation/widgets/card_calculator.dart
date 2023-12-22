@@ -2,10 +2,9 @@ part of '_widgets.dart';
 
 class CardCalculator extends StatelessWidget {
   const CardCalculator({
-    Key? key,
-    required this.model,
+    required this.model, super.key,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final CalculatorModel model;
   final VoidCallback? onTap;

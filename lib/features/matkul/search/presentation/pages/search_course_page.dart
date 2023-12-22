@@ -4,8 +4,8 @@ part of '_pages.dart';
 
 class SearchCoursePage extends StatefulWidget {
   const SearchCoursePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _SearchCoursePageState createState() => _SearchCoursePageState();
@@ -78,9 +78,8 @@ class _SearchCoursePageState
                     focusNode.unfocus();
                     searchCourseRM.state.controller.clear();
                   },
-                  onFieldSubmitted: (val) {
-                    searchCourseRM.state.addToHistory(val);
-                  },
+                  onFieldSubmitted: (val) =>
+                      searchCourseRM.state.addToHistory(val),
                   onChange: onQueryChanged,
                 ),
               ),

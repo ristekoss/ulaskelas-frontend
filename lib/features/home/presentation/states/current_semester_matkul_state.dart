@@ -4,11 +4,11 @@ part of '_states.dart';
 
 class CurrentTermCourseState {
   CurrentTermCourseState() {
-    final _remoteDataSource = CourseRemoteDataSourceImpl();
-    final _localDataSource = CourseLocalDataSourceImpl();
+    final remoteDataSource = CourseRemoteDataSourceImpl();
+    final localDataSource = CourseLocalDataSourceImpl();
     _repo = CourseRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 

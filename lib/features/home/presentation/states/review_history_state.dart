@@ -4,11 +4,11 @@ part of '_states.dart';
 
 class ReviewHistoryState {
   ReviewHistoryState() {
-    final _remoteDataSource = ReviewRemoteDataSourceImpl();
-    final _localDataSource = ReviewLocalDataSourceImpl();
+    final remoteDataSource = ReviewRemoteDataSourceImpl();
+    final localDataSource = ReviewLocalDataSourceImpl();
     _repo = ReviewRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 

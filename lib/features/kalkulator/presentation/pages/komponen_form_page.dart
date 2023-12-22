@@ -2,12 +2,12 @@ part of '_pages.dart';
 
 class ComponentFormPage extends StatefulWidget {
   const ComponentFormPage({
-    Key? key,
     required this.calculatorId,
     required this.courseName,
     required this.totalScore,
     required this.totalPercentage,
-  }) : super(key: key);
+    super.key,
+  });
 
   final int calculatorId;
   final String courseName;
@@ -65,15 +65,15 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
               await onSubmitCallBack(context);
             },
           ),
-        )
+        ),
       ],
     );
   }
 
   double _temporaryUpdateScore(
-      double newScore,
-      double newWeight,
-      ) {
+    double newScore,
+    double newWeight,
+  ) {
     return widget.totalScore + (newScore * newWeight / 100);
   }
 
@@ -90,6 +90,7 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
     if (componentFormRM.state.isLoading) {
       return;
     }
+    MixpanelService.track('calculator_add_course_component');
     if (componentFormRM.state.formKey.currentState!.validate()) {
       // progressDialogue(context);
       await componentFormRM.state.submitForm(widget.calculatorId);
@@ -103,7 +104,8 @@ class _ComponentFormPageState extends BaseStateful<ComponentFormPage> {
           componentFormRM.state.formData.weight!,
         ),
         totalPercentage: _temporaryUpdateWeight(
-          componentFormRM.state.formData.weight!,),
+          componentFormRM.state.formData.weight!,
+        ),
       );
       componentFormRM.state.cleanForm();
       return;

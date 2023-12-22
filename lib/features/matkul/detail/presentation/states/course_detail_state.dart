@@ -5,11 +5,11 @@ import 'package:ulaskelas/features/matkul/search/data/models/_models.dart';
 
 class CourseDetailState {
   CourseDetailState() {
-    final _remoteDataSource = CourseRemoteDataSourceImpl();
-    final _localDataSource = CourseLocalDataSourceImpl();
+    final remoteDataSource = CourseRemoteDataSourceImpl();
+    final localDataSource = CourseLocalDataSourceImpl();
     _repo = CourseRepositoryImpl(
-      _remoteDataSource,
-      _localDataSource,
+      remoteDataSource,
+      localDataSource,
     );
   }
 

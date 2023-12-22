@@ -4,8 +4,8 @@ part of '_pages.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _FilterPageState createState() => _FilterPageState();
@@ -158,10 +158,19 @@ class _FilterPageState extends BaseStateful<FilterPage> {
                   text: 'Terapkan Filter',
                   onTap: () {
                     nav.pop<bool>(true);
+                    MixpanelService.track(
+                      'apply_course_filter',
+                      params: {
+                        'jenis_matkul': filterRM.state.selectedType.toString(),
+                        'jumlah_sks': filterRM.state.selectedSks.toString(),
+                        'semester_wajib_ambil':
+                            filterRM.state.selectedSemester.toString(),
+                      },
+                    );
                   },
                 ),
               ),
-            )
+            ),
           ],
         );
       },

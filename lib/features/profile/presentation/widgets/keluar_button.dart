@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ulaskelas/core/theme/_theme.dart';
 
 class KeluarButton extends StatelessWidget {
-  const KeluarButton(this.handler, {Key? key}) : super(key: key);
+  const KeluarButton(this.handler, {super.key});
   final Function() handler;
 
   @override

@@ -2,7 +2,6 @@ part of '_pages.dart';
 
 class EditComponentPage extends StatefulWidget {
   const EditComponentPage({
-    Key? key,
     required this.id,
     required this.calculatorId,
     required this.courseName,
@@ -11,7 +10,8 @@ class EditComponentPage extends StatefulWidget {
     required this.componentName,
     required this.componentScore,
     required this.componentWeight,
-  }) : super(key: key);
+    super.key,
+  });
 
   final int id;
   final int calculatorId;
@@ -81,12 +81,12 @@ class _EditComponentPageState extends BaseStateful<EditComponentPage> {
                 ),
               );
               nav.replaceToComponentPage(
-                  calculatorId: widget.calculatorId,
-                  courseName: widget.courseName,
-                  totalScore: widget.totalScore -
-                      (widget.componentScore * widget.componentWeight / 100),
-                  totalPercentage:
-                      widget.totalPercentage - widget.componentWeight,
+                calculatorId: widget.calculatorId,
+                courseName: widget.courseName,
+                totalScore: widget.totalScore -
+                    (widget.componentScore * widget.componentWeight / 100),
+                totalPercentage:
+                    widget.totalPercentage - widget.componentWeight,
               );
             },
             child: Text(
@@ -107,7 +107,7 @@ class _EditComponentPageState extends BaseStateful<EditComponentPage> {
               await onSubmitCallBack(context);
             },
           ),
-        )
+        ),
       ],
     );
   }

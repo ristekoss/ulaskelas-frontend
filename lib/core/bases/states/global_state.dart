@@ -2,12 +2,12 @@ part of '_states.dart';
 
 /// Top level injection
 final searchCourseRM = RM.inject(
-  () => SearchCourseState(),
+  SearchCourseState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final filterRM = RM.inject(
-  () => FilterState(),
+  FilterState.new,
   autoDisposeWhenNotUsed: false,
 );
 
@@ -17,66 +17,66 @@ final filterRM = RM.inject(
 // );
 
 final reviewFormRM = RM.inject(
-  () => ReviewCourseFormState(),
+  ReviewCourseFormState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final searchTagRM = RM.inject(
-  () => SearchTagState(),
+  SearchTagState.new,
 );
 
 final bookmarkRM = RM.inject(
-  () => BookmarkState(),
+  BookmarkState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final authRM = RM.inject(
-  () => AuthState(),
+  AuthState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final progressWebView = RM.inject(
-  () => ProgressWebViewState(),
+  ProgressWebViewState.new,
 );
 
 final currentTermCourseRM = RM.inject(
-  () => CurrentTermCourseState(),
+  CurrentTermCourseState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final profileRM = RM.inject(
-  () => ProfileState(),
+  ProfileState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final reviewCourseRM = RM.inject(
-  () => ReviewCourseState(),
+  ReviewCourseState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final reviewHistoryRM = RM.inject(
-  () => ReviewHistoryState(),
+  ReviewHistoryState.new,
   autoDisposeWhenNotUsed: false,
 );
 
 final courseDetailRM = RM.inject(
-  () => CourseDetailState(),
+  CourseDetailState.new,
 );
 
 final leaderboardRM = RM.inject(
-      () => LeaderboardState(),
+      LeaderboardState.new,
 );
 
 final calculatorRM = RM.inject(
-  () => CalculatorState(),
+  CalculatorState.new,
 );
 
 final componentRM = RM.inject(
-  () => ComponentState(),
+  ComponentState.new,
 );
 
 final componentFormRM = RM.inject(
-      () => ComponentFormState(),
+      ComponentFormState.new,
   autoDisposeWhenNotUsed: false,
 );
 
@@ -91,25 +91,25 @@ class GlobalState {
           ),
         ),
       ),
-      Inject(() => NavigationServiceState()),
-      Inject(() => FilterState()),
-      Inject(() => SearchCourseState()),
+      Inject(NavigationServiceState.new),
+      Inject(FilterState.new),
+      Inject(SearchCourseState.new),
       // Inject(() => ReviewState()),
-      Inject(() => SearchTagState()),
-      Inject(() => BookmarkState()),
-      Inject(() => CalculatorState()),
+      Inject(SearchTagState.new),
+      Inject(BookmarkState.new),
+      Inject(CalculatorState.new),
     ];
   }
 
   static List<Injectable> injectData = <Injectable>[
-    Inject(() => ThemeState()),
-    Inject(() => NavigationServiceState()),
-    Inject(() => FilterState()),
-    Inject(() => SearchCourseState()),
+    Inject(ThemeState.new),
+    Inject(NavigationServiceState.new),
+    Inject(FilterState.new),
+    Inject(SearchCourseState.new),
     // Inject(() => ReviewState()),
-    Inject(() => SearchTagState()),
-    Inject(() => BookmarkState()),
-    Inject(() => CalculatorState()),
+    Inject(SearchTagState.new),
+    Inject(BookmarkState.new),
+    Inject(CalculatorState.new),
   ];
 
   static ReactiveModel<ThemeState> theme() {
